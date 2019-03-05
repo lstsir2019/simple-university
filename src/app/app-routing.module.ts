@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ExpressionBesoinCreateComponent} from "./expression-besoins/expression-besoin-create/expression-besoin-create.component";
-import {ExpressionBesoinListComponent} from "./expression-besoins/expression-besoin-list/expression-besoin-list.component";
+import {MagasinComponent} from "./magasin/magasin.component";
+import {ReceptionComponent} from "./reception/reception.component";
+import {ExpressionBesoinsComponent} from "./expression-besoins/expression-besoins.component";
 
 const routes: Routes = [
+  { path:'reception',component:ReceptionComponent},
+  { path: 'magasin',component:MagasinComponent},
+  { path: 'exepressionbesoins', component:ExpressionBesoinsComponent}
 
 ];
 
