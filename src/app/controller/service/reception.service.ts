@@ -1,0 +1,82 @@
+import { Injectable } from '@angular/core';
+import {Reception} from "../model/reception.model";
+import {ReceptionItem} from "../model/reception-item.model";
+import {HttpClient} from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReceptionService {
+
+  public url: string='http://localhost:8041/reception-api/reception/';
+  public receptionCreate:Reception=new Reception('','','');
+  public receptionItemCreate:ReceptionItem= new ReceptionItem('','','','',0);
+  constructor(private http: HttpClient) { }
+  private _receptions:Array<Reception>;
+  private _receptionSelected:Reception;
+  public addReceptionItem(){
+    let receptionItemClone:ReceptionItem= new ReceptionItem(this.receptionItemCreate.reference,this.receptionItemCreate.referenceCategorie,this.receptionItemCreate.referenceProduit,this.receptionItemCreate.referenceMagasin,this.receptionItemCreate.qte);
+    this.receptionCreate.receptionItems.push(receptionItemClone);
+  }
+  public  saveReception(){
+    console.log("SaveReception Service ");
+    console.log(this.receptionCreate);
+    this.http.post<Reception>(this.url,this.receptionCreate).subscribe(
+      data=> {
+        console.log("Ajouter avec success"+data);
+        this.receptionCreate = new Reception("","","");
+      },
+      error=>{
+        console.log("error");
+      }
+    );
+  }
+  public findReceptionItemsByReceptionReference(reception:Reception){
+    this.receptionSelected=reception;
+    if(this.receptionSelected!=null){
+      this.http.get<Array<ReceptionItem>>(this.url+"/reference/"+this.receptionSelected.reference+"/receptionitems").subscribe(
+        date => {
+          this._receptionSelected.receptionItems = date;
+        }, error => {
+          console.log("Error");
+        }
+      );
+    }
+  }
+  public findAll(){
+    if (this._receptions == null) {
+      this.http.get<Array<Reception>>(this.url+"receptions").subscribe(
+        date => {
+          this._receptions = date;
+        }, error => {
+          console.log("Error");
+        }
+      );
+    }
+  }
+  get receptions(): Array<Reception> {
+    if (this._receptions == null) {
+      this.http.get<Array<Reception>>(this.url+"receptions").subscribe(
+        date => {
+          this._receptions = date;
+        }, error => {
+          console.log("Error");
+        }
+      );
+    }
+    return this._receptions;
+  }
+
+  set receptions(value: Array<Reception>) {
+    this._receptions = value;
+  }
+
+  get receptionSelected(): Reception {
+    return this._receptionSelected;
+  }
+
+  set receptionSelected(value: Reception) {
+    this._receptionSelected = value;
+  }
+}
+

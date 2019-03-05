@@ -1,0 +1,72 @@
+import { Injectable } from '@angular/core';
+import {Magasin} from "../model/magasin.model";
+import {HttpClient} from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MagasinService {
+
+  private _url: string ="http://localhost:8040/magasin-api/magasin/";
+  constructor(private http: HttpClient) { }
+  private _magasinCreate:Magasin= new Magasin("");
+  private _magasins:Array<Magasin>;
+
+  public findAll(){
+    console.log("FindAll Magasins");
+    if(this._magasins==null){
+    this.http.get<Array<Magasin>>(this._url+"magasins").subscribe(
+      data=>{
+        this._magasins=data;
+      },error => {
+        console.log("Error");
+      }
+    );
+    }
+  }
+
+  public saveMagasin() {
+    this.http.post<Magasin>(this._url,this._magasinCreate).subscribe(
+      data=> {
+        this._magasinCreate = new Magasin("");
+        console.log("Ajouter avec success:"+data);
+      },
+      error=>{
+        console.log("error");
+      }
+    );
+  }
+
+  get url(): string {
+    return this._url;
+  }
+
+  set url(value: string) {
+    this._url = value;
+  }
+
+  get magasinCreate(): Magasin {
+    return this._magasinCreate;
+  }
+
+  set magasinCreate(value: Magasin) {
+    this._magasinCreate = value;
+  }
+
+  get magasins(): Array<Magasin> {
+    if (this._magasins == null) {
+      this.http.get<Array<Magasin>>(this.url+"magasins").subscribe(
+        date => {
+          this._magasins = date;
+        }, error => {
+          console.log("Error");
+        }
+      );
+    }
+    return this._magasins;
+  }
+
+  set magasins(value: Array<Magasin>) {
+    this._magasins = value;
+  }
+}

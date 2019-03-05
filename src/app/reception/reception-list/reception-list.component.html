@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-header">List Des Reception</div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" >Commande</label>
+      </div>
+      <input type="text" class="form-control"> <!--[(ngModel)]="reception.referenceCommande"-->
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <div >
+      <table class="table table-bordered table-sm" >
+        <thead>
+        <tr>
+          <th>Reception</th>
+          <th>Commande</th>
+          <th>Date Reception</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let r of receptions">
+          <td>{{r.reference}}</td>
+          <td>{{r.referenceCommande}}</td>
+          <td>{{r.dateReception}}</td>
+          <td><button (click)="findReceptionItemsByReceptionReference(r)" data-toggle="modal" data-target="#exampleModal" class="btn-info btn-sm fa fa-plus"></button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reception detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-sm" >
+          <thead>
+          <tr>
+            <th>Magasin</th>
+            <th>Categorie</th>
+            <th>Produit</th>
+            <th>qte</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="receptionSelected==null">
+          <tr>
+            <td colspan="4"> No Items</td>
+          </tr>
+          </tbody>
+          <tbody *ngIf="receptionSelected!=null">
+          <tr *ngFor="let item of receptionSelected.receptionItems">
+            <td>{{item.referenceMagasin}}</td>
+            <td>{{item.referenceCategorie}}</td>
+            <td>{{item.referenceProduit}}</td>
+            <td>{{item.qte}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

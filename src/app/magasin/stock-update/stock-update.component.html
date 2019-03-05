@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-body d-flex">
+    <div class="d-felx" *ngIf="stockSelected!=null">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" >Produit</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="stockSelected.referenceProduit" disabled>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" >Reception</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="stockSelected.referenceReception" disabled>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Qte</label>
+        </div>
+        <input [(ngModel)]="stockSelected.qte" type="number" min="0" step="1" class="form-control" disabled>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Qte Deffectueuse</label>
+        </div>
+        <input [(ngModel)]="stockSelected.qteDeffectueuse" type="number" min="0" step="1" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">seuil Alert</label>
+        </div>
+        <input [(ngModel)]="stockSelected.seuilAlert" type="number" min="0" step="1" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <input type="submit" (click)="saveUpdate()" class="btn btn-info fa fa-check" value="save">
+  </div>
+</div>
+
+
