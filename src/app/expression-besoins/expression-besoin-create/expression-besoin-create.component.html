@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-md-4">
+<div class="card spacer">
+  <div class="card-header text-white  bg-info mb-3">CREATION DE BESOIN</div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" >Reference</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoin.reference">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" >Date</span>
+      </div>
+      <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoin.dateExpression">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" >Code Entite</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoin.codeEntity">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" >Code Personel</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoin.codePersonel">
+    </div>
+    <button style="margin: auto" (click)="saveCommande()" class="btn btn-block btn-outline-success">Save expression besoin</button>
+
+  </div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card spacer">
+  <div class="card-header text-white bg-info mb-3">DETAIL</div>
+  <div class="card-body">
+  <div class="form-row">
+    <div class="col">
+      <label>CATEGORIE PRODUIT</label>
+
+        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit">
+
+    </div>
+
+    <div class="col">
+      <label>REFERENCE PRODUIT</label>
+
+        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceProduit">
+
+    </div>
+
+    <div class="col">
+      <label>QTE</label>
+
+        <input class="form-control" type="number" [(ngModel)]="expressionBesoinItem.quantiteDemande">
+
+    </div>
+
+    <div class="col">
+      <label>DESCRIPTION</label>
+
+        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.description">
+
+    </div>
+
+
+
+
+        <button (click)="addExpressionBesoinItem()" class="btn btn-outline-info mt-4">Ajouter</button>
+
+
+
+  </div>
+  </div>
+</div>
+<div class="spacer">
+<table class="table table-hover ">
+  <thead class="thead-light"><th>CATEGORIE PRODUIT</th><th>REFERENCE PRODUIT</th><th>QTE</th><th>DESCTIPTION</th></thead>
+  <tbody>
+  <tr *ngFor="let e of expressionBesoinItems">
+    <td>{{e.referenceCategorieProduit}}</td>
+    <td>{{e.referenceProduit}}</td>
+    <td>{{e.quantiteDemande}}</td>
+    <td>{{e.description}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+</div>
