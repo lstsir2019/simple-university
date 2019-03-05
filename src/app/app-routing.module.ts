@@ -5,9 +5,9 @@ import {ReceptionComponent} from "./reception/reception.component";
 import {ExpressionBesoinsComponent} from "./expression-besoins/expression-besoins.component";
 
 const routes: Routes = [
+  { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
   { path:'reception',component:ReceptionComponent},
-  { path: 'magasin',component:MagasinComponent},
-  { path: 'exepressionbesoins', component:ExpressionBesoinsComponent}
+  { path: 'magasin',component:MagasinComponent}
 
 ];
 
