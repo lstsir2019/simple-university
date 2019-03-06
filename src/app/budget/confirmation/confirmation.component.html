@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered text-center">
+        <thead>
+        <tr>
+          <th scope="col">Annee</th>
+          <th scope="col">Sous projet</th>
+          <th scope="col">Entite administratif</th>
+          <th scope="col">Compte budgitaire</th>
+          <th scope="col">Détails</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="bf==null">
+          <td colspan="4" class="font-italic text-center">No details exist</td>
+        </tr>
+        <tr>
+          <th rowspan="8" class="align-middle">2018</th>
+          <td rowspan="4" class="align-middle">Recherche</td>
+          <td rowspan="2" class="align-middle">Math</td>
+          <td>Achat</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Vente</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="2" class="align-middle">Physique</td>
+          <td>Achat</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Vente</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="4" class="align-middle">Enseignant</td>
+          <td rowspan="2" class="align-middle">Info</td>
+          <td>Achat</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Vente</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="2" class="align-middle">Chimie</td>
+          <td>Achat</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Vente</td>
+          <td>
+            <button class="btn btn-outline-primary fa fa-info"></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="col-md-6">
+        <button class="btn btn-outline-primary" (click)="saveAll()">Confirmation</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="row col-md-12">
+    <div class="col-md-6 offset-3">
+      <div class="card">
+        <div class="card-header text-center">
+          Création
+        </div>
+        <div class="card-body">
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="annee">Année</label>
+            </div>
+            <input type="number" [(ngModel)]="budgetFaculteVo.annee" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="annee"
+                   aria-describedby="inputGroup-sizing-sm">
+            <div class="input-group-append">
+              <input type="button" class="btn btn-outline-secondary" (click)="bfinfo()" value="Rechercher">
+            </div>
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="coe">Crédit Ouvert Estimatif</label>
+            </div>
+            <input type="number" class="form-control"
+                   value="{{ !!bf ? bf.detaillesBudgetVo.creditOuvertEstimatif : null}}"
+                   [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" aria-label="Sizing example input" min="0"
+                   step="any" required id="coe" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="cor">Crédit Ouvert Réel</label>
+            </div>
+            <input type="number" value="{{ !!bf ? bf.detaillesBudgetVo.creditOuvertReel : null}}" class="form-control"
+                   [(ngModel)]="detaillesBudgetVo.creditOuvertReel" aria-label="Sizing example input" min="0" step="any"
+                   required id="cor" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="engagepaye">Engagé payé</label>
+            </div>
+            <input type="number" class="form-control" value="{{ !!bf ? bf.detaillesBudgetVo.engagePaye : null}}"
+                   [(ngModel)]="detaillesBudgetVo.engagePaye" aria-label="Sizing example input" min="0" step="any"
+                   required id="engagepaye" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+            </div>
+            <input type="number" class="form-control" value="{{ !!bf ? bf.detaillesBudgetVo.engageNonPaye : null}}"
+                   [(ngModel)]="detaillesBudgetVo.engageNonPaye" aria-label="Sizing example input" min="0" step="any"
+                   required id="engagenonpaye" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div>
+            <button class="btn btn-outline-danger" (click)="delete(bf.annee)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

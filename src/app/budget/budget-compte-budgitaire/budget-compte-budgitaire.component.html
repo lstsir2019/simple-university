@@ -1,0 +1,287 @@
+<div class="container-fluid">
+  <div class="row col-md-12 justify-content-between">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          Création
+        </div>
+        <div class="card-body">
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="refsp">Réf sous projet</label>
+            </div>
+            <select [(ngModel)]="budgetSousProjetClone.referenceSousProjet" id="refsp" class="select form-control"
+                    required>
+              <option value="">------SELECT-------</option>
+              <option value="Recherche">Recherche</option>
+              <option value="Enseignant">Enseignant</option>
+              <option value="Découverte">Découverte</option>
+            </select>
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="refea">Réf entite admin</label>
+            </div>
+            <select [(ngModel)]="beaCreateClone.referenceEntiteAdministratif" id="refea" class="select form-control"
+                    required>
+              <option value="">----------SELECT-----------</option>
+              <option value="Mathématiques">Mathématiques</option>
+              <option value="Physiques">Physiques</option>
+              <option value="Informatiques">Informatiques</option>
+              <option value="Biologie">Biologie</option>
+            </select>
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
+            </div>
+            <input type="number" [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
+            </div>
+            <input type="number" [(ngModel)]="detaillesBudgetVo.creditOuvertReel" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="engagepaye">Engagé payé</label>
+            </div>
+            <input type="number" [(ngModel)]="detaillesBudgetVo.engagePaye" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+            </div>
+            <input type="number" [(ngModel)]="detaillesBudgetVo.engageNonPaye" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="code">Code</label>
+            </div>
+            <input type="text" [(ngModel)]="compteBudgitaire.code" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="code"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="libelle">Libellé</label>
+            </div>
+            <input type="text" [(ngModel)]="compteBudgitaire.libelle" class="form-control"
+                   aria-label="Sizing example input" min="0" step="any" required id="libelle"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <div class="form-group">
+            <input type="button" id="submit" (click)="addBudgetCompteBudgitaire()" class="form-control btn btn-success"
+                   value="Ajouter">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          List
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Libéllé</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="bcbsRecherches.length==0 && budgetCompteBudgitaires.length==0">
+              <td class="text-center font-italic" colspan="3">No item found</td>
+            </tr>
+            <tr *ngFor="let bcb of budgetCompteBudgitaires" class="table-warning">
+              <td>{{ bcb.compteBudgitaireVo.code }}</td>
+              <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
+              <td>
+                <button class="btn btn-outline-danger fa fa-trash"></button>
+              </td>
+            </tr>
+            <tr *ngFor="let bcb of bcbsRecherches" class="table-info">
+              <td>{{ bcb.compteBudgitaireVo.code }}</td>
+              <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
+              <td>
+                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBcbInfos(bcb)" data-toggle="modal"
+                        data-target="#exampleModalBcbInfo"></button>
+                <button class="btn btn-outline-success fa fa-pencil" data-toggle="modal"
+                        data-target="#exampleModalBcbUpDel"></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal-->
+<div class="modal fade" id="exampleModalBcbInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Information sur</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 offset-md-1">
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Année: </b></label>
+                <p><i>{{ selectedBcb.budgetEntiteAdministratifVo.budgetSousProjetVo.budgetFaculteVo.annee }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Référence sous projet: </b></label>
+                <p><i>{{ selectedBcb.budgetEntiteAdministratifVo.budgetSousProjetVo.referenceSousProjet}}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Référence entité administratif: </b></label>
+                <p><i>{{ selectedBcb.budgetEntiteAdministratifVo.referenceEntiteAdministratif}}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Anticident: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.antecedent}}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Code: </b></label>
+                <p><i>{{ selectedBcb.compteBudgitaireVo.code}}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Libellé: </b></label>
+                <p><i>{{ selectedBcb.compteBudgitaireVo.libelle}}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Credit ouvert éstimatif: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.creditOuvertEstimatif }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Credit ouvert réel: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.creditOuvertReel }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Engagé payé: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.engagePaye }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Engagé non payé: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.engageNonPaye }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Reliquat non payé éstimatif: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.reliquatNonPayeEstimatif }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Reliquat non payé réel: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.reliquatNonPayReel }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Reliquat payé éstimatif: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.reliquatPayeEstimatif }}</i></p>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="form-row justify-content-between">
+                <label><b>Reliquat payé réel: </b></label>
+                <p><i>{{ selectedBcb.detaillesBudgetVo.reliquatPayereel }}</i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalBcbUpDel" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="credouvrestmod">Crédit ouvert éstimatif</label>
+                </div>
+                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
+                       id="credouvrestmod" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="credouvrreelmod">Crédit ouvert réel</label>
+                </div>
+                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
+                       id="credouvrreelmod" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="engagepayemod">Engagé payé</label>
+                </div>
+                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
+                       id="engagepayemod" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="engagenonpayemod">Engagé non payé</label>
+                </div>
+                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
+                       id="engagenonpayemod" aria-describedby="inputGroup-sizing-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="delete()" class="btn btn-outline-danger" data-dismiss="modal">Supprimer</button>
+        <button type="button" (click)="update()" class="btn btn-outline-primary">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+</div>
