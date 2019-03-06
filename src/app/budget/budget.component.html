@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="budgetFaculte-tab" data-toggle="tab" href="#budgetFaculte" role="tab"
+             aria-controls="budgetFaculte"
+             aria-selected="true">Budget Faculte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="budgetSousProjet-tab" data-toggle="tab" href="#budgetSousProjet" role="tab"
+             aria-controls="budgetSousProjet"
+             aria-selected="false">Budget Sous Projet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="budgetEntiteAdministratif-tab" data-toggle="tab" href="#budgetEntiteAdministratif"
+             role="tab" aria-controls="budgetEntiteAdministratif"
+             aria-selected="false">Budget Entité Administratif</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="budgetCompteBudgitaire-tab" data-toggle="tab" href="#budgetCompteBudgitaire"
+             role="tab" aria-controls="budgetCompteBudgitaire"
+             aria-selected="false">Budget Compte Budgitaire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="confirmation-tab" data-toggle="tab" href="#confirmation" role="tab"
+             aria-controls="confirmation"
+             aria-selected="false">Confirmation</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active mt-md-2" id="budgetFaculte" role="tabpanel"
+             aria-labelledby="budgetFaculte-tab">
+          <app-budget-faculte></app-budget-faculte>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetSousProjet" role="tabpanel" aria-labelledby="budgetSousProjet-tab">
+          <app-budget-sous-projet></app-budget-sous-projet>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetEntiteAdministratif" role="tabpanel"
+             aria-labelledby="budgetEntiteAdministratif-tab">
+          <app-budget-entite-administratif></app-budget-entite-administratif>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetCompteBudgitaire" role="tabpanel"
+             aria-labelledby="budgetCompteBudgitaire-tab">
+          <app-budget-compte-budgitaire></app-budget-compte-budgitaire>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="confirmation" role="tabpanel" aria-labelledby="confirmation-tab">
+          <app-confirmation></app-confirmation>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
