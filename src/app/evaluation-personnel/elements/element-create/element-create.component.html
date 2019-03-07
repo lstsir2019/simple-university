@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body text-dark">
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Reference Élément</label>
+        <input type="text" [(ngModel)]="element.reference" name="reference" class="form-control" id="formGroupExampleInput" placeholder="Reference Élément">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Libellé</label>
+        <input type="text" [(ngModel)]="element.libelle"  class="form-control" name="libelle" id="formGroupExampleInput2" placeholder="Libellé">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput3">Barem Min</label>
+        <input type="number" [(ngModel)]="element.baremMin"  class="form-control" name="baremmin" id="formGroupExampleInput3" placeholder="Barem Min">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput4">Barem Max</label>
+        <input type="number" [(ngModel)]="element.baremMax"  class="form-control" name="baremmax" id="formGroupExampleInput4" placeholder="Barem Max">
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <button type="button" (click)="saveElement" class="btn btn-outline-dark">Ajouter</button>
+
+  </div>
+
+
+</div>
+
+
+
+
+

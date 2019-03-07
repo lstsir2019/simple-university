@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body text-dark">
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Reference Mention</label>
+        <input type="text" [(ngModel)]="mention.reference" name="reference" class="form-control" id="formGroupExampleInput" placeholder="Reference Mention">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Libellé</label>
+        <input type="text" [(ngModel)]="mention.libelle" name="libelle"  class="form-control" id="formGroupExampleInput2" placeholder="Libellé">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput3">Note Min</label>
+        <input type="number" [(ngModel)]="mention.noteMin" name="notemin"  class="form-control" id="formGroupExampleInput3" placeholder="Note Min">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput4">Note Max</label>
+        <input type="number" [(ngModel)]="mention.noteMax" name="notemax"  class="form-control" id="formGroupExampleInput4" placeholder="Note Max">
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <button type="button" (click)="saveMention" class="btn btn-outline-dark">Ajouter</button>
+
+  </div>
+
+
+</div>
+
+
+
+
+

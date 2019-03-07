@@ -1,0 +1,13 @@
+.tbodyx {
+  display:block;
+  height:200px;
+  overflow:auto;
+}
+.theadx, .tbodyx tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+.theadx {
+  width: calc( 100% - 1em )
+}
