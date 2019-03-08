@@ -1,0 +1,134 @@
+<div class="card text-center">
+  <div class="card-header">CHERCHER PRODUIT</div>
+  <div class="card-body text-center">
+  <div class="row">
+
+  </div>
+       <div class="row ">
+         <div class="col-sm-3 " >
+           <div class="input-group ">
+
+             <input type="text"   [(ngModel)]="referenceP"/>
+             <button class="btn btn-outline-primary "  (click)="produitR(referenceP)"><i class="fa fa-search" aria-hidden="true"></i></button>
+           </div>
+         </div>
+         <div class="col-sm-3 centered" >
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">Categorie</span>
+             </div>
+
+             <select class="custom-select" id="inputGroupSelect01"  >
+               <option selected>Choose...</option>
+               <option *ngFor="let c of categories" value="{{c.libelle}}">{{c.libelle}}</option>
+             </select>
+
+
+           </div>
+         </div>
+         <div class="col-sm-3 centered" >
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">Type</span>
+             </div>
+
+             <select class="custom-select" id="inputGroupSelect02"  >
+               <option selected>Choose...</option>
+               <option *ngFor="let t of types" value="{{t.code}}">{{t.code}}</option>
+             </select>
+
+
+           </div>
+
+         </div>
+         <div class="col-sm-2 centered" >
+
+           <button class="btn btn-outline-primary " data-toggle="modal" data-target="#myModalProduit" >AJOUTER</button>
+         </div>
+       </div>
+
+  </div>
+
+</div>
+
+<div class="card text-center">
+  <div class="card-header">RESULTAT</div>
+  <div class="card-body">
+    <table class="table table-sm table-hover table-bordered">
+      <thead class="thead-dark">
+      <th>LiBELLE</th>
+      <th>REFERENCE</th>
+      <th>CATEGORIE</th>
+      <th>TYPE</th>
+      <th>ACTION</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of produits">
+          <td>{{p.libelle}}</td>
+          <td>{{p.reference}}</td>
+          <td>{{p.categorieProduitVo.libelle}}</td>
+          <td>{{p.typeProduitVo.code}}</td>
+          <td class="something"><button class="btn btn-outline-danger" (click)="deleteProduit(p)"><i class="fa fa-trash" aria-hidden="true"></i>
+          </button></td>
+
+
+        </tr>
+
+      </tbody>
+
+
+    </table>
+
+  </div>
+</div>
+<div class="modal" id="myModalProduit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">CREATE PRODUIT</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div >
+          <div class="form-group" style="width:70%;margin:0 auto">
+            <label for="libelle">libelle:</label>
+            <input type="text" class="form-control" id="libelle" [(ngModel)]="produit.libelle">
+          </div>
+          <div class="form-group" style="width:70%;margin:0 auto">
+            <label for="rcb">Reference :</label>
+            <input type="text" class="form-control" id="rcb" [(ngModel)]="produit.reference">
+          </div>
+          <div class="form-group" style="width:70%;margin:0 auto" >
+
+            <label for="Categorie">Categorie</label>
+            <select class="form-control" id="Categorie" [(ngModel)]="produit.categorieProduitVo.libelle">
+              <option value="">SELECT</option>
+              <option *ngFor="let c of categories">{{c.libelle}}</option>
+
+            </select>
+          </div>
+          <div class="form-group" style="width:70%;margin:0 auto" >
+            <label >Type</label>
+            <select class="form-control" [(ngModel)]="produit.typeProduitVo.code" >
+              <option value="">SELECT</option>
+              <option  *ngFor="let t of types">{{t.code}}</option>
+            </select>
+          </div>
+          <div class="form-group" style="width:70%;margin:0 auto" >
+            <button type="submit" name="button" class="btn btn-info" style="margin-top:30px" (click)="saveProduit()">insert</button>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>

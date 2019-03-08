@@ -34,6 +34,11 @@ import { NotesComponent } from './evaluation-personnel/notes/notes.component';
 import { NoteCreateComponent } from './evaluation-personnel/notes/note-create/note-create.component';
 import { NoteListComponent } from './evaluation-personnel/notes/note-list/note-list.component';
 
+import {ProduitCreateComponent} from "./produits/produit-create/produit-create.component";
+import {CategorieTypeCreateComponent} from "./produits/categorie-type-create/categorie-type-create.component";
+import {TypeCreateComponent} from "./produits/type-create/type-create.component";
+import {ProduitsComponent} from "./produits/produits.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +62,10 @@ import { NoteListComponent } from './evaluation-personnel/notes/note-list/note-l
     EvaluationPersonnelComponent,
     ElementCreateComponent,
     ElementListComponent,
+    ProduitCreateComponent,
+    CategorieTypeCreateComponent,
+    TypeCreateComponent,
+    ProduitsComponent,
 
     NavbarComponent,
     ElementsComponent,

@@ -1,0 +1,14 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-cat-tab" data-toggle="tab" href="#nav-cat" role="tab" aria-controls="nav-cat" aria-selected="true">PRODUIT</a>
+
+    <a class="nav-item nav-link" id="nav-produit-tab" data-toggle="tab" href="#nav-produit" role="tab" aria-controls="nav-produit" aria-selected="false">CATEGORIE PRODUIT</a>
+    <a class="nav-item nav-link" id="nav-type-tab" data-toggle="tab" href="#nav-type" role="tab" aria-controls="nav-type" aria-selected="false">TYPE PRODUIT</a>
+
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-cat" role="tabpanel" aria-labelledby="nav-cat-tab"><app-produit-create></app-produit-create></div>
+  <div class="tab-pane fade" id="nav-produit" role="tabpanel" aria-labelledby="nav-produit-tab"><app-categorie-type-create></app-categorie-type-create></div>
+  <div class="tab-pane fade" id="nav-type" role="tabpanel" aria-labelledby="nav-type-tab"><app-type-create></app-type-create></div>
+</div>

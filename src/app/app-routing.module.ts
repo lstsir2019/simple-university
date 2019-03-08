@@ -8,12 +8,15 @@ import {MentionsComponent} from './evaluation-personnel/mentions/mentions.compon
 import {NotesComponent} from './evaluation-personnel/notes/notes.component';
 import {ElementsComponent} from './evaluation-personnel/elements/elements.component';
 import {EvaluationPersonnelComponent} from './evaluation-personnel/evaluation-personnel.component';
+import {ProduitsComponent} from "./produits/produits.component";
+
 
 const routes: Routes = [
   { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
   { path:'reception',component:ReceptionComponent},
   { path: 'magasin',component:MagasinComponent},
   { path: 'budget',component:BudgetComponent},
+
   { path: 'evaluation', component: EvaluationPersonnelComponent,
     children: [
       // { path: '', redirectTo: 'elements', pathMatch: 'full' },
@@ -24,7 +27,10 @@ const routes: Routes = [
     ]
 
 
-  },
+  } ,
+  { path: 'Produit',component:ProduitsComponent},
+
+
 
 
 

@@ -1,0 +1,83 @@
+<div class="card text-center">
+  <div class="card-header">TYPE PRODUIT</div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <button class="btn btn-outline-success" data-toggle="modal" data-target="#myModalType">AJOUTER</button>
+
+      </div>
+
+      <div class="col-sm-6">
+        <div class="input-group ">
+
+          <input type="text"   [(ngModel)]="libelleR"/>
+          <button class="btn btn-outline-primary " (click)="typeR(libelleR)" ><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <table class="table  table-hover table-sm table-bordered">
+      <thead class="thead-dark">
+      <th class="something">LABELLE</th>
+      <th class="something">CODE PRODUIT</th>
+      <th class="something">ACTION</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let t of types">
+        <td class="something">{{t.libelle}}</td>
+        <td class="something">{{t.code}}</td>
+        <td class="something"><button class="btn btn-outline-danger" (click)="deleteType(t)"><i class="fa fa-trash" aria-hidden="true"></i>
+        </button></td>
+      </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<div class="modal" id="myModalType">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">CREATE PRODUIT</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text widthLabel">LIBELLE</div>
+          </div>
+          <input type="text" [(ngModel)]="typeProduit.libelle" class="form-control" >
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text widthLabel">CODE</div>
+          </div>
+          <input type="text" [(ngModel)]="typeProduit.code" class="form-control" >
+        </div>
+
+        <div class="form-group" style="width:70%;margin:0 auto" >
+          <button type="submit" name="button" class="btn btn-info" style="margin-top:30px" (click)="saveType()">insert</button>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+    </div>
+
+  </div>
+
+</div>
+
