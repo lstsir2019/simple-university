@@ -1,0 +1,73 @@
+<div class="card spacer">
+  <div class="card-header bg-info text-white">Recherche</div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="input-group mb-2 col">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Reference</span>
+        </div>
+        <input type="text" class="form-control"  >
+      </div>
+      <div class="input-group mb-2 col">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Date min</span>
+        </div>
+        <input type="date" class="form-control"  >
+      </div>
+      <div class="input-group mb-2 col">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Date max</span>
+        </div>
+        <input type="date" class="form-control"  >
+      </div>
+
+      <div class=" col">
+        <button class="btn btn-block btn-outline-info">Recherche</button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+<div class="row">
+  <div class="col-md-7">
+
+    <div class="container">
+      <div class="card spacer">
+        <div class="card-header bg-info text-white  ">Liste des commandes</div>
+        <table class="table table-hover  ">
+          <thead class="theadx"><th>Reference</th><th>total</th><th>action</th></thead>
+          <tbody class="tbodyx">
+          <tr *ngFor="let c of commandes">
+            <td>{{c.reference}}</td>
+            <td>{{c.total}}</td>
+            <td ><button (click)="findCommandeItemByReference(c)" class="btn btn-outline-dark fa fa-plus"></button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="container" *ngIf="commandeSelected != null">
+      <div class="card  spacer">
+        <div class="card-header text-white bg-info ">list des produits {{commandeSelected.reference}}</div>
+        <table class="table table-hover">
+          <thead class=""><th>Reference</th><th>prix</th><th>qte</th></thead>
+          <tbody>
+          <tr *ngFor="let eb of commandeSelected.commandeItemVos">
+            <td>{{c.referenceProduit}}</td>
+            <td>{{c.prix}}</td>
+            <td>{{c.qte}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
