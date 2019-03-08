@@ -41,6 +41,9 @@ import {ProduitCreateComponent} from "./produits/produit-create/produit-create.c
 import {CategorieTypeCreateComponent} from "./produits/categorie-type-create/categorie-type-create.component";
 import {TypeCreateComponent} from "./produits/type-create/type-create.component";
 import {ProduitsComponent} from "./produits/produits.component";
+import {LivraisonsComponent} from "./livraisons/livraisons.component";
+import {LivraisonCreateComponent} from "./livraisons/livraison-create/livraison-create.component";
+import {LivraisonListComponent} from "./livraisons/livraison-list/livraison-list.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import {ProduitsComponent} from "./produits/produits.component";
     CategorieTypeCreateComponent,
     TypeCreateComponent,
     ProduitsComponent,
+    LivraisonsComponent,
+    LivraisonCreateComponent,
+    LivraisonListComponent,
 
     NavbarComponent,
     ElementsComponent,
