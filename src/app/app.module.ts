@@ -33,6 +33,9 @@ import { MentionListComponent } from './evaluation-personnel/mentions/mention-li
 import { NotesComponent } from './evaluation-personnel/notes/notes.component';
 import { NoteCreateComponent } from './evaluation-personnel/notes/note-create/note-create.component';
 import { NoteListComponent } from './evaluation-personnel/notes/note-list/note-list.component';
+import { CommandesComponent } from './commandes/commandes.component';
+import { CommandeCreateComponent } from './commandes/commande-create/commande-create.component';
+import { CommandeListComponent } from './commandes/commande-list/commande-list.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,9 @@ import { NoteListComponent } from './evaluation-personnel/notes/note-list/note-l
     NotesComponent,
     NoteCreateComponent,
     NoteListComponent,
+    CommandesComponent,
+    CommandeCreateComponent,
+    CommandeListComponent,
   ],
   imports: [
     BrowserModule,
