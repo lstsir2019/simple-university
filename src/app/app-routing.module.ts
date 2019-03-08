@@ -8,6 +8,8 @@ import {MentionsComponent} from './evaluation-personnel/mentions/mentions.compon
 import {NotesComponent} from './evaluation-personnel/notes/notes.component';
 import {ElementsComponent} from './evaluation-personnel/elements/elements.component';
 import {EvaluationPersonnelComponent} from './evaluation-personnel/evaluation-personnel.component';
+import {CommandesComponent} from "./commandes/commandes.component";
+import {ProduitsComponent} from "./produits/produits.component";
 
 const routes: Routes = [
   { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
@@ -25,8 +27,9 @@ const routes: Routes = [
 
 
   },
+  { path: 'commande',component:CommandesComponent},
 
-
+  { path: 'produit',component:ProduitsComponent},
 
 
 ];
