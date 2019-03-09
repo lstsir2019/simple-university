@@ -23,7 +23,7 @@ import { BudgetCompteBudgitaireComponent } from './budget/budget-compte-budgitai
 import { ConfirmationComponent } from './budget/confirmation/confirmation.component';
 import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.component';
 import { EvaluationPersonnelComponent } from './evaluation-personnel/evaluation-personnel.component';
-import { NavbarComponent } from './evaluation-personnel/navbar/navbar.component';
+import { EvaluationNavbarComponent } from './evaluation-personnel/evaluation-navbar/evaluation-navbar.component';
 import { ElementsComponent } from './evaluation-personnel/elements/elements.component';
 import {ElementListComponent} from './evaluation-personnel/elements/element-list/element-list.component';
 import {ElementCreateComponent} from './evaluation-personnel/elements/element-create/element-create.component';
@@ -44,6 +44,14 @@ import {ProduitsComponent} from "./produits/produits.component";
 import {LivraisonsComponent} from "./livraisons/livraisons.component";
 import {LivraisonCreateComponent} from "./livraisons/livraison-create/livraison-create.component";
 import {LivraisonListComponent} from "./livraisons/livraison-list/livraison-list.component";
+import {EvolutionsPersonnelComponent} from './evolutions-personnel/evolutions-personnel.component';
+import {EvolutionPersonnelCreateComponent} from './evolutions-personnel/evolution-personnel-create/evolution-personnel-create.component';
+import {EvolutionPersonnelListComponent} from './evolutions-personnel/evolution-personnel-list/evolution-personnel-list.component';
+import {EchelleCreateComponent} from './echelles/echelle-create/echelle-create.component';
+import {EchelleListComponent} from './echelles/echelle-list/echelle-list.component';
+import {EchellesComponent} from './echelles/echelles.component';
+import {EchelonListComponent} from './echelons/echelon-list/echelon-list.component';
+import {EchelonCreateComponent} from './echelons/echelon-create/echelon-create.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +83,16 @@ import {LivraisonListComponent} from "./livraisons/livraison-list/livraison-list
     LivraisonsComponent,
     LivraisonCreateComponent,
     LivraisonListComponent,
+EvolutionsPersonnelComponent,
+    EvolutionPersonnelCreateComponent,
+    EvolutionPersonnelListComponent,
+    EchelleCreateComponent,
+    EchelleListComponent,
+    EchellesComponent,
+    EchelonListComponent,
+    EchelonCreateComponent,
 
-    NavbarComponent,
+    EvaluationNavbarComponent,
     ElementsComponent,
     MentionsComponent,
     MentionCreateComponent,

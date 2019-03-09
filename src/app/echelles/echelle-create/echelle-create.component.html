@@ -45,9 +45,11 @@
                     <div class="input-group-text">Liste des echelons</div>
                 </div>
                 <select multiple class="form-control" id="echelons" name="echelons" [(ngModel)]="echelle.echelons">
-                    <ng-content *ngFor="let echelon of echelons">
+                   <!--
+                   <ng-content *ngFor="let echelon of echelons">
                         <option >{{echelon.reference}}</option>
                     </ng-content>
+                    -->
                 </select>
             </div>
             <br>

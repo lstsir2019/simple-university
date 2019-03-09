@@ -123,8 +123,12 @@ export class NoteService {
         console.log('ok');
         this.definirMention();
         let noteAnnuelclone= new NoteAnnuel(this.noteAnnuelCreate.dateDevaluation,this.noteAnnuelCreate.referencePersonnel,this.noteAnnuelCreate.referenceEvaluateur,this.noteAnnuelCreate.totalNote);
+        noteAnnuelclone.mentionNoteVo=this.noteAnnuelCreate.mentionNoteVo;
+        noteAnnuelclone.notesElementVo=this.noteAnnuelCreate.notesElementVo;
         this._listeNotesAnnuel.push(noteAnnuelclone);
         this.noteAnnuelCreate=new NoteAnnuel('','','',0);
+        this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
+        this.noteAnnuelCreate.notesElementVo=new Array<Note>();
       },
       error => {
         console.log('error');
@@ -133,7 +137,7 @@ export class NoteService {
     );
   }
   public deleteNoteAnnuel(noteAnnuelSupp:NoteAnnuel) {
-    this.http.delete(this._url5+noteAnnuelSupp.referencePersonnel+'/dateDevaluation/'+noteAnnuelSupp.dateDevaluation).subscribe(
+    this.http.delete(this._url6+noteAnnuelSupp.referencePersonnel+'/dateDevaluation/'+noteAnnuelSupp.dateDevaluation).subscribe(
       data => {
         console.log("ok");
         const index: number = this._listeNotesAnnuel.indexOf(noteAnnuelSupp);
