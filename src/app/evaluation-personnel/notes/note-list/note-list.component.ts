@@ -36,5 +36,11 @@ export class NoteListComponent implements OnInit {
   public get listeNoteElements(){
     return this.noteService.listeNoteElements;
   }
+  public findNoteAnnuelByReference(referencePersonnel){
+    return this.noteService.findNotesAnnuelByReference(referencePersonnel);
+  }
+  public get noteAnnuel(){
+    return this.noteService.noteAnnuelCreate2;
+  }
 
 }

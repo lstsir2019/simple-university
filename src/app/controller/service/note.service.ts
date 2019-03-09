@@ -12,6 +12,8 @@ export class NoteService {
   private _elementVoCreate:Element=new Element('','',0,0);
   private _noteCreate:Note=new Note('','',0,'',this._elementVoCreate);
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
+  private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
+
   private _listeNotesAnnuel:Array<NoteAnnuel>;
   private _url = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/elementsDevaluation/';
   private _listelements:Array<Element>;
@@ -22,6 +24,8 @@ export class NoteService {
   private _elementCreate2 :Element = new Element('','',0,0);
 
   private _url3 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/notePersonnelAnnuel/';
+  private _url6 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/notePersonnelAnnuel/referencePersonnel/';
+
   private _url5 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/noteElement/referencePersonnel/';
 
   private _url4='http://localhost:8099/sample-faculte-EvaluationPersonnel/mentionsNote/note/';
@@ -88,6 +92,17 @@ export class NoteService {
       }
     );
   }
+  public  findNotesAnnuelByReference(referencePersonnel:String){
+
+    this.http.get<Array<NoteAnnuel>>(this._url6+referencePersonnel).subscribe(
+      data => {
+        this._listeNotesAnnuel = data;
+      },
+      error => {
+        console.log('error while loading notes annuels...');
+      }
+    );
+  }
 
   public  findNotesElementsByNoteAnnuel(noteAnnuel:NoteAnnuel) {
     this._noteAnnuelSelected=noteAnnuel;
@@ -145,6 +160,14 @@ export class NoteService {
 
   }
 
+
+  get url6(): string {
+    return this._url6;
+  }
+
+  set url6(value: string) {
+    this._url6 = value;
+  }
 
   get url4(): string {
     return this._url4;
@@ -256,5 +279,13 @@ export class NoteService {
 
   set noteAnnuelSelected(value: NoteAnnuel) {
     this._noteAnnuelSelected = value;
+  }
+
+  get noteAnnuelCreate2(): NoteAnnuel {
+    return this._noteAnnuelCreate2;
+  }
+
+  set noteAnnuelCreate2(value: NoteAnnuel) {
+    this._noteAnnuelCreate2 = value;
   }
 }
