@@ -9,7 +9,7 @@ export class StockService {
 
   private _stocks:Array<Stock>;
   constructor(private  http:HttpClient) { }
-  private url:string = "http://localhost:8040/stock-api/stock/";
+  private url:string = "http://localhost:8040/stock-api/stocks/";
   private _stockSelected:Stock;
   private _stockSelectedClone:Stock;
 
@@ -17,10 +17,9 @@ export class StockService {
     this.http.get<Array<Stock>>(this.url+"stocks").subscribe(
       data=>{
         console.log(data);
-        console.log("hello From  FindAllStock Methode in Service");
         this.stocks=data;
       },error => {
-        console.log("Error From  FindAllStock Methode in Service");
+        console.log("Error"+error);
       }
     );
   }
