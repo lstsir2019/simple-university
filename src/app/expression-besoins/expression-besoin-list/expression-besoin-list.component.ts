@@ -26,11 +26,15 @@ public get expressionBesoinSelect(){
 public findItemsByReference(expressionBesoin:ExpressionBesoin){
  return this.expressionBesoinService.findItemsByReference(expressionBesoin);
   }
-  public deleteItem(expressionBesoinItem:ExpressionBesoinItem){
+  /*public deleteItem(expressionBesoinItem:ExpressionBesoinItem){
     this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
       this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
     );
     return this.expressionBesoinService.deleteItem(expressionBesoinItem);
 
+  }*/
+  public setItemSelect(expressionBesoinItem: ExpressionBesoinItem){
+    return this.expressionBesoinService.setItemSelect(expressionBesoinItem);
   }
+
 }

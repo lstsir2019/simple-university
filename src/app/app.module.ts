@@ -22,6 +22,7 @@ import { BudgetEntiteAdministratifComponent } from './budget/budget-entite-admin
 import { BudgetCompteBudgitaireComponent } from './budget/budget-compte-budgitaire/budget-compte-budgitaire.component';
 import { ConfirmationComponent } from './budget/confirmation/confirmation.component';
 import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.component';
+import { ExpressionBesoinItemManipComponent } from './expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.com
     BudgetSousProjetComponent,
     BudgetEntiteAdministratifComponent,
     BudgetCompteBudgitaireComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ExpressionBesoinItemManipComponent
   ],
   imports: [
     BrowserModule,

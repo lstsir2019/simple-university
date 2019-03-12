@@ -3,6 +3,7 @@ import {ExpressionBesoin} from '../model/expression-besoin.model';
 import {reference} from '@angular/core/src/render3';
 import {ExpressionBesoinItem} from '../model/expression-besoin-item.model';
 import {HttpClient} from "@angular/common/http";
+import {Stock} from '../model/stock.model';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ExpressionBesoinService {
   public url:string = "http://localhost:8099/faculte-besoin/expressionbesoins/"
   public expressionBesoinCreate: ExpressionBesoin = new ExpressionBesoin('' , '' , '', '');
   public expressionBesoinItemCreate: ExpressionBesoinItem = new ExpressionBesoinItem(0,
-    '', '', 0,'');
+    '', '', 0,'',0,0,0);
   private _expressionBesoins:Array<ExpressionBesoin>;
   private _expressionBesoinSelect:ExpressionBesoin;
   private _expressionBesoinItemSelect:ExpressionBesoinItem;
@@ -23,9 +24,9 @@ export class ExpressionBesoinService {
 
 
   public addExpressionBesoinItem() {
-    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description );
+    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre );
     this.expressionBesoinCreate.expressionBesoinItemsVos.push(expressionBesoinItemClone);
-    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'');
+    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0);
   }
 
 
@@ -54,6 +55,19 @@ export class ExpressionBesoinService {
       );
     }
 
+  }
+
+  public accorder(){
+    if (this._expressionBesoinItemSelect !=null){
+      console.log("koko");
+      this.http.put("localhost:8099/faculte-besoin/item/accorder" , this.expressionBesoinItemSelect  ).subscribe (
+        data=>{
+          console.log("daz");
+        },error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   public deleteItem(expressionBesoinItem:ExpressionBesoinItem){
@@ -102,7 +116,7 @@ export class ExpressionBesoinService {
 
   get expressionBesoinItemSelect(): ExpressionBesoinItem {
     if(this._expressionBesoinItemSelect == null){
-      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"");
+      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"",0,0,0);
     }
     return this._expressionBesoinItemSelect;
   }
@@ -110,4 +124,12 @@ export class ExpressionBesoinService {
   set expressionBesoinItemSelect(value: ExpressionBesoinItem) {
     this._expressionBesoinItemSelect = value;
   }
+
+  public setItemSelect(expressionBesoinItem: ExpressionBesoinItem) {
+    this.expressionBesoinItemSelect = expressionBesoinItem;
+  }
+
+
+
+
 }
