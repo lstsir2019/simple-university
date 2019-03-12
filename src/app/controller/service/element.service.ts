@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Element} from '../model/element.model';
 import {HttpClient} from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,19 +22,29 @@ export class ElementService {
   constructor(private http: HttpClient) { }
 
 
-  public saveElement() {
+  public  saveElement() {
     this.http.post< Element>(this._url, this._elementCreate).subscribe(
-      data => {
-        console.log('ok');
-        let elementclone= new Element(this._elementCreate.reference,this._elementCreate.libelle,this._elementCreate.baremMin,this._elementCreate.baremMax);
-        this._listelements.push(elementclone);
-        this._elementCreate= new Element('','',0,0);
-      },
-      error => {
-        console.log('error');
-      }
+      (res) => {
+        if (res != null) {
+          Swal({
+            title: 'Création élément',
+            text: 'Insuffisance de donnees',
+            type: 'success',
+          });
+          let elementclone = new Element(this._elementCreate.reference, this._elementCreate.libelle, this._elementCreate.baremMin, this._elementCreate.baremMax);
+          this._listelements.push(elementclone);
+          this._elementCreate = new Element('', '', 0, 0);
+        }
+        else {
+          Swal({
+            title: 'Erreur!',
+            text: 'Erreur Inconnue',
+            type: 'error',
+          });
+        }
 
-    );
+
+      });
   }
 
   public deleteElement(elementSupp:Element) {

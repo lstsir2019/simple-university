@@ -129,6 +129,7 @@ export class NoteService {
         this.noteAnnuelCreate=new NoteAnnuel('','','',0);
         this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
         this.noteAnnuelCreate.notesElementVo=new Array<Note>();
+
       },
       error => {
         console.log('error');
