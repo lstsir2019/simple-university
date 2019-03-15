@@ -52,6 +52,7 @@ import {EchelleListComponent} from './echelles/echelle-list/echelle-list.compone
 import {EchellesComponent} from './echelles/echelles.component';
 import {EchelonListComponent} from './echelons/echelon-list/echelon-list.component';
 import {EchelonCreateComponent} from './echelons/echelon-create/echelon-create.component';
+import {ExpressionBesoinItemManipComponent} from './expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {EchelonCreateComponent} from './echelons/echelon-create/echelon-create.c
     ExpressionBesoinsComponent,
     ExpressionBesoinCreateComponent,
     ExpressionBesoinListComponent,
+    ExpressionBesoinItemManipComponent,
     ReceptionComponent,
     ReceptionCreateComponent,
     ReceptionListComponent,

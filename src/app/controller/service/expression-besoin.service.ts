@@ -4,6 +4,7 @@ import {reference} from '@angular/core/src/render3';
 import {ExpressionBesoinItem} from '../model/expression-besoin-item.model';
 import {HttpClient} from "@angular/common/http";
 import {Stock} from '../model/stock.model';
+import {error} from 'selenium-webdriver';
 
 
 @Injectable({
@@ -57,15 +58,16 @@ export class ExpressionBesoinService {
 
   }
 
-  public accorder(){
-    if (this._expressionBesoinItemSelect !=null){
+  public accorder(expressionBesoinItem: ExpressionBesoinItem){
+    if (expressionBesoinItem !=null){
       console.log("koko");
-      this.http.put("localhost:8099/faculte-besoin/item/accorder" , this.expressionBesoinItemSelect  ).subscribe (
+      this.http.put('http://localhost:8099/faculte-besoin/item/accorder',expressionBesoinItem).subscribe(
         data=>{
-          console.log("daz");
-        },error => {
-          console.log(error);
-        }
+          console.log("Done ... !");},
+            error=>{
+            console.log(error);
+            }
+
       );
     }
   }
