@@ -11,6 +11,7 @@ import {EvaluationPersonnelComponent} from './evaluation-personnel/evaluation-pe
 import {CommandesComponent} from "./commandes/commandes.component";
 import {ProduitsComponent} from "./produits/produits.component";
 import {LivraisonsComponent} from "./livraisons/livraisons.component";
+import {EvolutionsComponent} from "./evolutions/evolutions.component";
 
 const routes: Routes = [
   { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
@@ -32,7 +33,7 @@ const routes: Routes = [
 
   { path: 'produit',component:ProduitsComponent},
   { path: 'Livraison',component:LivraisonsComponent},
-
+  { path: 'evolution', component: EvolutionsComponent}
 
 ];
 

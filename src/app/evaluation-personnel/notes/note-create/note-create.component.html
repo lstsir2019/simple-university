@@ -1,7 +1,8 @@
 <div class="card">
   <div class="card-body text-dark">
 
-
+<div class="row">
+    <div class="col-md">
     <div class="card-header bg-transparent  text-center"><h4>Note/Élément</h4></div>
     <br>
     <div class="form-group">
@@ -78,14 +79,51 @@
     </div>
 
 
+    </div>
+
+
+
+
+
+<div class="col-md">
+    <div class="card-header bg-transparent  text-center"><h4>Note Annuel</h4></div>
+    <br>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Reference Personnel</label>
+      <input type="text" [(ngModel)]="noteAnnuel.referencePersonnel" name="referencePersonnel1" class="form-control" id="formGroupExampleInput5" placeholder="Reference Personnel">
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput">Reference Chef du Personnel</label>
+      <input type="text" [(ngModel)]="noteAnnuel.referenceEvaluateur" name="referenceChefduPersonnel" class="form-control" id="formGroupExampleInput6" placeholder="Reference Chef du Personnel">
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput">Date d'évaluation</label>
+      <input type="date" value="yyyy-mm-dd" [(ngModel)]="noteAnnuel.dateDevaluation" name="date" class="form-control" id="formGroupExampleInput7" >
+    </div>
+
+    <div class="form-group">
+      <button type="button" (click)="saveNoteAnnuel"  class="btn btn-outline-dark">Ajouter Note Annuel</button>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+</div>
     <div class="card-header bg-transparent  text-center"><h4>Liste des Notes/Élément</h4></div>
 
     <br>
 
 
     <table class="table table-hover table-responsive-xl">
-      <thead><th>Reference Personnel</th>    <th>Reference Evaluateur</th>    <th>Élément</th>     <th>Note</th>   <th>Observations</th>     <th></th>   <th></th>   </thead>
-      <tbody>
+      <thead class="theadx"><th>Reference Personnel</th>    <th>Reference Evaluateur</th>    <th>Élément</th>     <th>Note</th>   <th>Observations</th>     <th></th>   <th></th>   </thead>
+      <tbody class="tbodyx">
       <tr *ngFor="let c of notesElements ">
 
         <td>{{c.referencePersonnel}}</td>
@@ -94,6 +132,7 @@
         <td>{{c.noteElement}}</td>
         <td>{{c.observation}}</td>
         <td><button type="button" (click)="deleteNote(c)"  class="btn btn-outline-danger">Supprimer</button></td>
+        <td><button type="button"   class="btn btn-outline-warning">Modification</button></td>
 
 
 
@@ -105,48 +144,9 @@
       </tbody>
 
     </table>
-
-
-
-
-
-
-
-
-    <div class="card-header bg-transparent  text-center"><h4>Note Annuel</h4></div>
-    <br>
-    <div class="form-group">
-      <label for="formGroupExampleInput">Reference Personnel</label>
-      <input type="text" [(ngModel)]="noteAnnuel.referencePersonnel" name="referencePersonnel1" class="form-control" id="formGroupExampleInput5" placeholder="Reference Personnel">
-    </div>
-
-
-    <div class="form-group">
-      <label for="formGroupExampleInput">Reference Chef du Personnel</label>
-      <input type="text" [(ngModel)]="noteAnnuel.referenceEvaluateur" name="referenceChefduPersonnel" class="form-control" id="formGroupExampleInput6" placeholder="Reference Chef du Personnel">
-    </div>
-
-
-
-
-
-
-    <div class="form-group">
-      <label for="formGroupExampleInput">Date d'évaluation</label>
-      <input type="date" value="yyyy-mm-dd" [(ngModel)]="noteAnnuel.dateDevaluation" name="date" class="form-control" id="formGroupExampleInput7" >
-    </div>
-
-
-
-
-
-    <div class="card-footer">
-      <button type="button" (click)="saveNoteAnnuel"  class="btn btn-outline-dark">Ajouter Note Annuel</button>
-
-    </div>
+  </div>
 
   </div>
-</div>
 
 
 

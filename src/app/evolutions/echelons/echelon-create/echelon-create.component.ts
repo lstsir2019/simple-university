@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EchelonService} from '../../controller/service/echelon.service';
+import {EchelonService} from '../../../controller/service/evolutions/echelon.service';
 
 @Component({
     selector: 'app-echelon-create',

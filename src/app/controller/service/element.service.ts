@@ -23,22 +23,29 @@ export class ElementService {
 
 
   public  saveElement() {
-    this.http.post< Element>(this._url, this._elementCreate).subscribe(
+    this.http.post(this._url, this._elementCreate).subscribe(
       (res) => {
-        if (res != null) {
+        if (res == 1) {
           Swal({
             title: 'Création élément',
-            text: 'Insuffisance de donnees',
+            text: 'Création réussite',
             type: 'success',
           });
           let elementclone = new Element(this._elementCreate.reference, this._elementCreate.libelle, this._elementCreate.baremMin, this._elementCreate.baremMax);
           this._listelements.push(elementclone);
           this._elementCreate = new Element('', '', 0, 0);
         }
-        else {
+        else if(res == -1) {
           Swal({
             title: 'Erreur!',
-            text: 'Erreur Inconnue',
+            text: 'Élément déjà créer',
+            type: 'error',
+          });
+        }
+        else{
+          Swal({
+            title: 'Erreur!',
+            text: 'Le barem de 20 est dépassé',
             type: 'error',
           });
         }
@@ -48,52 +55,164 @@ export class ElementService {
   }
 
   public deleteElement(elementSupp:Element) {
-    this.http.delete(this._url1+elementSupp.reference).subscribe(
-      data => {
-        console.log("ok");
+    Swal({
+      title: 'Suppression',
+      text: "Vous voulez vraiment supprimer cet élément",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+      confirmButtonColor: '#d6000a',
+      cancelButtonColor: '#ddc800',
+      confirmButtonText: 'Supprimer'
+    }).then((result) => {
+      if (result.value) {
 
-        const index: number = this._listelements.indexOf(elementSupp);
-        if (index !== -1) {
-          this._listelements.splice(index, 1);
-        }
-      },
-      error => {
-        console.log('error while deleting element...');
+        this.http.delete(this._url1+elementSupp.reference).subscribe(
+          (res) => {
+            if(res==1){
+              const index: number = this._listelements.indexOf(elementSupp);
+              if (index !== -1) {
+                this._listelements.splice(index, 1);
+              }
+              Swal({
+                title: 'Suppression élément',
+                text: 'Suppression réussite',
+                type: 'success',
+              });
+
+            }
+
+
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Suppression échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
+
   }
 
   public editReference(elementEdit:Element,nvelement:Element){
-    this.http.put<Element>(this._url2+elementEdit.reference,nvelement).subscribe(
-      data => {
-        console.log("ok");
-        this.findAll();
-        this._elementCreate1 = new Element('','',0,0);
-        //this._elementCreate2 = new Element('','',0,0);
-        this.findByReference(nvelement);
-      },
-      error => {
-        console.log('error while updating element...');
+
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+
+        this.http.put(this._url2+elementEdit.reference,nvelement).subscribe(
+          (res) => {
+            if(res==1){
+              this.findAll();
+              this._elementCreate1 = new Element('','',0,0);
+              this.findByReference(nvelement);
+              Swal({
+                title: 'Modification élément',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+            else if(res==-1 || res==-2) {
+              Swal({
+                title: 'Erreur!',
+                text: "Manque d'informations: Référence ou libellé",
+                type: 'error',
+              });
+            }
+
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
+
 
   }
 
 
   public editBarem(elementEdit:Element,nvelement:Element){
-    this.http.put<Element>(this._url3+elementEdit.reference,nvelement).subscribe(
-      data => {
-        console.log("ok");
-        this.findAll();
-        this._elementCreate1 = new Element('','',0,0);
-        //this._elementCreate2 = new Element('','',0,0);
-        this.findByReference(elementEdit);
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d6d20b',
+      cancelButtonText:'Annuler',
 
-      },
-      error => {
-        console.log('error while updating element...');
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+
+        this.http.put(this._url3+elementEdit.reference,nvelement).subscribe(
+          (res) => {
+            if(res==1){
+              this.findAll();
+              this._elementCreate1 = new Element('','',0,0);
+              this.findByReference(elementEdit);
+
+              Swal({
+                title: 'Modification élément',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+            else if (res==-1) {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Le barem de 20 est dépassé',
+                type: 'error',
+              });
+            }
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
 
   }
 
