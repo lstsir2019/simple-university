@@ -26,6 +26,7 @@
     "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
     "jquery": "^3.3.1",
+    "ngx-bootstrap": "^3.2.0",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
     "sweetalert": "^2.1.2",
