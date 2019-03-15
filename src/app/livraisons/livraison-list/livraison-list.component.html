@@ -1,0 +1,111 @@
+<div class="card">
+  <div class="card-header">Result Livraison</div>
+  <div class="card-body">
+    <div class="card">
+      <div class="row">
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Reference</div>
+            </div>
+
+            <select class="custom-select" id="inputGroupSelect02"  >
+              <option selected>Choose...</option>
+              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">date</div>
+            </div>
+            <input type="date"  class="form-control" >
+          </div>
+        </div>
+
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">reference Commande</div>
+            </div>
+
+            <select class="custom-select" id="inputGroupSelect05"  >
+              <option selected>Choose...</option>
+              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Departement</div>
+            </div>
+
+            <select class="custom-select" id="inputGroupSelect01"  >
+              <option selected>Choose...</option>
+              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row text-center">
+        <div class="col-12">
+          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+
+        </div>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="card">
+      <div class="row">
+
+        <div class="card col-sm-6">
+          <div class="card-header">livraisons</div>
+          <div class="card-body">
+    <table class="table table-hover table-sm">
+      <thead> <th>Reference</th><th>date</th><th>ref-commd</th><th>Entite</th><th>detail</th></thead>
+      <tbody>
+      <tr *ngFor="let l of livraisons" >
+        <td>{{l.reference}}</td>
+        <td>{{l.date}}</td>
+        <td>{{l.referenceCommande}}</td>
+        <td>{{l.referenceEntite}}</td>
+        <td><button class="btn btn-outline-success" (click)="livraisonItemsR(l)">!</button></td>
+      </tr>
+      </tbody>
+    </table>
+          </div>
+
+        </div>
+
+        <div class="card col-sm-6">
+          <div class="card-header">livraison items</div>
+          <div class="card-body">
+          <table class="table table-hover table-sm">
+            <thead> <th>Reference</th><th>qte</th><th>Magsin</th></thead>
+            <tbody>
+            <tr *ngFor="let li of livraisonR.livraisonItemVos" >
+              <td>{{li.refenceProduit}}</td>
+              <td>{{li.qte}}</td>
+              <td>{{li.codeMagasin}}</td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

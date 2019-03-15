@@ -1,0 +1,188 @@
+
+<div class="card-body">
+  <div class="card">
+  <div class="card-header">
+
+<h5>Recherche des notes à partir du code de référence personnel </h5>
+      </div>
+
+<div class="card-body">
+  <div class="row ">
+    <div class="col-sm-6">
+
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2"  placeholder="Référence Personnel" type="text" [(ngModel)]="noteAnnuel.referencePersonnel" name="referencePersonnel1">
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="findNoteAnnuelByReference(noteAnnuel.referencePersonnel)" type="button"><i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="findNotesAnnuels" type="button">Liste des notes annuels (Liste entière)</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    </div>
+
+  <table class="table table-hover table-responsive-xl">
+    <thead><th>Référence Personnel</th><th>Référence Evaluateur</th><th>Note Annuel</th><th>Mention</th><th>Date d'évaluation</th><th>Notes</th><th></th></thead>
+    <tbody>
+    <tr *ngFor="let c of listeNotesAnnuels ">
+      <td>{{c.referencePersonnel}}</td>
+      <td>{{c.referenceEvaluateur}}</td>
+      <td>{{c.totalNote}}</td>
+      <td>{{c.mentionNoteVo.reference}}</td>
+      <td>{{c.dateDevaluation}}</td>
+      <td> <button type="button" (click)="findNoteElements(c)"     class="btn btn-outline-warning " id="buttonModal" data-toggle="modal" data-target="#modalNoteElement" data-whatever="@mdo"><i class="fa fa-xs	 fa-plus-circle" aria-hidden="true"></i>
+      </button>
+      </td>
+
+      <td><button (click)="deleteNoteAnnuel(c)" class="btn btn-outline-danger">Supprimer</button></td>
+
+
+
+
+
+
+
+
+
+
+
+    </tr>
+    </tbody>
+
+
+
+  </table>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<script>
+
+
+  /*$(document).ready(function(){
+    $("#buttonModal").click(function(){
+      $("#exampleModal").modal();
+    });
+  });*/
+
+  $('#buttonModal').click(function () {
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-title').text('New message to ' + recipient)
+      modal.find('.modal-body input').val(recipient)
+    })
+  });
+
+
+</script>-->
+
+
+
+<div class="modal fade bd-example-modal-xl" id="modalNoteElement"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="table">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Référence Personnel : {{selectedNoteAnnuel.referencePersonnel}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+
+        <table class="table table-hover table-responsive-xl">
+          <thead class="theadx"><th>Référence Evaluateur</th><th>Élément</th><th>Note d'élément</th><th>Observation</th><th></th></thead>
+          <tbody class="tbodyx">
+          <tr *ngFor="let c of selectedNoteAnnuel.notesElementVo ">
+            <td>{{c.referenceEvaluateur}}</td>
+            <td>{{c.elementEvaluationVo.reference}}</td>
+            <td>{{c.noteElement}}</td>
+            <td>{{c.observation}}</td>
+            <td><button  class="btn btn-outline-warning">Modification</button></td>
+
+
+
+
+
+
+
+
+
+
+
+
+          </tr>
+          </tbody>
+
+
+
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,123 @@
+
+<div class="card-body">
+  <table class="table table-hover table-responsive-xl">
+    <thead><th>Reference</th><th>Libellé</th><th>Barem-Min</th><th>Barem-Max</th><th></th><th></th></thead>
+    <tbody>
+    <tr *ngFor="let c of listelements ">
+      <td>{{c.reference}}</td>
+      <td>{{c.libelle}}</td>
+      <td>{{c.baremMin}}</td>
+      <td>{{c.baremMax}}</td>
+      <td><button type="button"  (click)="deleteElement(c)" class="btn btn-outline-danger">Supprimer</button></td>
+      <td>
+        <button type="button" (click)="elementByReference(c)"     class="btn btn-outline-warning " id="buttonModal" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Modification</button>
+      </td>
+
+
+
+
+
+
+
+
+
+
+    </tr>
+    </tbody>
+
+
+
+  </table>
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+  /*$(document).ready(function(){
+    $("#buttonModal").click(function(){
+      $("#exampleModal").modal();
+    });
+  });*/
+
+  $('#buttonModal').click(function () {
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-title').text('New message to ' + recipient)
+      modal.find('.modal-body input').val(recipient)
+    })
+  });
+
+
+</script>
+
+
+
+<div class="modal modal-lg fade " id="exampleModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+
+
+        <div class="form-group">
+          <h5 class="text-center">Modifier Reference-Libellé</h5>
+
+          <label for="formGroupExampleInput">Nouveau Reference Élément</label>
+          <input type="text" [(ngModel)]="element1.reference" class="form-control" id="formGroupExampleInput" placeholder="Nouveau Reference Élément">
+
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Nouveau Libellé</label>
+          <input type="text" [(ngModel)]="element1.libelle"  class="form-control" id="formGroupExampleInput2" placeholder="Nouveau Libellé">
+        </div>
+        <button type="button" (click)="editElement(element2,element1)"  class="btn btn-outline-dark">Modifier</button>
+        <hr>
+        <div class="form-group">
+          <h5 class="text-center">Modifier Barem Max</h5>
+
+          <label for="formGroupExampleInput3">Nouveau Barem Max</label>
+          <input type="number" [(ngModel)]="element1.baremMax"  class="form-control" id="formGroupExampleInput3" placeholder="Nouveau Barem Max">
+        </div>
+
+        <button type="button" (click)="editBarem(element2,element1)"  class="btn btn-outline-dark">Modifier</button>
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

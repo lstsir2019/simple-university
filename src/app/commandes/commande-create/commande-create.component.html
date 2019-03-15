@@ -1,0 +1,114 @@
+
+<div class="card">
+  <div class="card-header">Creation Commande</div>
+  <div class="card-body">
+
+
+
+    <div class="row">
+
+
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-header text-white bg-secondary mb-3">Produit</div>
+          <div class="card-body">
+            <div class="form-row">
+
+              <div class="col">
+                <label >reference produit</label>
+                <input class="form-control" type="text" [(ngModel)]="commandeItem.referenceProduit">
+              </div>
+
+              <div class="col">
+                <label >prix</label>
+                <input class="form-control" type="number" [(ngModel)]="commandeItem.prix">
+              </div>
+
+              <div class="col">
+                <label >quantite</label>
+                <input class="form-control" type="number" [(ngModel)]="commandeItem.qte">
+              </div>
+
+              <div class="col">
+                <button class="btn btn-outline-primary mt-4" (click)="addCommandeItem()"> Ajouter  </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header text-white bg-secondary mb-3">List des produits de la commande</div>
+          <div class="card-body">
+            <table class="table table-sm table-hover">
+              <thead><th>reference</th><th>prix</th><th>qte</th></thead>
+              <tbody>
+              <tr *ngFor="let c of commandeItems">
+                <td>{{c.referenceProduit}}</td>
+                <td>{{c.prix}}</td>
+                <td>{{c.qte}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header text-white bg-secondary mb-3">info commande</div>
+          <div class="card-body">
+
+
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">reference</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="commande.reference">
+            </div>
+
+
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Total</span>
+              </div>
+              <input class="form-control" type="number" [(ngModel)]="commande.total">
+            </div>
+
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Date</span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="commande.dateCommande">
+            </div>
+
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Fournisseur</span>
+              </div>
+              <select class="form-control"  [(ngModel)]="commande.fournisseurVo.reference">
+                <option value="">select</option>
+                <option *ngFor="let c of fournisseurs()">{{c.reference}}</option>
+              </select>
+            </div>
+
+            <button (click)="saveCommande()" class="btn btn-outline-success btn-block " >save</button>
+
+
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+

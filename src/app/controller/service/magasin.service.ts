@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MagasinService {
 
-  private _url: string ="http://localhost:8040/magasin-api/magasin/";
+  private _url: string ="http://localhost:8040/magasin-api/magasins/";
   constructor(private http: HttpClient) { }
   private _magasinCreate:Magasin= new Magasin("");
   private _magasins:Array<Magasin>;
@@ -19,7 +19,7 @@ export class MagasinService {
       data=>{
         this._magasins=data;
       },error => {
-        console.log("Error");
+        console.log("Error"+error);
       }
     );
     }
@@ -32,7 +32,7 @@ export class MagasinService {
         console.log("Ajouter avec success:"+data);
       },
       error=>{
-        console.log("error");
+        console.log("error"+error);
       }
     );
   }
@@ -59,7 +59,7 @@ export class MagasinService {
         date => {
           this._magasins = date;
         }, error => {
-          console.log("Error");
+          console.log("Error"+error);
         }
       );
     }

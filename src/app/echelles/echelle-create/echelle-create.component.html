@@ -1,0 +1,73 @@
+<div class="container" style="padding: 3%">
+    <form>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la refrence de l'echelle">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Reference</div>
+                        </div>
+                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference"
+                               [(ngModel)]="echelle.reference">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-2" data-toggle="tooltip" title="Entrer l'ordre de l'echelle">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Ordre</div>
+                        </div>
+                        <input type="number" class="form-control" id="ordre" name="ordre" placeholder="Ordre"
+                               [(ngModel)]="echelle.ordre">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer le libelle de l'echelle">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Libelle</div>
+                </div>
+                <input type="text" class="form-control" id="libelle" name="libelle" placeholder="Libelle"
+                       [(ngModel)]="echelle.libelle">
+            </div>
+            <br>
+            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la description de l'echelle">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Description</div>
+                </div>
+                <textarea class="form-control" id="description" name="description" placeholder="description"
+                          [(ngModel)]="echelle.description"
+                          rows="3"></textarea>
+            </div>
+            <br>
+            <div class="input-group mb-2" data-toggle="tooltip"
+                 title="Entrer la liste des echelons (utliser ctrl+click)">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Liste des echelons</div>
+                </div>
+                <select multiple class="form-control" id="echelons" name="echelons" [(ngModel)]="echelle.echelons">
+                   <!--
+                   <ng-content *ngFor="let echelon of echelons">
+                        <option >{{echelon.reference}}</option>
+                    </ng-content>
+                    -->
+                </select>
+            </div>
+            <br>
+            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du type personnel">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Reference Type personnel</div>
+                </div>
+                <select class="form-control" id="refrenceTypePersonnel" name="refrenceTypePersonnel"
+                        [(ngModel)]="echelle.referenceTypePersonnel">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <br>
+            <button type="button" class="btn btn-outline-success" (click)="ajouterEchelle()">Ajouter</button>
+        </div>
+    </form>
+</div>
