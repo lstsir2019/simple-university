@@ -1,6 +1,7 @@
 import {ExpressionBesoin} from './expression-besoin.model';
 
 export class ExpressionBesoinItem {
+
   constructor(
                   public id: number,
                   public referenceCategorieProduit: string ,
@@ -9,7 +10,9 @@ export class ExpressionBesoinItem {
                   public description: string ,
                   public quantiteAccorder: number,
                   public quantiteCommander: number,
-                  public quantiteLivre: number
+                  public quantiteLivre: number,
+
+
 
               ) { }
 }

@@ -62,6 +62,7 @@ import {LoiEvolutionTypePersonnelListComponent} from "./evolutions/lois-evolutio
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {ExpressionBesoinItemManipComponent} from './expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ExpressionBesoinsComponent,
     ExpressionBesoinCreateComponent,
     ExpressionBesoinListComponent,
+    ExpressionBesoinItemManipComponent,
     ReceptionComponent,
     ReceptionCreateComponent,
     ReceptionListComponent,

@@ -27,7 +27,7 @@ export class ExpressionBesoinService {
   public addExpressionBesoinItem() {
     let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre );
     this.expressionBesoinCreate.expressionBesoinItemsVos.push(expressionBesoinItemClone);
-    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0);
+    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0 );
   }
 
 
