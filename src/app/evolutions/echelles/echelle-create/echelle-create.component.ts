@@ -25,7 +25,8 @@ export class EchelleCreateComponent implements OnInit {
   }
 
   public ajouterEchelle() {
-    this.echelleService.ajouterEchelle();
+    // this.echelleService.ajouterEchelle();
+  console.log(this.echelle)
   }
 
 

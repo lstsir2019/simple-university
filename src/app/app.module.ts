@@ -62,6 +62,7 @@ import {LoiEvolutionTypePersonnelListComponent} from "./evolutions/lois-evolutio
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -132,7 +133,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

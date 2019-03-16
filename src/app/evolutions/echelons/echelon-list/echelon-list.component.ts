@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EchelonService} from '../../../controller/service/evolutions/echelon.service';
+import {Echelon} from "../../../controller/model/evolution/echelon.model";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class EchelonListComponent implements OnInit {
     toggleDataToModal(data){
         // @ts-ignore
         $('#modal').modal('show');
-        this.newEchelon = data;
+        this.newEchelon = new Echelon(data.reference,data.ordre,data.libelle);
     }
 
     modifierEchelon(){
