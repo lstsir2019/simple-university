@@ -13,7 +13,7 @@ export class NoteService {
   private _noteCreate:Note=new Note('','',0,'',this._elementVoCreate);
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
-
+  private _noteCreate2:Note=new Note('','',0,'',this._elementVoCreate);
   private _listeNotesAnnuel:Array<NoteAnnuel>;
   private _url = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/elementsDevaluation/';
   private _listelements:Array<Element>;
@@ -33,6 +33,13 @@ export class NoteService {
 
   constructor(private http: HttpClient) { }
 
+// fonction Test
+  public findNoteInModal(){
+    this.noteCreate2=this.noteCreate;
+  }
+
+
+  // add la note/Element dans le tableau
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
 
@@ -44,6 +51,18 @@ export class NoteService {
 
   }
 
+
+  // avoir la note/Element séléctonnée dans le tableau pour la modification
+  public findNoteElement(noteElement:Note){
+    for (let i of this.noteAnnuelCreate.notesElementVo) {
+      if(i==noteElement){
+this.noteCreate2=noteElement;
+      }
+    }
+  }
+
+
+  //Definir la mention
   public definirMention(){
     this.http.get<Mention>(this._url4+this.noteAnnuelCreate.totalNote).subscribe(
       data => {
@@ -56,6 +75,9 @@ export class NoteService {
   }
 
 
+
+
+  //Get Element
   public findByReference(element:Element){
     this.http.get<Element>(this._url1+element.reference).subscribe(
       data => {
@@ -68,7 +90,7 @@ export class NoteService {
 
   }
 
-
+//Get touts les elements
   public  findAll(){
 
     this.http.get<Array<Element>>(this._url).subscribe(
@@ -81,6 +103,11 @@ export class NoteService {
     );
   }
 
+
+
+
+
+  // Get toutes les notes Annuels
   public  findAllNotesAnnuel(){
 
     this.http.get<Array<NoteAnnuel>>(this._url3).subscribe(
@@ -92,6 +119,12 @@ export class NoteService {
       }
     );
   }
+
+
+
+
+
+  // Recherche des notes Annuels par reference
   public  findNotesAnnuelByReference(referencePersonnel:String){
 
     this.http.get<Array<NoteAnnuel>>(this._url6+referencePersonnel).subscribe(
@@ -104,6 +137,11 @@ export class NoteService {
     );
   }
 
+
+
+
+
+  //Get la list des notes /Elements pour chaque note Annuel
   public  findNotesElementsByNoteAnnuel(noteAnnuel:NoteAnnuel) {
     this._noteAnnuelSelected=noteAnnuel;
     //if (this._noteAnnuelSelected != null) {
@@ -117,6 +155,10 @@ export class NoteService {
     );
     //}
   }
+
+
+
+  // Création de la note annuel avec les note /Elements
   public saveNoteAnnuel() {
     this.http.post< NoteAnnuel>(this._url3, this._noteAnnuelCreate).subscribe(
       data => {
@@ -129,14 +171,26 @@ export class NoteService {
         this.noteAnnuelCreate=new NoteAnnuel('','','',0);
         this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
         this.noteAnnuelCreate.notesElementVo=new Array<Note>();
+        this.findAllNotesAnnuel();
+
 
       },
+
       error => {
         console.log('error');
       }
-
     );
+
+
+
   }
+
+
+
+
+
+
+  //Suppression de la note annuel et de ses notes /Element
   public deleteNoteAnnuel(noteAnnuelSupp:NoteAnnuel) {
     this.http.delete(this._url6+noteAnnuelSupp.referencePersonnel+'/dateDevaluation/'+noteAnnuelSupp.dateDevaluation).subscribe(
       data => {
@@ -156,6 +210,15 @@ export class NoteService {
   }
 
 
+
+
+
+
+
+
+
+
+  //Suppression de la  note /Element dans la table des notes /Elements avant la création dans la BD
   public deleteNote(noteSupp:Note) {
 
     const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(noteSupp);
@@ -164,6 +227,43 @@ export class NoteService {
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   get url6(): string {
@@ -292,5 +392,13 @@ export class NoteService {
 
   set noteAnnuelCreate2(value: NoteAnnuel) {
     this._noteAnnuelCreate2 = value;
+  }
+
+  get noteCreate2(): Note {
+    return this._noteCreate2;
+  }
+
+  set noteCreate2(value: Note) {
+    this._noteCreate2 = value;
   }
 }

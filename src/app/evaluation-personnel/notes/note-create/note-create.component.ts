@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteService} from '../../../controller/service/note.service';
+import {Note} from '../../../controller/model/note.model';
 
 @Component({
   selector: 'app-note-create',
@@ -13,6 +14,15 @@ export class NoteCreateComponent implements OnInit {
 
   ngOnInit() {
     this.noteService.findAll();
+  }
+  public get note2(){
+    return this.noteService.noteCreate2;
+  }
+  public findNoteInModal(){
+    return this.noteService.findNoteInModal();
+  }
+  public findNoteElement(noteElement:Note){
+    return this.noteService.findNoteElement(noteElement);
   }
   public deleteNote(noteSupp){
     return this.noteService.deleteNote(noteSupp);
@@ -41,7 +51,7 @@ export class NoteCreateComponent implements OnInit {
   public get noteAnnuel() {
     return this.noteService.noteAnnuelCreate;
   }
-  public get saveNoteAnnuel(){
+  public  saveNoteAnnuel(){
     return this.noteService.saveNoteAnnuel();
   }
 

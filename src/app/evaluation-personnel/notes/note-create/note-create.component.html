@@ -41,7 +41,6 @@
 
       </div>
 
-      <!-- <br><label>Barem Max: {{note.elementEvaluationVo.baremMax}}</label>-->
 
 
 
@@ -58,14 +57,11 @@
 
     </div>
 
+<!--  max="{{note.elementEvaluationVo.baremMax}}" min="0"  -->
 
-    <!--
-    <br>
-    <label>{{noteAnnuel.totalNote}}</label>
-        <br>-->
     <div class="form-group">
       <label for="formGroupExampleInput">Note Élément</label>
-      <input type="number" max="{{note.elementEvaluationVo.baremMax}}" min="0" [(ngModel)]="note.noteElement" name="note" class="form-control" id="formGroupExampleInput3" placeholder="Note Élément">
+      <input type="number"   [(ngModel)]="note.noteElement" name="note" class="form-control" id="formGroupExampleInput3" placeholder="Note Élément">
     </div>
 
     <div class="form-group">
@@ -104,7 +100,7 @@
     </div>
 
     <div class="form-group">
-      <button type="button" (click)="saveNoteAnnuel"  class="btn btn-outline-dark">Ajouter Note Annuel</button>
+      <button type="button" (click)="saveNoteAnnuel()"  class="btn btn-outline-dark">Ajouter Note Annuel</button>
 
     </div>
 
@@ -122,7 +118,7 @@
 
 
     <table class="table table-hover table-responsive-xl">
-      <thead class="theadx"><th>Reference Personnel</th>    <th>Reference Evaluateur</th>    <th>Élément</th>     <th>Note</th>   <th>Observations</th>     <th></th>   <th></th>   </thead>
+      <thead class="theadx"><th>Reference Personnel</th>    <th>Reference Evaluateur</th>    <th>Élément</th>     <th>Note</th>   <th>Observations</th>     <th></th> <th></th>   </thead>
       <tbody class="tbodyx">
       <tr *ngFor="let c of notesElements ">
 
@@ -132,8 +128,7 @@
         <td>{{c.noteElement}}</td>
         <td>{{c.observation}}</td>
         <td><button type="button" (click)="deleteNote(c)"  class="btn btn-outline-danger">Supprimer</button></td>
-        <td><button type="button"   class="btn btn-outline-warning">Modification</button></td>
-
+    <td><button type="button" (click)="findNoteElement(c)" id="btnModel"  data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"    class="btn btn-outline-warning">Modification</button></td>
 
 
       </tr>
@@ -149,13 +144,13 @@
   </div>
 
 
-
-<!-- model of modification-->
 <div class="modal modal-lg fade " id="exampleModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+        <label class="text-info text-sm-center">Veuillez saisir vos données ,la modification sera prise en charge automatiquement</label>
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -165,28 +160,57 @@
 
 
 
-
         <div class="form-group">
-          <h5 class="text-center">Modifier Reference-Libellé</h5>
+          <h5 class="text-center">Modifier Reference Personnel</h5>
 
-          <label for="formGroupExampleInput9">Nouveau Reference Élément</label>
-          <input type="text"  class="form-control" id="formGroupExampleInput9" placeholder="Nouveau Reference Élément">
+          <label for="formGroupExampleInput32">Nouveau Reference Personnel</label>
+          <input type="text" [(ngModel)]="note2.referencePersonnel"  class="form-control" id="formGroupExampleInput32" placeholder="Nouveau Reference Personnel">
 
         </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput2">Nouveau Libellé</label>
-          <input type="text"  class="form-control" id="formGroupExampleInput2" placeholder="Nouveau Libellé">
-        </div>
-        <button type="button"   class="btn btn-outline-dark">Modifier</button>
+
+
         <hr>
         <div class="form-group">
-          <h5 class="text-center">Modifier Barem Max</h5>
+          <h5 class="text-center">Modifier Reference Evaluateur</h5>
 
-          <label for="formGroupExampleInput10">Nouveau Barem Max</label>
-          <input type="number"   class="form-control" id="formGroupExampleInput10" placeholder="Nouveau Barem Max">
+          <label for="formGroupExampleInput99">Nouveau Reference Evaluateur</label>
+          <input type="text" [(ngModel)]="note2.referenceEvaluateur"  class="form-control" id="formGroupExampleInput99" placeholder="Nouveau Reference Evaluateur">
+
         </div>
 
-        <button type="button"   class="btn btn-outline-dark">Modifier</button>
+        <hr>
+        <div class="form-group">
+          <h5 class="text-center">Modifier Élément d'évaluation</h5>
+          <select  class="custom-select"  id="inputGroupSelect62" name="elementVo" [(ngModel)]="note2.elementEvaluationVo"  (change)="selectChangeHandler($event)" >
+            <option selected disabled> Choisir Élément</option>
+            <option *ngFor="let c of listElements " [ngValue]="c"    >{{c.reference}}
+            </option>
+
+          </select>
+        </div>
+
+
+        <hr>
+        <div class="form-group">
+          <h5 class="text-center">Modifier Note Élément</h5>
+
+          <label for="formGroupExampleInput30">Nouvelle Note</label>
+          <input type="number"   class="form-control" id="formGroupExampleInput30" [(ngModel)]="note2.noteElement" placeholder="Nouvelle Note">
+
+        </div>
+
+
+
+        <hr>
+        <div class="form-group">
+          <h5 class="text-center">Modifier l'observation</h5>
+
+          <label for="formGroupExampleInput25">Nouvelle observation</label>
+          <textarea    class="form-control" id="formGroupExampleInput25" [(ngModel)]="note2.observation" placeholder="Nouvelle observation"></textarea>
+
+        </div>
+
+
 
 
 
@@ -200,16 +224,18 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 <script>
-
-
-  /*$(document).ready(function(){
-    $("#buttonModal").click(function(){
-      $("#exampleModal").modal();
-    });
-  });*/
-
-  $('#buttonModal').click(function () {
+  $('#btnModel').click(function () {
     $('#exampleModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
       var recipient = button.data('whatever') // Extract info from data-* attributes
