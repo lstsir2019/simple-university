@@ -22,13 +22,7 @@ export class ExpressionBesoinItemManipComponent implements OnInit {
     return this.expressionBesoinService.expressionBesoinSelect;
   }
 
-  public deleteItem(expressionBesoinItem: ExpressionBesoinItem){
-    this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
-      this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
-    );
-    return this.expressionBesoinService.deleteItem(expressionBesoinItem);
 
-  }
 
   public accorder(expressionBesoinItem: ExpressionBesoinItem){
     return this.expressionBesoinService.accorder(expressionBesoinItem);

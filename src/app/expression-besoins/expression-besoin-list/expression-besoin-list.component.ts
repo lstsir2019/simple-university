@@ -37,4 +37,12 @@ public findItemsByReference(expressionBesoin:ExpressionBesoin){
     return this.expressionBesoinService.setItemSelect(expressionBesoinItem);
   }
 
+  public deleteItem(expressionBesoinItem: ExpressionBesoinItem){
+    this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
+      this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
+    );
+    return this.expressionBesoinService.deleteItem();
+
+  }
+
 }

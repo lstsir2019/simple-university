@@ -30,7 +30,7 @@
       </div>
       <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoin.codePersonel">
     </div>
-    <button style="margin: auto" (click)="saveCommande()" class="btn btn-block btn-outline-success">Save expression besoin</button>
+
 
   </div>
 </div>
@@ -71,7 +71,7 @@
 
 
 
-        <button (click)="addExpressionBesoinItem()" class="btn btn-outline-info mt-4">Ajouter</button>
+        <button (click)="addExpressionBesoinItem()" class="btn btn-outline-info mt-4 fa fa-plus"> Ajouter</button>
 
 
 
@@ -80,16 +80,18 @@
 </div>
 <div class="spacer">
 <table class="table table-hover ">
-  <thead class="thead-light"><th>CATEGORIE PRODUIT</th><th>REFERENCE PRODUIT</th><th>QTE</th><th>DESCTIPTION</th></thead>
+  <thead class="thead-light"><th>CATEGORIE PRODUIT</th><th>REFERENCE PRODUIT</th><th>QTE</th><th>DESCTIPTION</th><th>ELEMINER</th></thead>
   <tbody>
   <tr *ngFor="let e of expressionBesoinItems">
     <td>{{e.referenceCategorieProduit}}</td>
     <td>{{e.referenceProduit}}</td>
     <td>{{e.quantiteDemande}}</td>
     <td>{{e.description}}</td>
+    <td><button class="btn btn-outline-danger fa fa-times" (click)="eleminer(e)"></button> </td>
   </tr>
   </tbody>
 </table>
+  <button style="margin: auto" (click)="saveCommande()" class="btn btn-block btn-outline-success fa fa-check">  Save expression besoin</button>
 </div>
 
 </div>

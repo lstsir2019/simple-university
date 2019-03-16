@@ -72,13 +72,13 @@ export class ExpressionBesoinService {
     }
   }
 
-  public deleteItem(expressionBesoinItem:ExpressionBesoinItem){
-    this._expressionBesoinItemSelect=expressionBesoinItem;
+  public deleteItem(){
+
     if (this._expressionBesoinItemSelect !=null){
-      this.http.delete("http://localhost:8099/faculte-besoin/item/delete/"+this._expressionBesoinItemSelect.id+"",{}).subscribe(
+      this.http.delete("http://localhost:8099/faculte-besoin/item/delete/"+this.expressionBesoinItemSelect.id+"",{}).subscribe(
         data=>{
           console.log("deleted ...");
-        },error1 => {
+        },error => {
           console.log("error while deleting ...");
         }
       );

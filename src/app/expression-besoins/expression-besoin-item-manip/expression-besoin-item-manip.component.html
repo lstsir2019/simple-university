@@ -1,15 +1,14 @@
-<div class="row">
 
-<div class="nav flex-column nav-pills col-md-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Detail</a>
-  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Supprimer</a>
 
-</div>
-<div class="tab-content col-md-9" id="v-pills-tabContent">
-  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+
+
 
     <table class="table">
-
+      <tr>
+        <td>Description</td>
+        <td>{{expressionBesoinItemSelect.description}}</td>
+      </tr>
       <tr>
         <td>QTE Demandé</td>
         <td>{{expressionBesoinItemSelect.quantiteDemande}}</td>
@@ -22,19 +21,13 @@
         <td>QTE livré</td>
         <td>{{expressionBesoinItemSelect.quantiteLivre}}</td>
       </tr>
-      <tr>
+      <tr >
         <td>QTE Accordé</td>
-        <td><input type="number" class=""   [(ngModel)]="expressionBesoinItemSelect.quantiteAccorder"></td>
+        <td><input type="number" class="form-control"   [(ngModel)]="expressionBesoinItemSelect.quantiteAccorder"></td>
       </tr>
+
+
     </table>
-    <button (click)="accorder(expressionBesoinItemSelect)" class="btn btn-outline-info" >accorder</button>
-  </div>
-  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-    <p>l'element selectionné va être supprimer</p>
-    <button class="btn btn-danger fa fa-trash" (click)="deleteItem(expressionBesoinItemSelect)"> confirmer</button>
-  </div>
 
-</div>
-
-</div>
+    <button  (click)="accorder(expressionBesoinItemSelect)" class="btn btn-outline-info btn-block" > Accorder</button>
 
