@@ -157,6 +157,8 @@ export class MentionService {
 
             }
             else if(res==-1 || res==-2) {
+              this.findByReference(mentionEdit);
+
               Swal({
                 title: 'Erreur!',
                 text: "Manque d'informations: Référence ou libellé",
@@ -164,12 +166,22 @@ export class MentionService {
               });
             }
 
+            else if(res==-3) {
+              this.findByReference(mentionEdit);
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Mention deja existante',
+                type: 'error',
+              });
+            }
             else {
+              this.findByReference(mentionEdit);
               Swal({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',
               });
+
             }
 
 
@@ -215,13 +227,14 @@ export class MentionService {
               });
 
             }
-            else if (res==-1) {
+            else if (res==-1 || res ==-2) {
               Swal({
                 title: 'Erreur!',
                 text: 'Modification échouée:La note max doit etre supérieure à la note min',
                 type: 'error',
               });
             }
+
             else {
               Swal({
                 title: 'Erreur!',
@@ -269,7 +282,9 @@ export class MentionService {
               });
 
             }
-            else if (res==-1) {
+            else if (res==-1 || res==-2) {
+              this.findByReference(mentionEdit);
+
               Swal({
                 title: 'Erreur!',
                 text: 'Modification échouée:La note min doit etre inférieure à la note max',
@@ -277,6 +292,8 @@ export class MentionService {
               });
             }
             else {
+              this.findByReference(mentionEdit);
+
               Swal({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',

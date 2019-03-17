@@ -138,6 +138,13 @@ export class ElementService {
                 type: 'error',
               });
             }
+            else if(res==-3) {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Élément deja existant',
+                type: 'error',
+              });
+            }
 
             else {
               Swal({
