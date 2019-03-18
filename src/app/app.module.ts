@@ -63,6 +63,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {ExpressionBesoinItemManipComponent} from './expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component';
+import { EtudiantAdminComponent } from './etudiant-admin/etudiant-admin.component';
+import { EtudiantCreateComponent } from './etudiant-admin/etudiant-create/etudiant-create.component';
+import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-list.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +126,9 @@ import {ExpressionBesoinItemManipComponent} from './expression-besoins/expressio
     CommandesComponent,
     CommandeCreateComponent,
     CommandeListComponent,
+    EtudiantAdminComponent,
+    EtudiantCreateComponent,
+    EtudiantListComponent,
 
   ],
   imports: [

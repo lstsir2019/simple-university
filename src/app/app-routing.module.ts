@@ -12,8 +12,10 @@ import {CommandesComponent} from "./commandes/commandes.component";
 import {ProduitsComponent} from "./produits/produits.component";
 import {LivraisonsComponent} from "./livraisons/livraisons.component";
 import {EvolutionsComponent} from "./evolutions/evolutions.component";
+import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
 
 const routes: Routes = [
+  {path: 'etudiant-admin', component: EtudiantAdminComponent},
   { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
   { path:'reception',component:ReceptionComponent},
   { path: 'magasin',component:MagasinComponent},
@@ -25,6 +27,8 @@ const routes: Routes = [
 
       {path: 'mentions', component: MentionsComponent},
       {path: 'notes', component: NotesComponent},
+
+
     ]
   },*/
 
