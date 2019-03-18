@@ -4,6 +4,8 @@ import {NoteAnnuel} from "../model/note-annuel.model";
 import {HttpClient} from "@angular/common/http";
 import {Element} from "../model/element.model";
 import {Mention} from "../model/mention.model";
+import Swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,8 @@ import {Mention} from "../model/mention.model";
 export class NoteService {
   private _elementVoCreate:Element=new Element('','',0,0);
   private _noteCreate:Note=new Note('','',0,'',this._elementVoCreate);
+  private _noteCreateValidate:Note=new Note('','',0,'',this._elementVoCreate);
+
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteCreate2:Note=new Note('','',0,'',this._elementVoCreate);
@@ -27,6 +31,7 @@ export class NoteService {
   private _url6 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/notePersonnelAnnuel/referencePersonnel/';
 
   private _url5 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/noteElement/referencePersonnel/';
+  private _url7 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/noteElement/';
 
   private _url4='http://localhost:8099/sample-faculte-EvaluationPersonnel/mentionsNote/note/';
 
@@ -43,11 +48,54 @@ export class NoteService {
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
 
-    this._noteAnnuelCreate.totalNote+=this._noteCreate.noteElement;
-    let noteElementClone = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement,this._noteCreate.observation,this._noteCreate.elementEvaluationVo);
+    if(this._noteCreate.elementEvaluationVo==null) {
 
-    this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
-    this._noteCreate = new Note(this._noteCreate.referencePersonnel,this._noteCreate.referenceEvaluateur,0,'',this._elementVoCreate);
+      Swal({
+        type: 'error',
+        title: 'Erreur',
+        text: "Veuillez mentionner la référence de l'élément d'évaluation ",
+      });
+    }
+    else {
+
+      if (this._noteCreate.noteElement > this._noteCreate.elementEvaluationVo.baremMax) {
+
+        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+
+        Swal({
+          type: 'error',
+          title: 'Erreur',
+          text: 'La note donnée est supérieure au barem Max',
+        });
+      }
+      /*else if (this._noteCreate.elementEvaluationVo.reference == '') {
+        this.findByReference(selectedElement);
+
+        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._elementVoCreate);
+
+        Swal({
+          type: 'error',
+          title: 'Erreur',
+          text: "Veuillez mentionner la référence de l'élément d'évaluation ",
+        });
+      }*/
+      else {
+
+
+        this._noteAnnuelCreate.totalNote += this._noteCreate.noteElement;
+        let noteElementClone = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+
+        this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
+        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
+        Swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Note enregistrée',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    }
 
   }
 
@@ -102,6 +150,19 @@ this.noteCreate2=noteElement;
       }
     );
   }
+
+  /*
+  public get validationNote(){
+    this.http.get<Note>(this._url7+"/validation",this._noteCreate).subscribe(
+      data => {
+         this._noteCreateValidate= data;
+      },
+      error => {
+        console.log('error while loading noteElement...');
+      }
+    );
+  }
+  */
 
 
 
@@ -220,11 +281,28 @@ this.noteCreate2=noteElement;
 
   //Suppression de la  note /Element dans la table des notes /Elements avant la création dans la BD
   public deleteNote(noteSupp:Note) {
+    Swal({
+      title: 'Etes vous sûrs de la suppression',
+      text: "Cette note sera supprimer de façon définitive",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, Supprimer'
+    }).then((result) => {
+      if (result.value) {
+        const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(noteSupp);
+        if (index !== -1) {
+          this._noteAnnuelCreate.notesElementVo.splice(index, 1);
+        }
+        Swal({
+          type: 'success',
+          title: 'Suppression',
+          text: 'Note Supprimée',
+        });
+      }
+    })
 
-    const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(noteSupp);
-    if (index !== -1) {
-      this._noteAnnuelCreate.notesElementVo.splice(index, 1);
-    }
 
   }
 
@@ -400,5 +478,14 @@ this.noteCreate2=noteElement;
 
   set noteCreate2(value: Note) {
     this._noteCreate2 = value;
+  }
+
+
+  get url7(): string {
+    return this._url7;
+  }
+
+  set url7(value: string) {
+    this._url7 = value;
   }
 }

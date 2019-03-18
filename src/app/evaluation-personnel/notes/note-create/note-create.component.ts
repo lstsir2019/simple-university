@@ -57,6 +57,7 @@ export class NoteCreateComponent implements OnInit {
 
   public addNoteElement(selectedElement) {
     return this.noteService.addNoteElement(selectedElement);
+
   }
   selectedElement: string = '';
 

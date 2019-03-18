@@ -18,7 +18,7 @@ const routes: Routes = [
   { path:'reception',component:ReceptionComponent},
   { path: 'magasin',component:MagasinComponent},
   { path: 'budget',component:BudgetComponent},
-  { path: 'evaluation', component: EvaluationPersonnelComponent,
+  /*{ path: 'evaluation', component: EvaluationPersonnelComponent,
     children: [
       // { path: '', redirectTo: 'elements', pathMatch: 'full' },
       {path: 'elements', component: ElementsComponent, },
@@ -26,9 +26,14 @@ const routes: Routes = [
       {path: 'mentions', component: MentionsComponent},
       {path: 'notes', component: NotesComponent},
     ]
+  },*/
 
 
-  },
+
+  {path: 'elements', component: ElementsComponent, },
+
+  {path: 'mentions', component: MentionsComponent},
+  {path: 'notes', component: NotesComponent},
   { path: 'commande',component:CommandesComponent},
 
   { path: 'produit',component:ProduitsComponent},
