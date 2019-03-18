@@ -1,0 +1,164 @@
+<br>
+
+<div id="infoEtudiants" class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >CNE</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.cne" >
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >CIN</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.cin"  >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Nom</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.nom"   >
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Prenom</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.prenom"   >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Email</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.email"  >
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Tel</span>
+        </div>
+        <input type="text" class="form-control"  [(ngModel)]="etudiant.tel" >
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div id="diplome" class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >niveau d'etudes</span>
+        </div>
+        <select  [(ngModel)]="etudiant.niveauDetudes"  class="form-control form-control-sm">
+          <option value="BAC +2"> Bac +2</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Type Diplome</span>
+        </div>
+        <select  [(ngModel)]="etudiant.typeDiplome" class="form-control form-control-sm">
+          <option  value="DEUG" > DEUG</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<br>
+<div id="noteEtu" class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"  >Note S1</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.notesSermetreVo.noteS1" >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Note S2</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.notesSermetreVo.noteS2" >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Note S3</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.notesSermetreVo.noteS3" >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Note S4</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.notesSermetreVo.noteS4" >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Note S5</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="etudiant.notesSermetreVo.noteS5" >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Note S6</span>
+        </div>
+        <input type="text" class="form-control"  [(ngModel)]="etudiant.notesSermetreVo.noteS6">
+      </div>
+    </div>
+  </div>
+
+</div>
+<br>
+<div id="concours" class="container">
+  <div class="row" style="justify-content: center">
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Concours</span>
+        </div>
+        <select  [(ngModel)]="etudiant.choixVos.refConcours"   class="form-control form-control-sm" >
+          <option  value="{{c.reference}}" *ngFor="let c of concourss " > {{c.reference}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<br>
+<div id="ajouter" class="container">
+  <div class="row" style="justify-content: center">
+    <input type="button" class="btn btn-outline-success" value="Ajoutez l'étudiant"  (click)="saveEtudiant()">
+  </div>
+</div>
