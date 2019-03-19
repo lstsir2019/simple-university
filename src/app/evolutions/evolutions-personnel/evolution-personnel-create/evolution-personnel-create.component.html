@@ -1,91 +1,85 @@
 <div class="container" style="padding: 3%">
-    <form>
+  <form>
 
-        <div class="form-group">
-            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la refrence du l'evolution personnel">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Reference</div>
-                </div>
-                <input type="text" class="form-control" id="referenceEvolutionPersonnel"
-                       name="referenceEvolutionPersonnel" placeholder="referenceEvolutionPersonnel">
-            </div>
-            <br>
-            <div class="input-group mb-2" data-toggle="tooltip"
-                 title="Selectionner l'echelon de depart">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Loi Evolution Type Personnel</div>
-                </div>
-                <select class="form-control" id="loiEvolutionTypePersonnel" name="loiEvolutionTypePersonnel">
-                    <option>L1</option>
-                    <option>L2</option>
-                    <option>L3</option>
-                    <option>L4</option>
-                    <option>L5</option>
-                </select>
-            </div>
-            <br>
-            <div class="form-row">
-                <div class="col">
-                    <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la refrence du personnel">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Reference Personnel</div>
-                        </div>
-                        <input type="text" class="form-control" id="referencePersonnel" name="referencePersonnel"
-                               placeholder="Reference personnel">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du type personnel">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Reference Type Personnel</div>
-                        </div>
-                        <input type="text" class="form-control" id="refrenceTypePersonnel" name="refrenceTypePersonnel"
-                               placeholder="Refrence type personnel">
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="form-row">
-                <div class="col">
-                    <div class="input-group mb-2" data-toggle="tooltip"
-                         title="Selectionner l'echelon de depart">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Echelon Depart</div>
-                        </div>
-                        <select class="form-control" id="echelonDepart" name="echelonDepart">
-                            <option>ECH1</option>
-                            <option>ECH2</option>
-                            <option>ECH3</option>
-                            <option>ECH4</option>
-                            <option>ECH5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner l'echelon de fin">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Echelon Fin</div>
-                        </div>
-                        <select class="form-control" id="echelonFin" name="echelonFin">
-                            <option>ECH1</option>
-                            <option>ECH2</option>
-                            <option>ECH3</option>
-                            <option>ECH4</option>
-                            <option>ECH5</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la date de l'evolution">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Date evolution</div>
-                </div>
-                <input type="date" class="form-control" id="dateEvolution" name="dateEvolution">
-            </div>
+    <div class="form-group">
+      <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du l'evolution personnel">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Reference</div>
         </div>
-        <br>
-        <button type="button" class="btn btn-outline-success">Ajouter</button>
-    </form>
+        <input type="text" class="form-control" id="referenceEvolutionPersonnel"
+               name="referenceEvolutionPersonnel" placeholder="referenceEvolutionPersonnel"
+               [(ngModel)]="evolutionPersonnel.reference">
+      </div>
+      <br>
+      <div class="input-group mb-2" data-toggle="tooltip"
+           title="Selectionner l'echelon de depart">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Loi Evolution Type Personnel</div>
+        </div>
+        <select class="form-control" id="loiEvolutionTypePersonnel" name="loiEvolutionTypePersonnel"
+                [(ngModel)]="evolutionPersonnel.loiEvolutionTypePersonnel">
+          <option *ngFor="let loiEvolutionTypePersonnel of loisEvolutionTypePersonnel" [ngValue]="loiEvolutionTypePersonnel">{{loiEvolutionTypePersonnel.reference}}</option>
+        </select>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la refrence du personnel">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Reference Personnel</div>
+            </div>
+            <input type="text" class="form-control" id="referencePersonnel" name="referencePersonnel"
+                   placeholder="Reference personnel" [(ngModel)]="evolutionPersonnel.referencePersonnel">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du type personnel">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Reference Type Personnel</div>
+            </div>
+            <input type="text" class="form-control" id="refrenceTypePersonnel" name="refrenceTypePersonnel"
+                   placeholder="Refrence type personnel" [(ngModel)]="evolutionPersonnel.referenceTypePersonnel">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group mb-2" data-toggle="tooltip"
+               title="Selectionner l'echelon de depart">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Echelon Depart</div>
+            </div>
+            <select class="form-control" id="echelonDepart" name="echelonDepart"
+                    [(ngModel)]="evolutionPersonnel.echelonDepart">
+              <option *ngFor="let echelon of echelons" [ngValue]="echelon">{{echelon.reference}} | {{echelon.ordre}}
+                | {{echelon.libelle}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner l'echelon de fin">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Echelon Fin</div>
+            </div>
+            <select class="form-control" id="echelonFin" name="echelonFin" [(ngModel)]="evolutionPersonnel.echelonFin">
+              <option *ngFor="let echelon of echelons" [ngValue]="echelon">{{echelon.reference}} | {{echelon.ordre}}
+                | {{echelon.libelle}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la date de l'evolution">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Date evolution</div>
+        </div>
+        <input type="date" class="form-control" id="dateEvolution" name="dateEvolution"
+               [(ngModel)]="evolutionPersonnel.dateEvolution">
+      </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-outline-success" (click)="ajouterEvolutionPersonnel()">Ajouter</button>
+  </form>
 </div>
 

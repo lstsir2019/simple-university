@@ -30,8 +30,8 @@ export class ExpressionBesoinItemManipComponent implements OnInit {
 
   }
 
-  public accorder(expressionBesoinItem: ExpressionBesoinItem){
-    return this.expressionBesoinService.accorder(expressionBesoinItem);
-  }
+  // public accorder(expressionBesoinItem: ExpressionBesoinItem){
+  //   return this.expressionBesoinService.accorder(expressionBesoinItem);
+  // }
 
 }

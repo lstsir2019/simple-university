@@ -63,6 +63,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {DatePipe} from "@angular/common";
+import {ExpressionBesoinItemManipComponent} from "./expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {DatePipe} from "@angular/common";
     ExpressionBesoinsComponent,
     ExpressionBesoinCreateComponent,
     ExpressionBesoinListComponent,
+    ExpressionBesoinItemManipComponent,
     ReceptionComponent,
     ReceptionCreateComponent,
     ReceptionListComponent,
