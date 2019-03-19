@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetFaculte} from '../../controller/model/budget/budget-faculte.model';
 import {BudgetService} from '../../controller/service/budget.service';
+import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
+import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
 
 @Component({
   selector: 'app-confirmation',
@@ -9,17 +10,12 @@ import {BudgetService} from '../../controller/service/budget.service';
 })
 export class ConfirmationComponent implements OnInit {
 
+  private _selectedBcb:BudgetCompteBudgitaireVo;
   constructor(private _budgetService: BudgetService) {
   }
 
-  private _bfCreate: BudgetFaculte = new BudgetFaculte();
-
-  get bfCreate(): BudgetFaculte {
-    return this._bfCreate;
-  }
-
-  set bfCreate(value: BudgetFaculte) {
-    this._bfCreate = value;
+  public get bfCreate() {
+    return this._budgetService.budgetFaculteCreate;
   }
 
   get budgetService(): BudgetService {
@@ -33,6 +29,9 @@ export class ConfirmationComponent implements OnInit {
   ngOnInit() {
   }
 
+  public setSelectedBcb(bsb:BudgetCompteBudgitaireVo){
+    this._selectedBcb=bsb;
+  }
   /*
   public get bsps(){
     if (this._bfCreate==null) {
@@ -43,5 +42,13 @@ export class ConfirmationComponent implements OnInit {
   */
   public saveAll() {
     this._budgetService.saveAllInBudgetFaculte();
+  }
+
+  get selectedBcb(): BudgetCompteBudgitaireVo {
+    return this._selectedBcb;
+  }
+
+  set selectedBcb(value: BudgetCompteBudgitaireVo) {
+    this._selectedBcb = value;
   }
 }

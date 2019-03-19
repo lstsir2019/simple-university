@@ -10,26 +10,43 @@ export class BudgetFaculteComponent implements OnInit {
 
   ngOnInit() {
   }
-  constructor(private bfService: BudgetService) {
+  constructor(private budgetService: BudgetService) {
   }
 
   public get budgetFaculteVo() {
-    return this.bfService.budgetFaculteCreate;
+    return this.budgetService.budgetFaculteCreate;
+  }
+
+  public get budgetFaculteVo1(){
+    return this.budgetService.budgetFaculteCreate1;
   }
 
   public get detaillesBudgetVo() {
-    return this.bfService.detaillesBudgetVo0;
+    return this.budgetService.budgetFaculteCreate.detaillesBudgetVo;
   }
-
+  /*
   get bf() {
-    return this.bfService.bf;
+    return this.budgetService.bf;
   }
-
+*/
+  public findByAnneeMinAndAnneeMax(){
+    this.budgetService.findAllByAnneeMinAndAnneeMax();
+  }
+  public get budgetFacultes(){
+    return this.budgetService.budgetFacultes;
+  }
   public bfinfo() {
-    this.bfService.findAllByAnnee();
+    this.budgetService.findAllByAnnee();
   }
 
   public delete(annee: number) {
-    this.bfService.deleteBudgetFaculte(annee).subscribe();
+    if (annee!=null){
+      this.budgetService.deleteBudgetFaculte(annee).subscribe();
+      this.budgetService.refreshAllFromBf();
+    }
+  }
+
+  public get date(){
+    return new Date().getUTCFullYear();
   }
 }

@@ -52,6 +52,7 @@ import {EchelleListComponent} from './echelles/echelle-list/echelle-list.compone
 import {EchellesComponent} from './echelles/echelles.component';
 import {EchelonListComponent} from './echelons/echelon-list/echelon-list.component';
 import {EchelonCreateComponent} from './echelons/echelon-create/echelon-create.component';
+import { DetaillesComponent } from './budget/detailles/detailles.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ EvolutionsPersonnelComponent,
     CommandesComponent,
     CommandeCreateComponent,
     CommandeListComponent,
+    DetaillesComponent,
   ],
   imports: [
     BrowserModule,

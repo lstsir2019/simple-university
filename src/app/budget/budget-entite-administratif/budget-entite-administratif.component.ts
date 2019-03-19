@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetEntiteAdministratif} from '../../controller/model/budget/budget-entite-administratif.model';
+import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
 import {BudgetService} from '../../controller/service/budget.service';
 
 @Component({
@@ -9,12 +9,13 @@ import {BudgetService} from '../../controller/service/budget.service';
 })
 export class BudgetEntiteAdministratifComponent implements OnInit {
 
-  private _beasNoInDb: Array<BudgetEntiteAdministratif> = [];
-  private _selectedBea: BudgetEntiteAdministratif = new BudgetEntiteAdministratif();
+  private _beasNoInDb: Array<BudgetEntiteAdministratifVo> = [];
+  private _selectedBea: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo();
+  private _beas:Array<BudgetEntiteAdministratifVo>=[];
   constructor(private budgetService: BudgetService) {
   }
 
-  get beasNoInDb(): Array<BudgetEntiteAdministratif> {
+  get beasNoInDb(): Array<BudgetEntiteAdministratifVo> {
     return this._beasNoInDb;
   }
 
@@ -22,8 +23,12 @@ export class BudgetEntiteAdministratifComponent implements OnInit {
     return this.budgetService.budgetEntiteAdministratifCreate;
   }
 
-  set beasNoInDb(value: Array<BudgetEntiteAdministratif>) {
+  set beasNoInDb(value: Array<BudgetEntiteAdministratifVo>) {
     this._beasNoInDb = value;
+  }
+
+  public get sousProjets(){
+    return this.budgetService.allSousProjet;
   }
 
   public get budgetSousProjetClone() {
@@ -42,6 +47,11 @@ export class BudgetEntiteAdministratifComponent implements OnInit {
     return this.budgetService.findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin();
   }
   ngOnInit() {
+    this.budgetService.findAllEntiteAdministratif();
+  }
+
+  public get entiteAdministratif(){
+    return this.budgetService.allEntiteAdministratif;
   }
 
   get selectedBea() {
@@ -55,7 +65,7 @@ export class BudgetEntiteAdministratifComponent implements OnInit {
     this._selectedBea = value;
   }
 
-  public getBeaInfos(bear: BudgetEntiteAdministratif) {
+  public getBeaInfos(bear: BudgetEntiteAdministratifVo) {
     this._selectedBea = bear;
   }
 
@@ -63,7 +73,7 @@ export class BudgetEntiteAdministratifComponent implements OnInit {
     return this.budgetService.budgetEnAdmins;
   }
 
-  public deleteBsp(bea: BudgetEntiteAdministratif) {
+  public deleteBsp(bea: BudgetEntiteAdministratifVo) {
     const index: number = this.budgetEntiteAdmins.indexOf(bea);
     if (index !== -1) {
       this.budgetEntiteAdmins.splice(index, 1);

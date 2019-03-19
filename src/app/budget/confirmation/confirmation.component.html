@@ -1,80 +1,36 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-bordered text-center">
-        <thead>
-        <tr>
-          <th scope="col">Annee</th>
-          <th scope="col">Sous projet</th>
-          <th scope="col">Entite administratif</th>
-          <th scope="col">Compte budgitaire</th>
-          <th scope="col">Détails</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngIf="bf==null">
-          <td colspan="4" class="font-italic text-center">No details exist</td>
-        </tr>
-        <tr>
-          <th rowspan="8" class="align-middle">2018</th>
-          <td rowspan="4" class="align-middle">Recherche</td>
-          <td rowspan="2" class="align-middle">Math</td>
-          <td>Achat</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Vente</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2" class="align-middle">Physique</td>
-          <td>Achat</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Vente</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="4" class="align-middle">Enseignant</td>
-          <td rowspan="2" class="align-middle">Info</td>
-          <td>Achat</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Vente</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2" class="align-middle">Chimie</td>
-          <td>Achat</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Vente</td>
-          <td>
-            <button class="btn btn-outline-primary fa fa-info"></button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="col-md-6">
-        <button class="btn btn-outline-primary" (click)="saveAll()">Confirmation</button>
+  <div class="col-md-12">
+    <div class="card text-center">
+      <div class="card-header">
+        Détails budget de l'année {{bfCreate.annee}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
+    <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>reference sous projet</th>
+          <th>reference entite administratif</th>
+          <th>code compte budgitaire</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="bfCreate==null"><td>no item found</td></tr>
+      <tr *ngFor="let bsp of bfCreate.budgetSousProjetVo">
+        <td rowspan="bsp.budgetEntiteAdministratifVo.length">{{bsp.referenceSousProjet}}</td>
+        <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo">
+          <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
+          <div *ngFor="let bcb of bea.budgetCompteBudgitaireVo">
+            <td>{{bcb.compteBudgitaireVo.code}}</td>
+          </div>
+        </div>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

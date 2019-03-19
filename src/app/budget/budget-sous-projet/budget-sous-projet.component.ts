@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {BudgetSousProjet} from '../../controller/model/budget/budget-sous-projet.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 import {BudgetService} from '../../controller/service/budget.service';
 
 @Component({
@@ -9,24 +9,21 @@ import {BudgetService} from '../../controller/service/budget.service';
 })
 export class BudgetSousProjetComponent implements OnInit {
 
-  private _selectedBsp: BudgetSousProjet;
-  public bspInfo: BudgetSousProjet = new BudgetSousProjet();
+  public _selectedBsp: BudgetSousProjetVo;
+  public bspInfo: BudgetSousProjetVo = new BudgetSousProjetVo();
 
-  constructor(private bfs: BudgetService) {
+  constructor(private budgetService: BudgetService) {
   }
 
-  public get bsps() {
-    return this.bfs.bsps;
-  }
-
-  get selectedBsp(): BudgetSousProjet {
+  get selectedBsp(): BudgetSousProjetVo {
     if (this._selectedBsp == null) {
-      this._selectedBsp = new BudgetSousProjet();
+      this._selectedBsp = new BudgetSousProjetVo();
     }
     return this._selectedBsp;
   }
 
   ngOnInit() {
+    this.budgetService.findAllSousProjet();
   }
 
   public tableInfo(bsp) {
@@ -34,43 +31,47 @@ export class BudgetSousProjetComponent implements OnInit {
   }
 
   public get budgetSousprojet() {
-    return this.bfs.budgetSousProjetCreate;
+    return this.budgetService.budgetSousProjetCreate;
   }
 
   public get detaillesBudgetVo() {
-    return this.bfs.detaillesBudgetVo1;
+    return this.budgetService.detaillesBudgetVo1;
   }
 
-  public get budgetsSousProgets() {
-    return this.bfs.budgetFaculteCreate.budgetSousProjetVo;
+  public get budgetsSousProjets() {
+    return this.budgetService.budgetFaculteCreate.budgetSousProjetVo;
   }
 
-  public deleteBsp(bsp: BudgetSousProjet) {
-    const index: number = this.budgetsSousProgets.indexOf(bsp);
+  public deleteBsp(bsp: BudgetSousProjetVo) {
+    const index: number = this.budgetsSousProjets.indexOf(bsp);
     if (index !== -1) {
-      this.budgetsSousProgets.splice(index, 1);
+      this.budgetsSousProjets.splice(index, 1);
+      if(bsp.id!=0){
+        this.budgetService.deleteBudgetSousProjet(bsp).subscribe();
+      }
     }
   }
 
-  public addBudgetSousProjet() {
-    return this.bfs.addBudgetSousProjet();
+  public get findAll(){
+    return this.budgetService.allSousProjet;
   }
 
-  set selectedBsp(value: BudgetSousProjet) {
+  public addBudgetSousProjet() {
+    return this.budgetService.addBudgetSousProjet();
+  }
+
+  set selectedBsp(value: BudgetSousProjetVo) {
     this._selectedBsp = value;
   }
 
-  public getBspInfos(bspr: BudgetSousProjet) {
+  public setBudgetSousProjetInfos(bspr: BudgetSousProjetVo){
     this._selectedBsp = bspr;
   }
 
   public findAllByAnneeAndBudgetSousProjet() {
-    return this.bfs.findAllByAnneeAndBudgetSousProjet();
+    return this.budgetService.findAllByAnneeAndBudgetSousProjet();
   }
 
   public update() {
-  }
-
-  public delete() {
   }
 }

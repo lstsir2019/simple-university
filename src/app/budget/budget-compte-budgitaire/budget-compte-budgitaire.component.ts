@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetCompteBudgitaire} from '../../controller/model/budget/budget-compte-budgitaire.model';
+import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
 import {BudgetService} from '../../controller/service/budget.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {BudgetService} from '../../controller/service/budget.service';
 })
 export class BudgetCompteBudgitaireComponent implements OnInit {
 
-  private _selectedBcb: BudgetCompteBudgitaire = new BudgetCompteBudgitaire();
+  private _selectedBcb: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo();
   constructor(private budgetService: BudgetService) {
   }
 
@@ -47,19 +47,27 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     this.budgetService.addBudgetCompteBudgitaireCreate();
   }
 
-  get selectedBcb(): BudgetCompteBudgitaire {
+  get selectedBcb(): BudgetCompteBudgitaireVo {
     return this._selectedBcb;
   }
 
-  set selectedBcb(value: BudgetCompteBudgitaire) {
+  set selectedBcb(value: BudgetCompteBudgitaireVo) {
     this._selectedBcb = value;
   }
 
-  public getBcbInfos(bcbr: BudgetCompteBudgitaire) {
+  public getBcbInfos(bcbr: BudgetCompteBudgitaireVo) {
     if (this._selectedBcb == null) {
-      this._selectedBcb = new BudgetCompteBudgitaire();
+      this._selectedBcb = new BudgetCompteBudgitaireVo();
     }
     this._selectedBcb = bcbr;
+  }
+
+  public get sousProjets(){
+    return this.budgetService.allSousProjet;
+  }
+
+  public get entiteAdministratif(){
+    return this.budgetService.allEntiteAdministratif;
   }
 
   public update() {
