@@ -1,0 +1,79 @@
+<div style="padding-top: 3%">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Reference</th>
+      <th scope="col">Ordre</th>
+      <th scope="col">Libelle</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let echelon of echelons">
+      <th>{{echelon.reference}}</th>
+      <td>{{echelon.ordre}}</td>
+      <td>{{echelon.libelle}}</td>
+
+      <td>
+        <button type="button" class="btn btn-outline-warning" (click)="toggleDataToModal(echelon)">Modifier</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger" (click)="supprimerEchelon(echelon.reference)">Supprimer
+        </button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Reference</div>
+                  </div>
+                  <input type="text" class="form-control" id="reference" name="reference" readonly
+                         placeholder="Reference" [(ngModel)]=" newEchelon.reference">
+                </div>
+              </div>
+              <div class="col">
+                <div class="input-group mb-2" data-toggle="tooltip" title="Entrer l'ordre de l'echelon">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Ordre</div>
+                  </div>
+                  <input type="text" class="form-control" id="ordre" name="ordre" placeholder="Ordre"
+                         [(ngModel)]=" newEchelon.ordre">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="input-group mb-2" data-toggle="tooltip" title="Entrer le libelle de l'echelon">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Libelle</div>
+              </div>
+              <input type="text" class="form-control" id="libelle" name="libelle" placeholder="Libelle"
+                     [(ngModel)]=" newEchelon.libelle">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="exit()">Quitter</button>
+        <button type="button" class="btn btn-outline-primary" (click)="modifierEchelon()">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
