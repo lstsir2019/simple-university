@@ -138,6 +138,13 @@ export class ElementService {
                 type: 'error',
               });
             }
+            else if(res==-3) {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Élément deja existant',
+                type: 'error',
+              });
+            }
 
             else {
               Swal({
@@ -232,7 +239,6 @@ export class ElementService {
     this.http.get<Element>(this._url1+element.reference).subscribe(
       data => {
         this._elementCreate2 = data;
-        //this._elementCreate= new Element('','',0,0);
       },
       error => {
         console.log('error while loading the element...');
