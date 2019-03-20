@@ -5,7 +5,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Reference</div>
                 </div>
-                <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference">
+                <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference" [(ngModel)]="loiEvolution.reference">
             </div>
             <br>
             <div class="form-row">
@@ -14,7 +14,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Date Debut</div>
                         </div>
-                        <input type="date" class="form-control" id="dateDebut" name="dateDebut">
+                        <input type="date" class="form-control" id="dateDebut" name="dateDebut" [(ngModel)]="loiEvolution.dateDebut">
                     </div>
                 </div>
                 <div class="col">
@@ -22,7 +22,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Date Fin</div>
                         </div>
-                        <input type="date" class="form-control" id="dateFin" name="dateFin">
+                        <input type="date" class="form-control" id="dateFin" name="dateFin" [min]="loiEvolution.dateDebut" [(ngModel)]="loiEvolution.dateFin">
                     </div>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Description</div>
                 </div>
-                <textarea class="form-control" id="description" name="description" placeholder="description"
+                <textarea class="form-control" id="description" name="description" placeholder="description" [(ngModel)]="loiEvolution.description"
                           rows="3"></textarea>
             </div>
             <br>
-            <button type="button" class="btn btn-outline-success">Ajouter</button>
+            <button type="button" class="btn btn-outline-success" (click)="addLoiEvolution()">Ajouter</button>
         </div>
     </form>
 </div>
