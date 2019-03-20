@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import {LoiEvolutionTypePersonnel} from "../../model/evolution/loi-evolution-type-personnel.model";
+import {Injectable} from '@angular/core';
 import {EvolutionPersonnel} from "../../model/evolution/evolution-personnel.model";
 import Swal from "sweetalert2";
 import {HttpClient} from "@angular/common/http";
+import {getReact} from "./Util/SwalReact";
 
 @Injectable({
   providedIn: 'root'
@@ -10,129 +10,115 @@ import {HttpClient} from "@angular/common/http";
 export class EvolutionPersonnelService {
 
 
-  public url = 'http://localhost:8099/evolution/evolution-personnel/';
-  public evolutionPersonnel = new EvolutionPersonnel('',null,'','',null,null,'');
-  public evolutionsPersonnel = new Array<EvolutionPersonnel>();
+  private _url = 'http://localhost:8099/evolution/evolution-personnel/';
+  private _evolutionPersonnel = new EvolutionPersonnel('', null, '', '', null, null, '');
+  private _newEvolutionPersonnel = new EvolutionPersonnel('', null, '', '', null, null, '');
+  private _evolutionsPersonnel = new Array<EvolutionPersonnel>();
 
 
-  constructor(private http:HttpClient) {
+  private SWAL_REACT = getReact('Evolution personnel', true);
+  private SUCCESS_SUCCESS_CREATE = this.SWAL_REACT.SUCCESS_CREATE;
+  private SUCCESS_SUCCESS_EDIT = this.SWAL_REACT.SUCCESS_EDIT;
+  private SUCCESS_SUCCESS_DELETE = this.SWAL_REACT.SUCCESS_DELETE;
+  private ERROR_REF_ALREADY_EXISTS = this.SWAL_REACT.ERROR_REF_ALREADY_EXISTS;
+  private ERROR_REF_DOES_NOT_EXIST = this.SWAL_REACT.ERROR_REF_DOES_NOT_EXIST;
+  private ERROR_INVALID_REF = this.SWAL_REACT.ERROR_INVALID_REF;
+  private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
+  private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
+
+  constructor(private http: HttpClient) {
     this.getEvolutionsPersonnelFromDatabase();
   }
 
 
+  get url(): string {
+    return this._url;
+  }
+
+  set url(value: string) {
+    this._url = value;
+  }
+
+  get evolutionPersonnel(): EvolutionPersonnel {
+    return this._evolutionPersonnel;
+  }
+
+  set evolutionPersonnel(value: EvolutionPersonnel) {
+    this._evolutionPersonnel = value;
+  }
+
+  get newEvolutionPersonnel(): EvolutionPersonnel {
+    return this._newEvolutionPersonnel;
+  }
+
+  set newEvolutionPersonnel(value: EvolutionPersonnel) {
+    this._newEvolutionPersonnel = value;
+  }
+
+  get evolutionsPersonnel(): EvolutionPersonnel[] {
+    return this._evolutionsPersonnel;
+  }
+
+  set evolutionsPersonnel(value: EvolutionPersonnel[]) {
+    this._evolutionsPersonnel = value;
+  }
+
   public getEvolutionsPersonnelFromDatabase() {
-    this.http.get<EvolutionPersonnel>(this.url + 'all').subscribe(
+    this.http.get<EvolutionPersonnel>(this._url + 'all').subscribe(
       res => {
         // @ts-ignore
-        this.evolutionsPersonnel = res;
+        this._evolutionsPersonnel = res;
       }
     );
   }
 
 
   ajouterEvolutionPersonnel() {
-    this.http.post(this.url, this.evolutionsPersonnel).subscribe(
+    console.log(this._evolutionPersonnel);
+    this.http.post(this._url, this._evolutionPersonnel).subscribe(
       res => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Insuffisance de donnees',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference exist deja',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
-          Swal({
-            title: 'Succes',
-            text: 'Evolution personnel creee avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          this.getEvolutionsPersonnelFromDatabase();
+          // @ts-ignore
+          Swal(this.SUCCESS_SUCCESS_CREATE);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreur inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
 
   public modifierEvolutionPersonnel(data) {
-    this.http.put(this.url+'edit', data).subscribe(
+    this.http.put(this._url + 'edit', data).subscribe(
       (res) => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Insuffisance de donnees',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference exist deja',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
           this.getEvolutionsPersonnelFromDatabase();
-          Swal({
-            title: 'Succes',
-            text: 'Evolution personnel modofiee avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.SUCCESS_SUCCESS_EDIT);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreur inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
 
-  deleteEvolutionPersonnel(data){
-    this.http.delete(this.url + "delete/" + data).subscribe(
+  deleteEvolutionPersonnel(data) {
+    this.http.delete(this._url + "delete/" + data).subscribe(
       (res) => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference invalide',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_INVALID_REF);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference n\'existe pas',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
           this.getEvolutionsPersonnelFromDatabase();
-          Swal({
-            title: 'Succes',
-            text: 'Evolution personnel supprime avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.SUCCESS_SUCCESS_DELETE);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreure inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }

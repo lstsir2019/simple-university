@@ -3,6 +3,7 @@ import {LoiEvolution} from "../../model/evolution/loi-evolution.model";
 import Swal from 'sweetalert2';
 import {HttpClient} from "@angular/common/http";
 import {DatePipe} from "@angular/common";
+import {getReact} from "./Util/SwalReact";
 
 @Injectable({
   providedIn: 'root',
@@ -10,53 +11,67 @@ import {DatePipe} from "@angular/common";
 })
 export class LoiEvolutionService {
 
-  public url = 'http://localhost:8099/evolution/loi/';
-  public loiEvolution = new LoiEvolution('', '', '', '');
-  public loisEvolution = new Array<LoiEvolution>();
-  public loiEvolutionToEdit = new LoiEvolution('', '', '', '');
+  private _url = 'http://localhost:8099/evolution/loi/';
+  private _loiEvolution = new LoiEvolution('', '', '', '');
+  private _loisEvolution = new Array<LoiEvolution>();
 
-  constructor(private http:HttpClient, private datePipe: DatePipe) {
+  private SWAL_REACT = getReact('Loi d\'evolution personnel', true);
+  private SUCCESS_SUCCESS_CREATE = this.SWAL_REACT.SUCCESS_CREATE;
+  private SUCCESS_SUCCESS_EDIT = this.SWAL_REACT.SUCCESS_EDIT;
+  private SUCCESS_SUCCESS_DELETE = this.SWAL_REACT.SUCCESS_DELETE;
+  private ERROR_REF_ALREADY_EXISTS = this.SWAL_REACT.ERROR_REF_ALREADY_EXISTS;
+  private ERROR_REF_DOES_NOT_EXIST = this.SWAL_REACT.ERROR_REF_DOES_NOT_EXIST;
+  private ERROR_INVALID_REF = this.SWAL_REACT.ERROR_INVALID_REF;
+  private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
+  private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
+
+  constructor(private http: HttpClient, private datePipe: DatePipe) {
     this.getLoisEvolutionsFromDatabase();
   }
 
-  public getLoisEvolutionsFromDatabase(){
-    this.http.get<Array<LoiEvolution>>(this.url+"all").subscribe(res => this.loisEvolution = res)
+
+  get url(): string {
+    return this._url;
+  }
+
+  set url(value: string) {
+    this._url = value;
+  }
+
+  get loiEvolution(): LoiEvolution {
+    return this._loiEvolution;
+  }
+
+  set loiEvolution(value: LoiEvolution) {
+    this._loiEvolution = value;
+  }
+
+  get loisEvolution(): LoiEvolution[] {
+    return this._loisEvolution;
+  }
+
+  set loisEvolution(value: LoiEvolution[]) {
+    this._loisEvolution = value;
+  }
+
+  public getLoisEvolutionsFromDatabase() {
+    this.http.get<Array<LoiEvolution>>(this._url + "all").subscribe(res => this._loisEvolution = res)
   }
 
   public ajouterLoiEvolution() {
-    this.loiEvolution.dateDebut = this.datePipe.transform(this.loiEvolution.dateDebut, 'dd-MM-yyyy');
-    this.loiEvolution.dateFin = this.datePipe.transform(this.loiEvolution.dateFin, 'dd-MM-yyyy');
-    this.http.post(this.url, this.loiEvolution).subscribe(
+    this._loiEvolution.dateDebut = this.datePipe.transform(this._loiEvolution.dateDebut, 'dd-MM-yyyy');
+    this._loiEvolution.dateFin = this.datePipe.transform(this._loiEvolution.dateFin, 'dd-MM-yyyy');
+    this.http.post(this._url, this._loiEvolution).subscribe(
       (res) => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Insuffisance de donnees',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference exist deja',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
           this.getLoisEvolutionsFromDatabase();
-          Swal({
-            title: 'Succes',
-            text: 'Loi evolution creee avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.SUCCESS_SUCCESS_CREATE);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreur inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
@@ -64,72 +79,32 @@ export class LoiEvolutionService {
   public modifierLoiEvolution(data) {
     data.dateDebut = this.datePipe.transform(data.dateDebut, 'dd-MM-yyyy');
     data.dateFin = this.datePipe.transform(data.dateFin, 'dd-MM-yyyy');
-    this.http.put(this.url+'edit', data).subscribe(
+    this.http.put(this._url + 'edit', data).subscribe(
       (res) => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Insuffisance de donnees',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference exist deja',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
-          Swal({
-            title: 'Succes',
-            text: 'Loi evolution modofiee avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.SUCCESS_SUCCESS_EDIT);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreur inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
 
-  deleteLoiEvolution(data){
-    this.http.delete(this.url + "delete/" + data).subscribe(
+  deleteLoiEvolution(data) {
+    this.http.delete(this._url + "delete/" + data).subscribe(
       (res) => {
         if (res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference invalide',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_INVALID_REF);
         } else if (res == -2) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Reference n\'existe pas',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
           this.getLoisEvolutionsFromDatabase();
-          Swal({
-            title: 'Succes',
-            text: 'Loi evolution supprime avec succes',
-            type: 'success',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.SUCCESS_SUCCESS_DELETE);
         } else {
-          Swal({
-            title: 'Erreur!',
-            text: 'Erreure inconnue',
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
+          Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }

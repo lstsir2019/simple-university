@@ -27,7 +27,7 @@
       <input type="text" class="form-control"  >
     </div>
       <div class=" col">
-        <button class="btn btn-block btn-outline-info">Recherche</button>
+        <button class="btn btn-block btn-outline-info fa fa-search"> Recherche</button>
       </div>
   </div>
 
@@ -37,39 +37,43 @@
 
 </div>
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-md-6">
 
     <div class="container">
       <div class="card spacer">
         <div class="card-header bg-info text-white  ">Liste des expression besoin</div>
       <table class="table table-hover  ">
-        <thead class="theadx"><th>reference</th><th>date</th><th>code personel</th><th>code entité</th><th>detail</th></thead>
+        <thead class="theadx"><th>reference</th><th>date</th><th>code personel</th><th>code entité</th><th>Detail</th></thead>
         <tbody class="tbodyx">
-        <tr *ngFor="let e of expressionBesoins">
+
+        <tr *ngFor="let e of expressionBesoins" (click)="findItemsByReference(e)">
+
           <td>{{e.reference}}</td>
           <td>{{e.dateExpression}}</td>
           <td>{{e.codePersonel}}</td>
           <td>{{e.codeEntity }}</td>
-          <td ><button (click)="findItemsByReference(e)" class="btn btn-outline-dark fa fa-plus"></button></td>
+          <td ><button (click)="findItemsByReference(e)" class="btn btn-outline-info fa fa-angle-right"></button></td>
+
         </tr>
+
         </tbody>
       </table>
     </div>
     </div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="container" *ngIf="expressionBesoinSelect != null">
       <div class="card  spacer">
         <div class="card-header text-white bg-info ">Detail Expression Besoin {{expressionBesoinSelect.reference}}</div>
       <table class="table table-hover">
-        <thead class=""><th>Cat prod</th><th>Ref prod</th><th>Qte</th><th>Description</th><th>Supression</th></thead>
+        <thead class=""><th>Cat prod</th><th>Ref prod</th><th>Qte</th><th>Detail</th><th>Supprimer</th></thead>
         <tbody>
         <tr *ngFor="let eb of expressionBesoinSelect.expressionBesoinItemsVos">
           <td>{{eb.referenceCategorieProduit}}</td>
           <td>{{eb.referenceProduit}}</td>
           <td>{{eb.quantiteDemande}}</td>
-          <td>{{eb.description }}</td>
-          <td><button (click)="deleteItem(eb)" class="btn btn-outline-danger fa fa-trash"></button></td>
+          <td><button data-toggle="modal" data-target="#exampleModal" (click)="setItemSelect(eb)" class="btn btn-outline-info fa fa-plus"></button></td>
+          <td><button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger fa fa-trash" (click)="setItemSelect(eb)" ></button></td>
         </tr>
         </tbody>
       </table>
@@ -77,6 +81,49 @@
     </div>
   </div>
 </div>
+
+<!-- Modal detail-->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Expression besoin item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-expression-besoin-item-manip></app-expression-besoin-item-manip>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal delete-->
+<div class="modal fade " id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >supprimer expression besoin item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>l'élément selctionné va être supprimer</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger fa fa-trash" (click)="deleteItem()" data-dismiss="modal"> confirmer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abondonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

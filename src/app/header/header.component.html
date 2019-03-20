@@ -1,15 +1,29 @@
 <nav class="navbar-expand-lg navbar-light bg-light ">
+
   <div class="collapse navbar-collapse">
+    <img class="col-md-2" src="assets/img/fstgWide.png" >
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="budget">Budget</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="commande">Commande</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="evaluation">Evaluation personnel</a></li>
+      <!--Drop down Evaluation Personnel -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Evaluation Personnel        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  routerLink="elements">Éléments d'évaluation </a>
+          <a class="dropdown-item"   routerLink="mentions">Mentions</a>
+          <a class="dropdown-item"   routerLink="notes">Notes</a>
+        </div>
+      </li>
+      <!--Evaluation Personnel Finish-->
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="evolution">Evolution</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="exepressionbesoins">Exepression besoins</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Livraison">Livraison</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="magasin">Magasin</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="produit">Produit</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="reception">Reception</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>
+
     </ul>
   </div>
 </nav>

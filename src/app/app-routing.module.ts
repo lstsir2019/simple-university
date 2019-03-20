@@ -12,23 +12,32 @@ import {CommandesComponent} from "./commandes/commandes.component";
 import {ProduitsComponent} from "./produits/produits.component";
 import {LivraisonsComponent} from "./livraisons/livraisons.component";
 import {EvolutionsComponent} from "./evolutions/evolutions.component";
+import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
 
 const routes: Routes = [
+  {path: 'etudiant-admin', component: EtudiantAdminComponent},
   { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
   { path:'reception',component:ReceptionComponent},
   { path: 'magasin',component:MagasinComponent},
   { path: 'budget',component:BudgetComponent},
-  { path: 'evaluation', component: EvaluationPersonnelComponent,
+  /*{ path: 'evaluation', component: EvaluationPersonnelComponent,
     children: [
       // { path: '', redirectTo: 'elements', pathMatch: 'full' },
       {path: 'elements', component: ElementsComponent, },
 
       {path: 'mentions', component: MentionsComponent},
       {path: 'notes', component: NotesComponent},
+
+
     ]
+  },*/
 
 
-  },
+
+  {path: 'elements', component: ElementsComponent, },
+
+  {path: 'mentions', component: MentionsComponent},
+  {path: 'notes', component: NotesComponent},
   { path: 'commande',component:CommandesComponent},
 
   { path: 'produit',component:ProduitsComponent},
