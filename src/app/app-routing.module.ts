@@ -13,6 +13,10 @@ import {ProduitsComponent} from "./produits/produits.component";
 import {LivraisonsComponent} from "./livraisons/livraisons.component";
 import {EvolutionsComponent} from "./evolutions/evolutions.component";
 import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
+import {CommandeCreateComponent} from './commandes/commande-create/commande-create.component';
+import {CommandeListComponent} from './commandes/commande-list/commande-list.component';
+import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
+import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
@@ -42,7 +46,16 @@ const routes: Routes = [
 
   { path: 'produit',component:ProduitsComponent},
   { path: 'Livraison',component:LivraisonsComponent},
-  { path: 'evolution', component: EvolutionsComponent}
+  { path: 'evolution', component: EvolutionsComponent},
+
+  //commandes
+
+  { path: 'commandeCreate', component: CommandeCreateComponent},
+  { path: 'commandeListe', component: CommandeListComponent},
+
+  //expressionBesoin
+  { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
+  { path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
 
 ];
 
