@@ -5,32 +5,29 @@
         Détails budget de l'année {{bfCreate.annee}}
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>reference sous projet</th>
+            <th>reference entite administratif</th>
+            <th>code compte budgitaire</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="bfCreate==null"><td>no item found</td></tr>
+          <tr *ngFor="let bsp of bfCreate.budgetSousProjetVo">
+            <td rowspan="bsp.budgetEntiteAdministratifVo.length">{{bsp.referenceSousProjet}}</td>
+            <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo">
+              <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
+              <div *ngFor="let bcb of bea.budgetCompteBudgitaireVo">
+                <td>{{bcb.compteBudgitaireVo.code}}</td>
+              </div>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>
       </div>
     </div>
-    <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>reference sous projet</th>
-          <th>reference entite administratif</th>
-          <th>code compte budgitaire</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr *ngIf="bfCreate==null"><td>no item found</td></tr>
-      <tr *ngFor="let bsp of bfCreate.budgetSousProjetVo">
-        <td rowspan="bsp.budgetEntiteAdministratifVo.length">{{bsp.referenceSousProjet}}</td>
-        <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo">
-          <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
-          <div *ngFor="let bcb of bea.budgetCompteBudgitaireVo">
-            <td>{{bcb.compteBudgitaireVo.code}}</td>
-          </div>
-        </div>
-      </tr>
-      </tbody>
-    </table>
   </div>
 </div>

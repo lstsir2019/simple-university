@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 import {BudgetService} from '../../controller/service/budget.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-sous-projet',
@@ -26,7 +27,7 @@ export class BudgetSousProjetComponent implements OnInit {
     this.budgetService.findAllSousProjet();
   }
 
-  public tableInfo(bsp) {
+  public tableBudgetSousProjetInfo(bsp) {
     this.bspInfo = bsp;
   }
 
@@ -39,20 +40,46 @@ export class BudgetSousProjetComponent implements OnInit {
   }
 
   public get budgetsSousProjets() {
-    return this.budgetService.budgetFaculteCreate.budgetSousProjetVo;
+    return this.budgetService.bsps;
   }
 
-  public deleteBsp(bsp: BudgetSousProjetVo) {
+  public deleteBudgetSousProjet(bsp: BudgetSousProjetVo) {
     const index: number = this.budgetsSousProjets.indexOf(bsp);
-    if (index !== -1) {
-      this.budgetsSousProjets.splice(index, 1);
-      if(bsp.id!=0){
-        this.budgetService.deleteBudgetSousProjet(bsp).subscribe();
+    if (bsp.id==0) {
+      if (index !== -1) {
+        this.budgetsSousProjets.splice(index, 1);
       }
+    }else {
+      Swal({
+        title: 'Etes-vous sure?',
+        text: "Vous ne pouvez pas revenir en arrière!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimer!'
+      }).then((result) => {
+        if (result.value) {
+          if (index !== -1) {
+            this.budgetsSousProjets.splice(index, 1);
+          }
+          this.budgetService.deleteBudgetSousProjet(bsp).subscribe();
+          //this.budgetService.refreshAllFromBf();
+          Swal(
+            'Supprimmé!',
+            'Vos données ont été supprimés.',
+            'success'
+          );
+        }
+      });
     }
   }
 
-  public get findAll(){
+  public update() {
+    this.budgetService.updateBudgetSousProjet(this.bspInfo.referenceSousProjet);
+  }
+
+  public get sousProjets(){
     return this.budgetService.allSousProjet;
   }
 
@@ -72,6 +99,5 @@ export class BudgetSousProjetComponent implements OnInit {
     return this.budgetService.findAllByAnneeAndBudgetSousProjet();
   }
 
-  public update() {
-  }
+
 }

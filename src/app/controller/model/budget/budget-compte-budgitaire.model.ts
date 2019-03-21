@@ -8,6 +8,6 @@ export class BudgetCompteBudgitaireVo {
   public budgetEntiteAdministratifVo: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo();
   public compteBudgitaireVo: CompteBudgitaireVo = new CompteBudgitaireVo();
 
-  constructor(public id?: number, public codeBcb?:string) {
+  constructor(public id?: number, public referenceCompteBudgitaire?:string) {
   }
 }

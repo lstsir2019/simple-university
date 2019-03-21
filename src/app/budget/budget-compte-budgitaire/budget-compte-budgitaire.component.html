@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row col-md-12 justify-content-between">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header text-center">
           Création
@@ -30,7 +30,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
             </div>
-            <input type="number" [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
+            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertEstimatif:null" [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -38,7 +38,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
             </div>
-            <input type="number" [(ngModel)]="detaillesBudgetVo.creditOuvertReel" class="form-control"
+            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertReel:null" [(ngModel)]="detaillesBudgetVo.creditOuvertReel" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -46,7 +46,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagepaye">Engagé payé</label>
             </div>
-            <input type="number" [(ngModel)]="detaillesBudgetVo.engagePaye" class="form-control"
+            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engagePaye:null" [(ngModel)]="detaillesBudgetVo.engagePaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -54,7 +54,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
             </div>
-            <input type="number" [(ngModel)]="detaillesBudgetVo.engageNonPaye" class="form-control"
+            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engageNonPaye:null" [(ngModel)]="detaillesBudgetVo.engageNonPaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -62,7 +62,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="code">Code</label>
             </div>
-            <input type="text" [(ngModel)]="compteBudgitaire.code" class="form-control"
+            <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.code:null" [(ngModel)]="compteBudgitaire.code" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="code"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -70,18 +70,24 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="libelle">Libellé</label>
             </div>
-            <input type="text" [(ngModel)]="compteBudgitaire.libelle" class="form-control"
+            <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.libelle:null" [(ngModel)]="compteBudgitaire.libelle" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="libelle"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div class="form-group">
-            <input type="button" id="submit" (click)="addBudgetCompteBudgitaire()" class="form-control btn btn-success"
-                   value="Ajouter">
+          <div class="row">
+            <div class="col-6">
+              <input type="button" (click)="addBudgetCompteBudgitaire()" class="form-control btn btn-success"
+                     value="Ajouter">
+            </div>
+            <div class="col-6">
+              <input type="button" (click)="update()" class="form-control btn btn-primary"
+                     value="Ok">
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="card">
         <div class="card-header text-center">
           List
@@ -90,30 +96,32 @@
           <table class="table table-sm table-hover">
             <thead>
             <tr>
-              <th scope="col">Code</th>
-              <th scope="col">Libéllé</th>
-              <th scope="col">Actions</th>
+              <th scope="1">RCB</th>
+              <th scope="1">COE</th>
+              <th scope="1">COR</th>
+              <th scope="1">EP</th>
+              <th scope="1">ENP</th>
+              <th scope="1">Code</th>
+              <th scope="1">Libellé</th>
+              <th scope="1">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="bcbsRecherches.length==0 && budgetCompteBudgitaires.length==0">
-              <td class="text-center font-italic" colspan="3">No item found</td>
+            <tr *ngIf="bcbs.length==0">
+              <td class="text-center font-italic" colspan="8">No item found</td>
             </tr>
-            <tr *ngFor="let bcb of budgetCompteBudgitaires" class="table-warning">
-              <td>{{ bcb.compteBudgitaireVo.code }}</td>
-              <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
-              <td>
-                <button class="btn btn-outline-danger fa fa-trash"></button>
-              </td>
-            </tr>
-            <tr *ngFor="let bcb of bcbsRecherches" class="table-info">
+            <tr *ngFor="let bcb of bcbs" (click)="selectedTableBudgetCompteBudgitaire(bcb)" ngClass="bcb.id==0?'table-warning':'table-default'">
+              <td>{{ bcb.referenceCompteBudgitaire }}</td>
+              <td>{{ bcb.detaillesBudgetVo.creditOuvertEstimatif }}</td>
+              <td>{{ bcb.detaillesBudgetVo.creditOuvertReel }}</td>
+              <td>{{ bcb.detaillesBudgetVo.engagePaye }}</td>
+              <td>{{ bcb.detaillesBudgetVo.engageNonPaye }}</td>
               <td>{{ bcb.compteBudgitaireVo.code }}</td>
               <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
               <td>
                 <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBcbInfos(bcb)" data-toggle="modal"
                         data-target="#exampleModalBcbInfo"></button>
-                <button class="btn btn-outline-success fa fa-pencil" data-toggle="modal"
-                        data-target="#exampleModalBcbUpDel"></button>
+                <button class="btn btn-outline-danger fa fa-trash-o" (click)="deleteBudgetCompteBudgitaire(bcb)"></button>
               </td>
             </tr>
             </tbody>

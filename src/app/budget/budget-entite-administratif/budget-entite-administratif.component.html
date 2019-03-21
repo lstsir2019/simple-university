@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row col-md-12 justify-content-between">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header text-center">
           Création
@@ -27,14 +27,14 @@
             </select>
             <div class="input-group-append">
               <button (click)="findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin()"
-                      class="btn btn-outline-secondary fa fa-search"></button>
+                      class="btn btn-outline-primary fa fa-search"></button>
             </div>
           </div>
           <div class="input-group input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.creditOuvertEstimatif" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.creditOuvertEstimatif:null" [(ngModel)]="detailleBudgetVo.creditOuvertEstimatif" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -42,7 +42,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.creditOuvertReel" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.creditOuvertReel:null" [(ngModel)]="detailleBudgetVo.creditOuvertReel" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -50,7 +50,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagepaye">Engagé payé</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.engagePaye" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.engagePaye:null" [(ngModel)]="detailleBudgetVo.engagePaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -58,18 +58,23 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.engageNonPaye" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.engageNonPaye:null" [(ngModel)]="detailleBudgetVo.engageNonPaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div>
-            <input id="submit" (click)="addBudgetEntiteAdmin()" class="form-control btn btn-success" value="Ajouter"
-                   type="button">
+          <div class="row">
+            <div class="col-6">
+              <input id="submit" (click)="addBudgetEntiteAdmin()" class="form-control btn btn-success" value="Ajouter"
+                     type="button">
+            </div>
+            <div class="col-6">
+              <input type="button" (click)="update()" class="form-control btn btn-primary" value="Ok"/>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="card">
         <div class="card-header text-center">
           List
@@ -87,30 +92,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf=" budgetEntiteAdmins.length==0 && beas.length==0">
+            <tr *ngIf="beas.length==0">
               <td class="text-center font-italic" colspan="6">No item found</td>
             </tr>
-            <tr *ngFor="let bea of budgetEntiteAdmins" class="table-warning">
+            <tr *ngFor="let bea of beas" (click)="tableBudgetEntiteAdministratifInfo(bea)" ngClass="bea.id==0?'table-warning':'table-default'">
               <td>{{ bea.referenceEntiteAdministratif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertEstimatif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertReel }}</td>
               <td>{{ bea.detaillesBudgetVo.engagePaye }}</td>
               <td>{{ bea.detaillesBudgetVo.engageNonPaye }}</td>
               <td>
-                <button (click)="deleteBsp(bea)" class="btn btn-outline-danger fa fa-trash"></button>
-              </td>
-            </tr>
-            <tr *ngFor="let bear of beas" class="table-info">
-              <td>{{ bear.referenceEntiteAdministratif }}</td>
-              <td>{{ bear.detaillesBudgetVo.creditOuvertEstimatif }}</td>
-              <td>{{ bear.detaillesBudgetVo.creditOuvertReel }}</td>
-              <td>{{ bear.detaillesBudgetVo.engagePaye }}</td>
-              <td>{{ bear.detaillesBudgetVo.engageNonPaye }}</td>
-              <td>
-                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBeaInfos(bear)" data-toggle="modal"
+                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBeaInfos(bea)" data-toggle="modal"
                         data-target="#exampleModalBeaInfo"></button>
-                <button class="btn btn-outline-success fa fa-pencil" data-toggle="modal"
-                        data-target="#exampleModalBeaUpDel"></button>
+                <button class="btn btn-outline-danger fa fa-trash-o" (click)="deleteEntiteAdministratif(bea)"></button>
               </td>
             </tr>
             </tbody>
