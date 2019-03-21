@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import Swal from 'sweetalert2';
-import {Echelon} from "../../model/evolution/echelon.model";
+import {LoiEvolutionTypePersonnel} from "../../model/evolution/loi-evolution-type-personnel.model";
+import Swal from "sweetalert2";
+import {HttpClient} from "@angular/common/http";
 import {getReact} from "./Util/SwalReact";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EchelonService {
-  private _url = 'http://localhost:8099/evolution/echelon/';
-  private _echelon = new Echelon('', 0, '');
-  private _newEchelon = new Echelon('', 0, '');
-  private _echelons = new Array<Echelon>();
+export class LoiEvolutionTypePersonnelService {
 
-  private SWAL_REACT = getReact('Echelon', false);
+  private _url = 'http://localhost:8099/evolution/loi/loi-type-personnel/';
+  private _loiEvolutionTypePersonnel = new LoiEvolutionTypePersonnel('', '', null, null, 0, null);
+  private _loisEvolutionTypePersonnel = new Array<LoiEvolutionTypePersonnel>();
+
+  private SWAL_REACT = getReact('Evolution personnel', true);
   private SUCCESS_SUCCESS_CREATE = this.SWAL_REACT.SUCCESS_CREATE;
   private SUCCESS_SUCCESS_EDIT = this.SWAL_REACT.SUCCESS_EDIT;
   private SUCCESS_SUCCESS_DELETE = this.SWAL_REACT.SUCCESS_DELETE;
@@ -23,11 +23,9 @@ export class EchelonService {
   private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
   private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
 
-
   constructor(private http: HttpClient) {
-    this.getEchelonsFromDatabase();
+    this.getLoisEvolutionTypePersonnelFromDatabase();
   }
-
 
   get url(): string {
     return this._url;
@@ -37,76 +35,65 @@ export class EchelonService {
     this._url = value;
   }
 
-  get echelon(): Echelon {
-    return this._echelon;
+  get loiEvolutionTypePersonnel(): LoiEvolutionTypePersonnel {
+    return this._loiEvolutionTypePersonnel;
   }
 
-  set echelon(value: Echelon) {
-    this._echelon = value;
+  set loiEvolutionTypePersonnel(value: LoiEvolutionTypePersonnel) {
+    this._loiEvolutionTypePersonnel = value;
+  }
+
+  get loisEvolutionTypePersonnel(): LoiEvolutionTypePersonnel[] {
+    return this._loisEvolutionTypePersonnel;
+  }
+
+  set loisEvolutionTypePersonnel(value: LoiEvolutionTypePersonnel[]) {
+    this._loisEvolutionTypePersonnel = value;
+  }
+
+  public getLoisEvolutionTypePersonnelFromDatabase() {
+    this.http.get<LoiEvolutionTypePersonnel>(this._url + 'all').subscribe(
+      res => {
+        // @ts-ignore
+        this._loisEvolutionTypePersonnel = res;
+      }
+    );
   }
 
 
-  get newEchelon(): Echelon {
-    return this._newEchelon;
+  ajouterLoiEvolutionPersonnel() {
+    this.http.post(this._url, this._loiEvolutionTypePersonnel).subscribe(
+      res => {
+        if (res == -1) {
+          Swal(this.ERROR_NOT_ENOUGH_DATA);
+        } else if (res == -2) {
+          Swal(this.ERROR_REF_ALREADY_EXISTS);
+        } else if (res == 1) {
+          this.getLoisEvolutionTypePersonnelFromDatabase();
+          Swal(this.SUCCESS_SUCCESS_CREATE);
+        } else {
+          Swal(this.ERROR_UNKNOWN_ERROR);
+        }
+      });
   }
 
-  set newEchelon(value: Echelon) {
-    this._newEchelon = value;
-  }
-
-  get echelons(): Echelon[] {
-    return this._echelons;
-  }
-
-  set echelons(value: Echelon[]) {
-    this._echelons = value;
-  }
-
-  public ajouterEchelon() {
-    let echelonClone = new Echelon(this._echelon.reference, this._echelon.ordre, this._echelon.libelle);
-    this._echelons.push(echelonClone);
-    this.http.post(this._url, echelonClone).subscribe(
+  public modifierLoiEvolutionTypePersonnel(data) {
+    this.http.put(this._url + 'edit', data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
           Swal(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
-          Swal(this.SUCCESS_SUCCESS_CREATE);
-        } else {
-          Swal(this.ERROR_UNKNOWN_ERROR);
-        }
-      });
-
-  }
-
-
-  public getEchelonsFromDatabase() {
-    this.http.get<Echelon>(this._url + 'all').subscribe(
-      res => {
-        // @ts-ignore
-        this._echelons = res;
-      }
-    );
-  }
-
-  public modifierEchelon(data) {
-    this.http.put(this._url + "edit", data).subscribe(
-      (res) => {
-        if (res == -1) {
-          Swal(this.ERROR_NOT_ENOUGH_DATA);
-        } else if (res == -2) {
-          Swal(this.ERROR_REF_DOES_NOT_EXIST);
-        } else if (res == 1) {
+          this.getLoisEvolutionTypePersonnelFromDatabase();
           Swal(this.SUCCESS_SUCCESS_EDIT);
         } else {
           Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
-
   }
 
-  supprimerEchelon(data) {
+  deleteLoiEvolutionTypePersonnel(data) {
     this.http.delete(this._url + "delete/" + data).subscribe(
       (res) => {
         if (res == -1) {
@@ -114,11 +101,14 @@ export class EchelonService {
         } else if (res == -2) {
           Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
+          this.getLoisEvolutionTypePersonnelFromDatabase();
           Swal(this.SUCCESS_SUCCESS_DELETE);
-          this.getEchelonsFromDatabase();
         } else {
           Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
+
 }
+
+

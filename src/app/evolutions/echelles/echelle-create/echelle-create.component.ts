@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EchelleService} from '../../../controller/service/evolutions/echelle.service';
 import {EchelonService} from '../../../controller/service/evolutions/echelon.service';
-import {Echelon} from "../../../controller/model/evolution/echelon.model";
 
 @Component({
   selector: 'app-echelle-create',
@@ -27,7 +26,6 @@ export class EchelleCreateComponent implements OnInit {
   public ajouterEchelle() {
     this.echelleService.ajouterEchelle();
   }
-
 
 
 }

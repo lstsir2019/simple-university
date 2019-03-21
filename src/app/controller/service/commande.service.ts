@@ -9,8 +9,8 @@ import {Fournisseur} from '../model/fournisseur.model';
   providedIn: 'root'
 })
 export class CommandeService {
-  private _url:string = "http://localhost:8099/faculte-commande/commandes/";
-  private _url1:string = "http://localhost:8099/faculte-commande/fournisseurs/finAll";
+  private _url:string = "http://localhost:8090/faculte-commande/commandes/";
+  private _url1:string = "http://localhost:8090/faculte-commande/fournisseurs/finAll";
 
   private _commandeCreate:Commande = new Commande('' ,0,'');
   private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0);

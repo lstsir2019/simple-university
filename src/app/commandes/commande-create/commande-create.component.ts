@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandeService} from "../../controller/service/commande.service";
+import {CommandeItem} from '../../controller/model/commande-item.model';
 
 @Component({
   selector: 'app-commande-create',
@@ -34,6 +35,12 @@ export class CommandeCreateComponent implements OnInit {
 
   public fournisseurs(){
     return this.commandeService.fournisseurs;
+  }
+
+  public eleminer(commandeItem:CommandeItem){
+    this.commandeService.commandeCreate.commandeItemVos.splice(
+      this.commandeService.commandeCreate.commandeItemVos.indexOf(commandeItem),1
+    );
   }
 }
 

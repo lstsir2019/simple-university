@@ -4,7 +4,18 @@
     <img class="col-md-2" src="assets/img/fstgWide.png" >
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="budget">Budget</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="commande">Commande</a></li>
+
+      <!--Drop down Commande -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Commande</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  routerLink="commandeCreate">Create </a>
+          <a class="dropdown-item"   routerLink="commandeListe">List</a>
+        </div>
+      </li>
+      <!--Commandes Finish-->
+
       <!--Drop down Evaluation Personnel -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,8 +27,21 @@ Evaluation Personnel        </a>
         </div>
       </li>
       <!--Evaluation Personnel Finish-->
+
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="evolution">Evolution</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="exepressionbesoins">Exepression besoins</a></li>
+
+      <!--Drop down Exepression besoins -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Expression Besoin</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  routerLink="expressionBesoinCreate">Create </a>
+          <a class="dropdown-item"   routerLink="expressionBesoinList">List</a>
+        </div>
+      </li>
+      <!--Exepression besoins Finish-->
+
+
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Livraison">Livraison</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="magasin">Magasin</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="produit">Produit</a></li>

@@ -1,19 +1,22 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import Swal from 'sweetalert2';
-import {Echelon} from "../../model/evolution/echelon.model";
+import {EvolutionPersonnel} from "../../model/evolution/evolution-personnel.model";
+import Swal from "sweetalert2";
+import {HttpClient} from "@angular/common/http";
 import {getReact} from "./Util/SwalReact";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EchelonService {
-  private _url = 'http://localhost:8099/evolution/echelon/';
-  private _echelon = new Echelon('', 0, '');
-  private _newEchelon = new Echelon('', 0, '');
-  private _echelons = new Array<Echelon>();
+export class EvolutionPersonnelService {
 
-  private SWAL_REACT = getReact('Echelon', false);
+
+  private _url = 'http://localhost:8099/evolution/evolution-personnel/';
+  private _evolutionPersonnel = new EvolutionPersonnel('', null, '', '', null, null, '');
+  private _newEvolutionPersonnel = new EvolutionPersonnel('', null, '', '', null, null, '');
+  private _evolutionsPersonnel = new Array<EvolutionPersonnel>();
+
+
+  private SWAL_REACT = getReact('Evolution personnel', true);
   private SUCCESS_SUCCESS_CREATE = this.SWAL_REACT.SUCCESS_CREATE;
   private SUCCESS_SUCCESS_EDIT = this.SWAL_REACT.SUCCESS_EDIT;
   private SUCCESS_SUCCESS_DELETE = this.SWAL_REACT.SUCCESS_DELETE;
@@ -23,9 +26,8 @@ export class EchelonService {
   private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
   private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
 
-
   constructor(private http: HttpClient) {
-    this.getEchelonsFromDatabase();
+    this.getEvolutionsPersonnelFromDatabase();
   }
 
 
@@ -37,76 +39,75 @@ export class EchelonService {
     this._url = value;
   }
 
-  get echelon(): Echelon {
-    return this._echelon;
+  get evolutionPersonnel(): EvolutionPersonnel {
+    return this._evolutionPersonnel;
   }
 
-  set echelon(value: Echelon) {
-    this._echelon = value;
+  set evolutionPersonnel(value: EvolutionPersonnel) {
+    this._evolutionPersonnel = value;
+  }
+
+  get newEvolutionPersonnel(): EvolutionPersonnel {
+    return this._newEvolutionPersonnel;
+  }
+
+  set newEvolutionPersonnel(value: EvolutionPersonnel) {
+    this._newEvolutionPersonnel = value;
+  }
+
+  get evolutionsPersonnel(): EvolutionPersonnel[] {
+    return this._evolutionsPersonnel;
+  }
+
+  set evolutionsPersonnel(value: EvolutionPersonnel[]) {
+    this._evolutionsPersonnel = value;
+  }
+
+  public getEvolutionsPersonnelFromDatabase() {
+    this.http.get<EvolutionPersonnel>(this._url + 'all').subscribe(
+      res => {
+        // @ts-ignore
+        this._evolutionsPersonnel = res;
+      }
+    );
   }
 
 
-  get newEchelon(): Echelon {
-    return this._newEchelon;
-  }
-
-  set newEchelon(value: Echelon) {
-    this._newEchelon = value;
-  }
-
-  get echelons(): Echelon[] {
-    return this._echelons;
-  }
-
-  set echelons(value: Echelon[]) {
-    this._echelons = value;
-  }
-
-  public ajouterEchelon() {
-    let echelonClone = new Echelon(this._echelon.reference, this._echelon.ordre, this._echelon.libelle);
-    this._echelons.push(echelonClone);
-    this.http.post(this._url, echelonClone).subscribe(
-      (res) => {
+  ajouterEvolutionPersonnel() {
+    console.log(this._evolutionPersonnel);
+    this.http.post(this._url, this._evolutionPersonnel).subscribe(
+      res => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
           Swal(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
+          this.getEvolutionsPersonnelFromDatabase();
+          // @ts-ignore
           Swal(this.SUCCESS_SUCCESS_CREATE);
         } else {
           Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
-
   }
 
-
-  public getEchelonsFromDatabase() {
-    this.http.get<Echelon>(this._url + 'all').subscribe(
-      res => {
-        // @ts-ignore
-        this._echelons = res;
-      }
-    );
-  }
-
-  public modifierEchelon(data) {
-    this.http.put(this._url + "edit", data).subscribe(
+  public modifierEvolutionPersonnel(data) {
+    this.http.put(this._url + 'edit', data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
           Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
+          this.getEvolutionsPersonnelFromDatabase();
           Swal(this.SUCCESS_SUCCESS_EDIT);
         } else {
           Swal(this.ERROR_UNKNOWN_ERROR);
         }
       });
-
   }
 
-  supprimerEchelon(data) {
+  deleteEvolutionPersonnel(data) {
     this.http.delete(this._url + "delete/" + data).subscribe(
       (res) => {
         if (res == -1) {
@@ -114,8 +115,8 @@ export class EchelonService {
         } else if (res == -2) {
           Swal(this.ERROR_REF_DOES_NOT_EXIST);
         } else if (res == 1) {
+          this.getEvolutionsPersonnelFromDatabase();
           Swal(this.SUCCESS_SUCCESS_DELETE);
-          this.getEchelonsFromDatabase();
         } else {
           Swal(this.ERROR_UNKNOWN_ERROR);
         }

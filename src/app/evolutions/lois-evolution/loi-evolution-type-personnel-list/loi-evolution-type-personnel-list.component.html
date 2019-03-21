@@ -2,7 +2,6 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Reference</th>
       <th scope="col">Reference Type Personnel</th>
       <th scope="col">Echelon Depart</th>
@@ -13,53 +12,113 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Mark</td>
-      <td>Otto</td>
+    <tr *ngFor="let loiEvolutionTypePersonnel of loisEvolutionTypePersonnel">
+      <th>{{loiEvolutionTypePersonnel.reference}}</th>
+      <td>{{loiEvolutionTypePersonnel.referenceTypePersonnel}}</td>
+      <td>{{loiEvolutionTypePersonnel.echelonDepart.reference}}</td>
+      <td>{{loiEvolutionTypePersonnel.echelonFin.reference}}</td>
+      <td>{{loiEvolutionTypePersonnel.nombreAnnees}}</td>
+      <td>{{loiEvolutionTypePersonnel.loiEvolution.reference}}</td>
       <td>
-        <button type="button" class="btn btn-outline-warning">Modifier</button>
+        <button type="button" class="btn btn-outline-warning" (click)="toggleLoiEvolutionTypePersonnel(loiEvolutionTypePersonnel)">Modifier
+        </button>
       </td>
       <td>
-        <button type="button" class="btn btn-outline-danger">Supprimer</button>
-      </td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-        <button type="button" class="btn btn-outline-warning">Modifier</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-outline-danger">Supprimer</button>
-      </td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Larry</td>
-      <td>Mark</td>
-      <td>Mark</td>
-      <td>the Bird</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-        <button type="button" class="btn btn-outline-warning">Modifier</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-outline-danger">Supprimer</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteLoiEvolutionTypePersonnel(loiEvolutionTypePersonnel.reference)">Supprimer</button>
       </td>
     </tr>
     </tbody>
   </table>
+
+
+  <!-- Modal for editing an LoiEvolutionTypePersonnel-->
+  <div class="modal fade" id="modalEditLoiEvolutionTypePersonnel" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalScrollableTitle"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer une reference">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference</div>
+                </div>
+                <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference"  [(ngModel)]="loiEvolutionTypePersonnelToEdit.reference">
+              </div>
+              <br>
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du personnel">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Referenceeee Type Personnel</div>
+                </div>
+                <input type="text" class="form-control" id="referenceTypePersonnel"
+                       name="referenceTypePersonnel"
+                       placeholder="Reference Type Personnel"
+                       [(ngModel)]="loiEvolutionTypePersonnelToEdit.referenceTypePersonnel">
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner l'echelon de depart">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Echelon Depart</div>
+                    </div>
+                    <select class="form-control" id="echelonDepart" name="echelonDepart"
+                            [(ngModel)]="loiEvolutionTypePersonnelToEdit.echelonDepart">
+                      <option *ngFor="let _echelon of echelons" [ngValue]="_echelon">{{_echelon.reference}}
+                        | {{_echelon.ordre}} | {{_echelon.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner l'echelon de fin">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Echelon Fin</div>
+                    </div>
+                    <select class="form-control" id="echelonFin" name="echelonFin"
+                            [(ngModel)]="loiEvolutionTypePersonnelToEdit.echelonFin">
+                      <option *ngFor="let __echelon of echelons" [ngValue]="__echelon">{{__echelon.reference}}
+                        | {{__echelon.ordre}} | {{__echelon.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip" title="Entrer le nombre d'annees">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Nombre Annees</div>
+                    </div>
+                    <input type="number" class="form-control" id="nombreAnnees" name="nombreAnnees"
+                           placeholder="Nombre Annees" [(ngModel)]="loiEvolutionTypePersonnelToEdit.nombreAnnees">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner une loi d'evolution">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Loi Evolution</div>
+                    </div>
+                    <select class="form-control" id="loiEvolution" name="loiEvolution"
+                            [(ngModel)]="loiEvolutionTypePersonnelToEdit.loiEvolution">
+                      <option *ngFor="let loiEvolution of loisEvolution"
+                              [ngValue]="loiEvolution">{{loiEvolution.reference}}| {{loiEvolution.description}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Quitter</button>
+          <button type="button" class="btn btn-outline-primary" (click)="editLoiEvolutionTypePersonnel()">Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

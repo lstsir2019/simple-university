@@ -67,6 +67,7 @@ import { EtudiantAdminComponent } from './etudiant-admin/etudiant-admin.componen
 import { EtudiantCreateComponent } from './etudiant-admin/etudiant-create/etudiant-create.component';
 import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-list.component';
 import {DetaillesComponent} from './budget/detailles/detailles.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
