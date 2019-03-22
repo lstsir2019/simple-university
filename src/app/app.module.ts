@@ -66,6 +66,7 @@ import {ExpressionBesoinItemManipComponent} from './expression-besoins/expressio
 import { EtudiantAdminComponent } from './etudiant-admin/etudiant-admin.component';
 import { EtudiantCreateComponent } from './etudiant-admin/etudiant-create/etudiant-create.component';
 import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-list.component';
+import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from "@angular/common";
 
 @NgModule({
@@ -89,6 +90,7 @@ import {DatePipe} from "@angular/common";
     BudgetEntiteAdministratifComponent,
     BudgetCompteBudgitaireComponent,
     ConfirmationComponent,
+    DetaillesComponent,
     EvaluationPersonnelComponent,
     ElementCreateComponent,
     ElementListComponent,
@@ -141,7 +143,7 @@ import {DatePipe} from "@angular/common";
     TooltipModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {
