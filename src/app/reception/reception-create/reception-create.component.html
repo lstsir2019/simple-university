@@ -71,7 +71,8 @@
       <div class="card-body">
         <table class="table table-sm table-hover" >
           <thead>
-          <th>Categorie</th><th>Produit</th><th>Magasin</th><th>Qte</th></thead>
+          <th>Categorie</th><th>Produit</th><th>Magasin</th><th>Qte</th>
+          <th>action</th></thead>
           <tbody>
           <tr *ngIf="receptionItems.length==0">
             <td class="text-center font-italic" colspan="4">No Item added</td>
@@ -81,6 +82,7 @@
             <td>{{item.referenceProduit}}</td>
             <td>{{item.referenceMagasin}}</td>
             <td>{{item.qte}}</td>
+            <td><button (click)="deleteReceptionItems(item)"><i class="fa fa-trash-o"></i></button></td>
           </tr>
           </tbody>
         </table>
