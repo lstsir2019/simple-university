@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informations</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Ordre de Mission</h2>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Formulaire de demande</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" action="">
+                    <div class="row justify-content-between">
+                        <div class="form-group col-md-4">
+                            <label for="">Réference de la demande</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" required/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">Rechercher</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Pays de destination</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>Maroc</option>
+                                <option>France</option>
+                                <option>Espagne</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Objet de la Mission</label>
+                            <input type="text" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                       <div class="form-group col-md-4">
+                            <label for="">Moyen de transport</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>Avion</option>
+                                <option>Voiture</option>
+                                <option>Motocyclette</option>
+                            </select>
+                        </div>
+                         <div class="form-group col-md-4">
+                            <label for="">Entité administrative</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>département d'Informatique</option>
+                                <option>département de Physique</option>
+                                <option>département de Mathématiques</option>
+                                <option>département de Biologie</option>
+                                <option>département de Chimie</option>
+                                <option>département de Géologie</option>
+                                <option>Cellule de recherche</option>
+                                <option>Service administratif</option>
+                            </select>
+                        </div>     
+                        <div class="form-group col-md-4">
+                            <label for="">Nombre du personnel</label>
+                            <input type="number" class="form-control" min="1" step="1" required/>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="form-group col-md-4">
+                            <label for="">Estimation Kilométrique</label>
+                            <input type="number" class="form-control" min="1" step="1" required/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Date Départ</label>
+                            <input type="date" class="form-control" required/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Date Retour</label>
+                            <input type="date" class="form-control" required/>
+                        </div>
+                         <div class="form-group col-md-4">
+                            <label for="">Ville d'accueil</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>Rabat</option>
+                                <option>Casablanca</option>
+                                <option>Agadir</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="row justify-content-between col-md-4">
+                            <!-- <div><a href="" class="btn btn-danger">Supprimer</a></div> 
+                            <div><a href="" class="btn btn-primary">Modifier</a></div>   --> 
+                            <div><input type="submit" class="form-control btn btn-success" value="Sauvegarder"/></div>
+                            <div><a href="verifier.html" class="btn btn-danger">Voir l'état d'une demande</a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

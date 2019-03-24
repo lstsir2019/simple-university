@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetCompteBudgitaire} from '../../controller/model/budget/budget-compte-budgitaire.model';
+import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
 import {BudgetService} from '../../controller/service/budget.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-compte-budgitaire',
@@ -9,7 +10,8 @@ import {BudgetService} from '../../controller/service/budget.service';
 })
 export class BudgetCompteBudgitaireComponent implements OnInit {
 
-  private _selectedBcb: BudgetCompteBudgitaire = new BudgetCompteBudgitaire();
+  private _selectedBcb: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo();
+  private _tableBudgetCompteBudgitaireInfo:BudgetCompteBudgitaireVo=new BudgetCompteBudgitaireVo();
   constructor(private budgetService: BudgetService) {
   }
 
@@ -24,9 +26,10 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
   public get budgetSousProjetClone() {
     return this.budgetService.budgetSousProjetCreateClone2;
   }
+  /*
   public get budgetCompteBudgitaires() {
     return this.budgetService.budgetCbs;
-  }
+  }*/
 
   public get compteBudgitaire() {
     return this.budgetService.compteBudgitaireCreate;
@@ -36,7 +39,7 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     return this.budgetService.detaillesBudgetVo3;
   }
 
-  public get bcbsRecherches() {
+  public get bcbs() {
     return this.budgetService.bcbs;
   }
 
@@ -47,27 +50,71 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     this.budgetService.addBudgetCompteBudgitaireCreate();
   }
 
-  get selectedBcb(): BudgetCompteBudgitaire {
+  get selectedBcb(): BudgetCompteBudgitaireVo {
     return this._selectedBcb;
   }
 
-  set selectedBcb(value: BudgetCompteBudgitaire) {
+  set selectedBcb(value: BudgetCompteBudgitaireVo) {
     this._selectedBcb = value;
   }
 
-  public getBcbInfos(bcbr: BudgetCompteBudgitaire) {
-    if (this._selectedBcb == null) {
-      this._selectedBcb = new BudgetCompteBudgitaire();
-    }
+  public getBcbInfos(bcbr: BudgetCompteBudgitaireVo) {
     this._selectedBcb = bcbr;
   }
 
+  public get sousProjets(){
+    return this.budgetService.allSousProjet;
+  }
+
+  public get entiteAdministratif(){
+    return this.budgetService.allEntiteAdministratif;
+  }
+
   public update() {
-
+    this.budgetService.updateBudgetCompteBudgitaire(this._tableBudgetCompteBudgitaireInfo.referenceCompteBudgitaire);
   }
 
-  public delete() {
-
+  public deleteBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo) {
+    const index: number = this.bcbs.indexOf(bcb);
+    if (bcb.id==0) {
+      if (index !== -1) {
+        this.bcbs.splice(index, 1);
+      }
+    }else {
+      Swal({
+        title: 'Etes-vous sure?',
+        text: "Vous ne pouvez pas revenir en arrière!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimer!'
+      }).then((result) => {
+        if (result.value) {
+          if (index !== -1) {
+            this.bcbs.splice(index, 1);
+          }
+          this.budgetService.deleteBudgetCompteBudgitaire(bcb.referenceCompteBudgitaire).subscribe();
+          //this.budgetService.refreshAllFromBf();
+          Swal(
+            'Supprimmé!',
+            'Vos données ont été supprimés.',
+            'success'
+          );
+        }
+      });
+    }
   }
 
+  public selectedTableBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo){
+    this._tableBudgetCompteBudgitaireInfo=bcb;
+  }
+
+  get tableBudgetCompteBudgitaireInfo(): BudgetCompteBudgitaireVo {
+    return this._tableBudgetCompteBudgitaireInfo;
+  }
+
+  set tableBudgetCompteBudgitaireInfo(value: BudgetCompteBudgitaireVo) {
+    this._tableBudgetCompteBudgitaireInfo = value;
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row col-md-12 justify-content-between">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header text-center">
           Création
@@ -12,10 +12,8 @@
             </div>
             <select name="" id="refsp" class="select form-control"
                     [(ngModel)]="budgetSousProjetClone.referenceSousProjet" required>
-              <option value="">------SELECT-------</option>
-              <option value="Recherche">Recherche</option>
-              <option value="Enseignant">Enseignant</option>
-              <option value="Découverte">Découverte</option>
+              <option selected disabled>------SELECT-------</option>
+              <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
             </select>
           </div>
           <div class="input-group input-group mb-3">
@@ -24,22 +22,19 @@
             </div>
             <select [(ngModel)]="budgetEntiteAdmin.referenceEntiteAdministratif" id="refea" class="select form-control"
                     required>
-              <option value="">----------SELECT-----------</option>
-              <option value="Mathématiques">Mathématiques</option>
-              <option value="Physiques">Physiques</option>
-              <option value="Informatiques">Informatiques</option>
-              <option value="Biologie">Biologie</option>
+              <option disabled selected>----------SELECT-----------</option>
+              <option *ngFor="let ea of entiteAdministratif" value="{{ea.referenceEntiteAdministratif}}">{{ea.referenceEntiteAdministratif}}</option>
             </select>
             <div class="input-group-append">
-              <input type="button" (click)="findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin()"
-                     class="btn btn-outline-secondary" value="Rechercher">
+              <button (click)="findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin()"
+                      class="btn btn-outline-primary fa fa-search"></button>
             </div>
           </div>
           <div class="input-group input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.creditOuvertEstimatif" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.creditOuvertEstimatif:null" [(ngModel)]="detailleBudgetVo.creditOuvertEstimatif" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -47,7 +42,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.creditOuvertReel" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.creditOuvertReel:null" [(ngModel)]="detailleBudgetVo.creditOuvertReel" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -55,7 +50,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagepaye">Engagé payé</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.engagePaye" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.engagePaye:null" [(ngModel)]="detailleBudgetVo.engagePaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -63,18 +58,23 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
             </div>
-            <input type="number" [(ngModel)]="detailleBudgetVo.engageNonPaye" class="form-control"
+            <input type="number" [value]="_budgetEntiteAdministratifInfo?_budgetEntiteAdministratifInfo.detaillesBudgetVo.engageNonPaye:null" [(ngModel)]="detailleBudgetVo.engageNonPaye" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div>
-            <input id="submit" (click)="addBudgetEntiteAdmin()" class="form-control btn btn-success" value="Save"
-                   type="button">
+          <div class="row">
+            <div class="col-6">
+              <input id="submit" (click)="addBudgetEntiteAdmin()" class="form-control btn btn-success" value="Ajouter"
+                     type="button">
+            </div>
+            <div class="col-6">
+              <input type="button" (click)="update()" class="form-control btn btn-primary" value="Ok"/>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="card">
         <div class="card-header text-center">
           List
@@ -92,30 +92,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf=" budgetEntiteAdmins.length==0 && beas.length==0">
+            <tr *ngIf="beas.length==0">
               <td class="text-center font-italic" colspan="6">No item found</td>
             </tr>
-            <tr *ngFor="let bea of budgetEntiteAdmins" class="table-warning">
+            <tr *ngFor="let bea of beas" (click)="tableBudgetEntiteAdministratifInfo(bea)" ngClass="bea.id==0?'table-warning':'table-default'">
               <td>{{ bea.referenceEntiteAdministratif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertEstimatif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertReel }}</td>
               <td>{{ bea.detaillesBudgetVo.engagePaye }}</td>
               <td>{{ bea.detaillesBudgetVo.engageNonPaye }}</td>
               <td>
-                <button (click)="deleteBsp(bea)" class="btn btn-outline-danger fa fa-trash"></button>
-              </td>
-            </tr>
-            <tr *ngFor="let bear of beas" class="table-info">
-              <td>{{ bear.referenceEntiteAdministratif }}</td>
-              <td>{{ bear.detaillesBudgetVo.creditOuvertEstimatif }}</td>
-              <td>{{ bear.detaillesBudgetVo.creditOuvertReel }}</td>
-              <td>{{ bear.detaillesBudgetVo.engagePaye }}</td>
-              <td>{{ bear.detaillesBudgetVo.engageNonPaye }}</td>
-              <td>
-                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBeaInfos(bear)" data-toggle="modal"
+                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBeaInfos(bea)" data-toggle="modal"
                         data-target="#exampleModalBeaInfo"></button>
-                <button class="btn btn-outline-success fa fa-pencil" data-toggle="modal"
-                        data-target="#exampleModalBeaUpDel"></button>
+                <button class="btn btn-outline-danger fa fa-trash-o" (click)="deleteEntiteAdministratif(bea)"></button>
               </td>
             </tr>
             </tbody>
@@ -128,143 +117,6 @@
 
 <div class="modal fade" id="exampleModalBeaInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Information sur <i>{{ selectedBea.referenceEntiteAdministratif
-          }}</i></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12 offset-md-1">
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Année: </b></label>
-                <p><i>{{ selectedBea.budgetSousProjetVo.budgetFaculteVo.annee }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Référence sous projet: </b></label>
-                <p><i>{{ selectedBea.budgetSousProjetVo.referenceSousProjet }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Anticident: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.antecedent }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert éstimatif: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.creditOuvertEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert réel: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.creditOuvertReel }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé payé: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.engagePaye }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé non payé: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.engageNonPaye }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé éstimatif: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.reliquatNonPayeEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé réel: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.reliquatNonPayReel }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé éstimatif: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.reliquatPayeEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé réel: </b></label>
-                <p><i>{{ selectedBea.detaillesBudgetVo.reliquatPayereel }}</i></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--modal pour update and delete-->
-<div class="modal fade" id="exampleModalBeaUpDel" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="credouvrestmod">Crédit ouvert éstimatif</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="credouvrestmod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="credouvrreelmod">Crédit ouvert réel</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="credouvrreelmod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="engagepayemod">Engagé payé</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="engagepayemod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="engagenonpayemod">Engagé non payé</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="engagenonpayemod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="delete()" class="btn btn-outline-danger" data-dismiss="modal">Supprimer</button>
-        <button type="button" (click)="update()" class="btn btn-outline-primary">Sauvegarder</button>
-      </div>
-    </div>
-  </div>
+  <app-detailles [_selectedBudgetEntiteAdministratif]="selectedBea"></app-detailles>
 </div>
 

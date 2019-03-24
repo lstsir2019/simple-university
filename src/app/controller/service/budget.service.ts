@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BudgetFaculte} from '../model/budget/budget-faculte.model';
-import {BudgetSousProjet} from '../model/budget/budget-sous-projet.model';
-import {BudgetEntiteAdministratif} from '../model/budget/budget-entite-administratif.model';
-import {BudgetCompteBudgitaire} from '../model/budget/budget-compte-budgitaire.model';
-import {CompteBudgitaire} from '../model/budget/compte-budgitaire.model';
+import {BudgetFaculteVo} from '../model/budget/budget-faculte.model';
+import {BudgetSousProjetVo} from '../model/budget/budget-sous-projet.model';
+import {BudgetEntiteAdministratifVo} from '../model/budget/budget-entite-administratif.model';
+import {BudgetCompteBudgitaireVo} from '../model/budget/budget-compte-budgitaire.model';
+import {CompteBudgitaireVo} from '../model/budget/compte-budgitaire.model';
 import {DetaillesBudget} from '../model/budget/detailles-budget.model';
 import {catchError, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -25,100 +26,84 @@ export class BudgetService {
   public _url_bcb = this._host + 'budget_compte_budgitaires/';
 
   //variables du pointage sur les formulaires
-  public budgetFaculteCreate: BudgetFaculte = new BudgetFaculte(0, 0);
-  public budgetSousProjetCreate: BudgetSousProjet = new BudgetSousProjet(0);
-  public budgetSousProjetCreateClone1: BudgetSousProjet = new BudgetSousProjet(0);
-  public budgetSousProjetCreateClone2: BudgetSousProjet = new BudgetSousProjet(0);
-  public budgetEntiteAdministratifCreate: BudgetEntiteAdministratif = new BudgetEntiteAdministratif(0);
-  public budgetEntiteAdministratifCreateClone: BudgetEntiteAdministratif = new BudgetEntiteAdministratif(0);
-  public budgetCompteBudgitaireCreate: BudgetCompteBudgitaire = new BudgetCompteBudgitaire(0);
-  public compteBudgitaireCreate: CompteBudgitaire = new CompteBudgitaire(0);
+  private _budgetFaculteCreate: BudgetFaculteVo = new BudgetFaculteVo(0, new Date().getFullYear()-1);
+  private _budgetFaculteCreate1: BudgetFaculteVo = new BudgetFaculteVo(0, new Date().getFullYear());
+  public budgetSousProjetCreate: BudgetSousProjetVo = new BudgetSousProjetVo(0);
+  public budgetSousProjetCreateClone1: BudgetSousProjetVo = new BudgetSousProjetVo(0);
+  public budgetSousProjetCreateClone2: BudgetSousProjetVo = new BudgetSousProjetVo(0);
+  public budgetEntiteAdministratifCreate: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo(0);
+  public budgetEntiteAdministratifCreateClone: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo(0);
+  public budgetCompteBudgitaireCreate: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo(0);
+  public compteBudgitaireCreate: CompteBudgitaireVo = new CompteBudgitaireVo(0);
 
   //Arrays
-  public budgetEnAdmins: Array<BudgetEntiteAdministratif> = [];
-  public budgetCbs: Array<BudgetCompteBudgitaire> = [];
+  public budgetEnAdmins: Array<BudgetEntiteAdministratifVo> = [];
+  public budgetCbs: Array<BudgetCompteBudgitaireVo> = [];
+  //Arrays between two dates
 
+  public budgetSousProjets:Array<BudgetSousProjetVo>=[];
   //detailles budget vo pour chaque composant
-  public detaillesBudgetVo0: DetaillesBudget = new DetaillesBudget();
   public detaillesBudgetVo1: DetaillesBudget = new DetaillesBudget();
   public detaillesBudgetVo2: DetaillesBudget = new DetaillesBudget();
   public detaillesBudgetVo3: DetaillesBudget = new DetaillesBudget();
+  //selected objects
+  public selectdeBudgetSp:BudgetSousProjetVo=new BudgetSousProjetVo();
+  //resultat de recheres s'enregistrent dans ces variables
+  public budgetFacultes:Array<BudgetFaculteVo> = [];
+  private _bsps: Array<BudgetSousProjetVo> = [];
+  private _beas: Array<BudgetEntiteAdministratifVo> = [];
+  private _bcbs: Array<BudgetCompteBudgitaireVo> = [];
+  //findAll
+  private _allSousProjet:Array<BudgetSousProjetVo> = [];
+  private _allEntiteAdministratif:Array<BudgetEntiteAdministratifVo> = [];
 
-
-
-  //les varibles qui contient les rĂ©sultats de la recherche
-  private _bf: BudgetFaculte = new BudgetFaculte();
-
-  get bf(): BudgetFaculte {
-    return this._bf;
-  }
-
-  private _bsps: Array<BudgetSousProjet> = [];
-
-  get bsps(): Array<BudgetSousProjet> {
-    return this._bsps;
-  }
-
-  private _beas: Array<BudgetEntiteAdministratif> = [];
-
-  get beas(): Array<BudgetEntiteAdministratif> {
-    return this._beas;
-  }
-
-  private _bcbs: Array<BudgetCompteBudgitaire> = [];
-
-  get bcbs(): Array<BudgetCompteBudgitaire> {
-    if (this._bcbs == null) {
-      this._bcbs = [];
-    }
-    return this._bcbs;
-  }
-
+  //permet d'ajouter le budget Sous Projet
   public addBudgetSousProjet() {
-    const bspClone: BudgetSousProjet = new BudgetSousProjet(0, this.budgetSousProjetCreate.referenceSousProjet);
+    const bspClone: BudgetSousProjetVo = new BudgetSousProjetVo(0, this.budgetSousProjetCreate.referenceSousProjet);
     bspClone.detaillesBudgetVo = this.detaillesBudgetVo1;
-    this.budgetFaculteCreate.detaillesBudgetVo = this.detaillesBudgetVo0;
-    this.budgetFaculteCreate.budgetSousProjetVo.push(bspClone);
+    this._budgetFaculteCreate.budgetSousProjetVo.push(bspClone);
+    this._bsps.push(bspClone);
     this.detaillesBudgetVo1 = new DetaillesBudget();
   }
-
+  //permet d'ajouter le budget entite administratif
   public addBudgetEntiteAdministratif() {
-    this.budgetFaculteCreate.budgetSousProjetVo.forEach(bsp => {
+    this._budgetFaculteCreate.budgetSousProjetVo.forEach(bsp => {
       if (bsp.referenceSousProjet === this.budgetSousProjetCreateClone1.referenceSousProjet) {
-        let beaClone: BudgetEntiteAdministratif = new BudgetEntiteAdministratif(0, this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif);
+        let beaClone: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo(0, this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif);
         beaClone.detaillesBudgetVo = this.detaillesBudgetVo2;
         bsp.budgetEntiteAdministratifVo.push(beaClone);
         //beaClone.budgetSousProjetVo=bsp;
-        this.budgetEnAdmins.push(beaClone);
+        this._beas.push(beaClone);
         //beaClone=new BudgetEntiteAdministratif();
         this.detaillesBudgetVo2 = new DetaillesBudget();
       }
     });
   }
-
+  //permet d'ajouter le budget compte budgitaire
   public addBudgetCompteBudgitaireCreate() {
-    this.budgetFaculteCreate.budgetSousProjetVo.forEach(bsp => {
+    this._budgetFaculteCreate.budgetSousProjetVo.forEach(bsp => {
       if (bsp.referenceSousProjet == this.budgetSousProjetCreateClone2.referenceSousProjet) {
         bsp.budgetEntiteAdministratifVo.forEach(bea => {
           if (bea.referenceEntiteAdministratif == this.budgetEntiteAdministratifCreateClone.referenceEntiteAdministratif) {
-            let bcbClone: BudgetCompteBudgitaire = new BudgetCompteBudgitaire();
+            let bcbClone: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo();
             bcbClone.detaillesBudgetVo = this.detaillesBudgetVo3;
             bcbClone.compteBudgitaireVo = this.compteBudgitaireCreate;
             bea.budgetCompteBudgitaireVo.push(bcbClone);
             //bcbClone.budgetEntiteAdministratifVo=bea;
-            this.budgetCbs.push(bcbClone);
+            this._bcbs.push(bcbClone);
             //bcbClone=new BudgetCompteBudgitaire();
             this.detaillesBudgetVo3 = new DetaillesBudget();
-            this.compteBudgitaireCreate = new CompteBudgitaire();
+            this.compteBudgitaireCreate = new CompteBudgitaireVo();
           }
         });
       }
     });
   }
-
+  //permet de sauvegarder l'objet tout entier
   public saveAllInBudgetFaculte() {
-    this.http.post<BudgetFaculte>(this._url_bf, this.budgetFaculteCreate).subscribe(
+    this.http.post<BudgetFaculteVo>(this._url_bf, this._budgetFaculteCreate).subscribe(
       data => {
+        this._budgetFaculteCreate=new BudgetFaculteVo();
         console.log('Ok');
       },
       error => {
@@ -126,112 +111,415 @@ export class BudgetService {
       }
     );
   }
-
   /* DELETE: delete the budgetFaculte from the server */
-  deleteBudgetFaculte(annee: number) {
-    return this.http.delete(this._url_bf + 'suppression/annee/' + annee).pipe(
+  public deleteBudgetFaculte(annee: number) {
+    return this.http.delete(this._url_bf + 'annee/' + annee).pipe(
       tap(_ => console.log('Deleted budget faculte with annee = ' + annee)),
       catchError(error => of(null))
     );
   }
-
-  deleteBudgetSousProjet(annee: number) {
-    return this.http.delete(this._url_bsp + 'suppression/annee/' + annee).pipe(
-      tap(_ => console.log('Deleted budget sous projet with annee = ' + annee)),
+  /* DELETE: delete the budget sous projet from the server */
+  public deleteBudgetSousProjet(bsp:BudgetSousProjetVo) {
+    return this.http.delete(this._url_bsp + 'referenceSousProjet/'+bsp.referenceSousProjet+'/annee/' + bsp.budgetFaculteVo.annee).pipe(
+      tap(_ => console.log('Deleted budget sous projet with annee = ' + bsp.budgetFaculteVo.annee)),
       catchError(error => of(null))
     );
   }
-
-  deleteBudgetEntiteAdmin(refSousProjet: string, annee: number) {
-    return this.http.delete(this._url_bea + 'suppression/refSousProjet/' + refSousProjet + '/annee/' + annee).pipe(
-      tap(_ => console.log('Deleted budget entite admin with annee = ' + annee)),
-      catchError(error => of(null))
-    );
-  }
-
-  deleteBudgetCompteBudgitaire(refSousProjet: string, refEntitAdmin: string, annee: number) {
-    return this.http.delete(this._url_bcb + 'suppression/referenceEntiteAdministratif/' + refEntitAdmin + '/referenceSousProjet/' + refSousProjet + 'annee/' + annee).pipe(
+  /* DELETE: delete the budget sous entite administratif from the server */
+  public deleteBudgetEntiteAdmin(refEntitAdmin: string,refSousProjet: string, annee: number) {
+    return this.http.delete(this._url_bea + 'referenceEntiteAdmin/' + refEntitAdmin + '/referenceSousProjet/' + refSousProjet + '/annee/' + annee).pipe(
       tap(_ => console.log('Deleted budget compte budgitaire with annee = ' + annee)),
       catchError(error => of(null))
     );
   }
-
+  /* DELETE: delete the budget budget compte cudgitaire from the server */
+  public deleteBudgetCompteBudgitaire(referenceCompteBudgitaire:string) {
+    return this.http.delete(this._url_bcb + 'referenceCompteBudgitaire/'+referenceCompteBudgitaire).pipe(
+      tap(_ => console.log('Deleted budget entite admin with annee = ')),
+      catchError(error => of(null))
+    );
+  }
+  //find By creteria annee
   public findAllByAnnee() {
-    this.http.get<BudgetFaculte>(this._url_bf + 'annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bf = data;
-      }, error => {
-        console.log('error');
-      }
-    );
-    this.http.get<Array<BudgetSousProjet>>(this._url_bsp + 'annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bsps = data;
-      }, error => {
-        this._bsps = [];
-        console.log('error');
-      }
-    );
-    this.http.get<Array<BudgetEntiteAdministratif>>(this._url_bea + 'annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._beas = data;
-      }, error => {
-        console.log('error');
-      }
-    );
-    this.http.get<Array<BudgetCompteBudgitaire>>(this._url_bcb + 'annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bcbs = data;
-      }, error => {
-        this._bcbs = [];
-        console.log('error');
-      }
-    );
+    if (this._budgetFaculteCreate == null || this._budgetFaculteCreate.annee>(new Date().getFullYear())) {
+      Swal({
+        type: 'error',
+        title: 'Merci de saisir une année valide',
+        text: 'Infos saisies invalide!'
+      });
+    } else {
+      this.http.get<BudgetFaculteVo>(this._url_bf + 'annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          //this._budgetFaculteCreate=new BudgetFaculteVo();
+          if (data != null) {
+            this.budgetFacultes = [];
+            this.budgetFacultes.push(data);
+          } else {
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this.budgetFacultes = [];
+          }
+        }, error => {
+          Swal({
+            type: 'warning',
+            title: 'Le serveur est implanté',
+            text: 'Something went wrong!'
+          });
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp + 'annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data != null) {
+            this._bsps = [];
+            this._bsps = data;
+          } else {
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._bsps = [];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetEntiteAdministratifVo>>(this._url_bea + 'annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data != null) {
+            this._beas = [];
+            this._beas = data;
+          } else {
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._beas = [];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb + 'annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data != null) {
+            this._bcbs = [];
+            this._bcbs = data;
+          } else {
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._bcbs = [];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+    }
   }
-
+  // find by annee et RefSousProjet
   public findAllByAnneeAndBudgetSousProjet() {
-    this.http.get<BudgetSousProjet>(this._url_bsp + 'reference/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bsps = [];
-        this._bsps.push(data);
-      }, error => {
-        console.log('error');
+    if (this.budgetFaculteCreate!=null && this.budgetSousProjetCreate!=null){
+      this.http.get<BudgetSousProjetVo>(this._url_bsp + 'reference/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data!=null){
+            this._bsps=[];
+            this._bsps.push(data);
+          }else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._bsps=[];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetEntiteAdministratifVo>>(this._url_bea + 'refSousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data!=null){
+            this._beas = [];
+            this._beas = data;
+          }else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._beas = [];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb + 'reference/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data!=null){
+            this._bcbs = [];
+            this._bcbs = data;
+          }else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._bcbs = [];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+  //find by Annee et refSousProjet et refEntitéAdministratif
+  public findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin() {
+    if (this.budgetEntiteAdministratifCreate!=null && this.budgetSousProjetCreate.referenceSousProjet!=null && this._budgetFaculteCreate!=null){
+      this.http.get<BudgetEntiteAdministratifVo>(this._url_bea + 'referenceEntiteAdmin/' + this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif + '/refSousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data!=null){
+            this._beas=[];
+            this._beas.push(data);
+          } else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._beas=[];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+      this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb + 'refEntite/' + this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif + '/refsousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this._budgetFaculteCreate.annee).subscribe(
+        data => {
+          if (data!=null){
+            this._bcbs=[];
+            this._bcbs = data;
+          } else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this._bcbs=[];
+          }
+        }, error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+  //full in comboboxes with references sous projet and entite administratif
+  public findAllSousProjet(){
+    return this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp+"all/sousprojet").subscribe(
+      data=>{
+        if (data!=null){
+          this._allSousProjet=[];
+          this._allSousProjet=data;
+        } else{
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+          this._allSousProjet=[];
+        }
+      },error => {
+        console.log(error);
+      }
+    )
+  }
+  public findAllEntiteAdministratif(){
+    return this.http.get<Array<BudgetEntiteAdministratifVo>>(this._url_bea+"all/entiteadministratif").subscribe(
+      data=>{
+        if (data!=null){
+          this._allEntiteAdministratif=[];
+          this._allEntiteAdministratif=data;
+        } else{
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+          this._allEntiteAdministratif=[];
+        }
+      },error => {
+        console.log(error);
+      }
+    )
+  }
+  //find all info by annee min and annee max
+  public findAllByAnneeMinAndAnneeMax(){
+       this.http.get<Array<BudgetFaculteVo>>(this._url_bf+"anneeMin/"+this.budgetFaculteCreate.annee+"/anneeMax/"+this.budgetFaculteCreate1.annee).subscribe(
+        data=>{
+          if (data!=null){
+            this.budgetFacultes=[];
+            this.budgetFacultes=data;
+          } else{
+            Swal({
+              type: 'error',
+              title: 'Aucun informations trouvés',
+              text: 'Something went wrong!'
+            });
+            this.budgetFacultes=[];
+          }
+          console.log("Data between found");
+        },error1 => {
+          console.log("No data between");
+        }
+      );
+     this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp+"anneeMin/"+this.budgetFaculteCreate.annee+"/anneeMax/"+this.budgetFaculteCreate1.annee).subscribe(
+      data=>{
+        if (data!=null){
+          this._bsps=[];
+          this._bsps=data;
+        } else{
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+          this._bsps=[];
+        }
+      },error1 => {
+        console.log(error1);
       }
     );
-    this.http.get<Array<BudgetEntiteAdministratif>>(this._url_bea + 'refSousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._beas = [];
-        this._beas = data;
-      }, error => {
-        console.log('error');
+
+    this.http.get<Array<BudgetEntiteAdministratifVo>>(this._url_bea+"anneeMin/"+this.budgetFaculteCreate.annee+"/anneeMax/"+this.budgetFaculteCreate1.annee).subscribe(
+      data=>{
+        if (data!=null){
+          this._beas=[];
+          this._beas=data;
+        } else{
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+          this._beas=[];
+        }
+      },error => {
+        console.log(error);
       }
     );
-    this.http.get<Array<BudgetCompteBudgitaire>>(this._url_bcb + 'reference/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bcbs = [];
-        this._bcbs = data;
-      }, error => {
-        console.log('error');
+
+    this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb+"anneeMin/"+this.budgetFaculteCreate.annee+"/anneeMax/"+this.budgetFaculteCreate1.annee).subscribe(
+      data=>{
+        if (data!=null) {
+          this._bcbs=[];
+          this._bcbs=data;
+        }else{
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+          this._bcbs=[];
+        }
+      },error => {
+        console.log(error);
       }
     );
   }
-
-  public findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin() {
-    this.http.get<BudgetEntiteAdministratif>(this._url_bea + 'referenceEntiteAdmin/' + this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif + '/refSousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._beas = [];
-        this._beas.push(data);
-      }, error => {
-        console.log('error');
+  //permet de rafraichair les champs en se basant sur l'objet supprimmé
+  public refreshAllFromBf(){
+    this.budgetFaculteCreate=new BudgetFaculteVo();
+    this._budgetFaculteCreate.budgetSousProjetVo = [];
+    this._beas = [];
+    this._bcbs = [];
+  }
+  public refreshAllFromBsp(){
+    this.budgetFaculteCreate=new BudgetFaculteVo();
+    this._budgetFaculteCreate.budgetSousProjetVo = [];
+    this._beas = [];
+    this._bcbs = [];
+  }
+  public refreshAllFromBea(){
+    this.budgetFaculteCreate=new BudgetFaculteVo();
+    this._budgetFaculteCreate.budgetSousProjetVo = [];
+    this._beas = [];
+    this._bcbs = [];
+  }
+  //update budget sous projet
+  public updateBudgetSousProjet(refSousProjet:string){
+    this._bsps.forEach(bsp=>{
+      if (bsp.referenceSousProjet==refSousProjet){
+        bsp.detaillesBudgetVo=this.detaillesBudgetVo1;
+        this.detaillesBudgetVo1=new DetaillesBudget();
       }
-    );
-    this.http.get<Array<BudgetCompteBudgitaire>>(this._url_bcb + 'refEntite/' + this.budgetEntiteAdministratifCreate.referenceEntiteAdministratif + '/refsousProjet/' + this.budgetSousProjetCreate.referenceSousProjet + '/annee/' + this.budgetFaculteCreate.annee).subscribe(
-      data => {
-        this._bcbs = [];
-        this._bcbs = data;
-      }, error => {
-        console.log('error');
+    });
+  }
+  //update budget sous projet
+  public updateBudgetEntiteAdministratif(refEntiteAdministratif:string){
+    this._beas.forEach(bea=>{
+      if (bea.referenceEntiteAdministratif==refEntiteAdministratif){
+        bea.detaillesBudgetVo=this.detaillesBudgetVo2;
+        this.detaillesBudgetVo2=new DetaillesBudget();
       }
-    );
+    });
+  }
+  public updateBudgetCompteBudgitaire(refCompteBudgitaire:string){
+    this._bcbs.forEach(bcb=>{
+      if (bcb.referenceCompteBudgitaire==refCompteBudgitaire){
+        bcb.detaillesBudgetVo=this.detaillesBudgetVo3;
+        bcb.compteBudgitaireVo=this.compteBudgitaireCreate;
+        this.detaillesBudgetVo3=new DetaillesBudget();
+        this.compteBudgitaireCreate=new CompteBudgitaireVo();
+      }
+    });
+  }
+  //gettters and setters
+  get budgetFaculteCreate(): BudgetFaculteVo {
+    return this._budgetFaculteCreate;
+  }
+  set budgetFaculteCreate(value: BudgetFaculteVo) {
+    this._budgetFaculteCreate = value;
+  }
+  get budgetFaculteCreate1(): BudgetFaculteVo {
+    return this._budgetFaculteCreate1;
+  }
+  set budgetFaculteCreate1(value: BudgetFaculteVo) {
+    this._budgetFaculteCreate1 = value;
+  }
+  public selectedBsp(bsp:BudgetSousProjetVo){
+    this.selectdeBudgetSp=bsp;
+  }
+  get allSousProjet(): Array<BudgetSousProjetVo> {
+    return this._allSousProjet;
+  }
+  set allSousProjet(value: Array<BudgetSousProjetVo>) {
+    this._allSousProjet = value;
+  }
+  get allEntiteAdministratif(): Array<BudgetEntiteAdministratifVo> {
+    return this._allEntiteAdministratif;
+  }
+  set allEntiteAdministratif(value: Array<BudgetEntiteAdministratifVo>) {
+    this._allEntiteAdministratif = value;
+  }
+  get bsps(): Array<BudgetSousProjetVo> {
+    return this._bsps;
+  }
+  get beas(): Array<BudgetEntiteAdministratifVo> {
+    if (this._beas==null){
+      this._beas=[];
+    }
+    return this._beas;
+  }
+  get bcbs(): Array<BudgetCompteBudgitaireVo> {
+    if (this._bcbs == null) {
+      this._bcbs = [];
+    }
+    return this._bcbs;
   }
 }

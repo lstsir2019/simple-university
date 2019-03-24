@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vérification</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Ordre de Mission</h2>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="" method="get">
+                    <h2 class="text-center">Vérification des demandes</h2>
+                    <div class="row justify-content-between">
+                    <div class="form-group col-md-4">
+                        <label for="">Réference de la demande</label>
+                        <input type="text" class="form-control" required/>
+                    </div>
+                     <div class="form-group col-md-4">
+                            <label for="">Entité administrative</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>département d'Informatique</option>
+                                <option>département de Physique</option>
+                                <option>département de Mathématiques</option>
+                                <option>département de Biologie</option>
+                                <option>département de Chimie</option>
+                                <option>département de Géologie</option>
+                                <option>Cellule de recherche</option>
+                                <option>Service administratif</option>
+                              
+                            </select>
+                        </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Date minimale de début Mission</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="form-group col-md-4">
+                        <label for="">Date maximale de début Mission</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Date minimale de fin Mission</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                     <div class="form-group col-md-4">
+                        <label for="">Date maximale de fin Mission</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="form-group col-md-4">
+                            <label for="">Confirmation du chef Département</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>En cours de traitement</option>
+                                <option>Oui</option>
+                                <option>Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Confirmation du Doyen</label>
+                            <select class="form-control">
+                                <option>------Selectionner------</option>
+                                <option>En cours de traitement</option>
+                                <option>Oui</option>
+                                <option>Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                        <label for="">Date minimale de demande</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="form-group col-md-4">
+                        <label for="">Date maximale de demande</label>
+                        <input type="Date" class="form-control" required/>
+                    </div>
+                    </div>
+
+                        <div class="form-group">
+                        <input type="submit" class="form-control btn btn-success" value="Chercher">
+                    </div>
+
+                    <!-- <a href="verifier.html" class="form-control btn btn-dark col-md-4">Verifier</a> -->
+                </form>
+                <table class="table">
+                    <head>
+                        <tr>
+                            <th>Objet de la Mission</th>
+                            <th>Confirmation du Chef Département</th>
+                            <th>Confirmation du Doyen</th>
+                            <th>imprimer</th>
+                        </tr>
+                    </head>
+                    <body>
+                        <tr>
+                            <td>Conférence</td>
+                            <td>Non</td>
+                            <td>Non</td>
+                            <td><button class="btn btn-primary">imprimer</button></td>
+                        </tr>
+                    </body>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
