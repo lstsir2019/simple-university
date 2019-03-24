@@ -18,6 +18,7 @@ import {CommandeListComponent} from './commandes/commande-list/commande-list.com
 import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
 import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
 import {PaiementComponent} from './commandes/paiement/paiement.component';
+import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},

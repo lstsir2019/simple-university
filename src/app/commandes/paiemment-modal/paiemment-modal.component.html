@@ -1,0 +1,30 @@
+
+
+
+
+
+
+<table class="table">
+  <tr>
+    <td>reference</td>
+    <td>{{commandeSelected.reference}}</td>
+  </tr>
+  <tr>
+    <td>total</td>
+    <td>{{commandeSelected.total}}</td>
+  </tr>
+  <tr>
+    <td>total paiement</td>
+    <td>{{commandeSelected.totalPaiement}}</td>
+  </tr>
+  <tr >
+    <td> montant </td>
+    <td><input type="number" min="0" class="form-control"   [(ngModel)]="paiement.montant"></td>
+  </tr>
+
+
+</table>
+
+<button  (click)="payerCommande()"  class="btn btn-outline-info btn-block" > Accorder</button>
+
+

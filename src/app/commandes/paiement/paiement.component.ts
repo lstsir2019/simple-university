@@ -27,4 +27,8 @@ export class PaiementComponent implements OnInit {
     return this.commandeService.commandeSelected;
   }
 
+  public itemToModal(commandeSelected: Commande) {
+    this.commandeService.itemToModal(commandeSelected);
+  }
+
 }

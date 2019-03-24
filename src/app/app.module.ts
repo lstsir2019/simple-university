@@ -69,6 +69,7 @@ import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-l
 import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from "@angular/common";
 import { PaiementComponent } from './commandes/paiement/paiement.component';
+import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +135,7 @@ import { PaiementComponent } from './commandes/paiement/paiement.component';
     EtudiantCreateComponent,
     EtudiantListComponent,
     PaiementComponent,
+    PaiemmentModalComponent,
 
   ],
   imports: [
