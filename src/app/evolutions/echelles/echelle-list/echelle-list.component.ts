@@ -28,6 +28,14 @@ export class EchelleListComponent implements OnInit {
     return this.echelonService.echelons;
   }
 
+  public get searchInput() {
+    return this.echelleService.searchInput;
+  }
+
+  public set searchInput(data) {
+    this.echelleService.searchInput = data;
+  }
+
   afficherListeEchelons(echelons) {
     // @ts-ignore
     $('#modalListeEchelons').modal('show');
@@ -44,7 +52,15 @@ export class EchelleListComponent implements OnInit {
     this.echelleService.editEchelle(this.echelleToEdit);
   }
 
-  supprimerEchelle(data){
+  supprimerEchelle(data) {
     this.echelleService.deleteEchelle(data);
+  }
+
+  search() {
+    this.echelleService.search();
+  }
+
+  getAll() {
+    this.echelleService.getEchellesFromDatabase();
   }
 }
