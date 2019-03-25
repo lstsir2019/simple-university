@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Commande} from '../model/commande.model';
-import {CommandeItem} from '../model/commande-item.model';
+import {Commande} from '../../model/commandes/commande.model';
+import {CommandeItem} from '../../model/commandes/commande-item.model';
 import {HttpClient} from '@angular/common/http';
-import {Fournisseur} from '../model/fournisseur.model';
+import {Fournisseur} from '../../model/commandes/fournisseur.model';
+import {Paiement} from '../../model/commandes/paiement.model';
+import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
 
 
 @Injectable({
@@ -11,11 +13,14 @@ import {Fournisseur} from '../model/fournisseur.model';
 export class CommandeService {
   private _url:string = "http://localhost:8090/faculte-commande/commandes/";
   private _url1:string = "http://localhost:8090/faculte-commande/fournisseurs/finAll";
+  private _url3:string = "http://localhost:8090/faculte-commande/paiementes/reference/";
+  private _url4:string = "http://localhost:8090/faculte-commande/paiementes"
 
-  private _commandeCreate:Commande = new Commande('' ,0,'');
+  private _commandeCreate:Commande = new Commande('' ,0,'','');
   private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0);
   private _commandes:Array<Commande>;
   private _commandeSelected:Commande;
+  private _paiementCreate:Paiement = new Paiement(Number(''),0,'','');
   private _fournisseurs:Array<Fournisseur>;
   constructor(private http:HttpClient) { }
 
@@ -30,7 +35,7 @@ export class CommandeService {
     this.http.post<Commande>(this._url,this.commandeCreate).subscribe({
       next: data=>{
       console.log("ok");
-      this.commandeCreate = new Commande('',0,'');
+      this.commandeCreate = new Commande('',0,'','');
       this.commandeItemCreate = new CommandeItem("",0,0);
     } , error: error=>{
       console.log("erreur");
@@ -38,6 +43,18 @@ export class CommandeService {
     });
 
   }
+
+  public payerCommande(){
+      this.http.post<Paiement>(this._url4+"/referenceCommande/"+this.commandeSelected.reference+"/montant/"+this.paiementCreate.montant,this.paiementCreate).subscribe({
+        next: data=>{
+          console.log("ok");
+          this.paiementCreate = new Paiement(Number(''),0,'','');
+        } , error: error=>{
+          console.log("pyer commande ma(damache");
+        }
+      });
+  }
+
 
   public findCommandeItemByReference(commande:Commande){
     this._commandeSelected=commande;
@@ -52,6 +69,21 @@ export class CommandeService {
     }
   }
 
+
+
+  public findPaiementByCommande(commande:Commande){
+    this._commandeSelected=commande;
+    if(this.commandeSelected !=null){
+      this.http.get<Array<Paiement>>(this._url3+this.commandeSelected.reference).subscribe(
+        data =>{
+          this.commandeSelected.paiementVos = data;
+        } , error =>{
+          console.log("error whith loading paiements");
+        }
+      );
+    }
+
+  }
 
   get url(): string {
     return this._url;
@@ -96,7 +128,7 @@ export class CommandeService {
 
   get commandeSelected(): Commande {
     if(this._commandeSelected == null){
-      this._commandeSelected = new Commande('',0,'');
+      this._commandeSelected = new Commande('',0,'','');
     }
     return this._commandeSelected;
   }
@@ -131,5 +163,39 @@ export class CommandeService {
 
   set fournisseurs(value: Array<Fournisseur>) {
     this._fournisseurs = value;
+  }
+
+
+  get url3(): string {
+    return this._url3;
+  }
+
+  set url3(value: string) {
+    this._url3 = value;
+  }
+
+
+  get url4(): string {
+    return this._url4;
+  }
+
+  set url4(value: string) {
+    this._url4 = value;
+  }
+
+  get paiementCreate(): Paiement {
+    if(this._paiementCreate == null){
+      this._paiementCreate=new Paiement(Number(''),0,'','')
+    }
+    return this._paiementCreate;
+  }
+
+  set paiementCreate(value: Paiement) {
+    this._paiementCreate = value;
+  }
+
+
+  public itemToModal(commandeSelected: Commande) {
+    this.commandeSelected = commandeSelected;
   }
 }

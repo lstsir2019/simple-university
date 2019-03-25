@@ -17,6 +17,8 @@ import {CommandeCreateComponent} from './commandes/commande-create/commande-crea
 import {CommandeListComponent} from './commandes/commande-list/commande-list.component';
 import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
 import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
+import {PaiementComponent} from './commandes/paiement/paiement.component';
+import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
@@ -52,6 +54,7 @@ const routes: Routes = [
 
   { path: 'commandeCreate', component: CommandeCreateComponent},
   { path: 'commandeListe', component: CommandeListComponent},
+  { path: 'paiement', component: PaiementComponent},
 
   //expressionBesoin
   { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},

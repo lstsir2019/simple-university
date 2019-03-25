@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CommandeService} from "../../controller/service/commande.service";
-import {CommandeItem} from '../../controller/model/commande-item.model';
+import {CommandeService} from "../../controller/service/commandes/commande.service";
+import {CommandeItem} from '../../controller/model/commandes/commande-item.model';
 
 @Component({
   selector: 'app-commande-create',
