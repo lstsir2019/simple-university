@@ -112,7 +112,7 @@ export function getReact(subject: string, gender: boolean) {
     text: 'Aucune occurrence trouvée',
     type: 'warning',
     toast : true,
-    timer: 1000,
+    timer: 1200,
     position : 'top-right',
     confirmButtonText: 'ok'
   };
