@@ -104,11 +104,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
           <select class="form-control">
             <option>magasin/Qte</option>
 
           </select>
+
+        </div>
+        <div class="form-group col-md-6">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline111" name="inlineDefaultRadiosExample" >
+            <label class="custom-control-label" for="defaultInline111">ancient</label>
+          </div>
+
+
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline222" name="inlineDefaultRadiosExample" >
+            <label class="custom-control-label" for="defaultInline222">newer</label>
+          </div>
 
         </div>
 
@@ -116,8 +129,7 @@
 
 
       <div class="row">
-        <div class="form-group col-md-12">
-
+        <div class="form-group col-md-6">
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">Reference-Produit</div>
@@ -126,26 +138,6 @@
           </div>
 
 
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">magasin</div>
-            </div>
-            <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin">
-              <option>choose...</option>
-              <option value="mag1">mag1</option>
-              <option value="mag2">mag2</option>
-
-            </select>
-
-
-          </div>
 
         </div>
 
@@ -190,7 +182,7 @@
               <td>{{l.refenceProduit}}</td>
               <td>{{l.codeMagasin}}</td>
               <td>{{l.qte}}</td>
-              <td class="something"><button class="btn btn-outline-danger">DELATE</button></td>
+              <td class="something"><button class="btn btn-outline-danger" (click)="deleteTableItem(l)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
             </tr>
             </tbody>
           </table>
@@ -328,8 +320,11 @@
           </div>
 
 
+
           <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
+
+
 
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -338,27 +333,6 @@
                 <input type="text" [(ngModel)]="livraisonItem.refenceProduit" class="form-control" >
               </div>
 
-
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-
-
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">magasin</div>
-                </div>
-                <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin">
-                  <option>choose...</option>
-                  <option value="mag1">mag1</option>
-                  <option value="mag2">mag2</option>
-
-                </select>
-
-
-              </div>
 
             </div>
 
@@ -403,7 +377,7 @@
                   <td>{{l.refenceProduit}}</td>
                   <td>{{l.codeMagasin}}</td>
                   <td>{{l.qte}}</td>
-                  <td class="something"><button class="btn btn-outline-danger">DELATE</button></td>
+                  <td class="something"><button class="btn btn-outline-danger" (click)="deleteTableItem(l)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                 </tr>
                 </tbody>
               </table>

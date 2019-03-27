@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LivraisonService} from '../../controller/service/livraison.service';
+import {LivraisonItem} from "../../controller/model/livraison-item.model";
 
 @Component({
   selector: 'app-livraison-create',
@@ -43,5 +44,11 @@ export class LivraisonCreateComponent implements OnInit {
   public get livraisons(){
     return this.livraisonService.livraisons;
   }
+  public deleteTableItem(livraisonItem:LivraisonItem){
+    this.livraisonService.livraisonCreate.livraisonItemVos.splice(
+      this.livraisonService.livraisonCreate.livraisonItemVos.indexOf(livraisonItem),1
+    );
+  }
+
 }
 
