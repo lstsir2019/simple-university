@@ -1,33 +1,31 @@
 
+
 <div class="card-body">
-  <div class="card">
+
   <div class="card-header">
+    <br>
+    <!--<h5>Recherche des notes à partir du code de référence personnel </h5>-->
+    <div class="row ">
+      <div class="col-6">
 
-<h5>Recherche des notes à partir du code de référence personnel </h5>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2"  placeholder="Référence Personnel" type="text" [(ngModel)]="noteAnnuel.referencePersonnel" name="referencePersonnel1">
+          <button class="btn btn-outline-success my-2 my-sm-0" (click)="findNoteAnnuelByReference(noteAnnuel.referencePersonnel)" type="button"><i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
       </div>
-
-<div class="card-body">
-  <div class="row ">
-    <div class="col-sm-6">
-
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2"  placeholder="Référence Personnel" type="text" [(ngModel)]="noteAnnuel.referencePersonnel" name="referencePersonnel1">
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="findNoteAnnuelByReference(noteAnnuel.referencePersonnel)" type="button"><i class="fa fa-search" aria-hidden="true"></i>
-        </button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <button class="btn btn-outline-success my-2 my-sm-0" (click)="findNotesAnnuels" type="button">Liste des notes annuels (Liste entière)</button>
+      <div class="col-6">
+        <button class="btn btn-outline-success mr-sm-2" (click)="findNotesAnnuels" type="button">Liste entière des notes</button>
+      </div>
     </div>
   </div>
-</div>
+  <br>
 
 
 
 
 
 
-    </div>
 
   <table class="table table-hover table-responsive-xl">
     <thead><th>Référence Personnel</th><th>Référence Evaluateur</th><th>Note Annuel</th><th>Mention</th><th>Date d'évaluation</th><th>Notes</th><th></th></thead>
@@ -123,7 +121,7 @@
 
 
         <table class="table table-hover table-responsive-xl">
-          <thead class="theadx"><th>Référence Evaluateur</th><th>Élément</th><th>Note d'élément</th><th>Observation</th></thead>
+          <thead class="theadx"><th>Référence Evaluateur</th><th>Élément</th><th>Note d'élément</th><th>Observation</th><th></th></thead>
           <tbody class="tbodyx">
           <tr *ngFor="let c of selectedNoteAnnuel.notesElementVo ">
             <td>{{c.referenceEvaluateur}}</td>

@@ -1,0 +1,147 @@
+<div style="padding-top: 3%">
+  <form class="form-inline" data-toggle="tooltip" title="Entrer la  reference d'evolution personnel">
+    <input class="form-control ml-3 col-lg-3" type="search" name="searchInput"
+           placeholder="Entrer la  reference d'evolution personnel" aria-label="Search" (keyup)="search()"
+           [(ngModel)]="searchInput">
+    <button class="btn btn-outline-success ml-2 my-sm-0" type="submit" (click)="search()">Chercher</button>
+    <button class="btn btn-outline-primary ml-2" type="submit" (click)="getAll()">Afficher tout</button>
+  </form>
+  <br>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Reference</th>
+      <th scope="col">Loi Evolution Type Personnel</th>
+      <th scope="col">Reference Personnel</th>
+      <th scope="col">Reference Type Personnel</th>
+      <th scope="col">Echelon Depart</th>
+      <th scope="col">Echelon Fin</th>
+      <th scope="col">Date Evolution</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let evolutionPersonnel of evolutionsPersonnel">
+      <th>{{evolutionPersonnel.reference}}</th>
+      <td>{{evolutionPersonnel.loiEvolutionTypePersonnel.reference}}</td>
+      <td>{{evolutionPersonnel.referencePersonnel}}</td>
+      <td>{{evolutionPersonnel.referenceTypePersonnel}}</td>
+      <td>{{evolutionPersonnel.echelonDepart.reference}}</td>
+      <td>{{evolutionPersonnel.echelonFin.reference}}</td>
+      <td>{{evolutionPersonnel.dateEvolution}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-warning" (click)="toggleData(evolutionPersonnel)">Modifier</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger"
+                (click)="supprimerEvolutionPersonnel(evolutionPersonnel.reference)">Supprimer
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-info" (click)="print(evolutionPersonnel)">Imprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalEvolutionPersonnel" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalScrollableTitle"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du l'evolution personnel">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference</div>
+                </div>
+                <input type="text" class="form-control" id="referenceEvolutionPersonnel"
+                       name="referenceEvolutionPersonnel" placeholder="referenceEvolutionPersonnel"
+                       [(ngModel)]="newLocalEvolutionPersonnel.reference">
+              </div>
+              <br>
+              <div class="input-group mb-2" data-toggle="tooltip"
+                   title="Selectionner l'echelon de depart">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Loi Evolution Type Personnel</div>
+                </div>
+                <select class="form-control" id="loiEvolutionTypePersonnel" name="loiEvolutionTypePersonnel"
+                        [(ngModel)]="newLocalEvolutionPersonnel.loiEvolutionTypePersonnel">
+                  <option *ngFor="let loiEvolutionTypePersonnel of loisEvolutionTypePersonnel"
+                          [ngValue]="loiEvolutionTypePersonnel">{{loiEvolutionTypePersonnel.reference}}</option>
+                </select>
+              </div>
+              <br>
+
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du personnel">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference Personnel</div>
+                </div>
+                <input type="text" class="form-control" id="referencePersonnel" name="referencePersonnel"
+                       placeholder="Reference personnel" [(ngModel)]="newLocalEvolutionPersonnel.referencePersonnel">
+
+              </div>
+              <br>
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la reference du type personnel">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference Type Personnel</div>
+                </div>
+                <input type="text" class="form-control" id="refrenceTypePersonnel" name="refrenceTypePersonnel"
+                       placeholder="Refrence type personnel"
+                       [(ngModel)]="newLocalEvolutionPersonnel.referenceTypePersonnel">
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip"
+                       title="Selectionner l'echelon de depart">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Echelon Depart</div>
+                    </div>
+                    <select class="form-control" id="echelonDepart" name="echelonDepart"
+                            [(ngModel)]="newLocalEvolutionPersonnel.echelonDepart">
+                      <option *ngFor="let echelon of echelons" [ngValue]="echelon">{{echelon.reference}}
+                        | {{echelon.ordre}}
+                        | {{echelon.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-2" data-toggle="tooltip" title="Selectionner l'echelon de fin">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Echelon Fin</div>
+                    </div>
+                    <select class="form-control" id="echelonFin" name="echelonFin"
+                            [(ngModel)]="newLocalEvolutionPersonnel.echelonFin">
+                      <option *ngFor="let echelon of echelons" [ngValue]="echelon">{{echelon.reference}}
+                        | {{echelon.ordre}}
+                        | {{echelon.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="input-group mb-2" data-toggle="tooltip" title="Entrer la date de l'evolution">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Date evolution</div>
+                </div>
+                <input type="date" class="form-control" id="dateEvolution" name="dateEvolution"
+                       [(ngModel)]="newLocalEvolutionPersonnel.dateEvolution">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Quitter</button>
+          <button type="button" class="btn btn-outline-primary" (click)="modifierEvolutionPersonnel()">Sauvegarder
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

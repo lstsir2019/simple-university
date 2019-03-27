@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="row col-md-12 justify-content-between">
-    <div class="col-md-6">
+  <div class="row col-md-12">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header text-center">
           Création
@@ -12,21 +12,18 @@
             </div>
             <select [(ngModel)]="budgetSousprojet.referenceSousProjet" id="reference" class="select form-control"
                     required>
-              <option value="">----------SELECT-----------</option>
-              <option value="Recherche">Recherche</option>
-              <option value="Enseignant">Enseignant</option>
-              <option value="Découverte">Découverte</option>
+              <option disabled selected>----------SELECT-----------</option>
+              <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
             </select>
             <div class="input-group-append">
-              <input type="button" (click)="findAllByAnneeAndBudgetSousProjet()" class="btn btn-outline-secondary"
-                     value="Rechercher">
+              <button class="btn btn-outline-primary fa fa-search" (click)="findAllByAnneeAndBudgetSousProjet()"></button>
             </div>
           </div>
           <div class="input-group input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverestimatif">Crédit Ouvert Estimatif</label>
             </div>
-            <input type="number" value="{{ !!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertEstimatif:null}}"
+            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
                    [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
                    aria-describedby="inputGroup-sizing-sm">
@@ -35,7 +32,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="creditouverreel">Crédit Ouvert Reel</label>
             </div>
-            <input type="number" value="{{ !!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertReel:null}}"
+            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertReel:null"
                    class="form-control" [(ngModel)]="detaillesBudgetVo.creditOuvertReel"
                    aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
                    aria-describedby="inputGroup-sizing-sm">
@@ -44,7 +41,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagepaye">Engagé payé</label>
             </div>
-            <input type="number" value="{{ !!bspInfo ? bspInfo.detaillesBudgetVo.engagePaye:null}}" class="form-control"
+            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engagePaye:null" class="form-control"
                    [(ngModel)]="detaillesBudgetVo.engagePaye"
                    aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
                    aria-describedby="inputGroup-sizing-sm">
@@ -53,18 +50,23 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
             </div>
-            <input type="number" value="{{ !!bspInfo ? bspInfo.detaillesBudgetVo.engageNonPaye:null}}"
+            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engageNonPaye:null"
                    class="form-control" [(ngModel)]="detaillesBudgetVo.engageNonPaye"
                    aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
                    aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div>
-            <input type="button" (click)="addBudgetSousProjet()" class="form-control btn btn-success" value="Ajouter"/>
+          <div class="row">
+            <div class="col-6">
+              <input type="button" (click)="addBudgetSousProjet()" class="form-control btn btn-success" value="Ajouter"/>
+            </div>
+            <div class="col-6">
+              <input type="button" (click)="update()" class="form-control btn btn-primary" value="Ok"/>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="card">
         <div class="card-header text-center">
           List
@@ -82,30 +84,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetsSousProgets.length==0 && bsps.length==0">
+            <tr *ngIf="budgetsSousProjets.length==0">
               <td class="text-center font-italic" colspan="6">No item added</td>
             </tr>
-            <tr *ngFor="let bsp of budgetsSousProgets" class="table-warning" (click)="tableInfo(bsp)">
+            <tr *ngFor="let bsp of budgetsSousProjets" (click)="tableBudgetSousProjetInfo(bsp)" class="{{bsp.id==0?'table-warning':'table-default'}}">
               <td>{{ bsp.referenceSousProjet }}</td>
               <td>{{ bsp.detaillesBudgetVo.creditOuvertEstimatif }}</td>
               <td>{{ bsp.detaillesBudgetVo.creditOuvertReel }}</td>
               <td>{{ bsp.detaillesBudgetVo.engagePaye }}</td>
               <td>{{ bsp.detaillesBudgetVo.engageNonPaye }}</td>
               <td>
-                <button (click)="deleteBsp(bsp)" class="btn btn-outline-danger fa fa-trash"></button>
-              </td>
-            </tr>
-            <tr *ngFor="let bsprech of bsps" class="table-info">
-              <td>{{bsprech.referenceSousProjet}}</td>
-              <td>{{ bsprech.detaillesBudgetVo.creditOuvertEstimatif }}</td>
-              <td>{{ bsprech.detaillesBudgetVo.creditOuvertReel }}</td>
-              <td>{{ bsprech.detaillesBudgetVo.engagePaye }}</td>
-              <td>{{ bsprech.detaillesBudgetVo.engageNonPaye }}</td>
-              <td>
-                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBspInfos(bsprech)" data-toggle="modal"
+                <button *ngIf="bsp.id!=0" type="button" class="btn btn-outline-info fa fa-info mr-2"
+                        (click)="setBudgetSousProjetInfos(bsp)" data-toggle="modal"
                         data-target="#exampleModalBspInfo"></button>
-                <button class="btn btn-outline-success fa fa-pencil" data-toggle="modal"
-                        data-target="#exampleModalBspUpDel"></button>
+                <button type="button" (click)="deleteBudgetSousProjet(bsp)" class="btn btn-outline-danger fa fa-trash"></button>
               </td>
             </tr>
             </tbody>
@@ -119,136 +111,6 @@
 <!--modal pour infos-->
 <div class="modal fade" id="exampleModalBspInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Information sur <i>{{ selectedBsp.referenceSousProjet }}</i></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12 offset-md-1">
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Année: </b></label>
-                <p><i>{{ selectedBsp.budgetFaculteVo.annee }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Anticident: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.antecedent }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert éstimatif: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.creditOuvertEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert réel: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.creditOuvertReel }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé payé: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.engagePaye }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé non payé: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.engageNonPaye }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé éstimatif: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.reliquatNonPayeEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé réel: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.reliquatNonPayReel }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé éstimatif: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.reliquatPayeEstimatif }}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé réel: </b></label>
-                <p><i>{{ selectedBsp.detaillesBudgetVo.reliquatPayereel }}</i></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--modal pour update and delete-->
-<div class="modal fade" id="exampleModalBspUpDel" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="credouvrestmod">Crédit ouvert éstimatif</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="credouvrestmod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="credouvrreelmod">Crédit ouvert réel</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="credouvrreelmod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="engagepayemod">Engagé payé</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="engagepayemod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="engagenonpayemod">Engagé non payé</label>
-                </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" min="0" step="any" required
-                       id="engagenonpayemod" aria-describedby="inputGroup-sizing-sm">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" (click)="delete()" data-dismiss="modal">Supprimer</button>
-        <button type="button" class="btn btn-outline-primary" (click)="update()">Sauvegarder</button>
-      </div>
-    </div>
-  </div>
+  <app-detailles [_selectedBsp]="_selectedBsp"></app-detailles>
 </div>
 

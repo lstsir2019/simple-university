@@ -1,12 +1,12 @@
 import {DetaillesBudget} from './detailles-budget.model';
-import {BudgetSousProjet} from './budget-sous-projet.model';
-import {BudgetCompteBudgitaire} from './budget-compte-budgitaire.model';
+import {BudgetSousProjetVo} from './budget-sous-projet.model';
+import {BudgetCompteBudgitaireVo} from './budget-compte-budgitaire.model';
 
-export class BudgetEntiteAdministratif {
+export class BudgetEntiteAdministratifVo {
 
   public detaillesBudgetVo: DetaillesBudget = new DetaillesBudget();
-  public budgetSousProjetVo: BudgetSousProjet = new BudgetSousProjet();
-  public budgetCompteBudgitaireVo: Array<BudgetCompteBudgitaire> = [];
+  public budgetSousProjetVo: BudgetSousProjetVo = new BudgetSousProjetVo();
+  public budgetCompteBudgitaireVo: Array<BudgetCompteBudgitaireVo> = [];
 
   constructor(public id?: number, public referenceEntiteAdministratif?: string) {
   }

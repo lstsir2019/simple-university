@@ -1,0 +1,94 @@
+
+
+<table class="table table-sm">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Cne</th>
+    <th scope="col">Cin</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Prenom</th>
+    <th scope="col">Email</th>
+    <th scope="col">Telephone</th>
+    <th scope="col">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let e of etudiants">
+    <td>{{e.cne}}</td>
+    <td>{{e.cin}}</td>
+    <td>{{e.nom}}</td>
+    <td>{{e.prenom}}</td>
+    <td>{{e.email}}</td>
+    <td>{{e.tel}}</td>
+    <td>
+      <button class="btn btn-sm btn-outline-secondary fa fa-plus"></button></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal Update -->
+<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="DivDuForm2">
+          <div class="form-group">
+            <label for="Cne" class="col-form-label">Cne:</label>
+            <input type="text" class="form-control" id="Cne">
+          </div>
+          <div class="form-group">
+            <label for="Cin" class="col-form-label">Cin:</label>
+            <input type="text" class="form-control" id="Cin">
+          </div>
+          <div class="form-group">
+            <label for="Cin" class="col-form-label">Cin:</label>
+            <input type="text" class="form-control" id="Cin">
+          </div>
+          <div class="form-group">
+            <label for="Cin" class="col-form-label">Cin:</label>
+            <input type="text" class="form-control" id="Cin">
+          </div>
+          <div class="form-group">
+            <label for="Cin" class="col-form-label">Cin:</label>
+            <input type="text" class="form-control" id="Cin">
+          </div>
+          <div class="form-group">
+            <label for="Cin" class="col-form-label">Cin:</label>
+            <input type="text" class="form-control" id="Cin">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn btn-primary ">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal delete -->
+<div class="modal fade" id="exampleModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Voulez vous vraiment supprimer cet etudiant
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

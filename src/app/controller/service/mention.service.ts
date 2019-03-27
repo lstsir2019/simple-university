@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Mention} from "../model/mention.model";
 import {Element} from "../model/element.model";
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -24,18 +25,43 @@ export class MentionService {
 
 
   public saveMention() {
-    this.http.post< Mention>(this._url, this._mentionCreate).subscribe(
-      data => {
-        console.log('ok');
-        let mentionclone= new Mention(this._mentionCreate.reference,this._mentionCreate.libelle,this._mentionCreate.noteMin,this._mentionCreate.noteMax);
-        this._listeMention.push(mentionclone);
-        this._mentionCreate= new Mention('','',0,0);
-      },
-      error1 => {
-        console.log('error');
-      }
+    if(this.mentionCreate.reference==='' || this.mentionCreate.libelle===''){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Référence ou libellé",
+        type: 'error',
+      });
+    }
+    else {
 
-    );
+      this.http.post(this._url, this._mentionCreate).subscribe(
+        (res) => {
+          if (res == 1) {
+            Swal({
+              title: 'Création Mention',
+              text: 'Création réussite',
+              type: 'success',
+            });
+            let mentionclone = new Mention(this._mentionCreate.reference, this._mentionCreate.libelle, this._mentionCreate.noteMin, this._mentionCreate.noteMax);
+            this._listeMention.push(mentionclone);
+            this._mentionCreate = new Mention('', '', 0, 0);
+          } else if (res == -1) {
+            Swal({
+              title: 'Erreur!',
+              text: 'Mention existe déjà',
+              type: 'error',
+            });
+          } else {
+            Swal({
+              title: 'Erreur!',
+              text: "L'intervalle de cette mention existe déjà ",
+              type: 'error',
+            });
+          }
+
+
+        });
+    }
   }
   public findAll(){
 
@@ -44,25 +70,60 @@ export class MentionService {
         this._listeMention = data;
       },
       error1 => {
-        console.log('error while loading elements...');
+        console.log('error while loading mentions...');
       }
     );
   }
 
   public deleteMention(mentionSupp:Mention) {
-    this.http.delete(this._url1+mentionSupp.reference).subscribe(
-      data => {
-        console.log("ok");
-        const index: number = this._listeMention.indexOf(mentionSupp);
-        if (index !== -1) {
-          this._listeMention.splice(index, 1);
-        }
+    Swal({
+      title: 'Suppression',
+      text: "Vous voulez vraiment supprimer cette mention",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+      confirmButtonColor: '#d6000a',
+      cancelButtonColor: '#ddc800',
+      confirmButtonText: 'Supprimer'
+    }).then((result) => {
+      if (result.value) {
 
-      },
-      error => {
-        console.log('error while deleting mention...');
+        this.http.delete(this._url1+mentionSupp.reference).subscribe( 
+          (res) => {
+            if(res==1){
+              const index: number = this._listeMention.indexOf(mentionSupp); 
+              if (index !== -1) { 
+                this._listeMention.splice(index, 1);
+              }
+
+
+              Swal({
+                title: 'Suppression Mention',
+                text: 'Suppression réussite',
+                type: 'success',
+              });
+
+            }
+
+
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Suppression échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
+
   }
   public findByReference(mention:Mention){
     this.http.get<Mention>(this._url1+mention.reference).subscribe(
@@ -70,63 +131,194 @@ export class MentionService {
         this._mentionCreate2 = data;
       },
       error => {
-        console.log('error while loading the element...');
+        console.log('error while loading the mention...');
       }
     );
 
   }
 
   public editReference(mentionEdit:Mention,nvmention:Mention){
-    this.http.put<Mention>(this._url2+mentionEdit.reference,nvmention).subscribe(
-      data => {
-        console.log("ok");
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
 
-        this.findAll();
-        this._mentionCreate1 = new Mention('','',0,0);
-        //this. _mentionCreate2 = new Mention('','',0,0);
-        this.findByReference(nvmention);
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
 
-      },
-      error => {
-        console.log('error while updating the reference of  mention...');
+        this.http.put(this._url2+mentionEdit.reference,nvmention).subscribe( 
+          (res) => {
+            if(res==1){
+              this.findAll(); 
+              this._mentionCreate1 = new Mention('','',0,0); 
+              this.findByReference(nvmention); 
+              Swal({
+                title: 'Modification mention',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+            else if(res==-1 || res==-2) {
+              this.findByReference(mentionEdit);
+
+              Swal({
+                title: 'Erreur!',
+                text: "Manque d'informations: Référence ou libellé",
+                type: 'error',
+              });
+            }
+
+            else if(res==-3) {
+              this.findByReference(mentionEdit);
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Mention deja existante',
+                type: 'error',
+              });
+            }
+            else {
+              this.findByReference(mentionEdit);
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Erreur Inconnue',
+                type: 'error',
+              });
+
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
+
 
   }
 
 
 
   public editNotemax(mentionEdit:Mention,nvmention:Mention){
-    this.http.put<Mention>(this._url3+mentionEdit.reference,nvmention).subscribe(
-      data => {
-        console.log("ok");
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d6d20b',
+      cancelButtonText:'Annuler',
 
-        this.findAll();
-        this._mentionCreate1 = new Mention('','',0,0);
-        //this. _mentionCreate2 = new Mention('','',0,0);
-        this.findByReference(mentionEdit);
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
 
-      },
-      error => {
-        console.log('error while updating mention...');
+        this.http.put(this._url3+mentionEdit.reference,nvmention).subscribe( 
+          (res) => {
+            if(res==1){
+              this.findAll(); 
+              this._mentionCreate1 = new Mention('','',0,0); 
+               this.findByReference(mentionEdit); 
+
+              Swal({
+                title: 'Modification Mention',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+            else if (res==-1 || res ==-2) {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:La note max doit etre supérieure à la note min',
+                type: 'error',
+              });
+            }
+
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
 
   }
   public editNotemin(mentionEdit:Mention,nvmention:Mention){
-    this.http.put<Mention>(this._url4+mentionEdit.reference,nvmention).subscribe(
-      data => {
-        console.log("ok");
-        this.findAll();
-        this._mentionCreate1 = new Mention('','',0,0);
-        //this. _mentionCreate2 = new Mention('','',0,0);
-        this.findByReference(mentionEdit);
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d6d20b',
+      cancelButtonText:'Annuler',
 
-      },
-      error => {
-        console.log('error while updating mention...');
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+
+        this.http.put(this._url4+mentionEdit.reference,nvmention).subscribe(
+          (res) => {
+            if(res==1){
+              this.findAll();
+              this._mentionCreate1 = new Mention('','',0,0);
+              this.findByReference(mentionEdit);
+
+              Swal({
+                title: 'Modification Mention',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+            else if (res==-1 || res==-2) {
+              this.findByReference(mentionEdit);
+
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:La note min doit etre inférieure à la note max',
+                type: 'error',
+              });
+            }
+            else {
+              this.findByReference(mentionEdit);
+
+              Swal({
+                title: 'Erreur!',
+                text: 'Modification échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
+
+
       }
-    );
+    });
+
 
   }
 
