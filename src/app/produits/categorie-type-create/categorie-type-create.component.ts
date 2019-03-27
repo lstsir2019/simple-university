@@ -12,6 +12,8 @@ export class CategorieTypeCreateComponent implements OnInit {
   constructor(private produitService:ProduitService) { }
 
   ngOnInit() {
+    this.produitService.categoriesFindAll();
+
   }
 
   public get categorieProduit(){

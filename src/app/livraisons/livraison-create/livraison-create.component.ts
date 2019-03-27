@@ -18,7 +18,7 @@ export class LivraisonCreateComponent implements OnInit {
   ngOnInit() {
   }
   public afficher(){
-    this.mode=1;
+
   }
   public  ok(){
     this.modeGlobal=1;
@@ -37,8 +37,8 @@ export class LivraisonCreateComponent implements OnInit {
   }
   public saveLivraison(){
     this.livraisonService.saveLivraison();
-    this.modeGlobal=0;
-    this.mode=0;
+
+
   }
   public get livraisons(){
     return this.livraisonService.livraisons;
