@@ -20,9 +20,11 @@ export class ProduitService {
   private _url7: string = "http://localhost:8070/produit_api/produit/chercher?reference=";
   private _url6: string = "http://localhost:8070/produit_api/categoriType/categorie/delete/";
   private _url8:string="http://localhost:8070/produit_api/categoriType/type/delete/";
-  private _url9:string="http://localhost:8070/produit_api/categoriType"
+  private _url9:string="http://localhost:8070/produit_api/categoriType";
 
 
+  private _produitModified:Produit=new Produit("","");
+  private referenceProduitModyf:string="";
   private _categorieCreate: CategoriProduit=new CategoriProduit("","");
   private _typeCreate:TypeProduit=new TypeProduit("","");
   private _produitCreate:Produit=new Produit("","");
@@ -36,7 +38,7 @@ export class ProduitService {
 /////////////////////////////////////////////////////
 
  public produitR(referenceP:string):Array<Produit>{
-      this._http.get<Array<Produit>>(this._url7+referenceP).subscribe(
+      this._http.get<Array<Produit>>(this._url5+"chercher?reference="+referenceP).subscribe(
        data=>{
          this._produits=data;
          console.log(" success");
@@ -66,6 +68,7 @@ export class ProduitService {
    return this.categories;
  }
 
+
  public typeR(libelleR:string):Array<TypeProduit>{
     this._http.get<Array<TypeProduit>>(this._url9+"/type/chercher?libelle="+libelleR).subscribe(
         data=>{
@@ -79,6 +82,30 @@ export class ProduitService {
     );
     return this.types;
  }
+ public produitsFindAll(){
+    this._http.get<Array<Produit>>(this._url5).subscribe(
+      data=>{
+        if (data!=null){
+          this._produits=data;
+        }
+      },error1 => {
+        console.log(error1);
+      }
+    );
+ }
+ public modyfieProduit(){
+
+    this._http.put<Produit>(this._url5+"/update/",this.produitModified).subscribe(
+      data=>{
+
+        console.log(this.produitModified);
+
+      },error1 => {
+        console.log(error1);
+      }
+
+    );
+  }
 
 
   public saveProduit(){
@@ -96,8 +123,8 @@ export class ProduitService {
     );
 
   }
-  public deleteProduit(reference:string):Observable<Produit[]>{
-    return this._http.delete<Produit[]>(this._url5+"delete/"+reference);
+  public deleteProduit(reference:string){
+    return this._http.delete<Produit>(this._url5+"delete/"+reference);
   }
   public deleteCategorie(libelle:string): Observable<CategoriProduit[]>{
     console.log(this._url6 + libelle);
@@ -145,7 +172,18 @@ export class ProduitService {
 
 
   }
+  public categoriesFindAll() {
+    if (this._categories==null){
+      this._http.get<Array<CategoriProduit>>(this._url3).subscribe(
+        data=>{
+          this._categories=data;
+        },error1 => {
+          console.log("errooorr list");
+        }
+      );
+    }
 
+  }
 
   get categories(): Array<CategoriProduit> {
     if (this._categories==null){
@@ -174,8 +212,29 @@ export class ProduitService {
     }
     return this._types;
   }
+  public typesFindAll() {
+    if(this._types==null){
+      this._http.get<Array<TypeProduit>>(this._url4).subscribe(
+        data=>{
+          this._types=data;
+        },error1 => {
+          console.log("errooorr list");
+        }
+
+      );
+
+    }
+
+  }
 
 
+  get produitModified(): Produit {
+    return this._produitModified;
+  }
+
+  set produitModified(value: Produit) {
+    this._produitModified = value;
+  }
 
   get produits(): Array<Produit> {
     if(this._produits==null){
