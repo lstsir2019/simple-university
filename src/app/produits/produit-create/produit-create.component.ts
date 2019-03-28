@@ -9,10 +9,15 @@ import {Produit} from "../../controller/model/produit.model";
 })
 export class ProduitCreateComponent implements OnInit {
 
-  private referenceP:string="";
+
+
   constructor(private produitService:ProduitService) { }
 
   ngOnInit() {
+    this.produitService.produitsFindAll();
+    this.produitService.typesFindAll();
+    this.produitService.categoriesFindAll();
+
   }
   public get categories(){
     return this.produitService.categories;
@@ -40,5 +45,15 @@ export class ProduitCreateComponent implements OnInit {
 
       this.produits.indexOf(produit),1
     );
+  }
+  public get produitModified(){
+    return this.produitService.produitModified;
+  }
+  public modyfieProduit(){
+
+      this.produitService.modyfieProduit();
+  }
+  public produitSelectef(produit:Produit){
+    this.produitService.produitModified=produit;
   }
 }

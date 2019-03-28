@@ -25,35 +25,43 @@ export class MentionService {
 
 
   public saveMention() {
-    this.http.post(this._url, this._mentionCreate).subscribe( 
-      (res) => {
-        if (res == 1) {
-          Swal({
-            title: 'Création Mention',
-            text: 'Création réussite',
-            type: 'success',
-          });
-          let mentionclone= new Mention(this._mentionCreate.reference,this._mentionCreate.libelle,this._mentionCreate.noteMin,this._mentionCreate.noteMax); 
-          this._listeMention.push(mentionclone); 
-          this._mentionCreate= new Mention('','',0,0);
-        }
-        else if(res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Mention existe déjà',
-            type: 'error',
-          });
-        }
-        else{
-          Swal({
-            title: 'Erreur!',
-            text: "L'intervalle de cette mention existe déjà ",
-            type: 'error',
-          });
-        }
-
-
+    if(this.mentionCreate.reference==='' || this.mentionCreate.libelle===''){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Référence ou libellé",
+        type: 'error',
       });
+    }
+    else {
+
+      this.http.post(this._url, this._mentionCreate).subscribe(
+        (res) => {
+          if (res == 1) {
+            Swal({
+              title: 'Création Mention',
+              text: 'Création réussite',
+              type: 'success',
+            });
+            let mentionclone = new Mention(this._mentionCreate.reference, this._mentionCreate.libelle, this._mentionCreate.noteMin, this._mentionCreate.noteMax);
+            this._listeMention.push(mentionclone);
+            this._mentionCreate = new Mention('', '', 0, 0);
+          } else if (res == -1) {
+            Swal({
+              title: 'Erreur!',
+              text: 'Mention existe déjà',
+              type: 'error',
+            });
+          } else {
+            Swal({
+              title: 'Erreur!',
+              text: "L'intervalle de cette mention existe déjà ",
+              type: 'error',
+            });
+          }
+
+
+        });
+    }
   }
   public findAll(){
 

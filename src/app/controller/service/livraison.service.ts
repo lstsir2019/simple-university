@@ -10,17 +10,18 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LivraisonService {
   private _url: string = "http://localhost:8098/Livraison-api/livraisons/";
-  private _url2:string="http://localhost:8098/Livraison-api/livraisonItems/commande-items/";
+  private _url2:string="http://localhost:8098/Livraison-api/livraisonItems/";
   private _livraisonCreate: Livraison = new Livraison("", "", "","");
   private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '');
   private _livraisons:Array<Livraison>;
   private _livraisonR:Livraison;
-  private _livraisonItems:Array<LivraisonItem>;
+ // private _livraisonItems:Array<LivraisonItem>;
 
   constructor(private _http: HttpClient) { }
   public addLivraisonItem() {
     let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin);
     this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
+
   }
 
   public saveLivraison(){
@@ -38,12 +39,15 @@ export class LivraisonService {
 
   public livraisonItemsR(livraison:Livraison){
     this._livraisonR=livraison;
+
   if(this._livraisonR!=null) {
 
-    this._http.get<Array<LivraisonItem>>(this._url2 + this._livraisonR.reference).subscribe(data => {
+    this._http.get<Array<LivraisonItem>>(this._url2 +"livraison/reference/"+ this._livraisonR.reference).subscribe(
+      data => {
       this._livraisonR.livraisonItemVos=data;
+        console.log(data);
     },error1 => {
-      console.log("errooorr list");
+      console.log("errooorr list"+error1);
     });
   }
 
@@ -61,6 +65,22 @@ export class LivraisonService {
       );
     }
     return this._livraisons;
+  }
+     public findAll(){
+      this._http.get<Array<Livraison>>(this._url).subscribe(
+        data=>{
+          if(data!=null){
+            this._livraisons=data;
+            console.log(data);
+          }
+
+        },error1 => {
+          console.log("errooorr list"+error1);
+        }
+
+      );
+
+
   }
 
   set livraisons(value: Array<Livraison>) {
@@ -99,14 +119,7 @@ export class LivraisonService {
     this._http=value;
   }
 
-  get livraisonItems(): Array<LivraisonItem> {
 
-    return this._livraisonItems;
-  }
-
-  set livraisonItems(value: Array<LivraisonItem>) {
-    this._livraisonItems=value;
-  }
 
   get livraisonR(): Livraison {
     return this._livraisonR;

@@ -1,4 +1,12 @@
 <div style="padding-top: 3%">
+  <form class="form-inline" data-toggle="tooltip" title="Entrer la  reference d'evolution personnel">
+    <input class="form-control ml-3 col-lg-3" type="search" name="searchInput"
+           placeholder="Entrer la  reference d'evolution personnel" aria-label="Search" (keyup)="search()"
+           [(ngModel)]="searchInput">
+    <button class="btn btn-outline-success ml-2 my-sm-0" type="submit" (click)="search()">Chercher</button>
+    <button class="btn btn-outline-primary ml-2" type="submit" (click)="getAll()">Afficher tout</button>
+  </form>
+  <br>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -27,6 +35,9 @@
         <button type="button" class="btn btn-outline-danger"
                 (click)="supprimerEvolutionPersonnel(evolutionPersonnel.reference)">Supprimer
         </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-info" (click)="print(evolutionPersonnel)">Imprimer</button>
       </td>
     </tr>
     </tbody>

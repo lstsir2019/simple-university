@@ -23,35 +23,42 @@ export class ElementService {
 
 
   public  saveElement() {
-    this.http.post(this._url, this._elementCreate).subscribe(
-      (res) => {
-        if (res == 1) {
-          Swal({
-            title: 'Création élément',
-            text: 'Création réussite',
-            type: 'success',
-          });
-          let elementclone = new Element(this._elementCreate.reference, this._elementCreate.libelle, this._elementCreate.baremMin, this._elementCreate.baremMax);
-          this._listelements.push(elementclone);
-          this._elementCreate = new Element('', '', 0, 0);
-        }
-        else if(res == -1) {
-          Swal({
-            title: 'Erreur!',
-            text: 'Élément déjà créer',
-            type: 'error',
-          });
-        }
-        else{
-          Swal({
-            title: 'Erreur!',
-            text: 'Le barem de 20 est dépassé',
-            type: 'error',
-          });
-        }
-
-
+    if(this._elementCreate.reference==='' || this._elementCreate.libelle===''){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Référence ou libellé",
+        type: 'error',
       });
+    }
+    else {
+      this.http.post(this._url, this._elementCreate).subscribe(
+        (res) => {
+          if (res == 1) {
+            Swal({
+              title: 'Création élément',
+              text: 'Création réussite',
+              type: 'success',
+            });
+            let elementclone = new Element(this._elementCreate.reference, this._elementCreate.libelle, this._elementCreate.baremMin, this._elementCreate.baremMax);
+            this._listelements.push(elementclone);
+            this._elementCreate = new Element('', '', 0, 0);
+          } else if (res == -1) {
+            Swal({
+              title: 'Erreur!',
+              text: 'Élément déjà créer',
+              type: 'error',
+            });
+          } else {
+            Swal({
+              title: 'Erreur!',
+              text: 'Le barem de 20 est dépassé',
+              type: 'error',
+            });
+          }
+
+
+        });
+    }
   }
 
   public deleteElement(elementSupp:Element) {

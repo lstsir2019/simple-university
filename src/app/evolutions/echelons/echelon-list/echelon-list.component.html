@@ -1,4 +1,10 @@
 <div style="padding-top: 3%">
+  <form class="form-inline" data-toggle="tooltip" title="Entrer la  reference de l'echelon" >
+    <input class="form-control ml-3 col-lg-3" type="search" name="searchInput" placeholder="Entrer la  reference de l'echelon" aria-label="Search"  (keyup)="search()" [(ngModel)]="searchInput">
+    <button class="btn btn-outline-success ml-2 my-sm-0" type="submit" (click)="search()">Chercher</button>
+    <button class="btn btn-outline-primary ml-2" type="submit" (click)="getAll()">Afficher tout</button>
+  </form>
+  <br>
   <table class="table table-striped">
     <thead>
     <tr>

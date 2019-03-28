@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 export class NoteService {
   private _elementVoCreate:Element=new Element('','',0,0);
   private _noteCreate:Note=new Note('','',0,'',this._elementVoCreate);
-  private _noteCreateValidate:Note=new Note('','',0,'',this._elementVoCreate);
 
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
@@ -21,11 +20,14 @@ export class NoteService {
   private _listeNotesAnnuel:Array<NoteAnnuel>;
   private _url = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/elementsDevaluation/';
   private _listelements:Array<Element>;
+  private _listelements2:Array<Element>=new Array<Element>();
+
   private _listeNoteElements:Array<Note>;
   private _noteAnnuelSelected:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
 
   private _url1 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/elementsDevaluation/reference/';
   private _elementCreate2 :Element = new Element('','',0,0);
+  private _validate :number ;
 
   private _url3 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/notePersonnelAnnuel/';
   private _url6 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/notePersonnelAnnuel/referencePersonnel/';
@@ -34,21 +36,46 @@ export class NoteService {
   private _url7 = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/noteElement/';
 
   private _url4='http://localhost:8099/sample-faculte-EvaluationPersonnel/mentionsNote/note/';
-
-
   constructor(private http: HttpClient) { }
 
-// fonction Test
-  public findNoteInModal(){
-    this.noteCreate2=this.noteCreate;
+
+public validatUpdatedElement(){
+  for (let i of this._noteAnnuelCreate.notesElementVo) {
+
+
+    if (i.elementEvaluationVo.reference == this._noteCreate2.elementEvaluationVo.reference) {
+      this._validate=0;
+      break;
+    }
+    else {
+      this._validate=1;
+    }
   }
+  if(this._validate==0){
+
+    Swal({
+      type: 'error',
+      title: 'Erreur',
+      text: "Élément deja évaluer",
+    });
+  }
+
+}
+
 
 
   // add la note/Element dans le tableau
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
 
-    if(this._noteCreate.elementEvaluationVo==null) {
+
+    if (this._noteCreate.referencePersonnel === '' || this._noteCreate.referenceEvaluateur === '') {
+      Swal({
+        type: 'error',
+        title: 'Erreur',
+        text: "Manque d'infos:Référence evaluateur ou personnel ",
+      });
+    } else if (this._noteCreate.elementEvaluationVo == null) {
 
       Swal({
         type: 'error',
@@ -56,48 +83,103 @@ export class NoteService {
         text: "Veuillez mentionner la référence de l'élément d'évaluation ",
       });
     }
+
     else {
+      if (this._noteAnnuelCreate.notesElementVo.length == 0){
+        if (this._noteCreate.noteElement > this._noteCreate.elementEvaluationVo.baremMax) {
 
-      if (this._noteCreate.noteElement > this._noteCreate.elementEvaluationVo.baremMax) {
+          this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
 
-        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+          Swal({
+            type: 'error',
+            title: 'Erreur',
+            text: 'La note donnée est supérieure au barem Max:Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
+          });
+        }
+        else {
+          this._noteAnnuelCreate.totalNote += this._noteCreate.noteElement;
+          let noteElementClone = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+          this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
 
-        Swal({
-          type: 'error',
-          title: 'Erreur',
-          text: 'La note donnée est supérieure au barem Max',
-        });
+          this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
+          Swal({
+            position: 'center',
+            type: 'success',
+            title: 'Note enregistrée',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       }
-      /*else if (this._noteCreate.elementEvaluationVo.reference == '') {
-        this.findByReference(selectedElement);
 
-        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._elementVoCreate);
 
-        Swal({
-          type: 'error',
-          title: 'Erreur',
-          text: "Veuillez mentionner la référence de l'élément d'évaluation ",
-        });
-      }*/
+
       else {
 
 
-        this._noteAnnuelCreate.totalNote += this._noteCreate.noteElement;
-        let noteElementClone = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+        for (let i of this._noteAnnuelCreate.notesElementVo) {
 
-        this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
-        this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
-        Swal({
-          position: 'top-end',
-          type: 'success',
-          title: 'Note enregistrée',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
+
+          if (i.elementEvaluationVo.reference == this._noteCreate.elementEvaluationVo.reference) {
+            this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
+
+            this._validate=0;
+            break;
+          }
+          else {
+            this._validate=1;
+          }
+        }
+        if(this._validate==1){
+          if (this._noteCreate.noteElement > this._noteCreate.elementEvaluationVo.baremMax) {
+
+            this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+
+            Swal({
+              type: 'error',
+              title: 'Erreur',
+              text: 'La note donnée est supérieure au barem Max:Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
+            });
+          } else {
+            this._noteAnnuelCreate.totalNote += this._noteCreate.noteElement;
+            let noteElementClone = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, this._noteCreate.noteElement, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
+            this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
+
+            this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
+            Swal({
+              position: 'center',
+              type: 'success',
+              title: 'Note enregistrée',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+
+        }
+        else {
+          Swal({
+            type: 'error',
+            title: 'Erreur',
+            text: "Élément déja evalué ",
+          });
+        }
+
+     }
+
+
+
+
+
+
+
+
+
     }
 
+
   }
+
+
 
 
   // avoir la note/Element séléctonnée dans le tableau pour la modification
@@ -108,6 +190,7 @@ this.noteCreate2=noteElement;
       }
     }
   }
+
 
 
   //Definir la mention
@@ -151,18 +234,6 @@ this.noteCreate2=noteElement;
     );
   }
 
-  /*
-  public get validationNote(){
-    this.http.get<Note>(this._url7+"/validation",this._noteCreate).subscribe(
-      data => {
-         this._noteCreateValidate= data;
-      },
-      error => {
-        console.log('error while loading noteElement...');
-      }
-    );
-  }
-  */
 
 
 
@@ -221,27 +292,82 @@ this.noteCreate2=noteElement;
 
   // Création de la note annuel avec les note /Elements
   public saveNoteAnnuel() {
-    this.http.post< NoteAnnuel>(this._url3, this._noteAnnuelCreate).subscribe(
-      data => {
-        console.log('ok');
-        this.definirMention();
-        let noteAnnuelclone= new NoteAnnuel(this.noteAnnuelCreate.dateDevaluation,this.noteAnnuelCreate.referencePersonnel,this.noteAnnuelCreate.referenceEvaluateur,this.noteAnnuelCreate.totalNote);
-        noteAnnuelclone.mentionNoteVo=this.noteAnnuelCreate.mentionNoteVo;
-        noteAnnuelclone.notesElementVo=this.noteAnnuelCreate.notesElementVo;
-        this._listeNotesAnnuel.push(noteAnnuelclone);
-        this.noteAnnuelCreate=new NoteAnnuel('','','',0);
-        this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
-        this.noteAnnuelCreate.notesElementVo=new Array<Note>();
-        this.findAllNotesAnnuel();
 
 
-      },
+    if(this._noteAnnuelCreate.referenceEvaluateur===''){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Référence evaluateur",
+        type: 'error',
+      });
+    }
+    else if(this._noteAnnuelCreate.referencePersonnel===''){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Référence personnel ",
+        type: 'error',
+      });
+    }
+    else if(this._noteAnnuelCreate.dateDevaluation==='AAAA-MM-JJ'){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque d'infos:Date d'évaluation",
+        type: 'error',
+      });
+    }
+    else if(this._noteAnnuelCreate.notesElementVo.length==0){
+      Swal({
+        title: 'Erreur!',
+        text: "Veuillez d'abord saisir les notes pour chaque élément",
+        type: 'error',
+      });
+    }
+    else if(this._noteAnnuelCreate.notesElementVo.length!=this.listelements.length){
+      Swal({
+        title: 'Erreur!',
+        text: "Manque de notes:le personnel: "+ this._noteAnnuelCreate.referencePersonnel +"n'as pas été évaluer dans touts les élémenrs",
+        type: 'error',
+      });
+    }
 
-      error => {
-        console.log('error');
-      }
-    );
 
+    else {
+
+      this.http.post(this._url3, this._noteAnnuelCreate).subscribe(
+        (res) => {
+          if (res == 1) {
+            Swal({
+              title: 'Création Note annuel',
+              text: 'Note annuel enregistrée',
+              type: 'success',
+            });
+            this.definirMention();
+            let noteAnnuelclone= new NoteAnnuel(this.noteAnnuelCreate.dateDevaluation,this.noteAnnuelCreate.referencePersonnel,this.noteAnnuelCreate.referenceEvaluateur,this.noteAnnuelCreate.totalNote);
+            noteAnnuelclone.mentionNoteVo=this.noteAnnuelCreate.mentionNoteVo;
+            noteAnnuelclone.notesElementVo=this.noteAnnuelCreate.notesElementVo;
+            this._listeNotesAnnuel.push(noteAnnuelclone);
+            this.noteAnnuelCreate=new NoteAnnuel('','','',0);
+            this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
+            this.noteAnnuelCreate.notesElementVo=new Array<Note>();
+            this.findAllNotesAnnuel();
+
+          } else if (res == -1) {
+            Swal({
+              title: 'Erreur!',
+              text: 'Le personnel: '+ this._noteAnnuelCreate.referencePersonnel + ' a deja été noté à cette date',
+              type: 'error',
+            });
+          } else {
+            Swal({
+              title: 'Erreur!',
+              text: "Manque de notes : le personnel:  "+ this._noteAnnuelCreate.referencePersonnel +"  n'as pas été évalué dans touts les éléments",
+              type: 'error',
+            });
+          }
+
+
+        });
+    }
 
 
   }
@@ -487,5 +613,23 @@ this.noteCreate2=noteElement;
 
   set url7(value: string) {
     this._url7 = value;
+  }
+
+  get listelements2(): Array<Element> {
+    if(this._listelements2==null){
+      this._listelements2=new Array<Element>();
+    }    return this._listelements2;
+  }
+
+  set listelements2(value: Array<Element>) {
+    this._listelements2 = value;
+  }
+
+  get validate(): number {
+    return this._validate;
+  }
+
+  set validate(value: number) {
+    this._validate = value;
   }
 }

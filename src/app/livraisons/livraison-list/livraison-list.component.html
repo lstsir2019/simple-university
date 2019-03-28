@@ -86,12 +86,17 @@
 
         </div>
 
-        <div class="card col-sm-6">
+        <div class="card col-sm-6 text-center">
           <div class="card-header">livraison items</div>
           <div class="card-body">
           <table class="table table-hover table-sm">
             <thead> <th>Reference</th><th>qte</th><th>Magsin</th></thead>
-            <tbody>
+            <tbody *ngIf="livraisonR==null">
+            <tr >
+              <td colspan="4"> No Items</td>
+            </tr>
+            </tbody>
+            <tbody *ngIf="livraisonR!=null">
             <tr *ngFor="let li of livraisonR.livraisonItemVos" >
               <td>{{li.refenceProduit}}</td>
               <td>{{li.qte}}</td>
