@@ -40,7 +40,7 @@
         <table class="table table-hover  ">
           <thead class="theadx"><th>Reference</th><th>total</th><th>action</th></thead>
           <tbody class="tbodyx">
-          <tr *ngFor="let c of commandes">
+          <tr *ngFor="let c of commandes" >
             <td>{{c.reference}}</td>
             <td>{{c.total}}</td>
             <td ><button (click)="findCommandeItemByReference(c)" class="btn btn-outline-dark fa fa-plus"></button></td>

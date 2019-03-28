@@ -70,7 +70,6 @@ export class CommandeService {
   }
 
 
-
   public findPaiementByCommande(commande:Commande){
     this._commandeSelected=commande;
     if(this.commandeSelected !=null){
