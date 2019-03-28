@@ -18,10 +18,12 @@ export class CommandeService {
 
   private _commandeCreate:Commande = new Commande('' ,0,'','');
   private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0);
+  private _commande:Commande=new Commande('',0,'','');
   private _commandes:Array<Commande>;
   private _commandeSelected:Commande;
   private _paiementCreate:Paiement = new Paiement(Number(''),0,'','');
   private _fournisseurs:Array<Fournisseur>;
+  public commandeItems:Array<CommandeItem>;
   constructor(private http:HttpClient) { }
 
   public addCommandeItem() {
@@ -42,6 +44,18 @@ export class CommandeService {
     }
     });
 
+  }
+  public findCommandeItemsByCommandeReference(){
+
+    if (this.commande != null){
+      this.http.get<Array<CommandeItem>>('http://localhost:8090/faculte-commande/commandes/reference/'+this._commande.reference+'/commande-items').subscribe(
+        data=> {
+          this.commandeItems = data;
+        },error=> {
+          console.log(error);
+        }
+      );
+    }
   }
 
   public payerCommande(){
@@ -84,6 +98,10 @@ export class CommandeService {
     }
 
   }
+
+
+
+
 
   get url(): string {
     return this._url;
@@ -197,5 +215,14 @@ export class CommandeService {
 
   public itemToModal(commandeSelected: Commande) {
     this.commandeSelected = commandeSelected;
+  }
+
+
+  get commande(): Commande {
+    return this._commande;
+  }
+
+  set commande(value: Commande) {
+    this._commande = value;
   }
 }
