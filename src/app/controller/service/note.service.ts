@@ -16,6 +16,8 @@ export class NoteService {
 
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
+  private _noteCreate3:Note=new Note('','',0,'',this._elementVoCreate);
+
   private _noteCreate2:Note=new Note('','',0,'',this._elementVoCreate);
   private _listeNotesAnnuel:Array<NoteAnnuel>;
   private _url = 'http://localhost:8099/sample-faculte-EvaluationPersonnel/elementsDevaluation/';
@@ -39,7 +41,11 @@ export class NoteService {
   constructor(private http: HttpClient) { }
 
 
-public validatUpdatedElement(){
+/*public validatUpdatedElement(note:Note){
+  const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(note);
+  if (index !== -1) {
+    this._noteAnnuelCreate.notesElementVo.splice(index, 1);
+  }
   for (let i of this._noteAnnuelCreate.notesElementVo) {
 
 
@@ -53,21 +59,25 @@ public validatUpdatedElement(){
   }
   if(this._validate==0){
 
+    this._noteAnnuelCreate.notesElementVo.push(note);
+
     Swal({
       type: 'error',
       title: 'Erreur',
       text: "Élément deja évaluer",
     });
   }
+  else {
+    this._noteAnnuelCreate.notesElementVo.push(this._noteCreate2);
+  }
 
-}
+}*/
 
 
 
   // add la note/Element dans le tableau
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
-
 
     if (this._noteCreate.referencePersonnel === '' || this._noteCreate.referenceEvaluateur === '') {
       Swal({
@@ -184,9 +194,9 @@ public validatUpdatedElement(){
 
   // avoir la note/Element séléctonnée dans le tableau pour la modification
   public findNoteElement(noteElement:Note){
-    for (let i of this.noteAnnuelCreate.notesElementVo) {
+    for (let i of this._noteAnnuelCreate.notesElementVo) {
       if(i==noteElement){
-this.noteCreate2=noteElement;
+this._noteCreate2=noteElement;
       }
     }
   }
@@ -325,7 +335,7 @@ this.noteCreate2=noteElement;
     else if(this._noteAnnuelCreate.notesElementVo.length!=this.listelements.length){
       Swal({
         title: 'Erreur!',
-        text: "Manque de notes:le personnel: "+ this._noteAnnuelCreate.referencePersonnel +"n'as pas été évaluer dans touts les élémenrs",
+        text: "Manque de notes:le personnel: "+ this._noteAnnuelCreate.referencePersonnel +" n'as pas été évaluer dans touts les élémenrs",
         type: 'error',
       });
     }
@@ -335,9 +345,9 @@ this.noteCreate2=noteElement;
 
       this.http.post(this._url3, this._noteAnnuelCreate).subscribe(
         (res) => {
-          if (res == 1) {
+          if (res == 3) {
             Swal({
-              title: 'Création Note annuel',
+              title: 'Ajout de la Note annuel',
               text: 'Note annuel enregistrée',
               type: 'success',
             });
@@ -351,10 +361,10 @@ this.noteCreate2=noteElement;
             this.noteAnnuelCreate.notesElementVo=new Array<Note>();
             this.findAllNotesAnnuel();
 
-          } else if (res == -1) {
+          } else if (res == -5) {
             Swal({
               title: 'Erreur!',
-              text: 'Le personnel: '+ this._noteAnnuelCreate.referencePersonnel + ' a deja été noté à cette date',
+              text: 'Le personnel: '+ this._noteAnnuelCreate.referencePersonnel + ' a déjà été noté cette année',
               type: 'error',
             });
           } else {
@@ -379,19 +389,50 @@ this.noteCreate2=noteElement;
 
   //Suppression de la note annuel et de ses notes /Element
   public deleteNoteAnnuel(noteAnnuelSupp:NoteAnnuel) {
-    this.http.delete(this._url6+noteAnnuelSupp.referencePersonnel+'/dateDevaluation/'+noteAnnuelSupp.dateDevaluation).subscribe(
-      data => {
-        console.log("ok");
-        const index: number = this._listeNotesAnnuel.indexOf(noteAnnuelSupp);
-        if (index !== -1) {
-          this._listeNotesAnnuel.splice(index, 1);
-        }
+    Swal({
+      title: 'Etes vous sûrs de la suppression',
+      text: "Cette note sera supprimer de façon définitive",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, Supprimer'
+    }).then((result) => {
+      if (result.value) {
+        this.http.delete(this._url6+noteAnnuelSupp.referencePersonnel+'/dateDevaluation/'+noteAnnuelSupp.dateDevaluation).subscribe(          (res) => {
+            if(res==1){
+              const index: number = this._listeNotesAnnuel.indexOf(noteAnnuelSupp);
+              if (index !== -1) {
+                this._listeNotesAnnuel.splice(index, 1);
+              }
 
-      },
-      error => {
-        console.log('error while deleting Note Annuel...');
+
+              Swal({
+                title: 'Suppression Mention',
+                text: 'Suppression réussite',
+                type: 'success',
+              });
+
+            }
+
+
+            else {
+              Swal({
+                title: 'Erreur!',
+                text: 'Suppression échouée:Erreur Inconnue',
+                type: 'error',
+              });
+            }
+
+
+          },
+
+        );
+
       }
-    );
+    })
+
+
 
 
   }
@@ -631,5 +672,13 @@ this.noteCreate2=noteElement;
 
   set validate(value: number) {
     this._validate = value;
+  }
+
+  get noteCreate3(): Note {
+    return this._noteCreate3;
+  }
+
+  set noteCreate3(value: Note) {
+    this._noteCreate3 = value;
   }
 }

@@ -148,7 +148,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
         <label class="text-info text-sm-center">Veuillez saisir vos données ,la modification sera prise en charge automatiquement</label>
 
-        <button type="button" (click)="validateUpdateElement()" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -161,7 +161,7 @@
           <h5 class="text-center">Modifier Reference Personnel</h5>
 
           <label for="formGroupExampleInput32">Nouveau Reference Personnel</label>
-          <input type="text" [(ngModel)]="note2.referencePersonnel"  class="form-control" id="formGroupExampleInput32" placeholder="Nouveau Reference Personnel">
+          <input type="text" [(ngModel)]="note3.referencePersonnel"  class="form-control" id="formGroupExampleInput32" placeholder="Nouveau Reference Personnel">
 
         </div>
 
@@ -171,14 +171,14 @@
           <h5 class="text-center">Modifier Reference Evaluateur</h5>
 
           <label for="formGroupExampleInput99">Nouveau Reference Evaluateur</label>
-          <input type="text" [(ngModel)]="note2.referenceEvaluateur"  class="form-control" id="formGroupExampleInput99" placeholder="Nouveau Reference Evaluateur">
+          <input type="text" [(ngModel)]="note3.referenceEvaluateur"  class="form-control" id="formGroupExampleInput99" placeholder="Nouveau Reference Evaluateur">
 
         </div>
 
         <hr>
         <div class="form-group">
           <h5 class="text-center">Modifier Élément d'évaluation</h5>
-          <select  class="custom-select"  id="inputGroupSelect62" name="elementVo" [(ngModel)]="note2.elementEvaluationVo"  (change)="selectChangeHandler($event)" >
+          <select  class="custom-select"  id="inputGroupSelect62" name="elementVo" [(ngModel)]="note3.elementEvaluationVo"  (change)="selectChangeHandler($event)" >
             <option selected disabled> Choisir Élément</option>
             <option *ngFor="let c of listElements " [ngValue]="c"    >{{c.reference}}
             </option>
@@ -192,7 +192,7 @@
           <h5 class="text-center">Modifier Note Élément</h5>
 
           <label for="formGroupExampleInput30">Nouvelle Note</label>
-          <input type="number"   class="form-control" id="formGroupExampleInput30" [(ngModel)]="note2.noteElement" placeholder="Nouvelle Note">
+          <input type="number"   class="form-control" id="formGroupExampleInput30" [(ngModel)]="note3.noteElement" placeholder="Nouvelle Note">
 
         </div>
 
@@ -203,7 +203,7 @@
           <h5 class="text-center">Modifier l'observation</h5>
 
           <label for="formGroupExampleInput25">Nouvelle observation</label>
-          <textarea    class="form-control" id="formGroupExampleInput25" [(ngModel)]="note2.observation" placeholder="Nouvelle observation"></textarea>
+          <textarea    class="form-control" name="obsUpdate" id="formGroupExampleInput25" [(ngModel)]="note3.observation" placeholder="Nouvelle observation"></textarea>
 
         </div>
 
@@ -215,7 +215,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="validateUpdateElement()" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button"  class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
