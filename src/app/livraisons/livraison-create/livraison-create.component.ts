@@ -22,9 +22,12 @@ export class LivraisonCreateComponent implements OnInit {
   constructor(private livraisonService: LivraisonService,private produitService:ProduitService) { }
 
   ngOnInit() {
-    this.produitService.produitsFindAll();
+
   }
 
+  public  get produits(){
+    return this.produitService.produits;
+  }
 
   public  ok(){
 
