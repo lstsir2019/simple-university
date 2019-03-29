@@ -68,7 +68,6 @@ public validatUpdatedElement(){
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
 
-
     if (this._noteCreate.referencePersonnel === '' || this._noteCreate.referenceEvaluateur === '') {
       Swal({
         type: 'error',
