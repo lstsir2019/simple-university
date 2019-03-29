@@ -30,35 +30,35 @@
           <div class="d-flex justify-content-sm-between">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text" >Categorie</label>
+                <label for="referenceCategorie" class="input-group-text" >Categorie</label>
               </div>
-              <select [(ngModel)]="receptionItem.referenceCategorie" class="col-md-12 custom-select">
+              <select id="referenceCategorie" [(ngModel)]="receptionItem.referenceCategorie" class="col-md-12 custom-select">
                 <option disabled>SELECT</option>
                 <option>elctro</option>
               </select>
             </div>
             <div class="input-group mx-sm-3">
               <div class="input-group-prepend">
-                <label  class="input-group-text" >Prduit</label>
+                <label for="referenceProduit" class="input-group-text" >Prduit</label>
               </div>
-              <select [(ngModel)]="receptionItem.referenceProduit" class="custom-select" >
+              <select id="referenceProduit" [(ngModel)]="receptionItem.referenceProduit" class="custom-select" >
                 <option >pr-18</option>
                 <option >pr-28</option>
               </select>
             </div>
             <div class="input-group mx-sm-3">
               <div class="input-group-prepend">
-                <label class="input-group-text">Magasin</label>
+                <label for="referenceMagasin" class="input-group-text">Magasin</label>
               </div>
-              <select [(ngModel)]="receptionItem.referenceMagasin"  class="custom-select">
+              <select  id="referenceMagasin" [(ngModel)]="receptionItem.referenceMagasin"  class="custom-select">
                 <option *ngFor="let m of magasins" >{{m.reference}}</option>
               </select>
             </div>
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text">Qte</label>
+                <label for="qte" class="input-group-text">Qte</label>
               </div>
-              <input [(ngModel)]="receptionItem.qte" type="number" min="0" step="1" class="form-control">
+              <input id="qte" [(ngModel)]="receptionItem.qte" type="number" min="0" step="1" class="form-control">
             </div>
           </div>
         </div>
@@ -90,3 +90,4 @@
       <button class="btn btn-outline-primary" (click)="saveReception()"><i class="fa fa-database"></i> Confirmation</button>
     </div>
 </div>
+
