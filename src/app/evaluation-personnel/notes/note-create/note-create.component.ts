@@ -18,9 +18,7 @@ export class NoteCreateComponent implements OnInit {
   public get note2(){
     return this.noteService.noteCreate2;
   }
-  public findNoteInModal(){
-    return this.noteService.findNoteInModal();
-  }
+
   public findNoteElement(noteElement:Note){
     return this.noteService.findNoteElement(noteElement);
   }
@@ -34,6 +32,9 @@ export class NoteCreateComponent implements OnInit {
   }
   public findByReference(element){
     return this.noteService.findByReference(element);
+  }
+  public validateUpdateElement(){
+    return this.noteService.validatUpdatedElement();
   }
 
   public get notesElements() {

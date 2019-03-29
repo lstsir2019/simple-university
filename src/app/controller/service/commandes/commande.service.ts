@@ -4,6 +4,7 @@ import {CommandeItem} from '../../model/commandes/commande-item.model';
 import {HttpClient} from '@angular/common/http';
 import {Fournisseur} from '../../model/commandes/fournisseur.model';
 import {Paiement} from '../../model/commandes/paiement.model';
+import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
 
 
 @Injectable({
@@ -13,12 +14,16 @@ export class CommandeService {
   private _url:string = "http://localhost:8090/faculte-commande/commandes/";
   private _url1:string = "http://localhost:8090/faculte-commande/fournisseurs/finAll";
   private _url3:string = "http://localhost:8090/faculte-commande/paiementes/reference/";
+  private _url4:string = "http://localhost:8090/faculte-commande/paiementes"
 
   private _commandeCreate:Commande = new Commande('' ,0,'','');
   private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0);
+  private _commande:Commande=new Commande('',0,'','');
   private _commandes:Array<Commande>;
   private _commandeSelected:Commande;
+  private _paiementCreate:Paiement = new Paiement(Number(''),0,'','');
   private _fournisseurs:Array<Fournisseur>;
+  public commandeItems:Array<CommandeItem>;
   constructor(private http:HttpClient) { }
 
   public addCommandeItem() {
@@ -40,6 +45,30 @@ export class CommandeService {
     });
 
   }
+  public findCommandeItemsByCommandeReference(){
+
+    if (this.commande != null){
+      this.http.get<Array<CommandeItem>>('http://localhost:8090/faculte-commande/commandes/reference/'+this._commande.reference+'/commande-items').subscribe(
+        data=> {
+          this.commandeItems = data;
+        },error=> {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  public payerCommande(){
+      this.http.post<Paiement>(this._url4+"/referenceCommande/"+this.commandeSelected.reference+"/montant/"+this.paiementCreate.montant,this.paiementCreate).subscribe({
+        next: data=>{
+          console.log("ok");
+          this.paiementCreate = new Paiement(Number(''),0,'','');
+        } , error: error=>{
+          console.log("pyer commande ma(damache");
+        }
+      });
+  }
+
 
   public findCommandeItemByReference(commande:Commande){
     this._commandeSelected=commande;
@@ -54,6 +83,8 @@ export class CommandeService {
     }
   }
 
+
+
   public findPaiementByCommande(commande:Commande){
     this._commandeSelected=commande;
     if(this.commandeSelected !=null){
@@ -67,6 +98,10 @@ export class CommandeService {
     }
 
   }
+
+
+
+
 
   get url(): string {
     return this._url;
@@ -155,5 +190,39 @@ export class CommandeService {
 
   set url3(value: string) {
     this._url3 = value;
+  }
+
+
+  get url4(): string {
+    return this._url4;
+  }
+
+  set url4(value: string) {
+    this._url4 = value;
+  }
+
+  get paiementCreate(): Paiement {
+    if(this._paiementCreate == null){
+      this._paiementCreate=new Paiement(Number(''),0,'','')
+    }
+    return this._paiementCreate;
+  }
+
+  set paiementCreate(value: Paiement) {
+    this._paiementCreate = value;
+  }
+
+
+  public itemToModal(commandeSelected: Commande) {
+    this.commandeSelected = commandeSelected;
+  }
+
+
+  get commande(): Commande {
+    return this._commande;
+  }
+
+  set commande(value: Commande) {
+    this._commande = value;
   }
 }

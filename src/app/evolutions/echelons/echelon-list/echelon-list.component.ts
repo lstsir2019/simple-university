@@ -4,47 +4,67 @@ import {Echelon} from "../../../controller/model/evolution/echelon.model";
 
 
 @Component({
-    selector: 'app-echelon-list',
-    templateUrl: './echelon-list.component.html',
-    styleUrls: ['./echelon-list.component.css']
+  selector: 'app-echelon-list',
+  templateUrl: './echelon-list.component.html',
+  styleUrls: ['./echelon-list.component.css']
 })
 export class EchelonListComponent implements OnInit {
 
 
-    constructor(public echelonService: EchelonService) {
-    }
 
-    ngOnInit() {
-    }
+  constructor(public echelonService: EchelonService) {
+  }
 
-    public get echelons() {
-        return this.echelonService.echelons;
-    }
+  ngOnInit() {
+  }
 
-    public get newEchelon(){
-        return this.echelonService.newEchelon;
-    }
+  public get echelons() {
+    return this.echelonService.echelons;
+  }
 
-    public set newEchelon(data){
-        this.echelonService.newEchelon = data;
-    }
+  public get newEchelon() {
+    return this.echelonService.newEchelon;
+  }
 
-    toggleDataToModal(data){
-        // @ts-ignore
-        $('#modal').modal('show');
-        this.newEchelon = new Echelon(data.reference,data.ordre,data.libelle);
-    }
+  public set newEchelon(data) {
+    this.echelonService.newEchelon = data;
+  }
 
-    modifierEchelon(){
-        this.echelonService.modifierEchelon(this.newEchelon);
-    }
+  public get searchInput() {
+    return this.echelonService.searchInput;
+  }
 
-    exit(){
-        this.echelonService.getEchelonsFromDatabase();
-    }
-    supprimerEchelon(data){
-        this.echelonService.supprimerEchelon(data);
-    }
+  public set searchInput(data) {
+    this.echelonService.searchInput = data;
+  }
+
+
+
+  toggleDataToModal(data) {
+    // @ts-ignore
+    $('#modal').modal('show');
+    this.newEchelon = new Echelon(data.reference, data.ordre, data.libelle);
+  }
+
+  modifierEchelon() {
+    this.echelonService.modifierEchelon(this.newEchelon);
+  }
+
+  exit() {
+    this.echelonService.getEchelonsFromDatabase();
+  }
+
+  supprimerEchelon(data) {
+    this.echelonService.supprimerEchelon(data);
+  }
+
+  search() {
+    this.echelonService.search();
+  }
+
+  getAll(){
+    this.echelonService.getEchelonsFromDatabase();
+  }
 
 
 }

@@ -69,6 +69,8 @@ import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-l
 import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from "@angular/common";
 import { PaiementComponent } from './commandes/paiement/paiement.component';
+import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
+import { CommandeAffectationComponent } from './commandes/commande-affectation/commande-affectation.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +136,8 @@ import { PaiementComponent } from './commandes/paiement/paiement.component';
     EtudiantCreateComponent,
     EtudiantListComponent,
     PaiementComponent,
+    PaiemmentModalComponent,
+    CommandeAffectationComponent,
 
   ],
   imports: [
@@ -145,7 +149,7 @@ import { PaiementComponent } from './commandes/paiement/paiement.component';
     TooltipModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

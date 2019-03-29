@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoiEvolutionService} from "../../../controller/service/evolutions/loi-evolution.service";
 import {LoiEvolution} from "../../../controller/model/evolution/loi-evolution.model";
-import {EchelonService} from "../../../controller/service/evolutions/echelon.service";
 
 @Component({
   selector: 'app-loi-evolution-list',
@@ -11,28 +10,45 @@ import {EchelonService} from "../../../controller/service/evolutions/echelon.ser
 export class LoiEvolutionListComponent implements OnInit {
 
   public localLoiEvolutionToEdit = new LoiEvolution('', '', '', '');
-  constructor(private loiEvolutionService:LoiEvolutionService) {
+
+  constructor(private loiEvolutionService: LoiEvolutionService) {
   }
 
   ngOnInit() {
   }
 
-  public get loisEvolution(){
+  public get loisEvolution() {
     return this.loiEvolutionService.loisEvolution;
   }
 
+  public get searchInput() {
+    return this.loiEvolutionService.searchInput;
+  }
 
-  toggleLoiEvolution(data){
+  public set searchInput(data) {
+    this.loiEvolutionService.searchInput = data;
+  }
+
+
+  toggleLoiEvolution(data) {
     // @ts-ignore
     $('#modalEditLoiEvolution').modal('show');
     this.localLoiEvolutionToEdit = new LoiEvolution(data.reference, data.dateDebut, data.dateFin, data.description);
   }
 
-  editLoiEvolution(){
+  editLoiEvolution() {
     this.loiEvolutionService.modifierLoiEvolution(this.localLoiEvolutionToEdit)
   }
 
-  deleteLoiEvolution(data){
+  deleteLoiEvolution(data) {
     this.loiEvolutionService.deleteLoiEvolution(data);
+  }
+
+  search() {
+    this.loiEvolutionService.search();
+  }
+
+  getAll() {
+    this.loiEvolutionService.getLoisEvolutionsFromDatabase();
   }
 }
