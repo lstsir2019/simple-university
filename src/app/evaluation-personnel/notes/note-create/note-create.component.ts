@@ -33,9 +33,9 @@ export class NoteCreateComponent implements OnInit {
   public findByReference(element){
     return this.noteService.findByReference(element);
   }
-  public validateUpdateElement(){
-    return this.noteService.validatUpdatedElement();
-  }
+  /*public validateUpdateElement(note){
+    return this.noteService.validatUpdatedElement(note);
+  }*/
 
   public get notesElements() {
     return this.noteService.noteAnnuelCreate.notesElementVo;
@@ -47,6 +47,9 @@ export class NoteCreateComponent implements OnInit {
 
   public get note() {
     return this.noteService.noteCreate;
+  }
+  public get note3() {
+    return this.noteService.noteCreate3;
   }
 
   public get noteAnnuel() {
