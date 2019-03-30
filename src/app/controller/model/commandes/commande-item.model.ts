@@ -1,3 +1,3 @@
 export class CommandeItem {
-  constructor(public referenceProduit:string,public qte:number,public prix:number){}
+  constructor(public referenceProduit:String,public qte:number,public prix:number){}
 }

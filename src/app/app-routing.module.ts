@@ -19,7 +19,6 @@ import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-b
 import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
 import {PaiementComponent} from './commandes/paiement/paiement.component';
 import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
-import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
@@ -56,7 +55,6 @@ const routes: Routes = [
   { path: 'commandeCreate', component: CommandeCreateComponent},
   { path: 'commandeListe', component: CommandeListComponent},
   { path: 'paiement', component: PaiementComponent},
-  {path: 'affectation', component: CommandeAffectationComponent},
 
   //expressionBesoin
   { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},

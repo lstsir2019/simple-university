@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {LivraisonService} from '../../controller/service/livraison.service';
 import {LivraisonItem} from "../../controller/model/livraison-item.model";
+import {StockService} from "../../controller/service/stock.service";
+import {ProduitService} from "../../controller/service/produit.service";
 
 @Component({
   selector: 'app-livraison-create',
@@ -13,15 +15,22 @@ export class LivraisonCreateComponent implements OnInit {
 
  modeGlobal:number=0;
 
+ referenceCmdStock:string="";
+ referenceRecpStock:string="";
 
-  constructor(private livraisonService: LivraisonService) { }
+
+  constructor(private livraisonService: LivraisonService,private produitService:ProduitService) { }
 
   ngOnInit() {
-  }
-  public afficher(){
 
   }
+
+  public  get produits(){
+    return this.produitService.produits;
+  }
+
   public  ok(){
+
     this.modeGlobal=1;
   }
   public addLivraisonItem() {
@@ -41,9 +50,7 @@ export class LivraisonCreateComponent implements OnInit {
 
 
   }
-  public get livraisons(){
-    return this.livraisonService.livraisons;
-  }
+
   public deleteTableItem(livraisonItem:LivraisonItem){
     this.livraisonService.livraisonCreate.livraisonItemVos.splice(
       this.livraisonService.livraisonCreate.livraisonItemVos.indexOf(livraisonItem),1
