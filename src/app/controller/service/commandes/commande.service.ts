@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Fournisseur} from '../../model/commandes/fournisseur.model';
 import {Paiement} from '../../model/commandes/paiement.model';
 import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
+import {CommandeSource} from '../../model/commandes/commandeSource.model';
 
 
 @Injectable({
@@ -24,6 +25,10 @@ export class CommandeService {
   private _paiementCreate:Paiement = new Paiement(Number(''),0,'','');
   private _fournisseurs:Array<Fournisseur>;
   public commandeItems:Array<CommandeItem>;
+  public expressionBesoinItems:Array<ExpressionBesoinItem>;
+  public expressionBesoinItemSelect:ExpressionBesoinItem;
+  public commandeSourceCreate:CommandeSource=new CommandeSource(0,'');
+  public commandeItemSelected:CommandeItem;
   constructor(private http:HttpClient) { }
 
   public addCommandeItem() {
@@ -43,8 +48,9 @@ export class CommandeService {
       console.log("erreur");
     }
     });
-
   }
+  
+  
   public findCommandeItemsByCommandeReference(){
 
     if (this.commande != null){
@@ -97,6 +103,35 @@ export class CommandeService {
       );
     }
 
+  }
+  
+  public findExpressionBesoinItemsByProduit(commandeItem: CommandeItem){
+      this.http.get<Array<ExpressionBesoinItem>>('http://localhost:8099/faculte-besoin/item/produit/'+commandeItem.referenceProduit).subscribe(
+        data=>{
+          this.expressionBesoinItems = data;
+        },error => {
+          console.log(error);
+        }
+      );
+      this.commandeItemSelected=commandeItem;
+  }
+
+  public setItemSelect(expressionBesoinItem: ExpressionBesoinItem) {
+
+    this.expressionBesoinItemSelect = expressionBesoinItem;
+    this.commandeSourceCreate.referenceExpressionBesoinItem=expressionBesoinItem.id.toString();
+    this.commandeSourceCreate.commandeItemVo=this.commandeItemSelected;
+
+  }
+
+  public affecter(){
+    this.http.post<CommandeSource>('http://localhost:8090/faculte-commande/commandes/commandeSource',this.commandeSourceCreate).subscribe(
+      data=>{
+        console.log(data);
+      },error1 => {
+        console.log(error1);
+      }
+    );
   }
 
 
