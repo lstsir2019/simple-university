@@ -27,5 +27,13 @@ export class CommandeListComponent implements OnInit {
     return this.commandeService.commandeSelected;
   }
 
+  public itemToModal(commandeSelected: Commande) {
+    this.commandeService.itemToModal(commandeSelected);
+  }
+
+  public deletCommande(){
+    return this.commandeService.deleteCommande();
+  }
+
 }
 

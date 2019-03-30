@@ -21,7 +21,7 @@ export class PaiemmentModalComponent implements OnInit {
   public  get paiement(){
     return this.commandeService.paiementCreate;
   }
-  public get payerCommande(){
+  public  payerCommande(){
     return this.commandeService.payerCommande();
   }
   public get commandeSelected() {
