@@ -134,6 +134,19 @@ export class CommandeService {
     );
   }
 
+  public deleteCommande(){
+
+    if (this.commandeSelected!=null){
+      this.http.delete("http://localhost:8090/faculte-commande/commandes/reference/"+this.commandeSelected.reference+"",{}).subscribe(
+        data=>{
+          console.log("deleted ...");
+        },error => {
+          console.log("commande matmes7atche");
+        }
+      );
+    }
+
+  }
 
 
 
