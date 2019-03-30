@@ -70,7 +70,6 @@ export class CommandeService {
   }
 
 
-
   public findPaiementByCommande(commande:Commande){
     this._commandeSelected=commande;
     if(this.commandeSelected !=null){
@@ -79,6 +78,20 @@ export class CommandeService {
           this.commandeSelected.paiementVos = data;
         } , error =>{
           console.log("error whith loading paiements");
+        }
+      );
+    }
+
+  }
+
+  public deleteCommande(){
+
+    if (this.commandeSelected!=null){
+      this.http.delete("http://localhost:8090/faculte-commande/commandes/reference/"+this.commandeSelected.reference+"",{}).subscribe(
+        data=>{
+          console.log("deleted ...");
+        },error => {
+          console.log("commande matmes7atche");
         }
       );
     }
