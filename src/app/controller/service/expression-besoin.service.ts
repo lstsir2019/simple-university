@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ExpressionBesoin} from '../model/expression-besoin.model';
-import {reference} from '@angular/core/src/render3';
 import {ExpressionBesoinItem} from '../model/expression-besoin-item.model';
 import {HttpClient} from "@angular/common/http";
-import {Stock} from '../model/stock.model';
-import {error} from 'selenium-webdriver';
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -31,10 +29,19 @@ export class ExpressionBesoinService {
   }
 
 
+
+
   public saveExpressionBesoin(){
     if (this.expressionBesoinSelect!=null){
-      this.http.post<ExpressionBesoin>(this.url,this.expressionBesoinCreate).subscribe(
+      this.http.post<number>(this.url,this.expressionBesoinCreate).subscribe(
         date=>{
+          if (date == -1){
+            Swal({
+              title: 'cannot save !',
+              text: 'Référence déja utilisé',
+              type: 'error',
+            });
+          }
           console.log("done");
           this.expressionBesoinCreate = new ExpressionBesoin('' , '' , '', '');
         },error=>{

@@ -16,7 +16,7 @@ export class StockGlobalService {
       data=>{
         this.stockGlobal=data;
       },error => {
-        console.log("error"+error);
+        console.log("error");
       }
     )
   }

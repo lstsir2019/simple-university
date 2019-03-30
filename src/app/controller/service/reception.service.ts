@@ -22,8 +22,6 @@ export class ReceptionService {
     }
   }
   public  saveReception(){
-    console.log("SaveReception Service ");
-    console.log(this.receptionCreate);
     this.http.post<number>(this.url,this.receptionCreate).subscribe(
       data=> {
         console.log("Ajouter avec success"+data);
@@ -81,5 +79,11 @@ export class ReceptionService {
   set receptionSelected(value: Reception) {
     this._receptionSelected = value;
   }
+
+  deleteReceptionItems(item: ReceptionItem) {
+    let index:number=this.receptionCreate.receptionItems.indexOf(item);
+    this.receptionCreate.receptionItems.splice(index,1);
+  }
+
 }
 
