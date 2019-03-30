@@ -99,6 +99,21 @@ export class CommandeService {
   }
 
 
+  public deleteCommande(){
+
+    if (this._commandeSelected !=null){
+      this.http.delete("http://localhost:8090/faculte-commande/commandes/reference/"+this.commandeSelected.reference+"",{}).subscribe(
+        data=>{
+          console.log("commande tmas7at");
+        },error => {
+          console.log("commande mabatche tamse7");
+        }
+      );
+    }
+
+  }
+
+
 
 
 

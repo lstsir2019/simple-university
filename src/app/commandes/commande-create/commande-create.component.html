@@ -9,28 +9,28 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >Reference</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.reference">
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.reference" required>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" >Total</span>
           </div>
-          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.total">
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.total" disabled>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" >Date</span>
           </div>
-          <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.dateCommande">
+          <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.dateCommande" required>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" >Fournisseur</span>
           </div>
-          <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.fournisseurVo.reference">
+          <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.fournisseurVo.reference" required>
             <option value="">select</option>
             <option *ngFor="let c of fournisseurs()">{{c.reference}}</option>
           </select>
@@ -50,21 +50,21 @@
           <div class="col">
             <label>reference produit</label>
 
-            <input class="form-control" type="text" [(ngModel)]="commandeItem.referenceProduit">
+            <input class="form-control" type="text" [(ngModel)]="commandeItem.referenceProduit" required>
 
           </div>
 
           <div class="col">
             <label>prix</label>
 
-            <input class="form-control" type="number" [(ngModel)]="commandeItem.prix">
+            <input class="form-control" type="number" [(ngModel)]="commandeItem.prix" required min="0">
 
           </div>
 
           <div class="col">
             <label>quantite</label>
 
-            <input class="form-control" type="number" [(ngModel)]="commandeItem.qte">
+            <input class="form-control" type="number" [(ngModel)]="commandeItem.qte" required min="0">
 
           </div>
 
