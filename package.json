@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@sweetalert2/ngx-sweetalert2": "latest",
     "@toverux/ngx-sweetalert2": "^4.0.0",
     "@types/jquery": "^3.3.29",
     "angular-popper": "^2.0.0",
@@ -36,8 +37,7 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^7.33.1",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26",
-    "@sweetalert2/ngx-sweetalert2": "latest"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
