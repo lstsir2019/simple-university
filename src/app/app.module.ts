@@ -70,6 +70,8 @@ import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from "@angular/common";
 import { PaiementComponent } from './commandes/paiement/paiement.component';
 import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
+import { LivraisonDetailleComponent } from './livraisons/livraison-create/livraison-detaille/livraison-detaille.component';
+import { LivraisonGlobaleComponent } from './livraisons/livraison-create/livraison-globale/livraison-globale.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +138,8 @@ import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-m
     EtudiantListComponent,
     PaiementComponent,
     PaiemmentModalComponent,
+    LivraisonDetailleComponent,
+    LivraisonGlobaleComponent,
 
   ],
   imports: [

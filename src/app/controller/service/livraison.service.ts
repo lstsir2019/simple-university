@@ -12,14 +12,18 @@ export class LivraisonService {
   private _url: string = "http://localhost:8098/Livraison-api/livraisons/";
   private _url2:string="http://localhost:8098/Livraison-api/livraisonItems/";
   private _livraisonCreate: Livraison = new Livraison("", "", "","");
-  private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '');
+  private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '','','');
   private _livraisons:Array<Livraison>;
   private _livraisonR:Livraison;
  // private _livraisonItems:Array<LivraisonItem>;
 
   constructor(private _http: HttpClient) { }
   public addLivraisonItem() {
-    let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin);
+    console.log(this._livraisonItemCreate.referenceReception);
+    console.log(this.livraisonItemCreate.codeMagasin);
+    console.log(this.livraisonItemCreate.qte);
+    console.log(this.livraisonItemCreate.refenceProduit);
+    let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin,this._livraisonItemCreate.referenceReception,this._livraisonItemCreate.strategy);
     this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
 
   }
@@ -36,7 +40,18 @@ export class LivraisonService {
 
     );
   }
+  public saveLivraisonDetail(){
+    this._http.post<Livraison>(this._url+"detaille/",this._livraisonCreate).subscribe(
+      data=>{
+        this._livraisonCreate=new Livraison("","","","");
+        console.log("Ajoute avec success");
+      },
+      error => {
+        console.log("error");
+      }
 
+    );
+  }
   public livraisonItemsR(livraison:Livraison){
     this._livraisonR=livraison;
 

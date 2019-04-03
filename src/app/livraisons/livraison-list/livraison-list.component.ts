@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LivraisonService} from "../../controller/service/livraison.service";
 import {Livraison} from "../../controller/model/livraison.model";
+import {Stock} from "../../controller/model/stock.model";
 
 @Component({
   selector: 'app-livraison-list',
