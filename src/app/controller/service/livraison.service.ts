@@ -22,7 +22,7 @@ export class LivraisonService {
   }
 
   public addLivraisonItem() {
-    console.log(this._livraisonItemCreate.referenceReception);
+    console.log(this.livraisonItemCreate.referenceReception);
     console.log(this.livraisonItemCreate.codeMagasin);
     console.log(this.livraisonItemCreate.qte);
     console.log(this.livraisonItemCreate.refenceProduit);

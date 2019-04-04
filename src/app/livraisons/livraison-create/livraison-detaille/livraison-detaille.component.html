@@ -28,7 +28,13 @@
             <div class="input-group-prepend">
               <div class="input-group-text">ref-cmd</div>
             </div>
-            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >
+
+            <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraison.referenceCommande"  >
+              <option selected>Choose...</option>
+              <option  value="com-01">com-01</option>
+              <option  value="com-02">com-02</option>
+              <option  value="com-03">com-03</option>
+            </select>
           </div>
         </div>
 
@@ -41,7 +47,9 @@
 
             <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+              <option  value="math">math</option>
+              <option  value="physique">physique</option>
+              <option  value="info">info</option>
             </select>
           </div>
         </div>
@@ -92,9 +100,9 @@
 
           <div class="row">
             <div class="form-group col-md-12">
-              <select class="form-control"  [(ngModel)]="stockR" >
-                <option>ref-recep/date/qte</option>
-                <option *ngFor="let s of stocksDetails"  value="{{s}}">{{s.referenceReception}}/{{s.magasinVo.reference}}/{{s.qte}}</option>
+              <select class="form-control" [(ngModel)]="livraisonItem.referenceReception"  >
+                <option>ref-recep/Magasin/qte</option>
+                <option *ngFor="let s of stocksDetails"  value="{{s.referenceReception}}">{{s.referenceReception}}/{{s.magasinVo.reference}}/{{s.qte}}</option>
               </select>
 
               <!--<input type="text" [(ngModel)]="livraisonItem.referenceReception" class="form-control" >-->
@@ -108,7 +116,10 @@
 
               <select class="form-control"  [(ngModel)]="livraisonItem.codeMagasin">
                 <option>magasin</option>
-                <option *ngFor="let s of stocksDetails" value="{{s.magasinVo.reference}}" >{{s.magasinVo.reference}}</option>
+                <option value="mag-1" >mag-1</option>
+                <option value="mag-2" >mag-2</option>
+                <option value="mag-3" >mag-3</option>
+                <option value="mag-4" >mag-4</option>
               </select>
 
             </div>

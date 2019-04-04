@@ -39,9 +39,7 @@ export class LivraisonDetailleComponent implements OnInit {
   }
 
   public addLivraisonItem() {
-    console.log(this.stockR.magasinVo.reference);
-    this.livraisonService.livraisonItemCreate.codeMagasin=this.stockR.magasinVo.reference;
-    this.livraisonService.livraisonItemCreate.referenceReception=this.stockR.referenceReception;
+
     this.livraisonService.addLivraisonItem();
   }
 
