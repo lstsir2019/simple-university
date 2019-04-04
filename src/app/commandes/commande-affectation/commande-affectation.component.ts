@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandeService} from '../../controller/service/commandes/commande.service';
 import {Commande} from '../../controller/model/commandes/commande.model';
+import {CommandeItem} from '../../controller/model/commandes/commande-item.model';
+import {ExpressionBesoinItem} from '../../controller/model/expression-besoin-item.model';
 
 @Component({
   selector: 'app-commande-affectation',
@@ -25,5 +27,27 @@ export class CommandeAffectationComponent implements OnInit {
   public get commande(){
     return this.commandeService.commande;
   }
+
+  public findExpressionBesoinItemsByProduit(commandeItem: CommandeItem){
+    return this.commandeService.findExpressionBesoinItemsByProduit(commandeItem);
+  }
+
+  public get expressionBesoinItems(){
+    return this.commandeService.expressionBesoinItems;
+  }
+
+  public setItemSelect(expressionBesoinItem: ExpressionBesoinItem){
+    return this.commandeService.setItemSelect(expressionBesoinItem);
+  }
+
+  public affecter(){
+    return this.commandeService.affecter();
+  }
+
+  public get commandeSourceCreate(){
+    return this.commandeService.commandeSourceCreate;
+  }
+
+
 
 }

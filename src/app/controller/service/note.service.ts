@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class NoteService {
   private _elementVoCreate:Element=new Element('','',0,0);
   private _noteCreate:Note=new Note('','',0,'',this._elementVoCreate);
-
+private _noteTmp:Note=new Note('','',0,'',this._elementVoCreate);
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteCreate3:Note=new Note('','',0,'',this._elementVoCreate);
@@ -39,8 +39,6 @@ export class NoteService {
 
   private _url4='http://localhost:8099/sample-faculte-EvaluationPersonnel/mentionsNote/note/';
   constructor(private http: HttpClient) { }
-
-
 /*public validatUpdatedElement(note:Note){
   const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(note);
   if (index !== -1) {
@@ -75,6 +73,268 @@ export class NoteService {
 
 
 
+public updateNoteElement(){
+
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+
+
+        if(this._noteCreate2.elementEvaluationVo.baremMax>=this._noteCreate3.noteElement){
+          this._noteCreate2.noteElement=this._noteCreate3.noteElement;
+          this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+          Swal({
+            title: 'Modification Note Element',
+            text: 'Modification réussite',
+            type: 'success',
+          });
+        }
+        else {
+          this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+          Swal({
+            type: 'error',
+            title: 'Erreur',
+            text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate2.elementEvaluationVo.reference+' : '+this._noteCreate2.elementEvaluationVo.baremMax,
+          });
+
+        }
+
+
+      }
+
+
+
+    });
+
+}
+
+
+
+
+public updateObservation(){
+  if (this._noteCreate3.observation === '') {
+    this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+    Swal({
+      type: 'error',
+      title: 'Erreur',
+      text: "Manque d'infos:la nouvelle observation",
+    });
+  }
+  else {
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+        this._noteCreate2.observation=this._noteCreate3.observation;
+        this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+
+        Swal({
+          title: 'Modification Observation',
+          text: 'Modification réussite',
+          type: 'success',
+        });
+
+      }
+
+
+
+    });
+  }
+}
+
+
+
+
+
+public updateReferenceEvaluateur(){
+  if (this._noteCreate3.referenceEvaluateur === '') {
+    this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+    Swal({
+      type: 'error',
+      title: 'Erreur',
+      text: "Manque d'infos:la nouvelle référence evaluateur",
+    });
+  }
+  else {
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+        this._noteCreate2.referenceEvaluateur=this._noteCreate3.referenceEvaluateur;
+        this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+
+        Swal({
+          title: 'Modification Référence evaluateur',
+          text: 'Modification réussite',
+          type: 'success',
+        });
+
+      }
+
+
+
+    });
+  }
+
+}
+
+
+
+
+
+public updateReferencePersonnel(){
+  if (this._noteCreate3.referencePersonnel === '') {
+    this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+    Swal({
+      type: 'error',
+      title: 'Erreur',
+      text: "Manque d'infos:la nouvelle référence Personnel",
+    });
+  }
+  else {
+    Swal({
+      title: 'Modification',
+      text: "Vous êtes sûr de la modification",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Annuler',
+
+      confirmButtonColor: '#d6d20b',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Modifier'
+    }).then((result) => {
+      if (result.value) {
+        this._noteCreate2.referencePersonnel=this._noteCreate3.referencePersonnel;
+        this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+
+              Swal({
+                title: 'Modification Référence personnel',
+                text: 'Modification réussite',
+                type: 'success',
+              });
+
+            }
+
+
+
+  });
+}
+}
+
+
+
+
+
+public updateElement(selectedElement2:Element){
+  this.findByReferenceUpdate(selectedElement2);
+  if (this._noteCreate3.elementEvaluationVo == null) {
+    this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+    Swal({
+      type: 'error',
+      title: 'Erreur',
+      text: "Veuillez mentionner la référence de l'élément d'évaluation ",
+    });
+  }
+  else {
+    this._noteTmp=this._noteCreate2;
+    const index: number = this._noteAnnuelCreate.notesElementVo.indexOf(this._noteCreate2);
+    if (index !== -1) {
+      this._noteAnnuelCreate.notesElementVo.splice(index, 1);
+    }
+    for (let i of this._noteAnnuelCreate.notesElementVo) {
+
+
+      if (i.elementEvaluationVo.reference == this._noteCreate3.elementEvaluationVo.reference) {
+        this._validate=0;
+        break;
+      }
+      else {
+        this._validate=1;
+      }
+    }
+    if(this._validate==0){
+      this._noteAnnuelCreate.notesElementVo.push(this._noteTmp);
+      this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+      Swal({
+        type: 'error',
+        title: 'Erreur',
+        text: "Cette élément est déja evalué ",
+      });
+    }
+  else
+    {
+      Swal({
+        title: 'Modification',
+        text: "Vous êtes sûr de la modification",
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Annuler',
+
+        confirmButtonColor: '#d6d20b',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Modifier'
+      }).then((result) => {
+        if (result.value) {
+
+
+          this._noteTmp.elementEvaluationVo= this._noteCreate3.elementEvaluationVo;
+          this._noteAnnuelCreate.notesElementVo.push(this._noteTmp);
+      this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+
+          Swal({
+            title: 'Modification Référence personnel',
+            text: 'Modification réussite',
+            type: 'success',
+          });
+
+        }
+
+
+      });
+    }
+  }
+}
+
+
+
+
+
+
   // add la note/Element dans le tableau
   public addNoteElement(selectedElement:Element) {
     this.findByReference(selectedElement);
@@ -103,7 +363,7 @@ export class NoteService {
           Swal({
             type: 'error',
             title: 'Erreur',
-            text: 'La note donnée est supérieure au barem Max:Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
+            text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
           });
         }
         else {
@@ -148,7 +408,7 @@ export class NoteService {
             Swal({
               type: 'error',
               title: 'Erreur',
-              text: 'La note donnée est supérieure au barem Max:Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
+              text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
             });
           } else {
             this._noteAnnuelCreate.totalNote += this._noteCreate.noteElement;
@@ -223,6 +483,19 @@ this._noteCreate2=noteElement;
     this.http.get<Element>(this._url1+element.reference).subscribe(
       data => {
         this._noteCreate.elementEvaluationVo=data;
+      },
+      error => {
+        console.log('error while loading the element...');
+      }
+    );
+
+  }
+
+
+  public findByReferenceUpdate(element:Element){
+    this.http.get<Element>(this._url1+element.reference).subscribe(
+      data => {
+        this._noteCreate3.elementEvaluationVo=data;
       },
       error => {
         console.log('error while loading the element...');
@@ -342,7 +615,26 @@ this._noteCreate2=noteElement;
 
 
     else {
+      for (let i of this._noteAnnuelCreate.notesElementVo) {
 
+
+        if (i.referencePersonnel != this._noteAnnuelCreate.referencePersonnel) {
+
+          this._validate = 0;
+          break;
+        } else {
+          this._validate = 1;
+        }
+      }
+      if (this._validate == 0) {
+        Swal({
+          title: 'Erreur!',
+          text: "Erreur au niveau des Notes/Éléments : Existance d'une note qui ne convient pas à ce personnel",
+          type: 'error',
+        });
+      }
+
+else {
       this.http.post(this._url3, this._noteAnnuelCreate).subscribe(
         (res) => {
           if (res == 3) {
@@ -352,31 +644,32 @@ this._noteCreate2=noteElement;
               type: 'success',
             });
             this.definirMention();
-            let noteAnnuelclone= new NoteAnnuel(this.noteAnnuelCreate.dateDevaluation,this.noteAnnuelCreate.referencePersonnel,this.noteAnnuelCreate.referenceEvaluateur,this.noteAnnuelCreate.totalNote);
-            noteAnnuelclone.mentionNoteVo=this.noteAnnuelCreate.mentionNoteVo;
-            noteAnnuelclone.notesElementVo=this.noteAnnuelCreate.notesElementVo;
+            let noteAnnuelclone = new NoteAnnuel(this.noteAnnuelCreate.dateDevaluation, this.noteAnnuelCreate.referencePersonnel, this.noteAnnuelCreate.referenceEvaluateur, this.noteAnnuelCreate.totalNote);
+            noteAnnuelclone.mentionNoteVo = this.noteAnnuelCreate.mentionNoteVo;
+            noteAnnuelclone.notesElementVo = this.noteAnnuelCreate.notesElementVo;
             this._listeNotesAnnuel.push(noteAnnuelclone);
-            this.noteAnnuelCreate=new NoteAnnuel('','','',0);
-            this.noteAnnuelCreate.mentionNoteVo=new Mention('','',0,0);
-            this.noteAnnuelCreate.notesElementVo=new Array<Note>();
+            this.noteAnnuelCreate = new NoteAnnuel('', '', '', 0);
+            this.noteAnnuelCreate.mentionNoteVo = new Mention('', '', 0, 0);
+            this.noteAnnuelCreate.notesElementVo = new Array<Note>();
             this.findAllNotesAnnuel();
 
           } else if (res == -5) {
             Swal({
               title: 'Erreur!',
-              text: 'Le personnel: '+ this._noteAnnuelCreate.referencePersonnel + ' a déjà été noté cette année',
+              text: 'Le personnel: ' + this._noteAnnuelCreate.referencePersonnel + ' a déjà été noté cette année',
               type: 'error',
             });
           } else {
             Swal({
               title: 'Erreur!',
-              text: "Manque de notes : le personnel:  "+ this._noteAnnuelCreate.referencePersonnel +"  n'as pas été évalué dans touts les éléments",
+              text: "Manque de notes : le personnel:  " + this._noteAnnuelCreate.referencePersonnel + "  n'as pas été évalué dans touts les éléments",
               type: 'error',
             });
           }
 
 
         });
+    }
     }
 
 
@@ -680,5 +973,13 @@ this._noteCreate2=noteElement;
 
   set noteCreate3(value: Note) {
     this._noteCreate3 = value;
+  }
+
+  get noteTmp(): Note {
+    return this._noteTmp;
+  }
+
+  set noteTmp(value: Note) {
+    this._noteTmp = value;
   }
 }
