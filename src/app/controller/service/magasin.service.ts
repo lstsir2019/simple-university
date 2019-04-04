@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Magasin} from "../model/magasin.model";
 import {HttpClient} from "@angular/common/http";
 
@@ -7,33 +7,34 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MagasinService {
 
-  private _url: string ="http://localhost:8040/magasin-api/magasins/";
-  constructor(private http: HttpClient) { }
-  private _magasinCreate:Magasin= new Magasin("");
-  private _magasins:Array<Magasin>;
+  private _url: string = "http://localhost:8040/magasin-api/magasins/";
 
-  public findAll(){
-    if(this._magasins==null){
-    this.http.get<Array<Magasin>>(this._url).subscribe(
-    console.log("FindAll Magasins");
-    this.http.get<Array<Magasin>>(this._url).subscribe(
-      data=>{
-        this._magasins=data;
-      },error => {
-        console.log("Error"+error);
-      }
-    );
-    }
+  constructor(private http: HttpClient) {
   }
 
+  private _magasinCreate: Magasin = new Magasin("");
+  private _magasins: Array<Magasin>;
+
+  public findAll() {
+
+    this.http.get<Array<Magasin>>(this._url).subscribe(
+      data => {
+        this._magasins = data;
+      }, error => {
+        console.log("Error" + error);
+      }
+    );
+  }
+
+
   public saveMagasin() {
-    this.http.post<Magasin>(this._url,this._magasinCreate).subscribe(
-      data=> {
+    this.http.post<Magasin>(this._url, this._magasinCreate).subscribe(
+      data => {
         this._magasinCreate = new Magasin("");
-        console.log("Ajouter avec success:"+data);
+        console.log("Ajouter avec success:" + data);
       },
-      error=>{
-        console.log("error"+error);
+      error => {
+        console.log("error" + error);
       }
     );
   }
@@ -55,15 +56,6 @@ export class MagasinService {
   }
 
   get magasins(): Array<Magasin> {
-    if (this._magasins == null) {
-      this.http.get<Array<Magasin>>(this.url+"magasins").subscribe(
-        date => {
-          this._magasins = date;
-        }, error => {
-          console.log("Error"+error);
-        }
-      );
-    }
     return this._magasins;
   }
 

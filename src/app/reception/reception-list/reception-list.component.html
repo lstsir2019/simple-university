@@ -1,41 +1,43 @@
 <div class="card">
-  <div class="card-header">List Des Reception</div>
-  <div class="card-body">
-
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label class="input-group-text" >Reception</label>
+  <div class="card-header">Receptions</div>
+  <div class="card-body ">
+    <div class="d-flex justify-content-lg-between">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Reception</label>
+        </div>
+        <input type="text" class="form-control" [ngModel]="receptionSearch.reference">
       </div>
-      <input type="text" class="form-control" [ngModel]="receptionSearch.reference"> <!--[(ngModel)]="reception.referenceCommande"-->
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label class="input-group-text" >Commande</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Commande</label>
+        </div>
+        <input type="text" class="form-control" [ngModel]="receptionSearch.referenceCommande">
       </div>
-      <input type="text" class="form-control" [ngModel]="receptionSearch.referenceCommande"> <!--[(ngModel)]="reception.referenceCommande"-->
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label class="input-group-text" >Date Min</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Date Min</label>
+        </div>
+        <input type="date" class="form-control" [ngModel]="receptionSearch.dataMin">
       </div>
-      <input type="date" class="form-control" [ngModel]="receptionSearch.dataMin"> <!--[(ngModel)]="reception.referenceCommande"-->
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label class="input-group-text" >Date Max</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Date Max</label>
+        </div>
+        <input type="date" class="form-control" [ngModel]="receptionSearch.dataMax">
+        <!--[(ngModel)]="reception.referenceCommande"-->
       </div>
-      <input type="date" class="form-control" [ngModel]="receptionSearch.dataMax"> <!--[(ngModel)]="reception.referenceCommande"-->
-    </div>
-    <div class="input-group">
-     <input type="button" class="form-control" (click)="findByQuery()">
+      <div class="input-group">
+        <button type="button" class="btn-group-vertical" (click)="findByQuery()"><i class="fa fa-search"></i></button>
+      </div>
     </div>
   </div>
 </div>
 <div class="card">
   <div class="card-header"></div>
   <div class="card-body">
-    <div >
-      <table class="table table-bordered table-sm" >
+    <div>
+      <table class="table table-bordered table-sm">
         <thead>
         <tr>
           <th>Reception</th>
@@ -49,7 +51,10 @@
           <td>{{r.reference}}</td>
           <td>{{r.referenceCommande}}</td>
           <td>{{r.dateReception}}</td>
-          <td><button (click)="findReceptionItemsByReceptionReference(r)" data-toggle="modal" data-target="#exampleModal" class="btn-info btn-sm fa fa-plus"></button></td>
+          <td>
+            <button (click)="findReceptionItemsByReceptionReference(r)" data-toggle="modal" data-target="#exampleModal"
+                    class="btn-info btn-sm fa fa-plus"></button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -57,7 +62,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -67,7 +73,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <table class="table table-bordered table-sm" >
+        <table class="table table-bordered table-sm">
           <thead>
           <tr>
             <th>Magasin</th>
