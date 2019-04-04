@@ -47,7 +47,7 @@ export class ReceptionService {
     }
   }
   public findByQuery() {
-    this.http.post<Array<Reception>>(this.url+"/search",this.receptionSearch).subscribe(
+    this.http.post<Array<Reception>>(this.url+"search",this.receptionSearch).subscribe(
       date => {
         this._receptions = date;
       }, error => {

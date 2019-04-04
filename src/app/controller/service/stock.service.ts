@@ -26,7 +26,7 @@ export class StockService {
   }
 
   public findByCriteria(stockSearch: Stock) {
-    this.http.put<Array<Stock>>(this.url+"/search",stockSearch).subscribe(
+    this.http.post<Array<Stock>>(this.url+"/search",stockSearch).subscribe(
       data=>{
         console.log("save avec success:"+data);
         this._stocks=data;

@@ -32,7 +32,7 @@ export class ReceptionListComponent implements OnInit {
     return this.receptionService.receptionSelected;
   }
 
-  findByQuery() {
-    this.receptionService. findByQuery();
+  public findByQuery() {
+    this.receptionService.findByQuery();
   }
 }
