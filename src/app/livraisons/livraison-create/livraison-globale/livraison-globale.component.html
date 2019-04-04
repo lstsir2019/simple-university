@@ -77,9 +77,9 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <select class="form-control"  >
+              <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >
                 <option>magasin/Qte</option>
-                <option *ngFor="let stockGlobal of stockGlobals ">{{stockGlobal.referenceMagasin}}/{{stockGlobal.qte}}</option>
+                <option *ngFor="let stockGlobal of stockGlobals " value="{{stockGlobal.referenceMagasin}}">{{stockGlobal.referenceMagasin}}/{{stockGlobal.qte}}</option>
               </select>
 
             </div>
@@ -101,20 +101,20 @@
 
 
           <div class="row">
-            <div class="form-group col-md-6">
-              <div class="input-group">
+            <!--<div class="form-group col-md-6">-->
+              <!--<div class="input-group">-->
 
-                <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >
-                  <option>magasin</option>
-                  <option *ngFor="let stockGlobal of stockGlobals ">{{stockGlobal.referenceMagasin}}</option>
-                </select>
-              </div>
+                <!--<select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >-->
+                  <!--<option>magasin</option>-->
+                  <!--<option *ngFor="let stockGlobal of stockGlobals ">{{stockGlobal.referenceMagasin}}</option>-->
+                <!--</select>-->
+              <!--</div>-->
 
 
 
-            </div>
+            <!--</div>-->
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
 
               <div class="input-group">
                 <div class="input-group-prepend">
