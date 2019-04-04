@@ -93,7 +93,7 @@ export class EchelonService {
 
 
   public getEchelonsFromDatabase() {
-    this.http.get<Echelon>(this._url + 'all').subscribe(
+    this.http.get<Echelon>(this._url).subscribe(
       res => {
         // @ts-ignore
         this._echelons = res;
@@ -102,7 +102,7 @@ export class EchelonService {
   }
 
   public modifierEchelon(data) {
-    this.http.put(this._url + "edit", data).subscribe(
+    this.http.put(this._url, data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
@@ -121,7 +121,7 @@ export class EchelonService {
     Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
         if (result.value) {
-          this.http.delete(this._url + "delete/" + data).subscribe(
+          this.http.delete(this._url + "/" + data).subscribe(
             (res) => {
               if (res == -1) {
                 Swal(this.ERROR_INVALID_REF);
