@@ -7,18 +7,29 @@ import {StockGlobal} from "../model/stock-global.Model";
 })
 export class StockGlobalService {
 
-  private stockGlobal:StockGlobal=new StockGlobal("","","",0);
+  private _stockGlobalsLiverson:Array<StockGlobal>=[];
   constructor(private  http:HttpClient) { }
-  private url:string = "http://localhost:8040/stock-api/stocks/";
+  private url:string = "http://localhost:8042/stock-api/stocks/";
 
   public findStockGlobal(refcommande:string,refproduit:string){
-    this.http.get<StockGlobal>(this.url+"/commande/"+refcommande+"/produit/"+refproduit).subscribe(
+    console.log(this.url+"commande/"+refcommande+"/produit/"+refproduit);
+    this.http.get<Array<StockGlobal>>(this.url+"commande/"+refcommande+"/produit/"+refproduit).subscribe(
       data=>{
-        this.stockGlobal=data;
+        this._stockGlobalsLiverson=data;
+        console.log("ha data"+data);
+
       },error => {
         console.log("error");
       }
     )
   }
 
+
+  get stockGlobalsLiverson(): Array<StockGlobal> {
+    return this._stockGlobalsLiverson;
+  }
+
+  set stockGlobalsLiverson(value: Array<StockGlobal>) {
+    this._stockGlobalsLiverson = value;
+  }
 }

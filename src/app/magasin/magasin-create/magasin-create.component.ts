@@ -8,15 +8,8 @@ import {MagasinService} from "../../controller/service/magasin.service";
 })
 export class MagasinCreateComponent implements OnInit {
 
-  constructor(private magasinService:MagasinService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  public saveMagasin(){
-    this.magasinService.saveMagasin();
-  }
-
-  public get magasin(){
-    return this.magasinService.magasinCreate;
   }
 }

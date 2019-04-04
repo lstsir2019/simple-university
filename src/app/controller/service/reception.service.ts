@@ -15,6 +15,8 @@ export class ReceptionService {
   constructor(private http: HttpClient) { }
   private _receptions:Array<Reception>;
   private _receptionSelected:Reception;
+  public receptionSearch:Reception=new Reception('','','');
+
   public addReceptionItem(){
     if(this.receptionItemCreate.qte>0){
       let receptionItemClone:ReceptionItem= new ReceptionItem(this.receptionItemCreate.reference,this.receptionItemCreate.referenceCategorie,this.receptionItemCreate.referenceProduit,this.receptionItemCreate.referenceMagasin,this.receptionItemCreate.qte);
@@ -44,8 +46,16 @@ export class ReceptionService {
       );
     }
   }
+  public findByQuery() {
+    this.http.post<Array<Reception>>(this.url+"/search",this.receptionSearch).subscribe(
+      date => {
+        this._receptions = date;
+      }, error => {
+        console.log("Error"+error);
+      }
+    );
+  }
   public findAll(){
-    if (this._receptions == null) {
       this.http.get<Array<Reception>>(this.url+"receptions").subscribe(
         date => {
           this._receptions = date;
@@ -53,7 +63,6 @@ export class ReceptionService {
           console.log("Error"+error);
         }
       );
-    }
   }
   get receptions(): Array<Reception> {
     if (this._receptions == null) {
@@ -84,6 +93,7 @@ export class ReceptionService {
     let index:number=this.receptionCreate.receptionItems.indexOf(item);
     this.receptionCreate.receptionItems.splice(index,1);
   }
+
 
 }
 
