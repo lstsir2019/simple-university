@@ -42,4 +42,5 @@ export class StockListComponent implements OnInit {
   public stockSeleceted(s) {
     this._stockservice.setStockSelected(s);
   }
+
 }
