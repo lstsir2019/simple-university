@@ -70,6 +70,9 @@ export class LivraisonService {
     }
 
   }
+  public deleteLivraison(reference:string){
+    this._http.delete<Livraison>(this.url+"delete/reference/"+reference).subscribe();
+  }
 
   get livraisons(): Array<Livraison> {
     if (this._livraisons == null) {

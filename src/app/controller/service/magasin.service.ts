@@ -13,6 +13,8 @@ export class MagasinService {
   private _magasins:Array<Magasin>;
 
   public findAll(){
+    if(this._magasins==null){
+    this.http.get<Array<Magasin>>(this._url).subscribe(
     console.log("FindAll Magasins");
     this.http.get<Array<Magasin>>(this._url).subscribe(
       data=>{
@@ -20,7 +22,8 @@ export class MagasinService {
       },error => {
         console.log("Error"+error);
       }
-    )
+    );
+    }
   }
 
   public saveMagasin() {
@@ -52,6 +55,15 @@ export class MagasinService {
   }
 
   get magasins(): Array<Magasin> {
+    if (this._magasins == null) {
+      this.http.get<Array<Magasin>>(this.url+"magasins").subscribe(
+        date => {
+          this._magasins = date;
+        }, error => {
+          console.log("Error"+error);
+        }
+      );
+    }
     return this._magasins;
   }
 

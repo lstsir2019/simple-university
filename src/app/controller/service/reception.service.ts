@@ -15,6 +15,8 @@ export class ReceptionService {
   constructor(private http: HttpClient) { }
   private _receptions:Array<Reception>;
   private _receptionSelected:Reception;
+  public receptionSearch:Reception=new Reception('','','');
+
   public addReceptionItem(){
     if(this.receptionItemCreate.qte>0){
       let receptionItemClone:ReceptionItem= new ReceptionItem(this.receptionItemCreate.reference,this.receptionItemCreate.referenceCategorie,this.receptionItemCreate.referenceProduit,this.receptionItemCreate.referenceMagasin,this.receptionItemCreate.qte);
