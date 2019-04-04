@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Stock} from "../model/stock.model";
 import {HttpClient} from "@angular/common/http";
+import {Magasin} from '../model/magasin.model';
+import {findAll} from '@angular/compiler-cli/src/ngcc/src/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,7 @@ export class StockService {
   this.http.put<Stock>(this.url+"update",this.stockSelected).subscribe(
     data=>{
       console.log("save avec success:"+data);
+      this.findAll();
     },error=>{
       console.log("error");
     }
@@ -46,11 +49,10 @@ export class StockService {
   }
 
   public setStockSelected(value: Stock) {
-    this._stockSelected = value;
+    this._stockSelected = new Stock(value.referenceReception,value.referenceProduit, value.qte,value.qteDeffectueuse,value.seuilAlert,new Magasin(value.magasinVo.reference));
   }
 
   get stockSelectedClone(): Stock {
-    this._stockSelectedClone = new Stock(this._stockSelected.reference,this._stockSelected.referenceReception,this._stockSelected.referenceProduit,this._stockSelected.qte,this._stockSelected.qteDeffectueuse,this._stockSelected.seuilAlert,this._stockSelected.magasin);
     return this._stockSelectedClone;
   }
 

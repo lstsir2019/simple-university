@@ -71,6 +71,8 @@ import {DatePipe} from "@angular/common";
 import { PaiementComponent } from './commandes/paiement/paiement.component';
 import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
 import { CommandeAffectationComponent } from './commandes/commande-affectation/commande-affectation.component';
+import {MagasinCreateCreateComponent} from './magasin/magasin-create/magasin-create-create/magasin-create-create.component';
+import {MagasinCreateListeComponent} from './magasin/magasin-create/magasin-create-liste/magasin-create-liste.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { CommandeAffectationComponent } from './commandes/commande-affectation/c
     ReceptionListComponent,
     MagasinComponent,
     MagasinCreateComponent,
+    MagasinCreateCreateComponent,
+    MagasinCreateListeComponent,
     StockUpdateComponent,
     StockListComponent,
     BudgetComponent,
