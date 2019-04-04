@@ -34,7 +34,6 @@
     "poper": "^0.1.1",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
-    "sweetalert": "^2.1.2",
     "sweetalert2": "^7.33.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
