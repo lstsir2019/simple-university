@@ -24,4 +24,10 @@ export class LivraisonListComponent implements OnInit {
   get livraisonR(){
     return this.livraisonService.livraisonR;
   }
+  public findByQueryLivraison(){
+    this.livraisonService.findByQueryLivraison();
+  }
+  get livraisonQuery(){
+    return this.livraisonService.livraisonQuery;
+  }
 }

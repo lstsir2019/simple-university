@@ -7,22 +7,28 @@
 
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text">Reference</div>
+              <div class="input-group-text">Ref-l</div>
             </div>
 
-            <select class="custom-select" id="inputGroupSelect02"  >
-              <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
-            </select>
+            <input type="text" [(ngModel)]="livraisonQuery.reference">
           </div>
         </div>
         <div class="form-group col-sm-3">
 
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text">date</div>
+              <div class="input-group-text">dateMax</div>
             </div>
-            <input type="date"  class="form-control" >
+            <input type="date"  class="form-control" [(ngModel)]="livraisonQuery.dateMax">
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">dateMin</div>
+            </div>
+            <input type="date"  class="form-control" [(ngModel)]="livraisonQuery.dateMin">
           </div>
         </div>
 
@@ -33,30 +39,18 @@
               <div class="input-group-text">reference Commande</div>
             </div>
 
-            <select class="custom-select" id="inputGroupSelect05"  >
+            <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraisonQuery.referenceCommande" >
               <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+              <option *ngFor="let l of livraisons" value="{{l.referenceCommande}}">{{l.referenceCommande}}</option>
             </select>
           </div>
         </div>
-        <div class="form-group  col-sm-3">
 
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Departement</div>
-            </div>
-
-            <select class="custom-select" id="inputGroupSelect01"  >
-              <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
-            </select>
-          </div>
-        </div>
 
       </div>
       <div class="row text-center">
         <div class="col-12">
-          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+          <button class="btn btn-outline-info " (click)="findByQueryLivraison()">recherche</button>
 
         </div>
       </div>
