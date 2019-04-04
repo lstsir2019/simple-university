@@ -34,4 +34,8 @@ export class ReceptionCreateComponent implements OnInit {
   public get magasins(){
     return this.magasinService.magasins;
   }
+
+  public deleteReceptionItems(item) {
+    this.receptionservice.deleteReceptionItems(item);
+  }
 }

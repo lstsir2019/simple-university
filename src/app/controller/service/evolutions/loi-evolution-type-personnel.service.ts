@@ -64,7 +64,7 @@ export class LoiEvolutionTypePersonnelService {
   }
 
   public getLoisEvolutionTypePersonnelFromDatabase() {
-    this.http.get<LoiEvolutionTypePersonnel>(this._url + 'all').subscribe(
+    this.http.get<LoiEvolutionTypePersonnel>(this._url).subscribe(
       res => {
         // @ts-ignore
         this._loisEvolutionTypePersonnel = res;
@@ -90,7 +90,7 @@ export class LoiEvolutionTypePersonnelService {
   }
 
   public modifierLoiEvolutionTypePersonnel(data) {
-    this.http.put(this._url + 'edit', data).subscribe(
+    this.http.put(this._url , data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
@@ -109,7 +109,7 @@ export class LoiEvolutionTypePersonnelService {
     Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
         if (result.value) {
-          this.http.delete(this._url + "delete/" + data).subscribe(
+          this.http.delete(this._url + "/" + data).subscribe(
             (res) => {
               if (res == -1) {
                 Swal(this.ERROR_INVALID_REF);

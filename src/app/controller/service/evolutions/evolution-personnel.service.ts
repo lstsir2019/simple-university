@@ -3,6 +3,7 @@ import {EvolutionPersonnel} from "../../model/evolution/evolution-personnel.mode
 import Swal from "sweetalert2";
 import {HttpClient} from "@angular/common/http";
 import {getReact} from "./Util/SwalReact";
+import {DatePipe} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class EvolutionPersonnelService {
   private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
   private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private datePipe: DatePipe) {
     this.getEvolutionsPersonnelFromDatabase();
   }
 
@@ -67,7 +68,7 @@ export class EvolutionPersonnelService {
   }
 
   public getEvolutionsPersonnelFromDatabase() {
-    this.http.get<EvolutionPersonnel>(this._url + 'all').subscribe(
+    this.http.get<EvolutionPersonnel>(this._url).subscribe(
       res => {
         // @ts-ignore
         this._evolutionsPersonnel = res;
@@ -84,7 +85,7 @@ export class EvolutionPersonnelService {
   }
 
   ajouterEvolutionPersonnel() {
-    console.log(this._evolutionPersonnel);
+    this._evolutionPersonnel.dateEvolution = this.datePipe.transform(this._evolutionPersonnel.dateEvolution, 'dd-MM-yyyy');
     this.http.post(this._url, this._evolutionPersonnel).subscribe(
       res => {
         if (res == -1) {
@@ -102,7 +103,8 @@ export class EvolutionPersonnelService {
   }
 
   public modifierEvolutionPersonnel(data) {
-    this.http.put(this._url + 'edit', data).subscribe(
+    data.dateEvolution = this.datePipe.transform(data.dateEvolution, 'dd-MM-yyyy');
+    this.http.put(this._url, data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
@@ -121,7 +123,7 @@ export class EvolutionPersonnelService {
     Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
         if (result.value) {
-          this.http.delete(this._url + "delete/" + data).subscribe(
+          this.http.delete(this._url + "/" + data).subscribe(
             (res) => {
               if (res == -1) {
                 Swal(this.ERROR_INVALID_REF);

@@ -19,7 +19,7 @@ export class StockGlobalService {
         console.log("ha data"+data);
 
       },error => {
-        console.log("error"+error);
+        console.log("error");
       }
     )
   }
