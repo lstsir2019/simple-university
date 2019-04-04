@@ -30,4 +30,10 @@ export class LivraisonListComponent implements OnInit {
   get livraisonQuery(){
     return this.livraisonService.livraisonQuery;
   }
+  public deleteLivraison(livraison:Livraison){
+    this.livraisonService.deleteLivraison(livraison.reference);
+    this.livraisons.splice(
+      this.livraisons.indexOf(livraison),1
+    );
+  }
 }

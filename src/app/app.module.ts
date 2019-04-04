@@ -146,6 +146,11 @@ import { CommandeAffectationComponent } from './commandes/commande-affectation/c
     EtudiantListComponent,
     PaiementComponent,
     PaiemmentModalComponent,
+    LivraisonDetailleComponent,
+    LivraisonGlobaleComponent,
+    MagasinCreateCreateComponent,
+    MagasinCreateListeComponent,
+    CommandeAffectationComponent,
 
   ],
   imports: [

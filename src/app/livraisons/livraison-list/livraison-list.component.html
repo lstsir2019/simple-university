@@ -41,7 +41,9 @@
 
             <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraisonQuery.referenceCommande" >
               <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.referenceCommande}}">{{l.referenceCommande}}</option>
+              <option  value="com-01">com-01</option>
+              <option  value="com-02">com-02</option>
+              <option  value="com-03">com-03</option>
             </select>
           </div>
         </div>
@@ -65,14 +67,17 @@
           <div class="card-header">livraisons</div>
           <div class="card-body">
     <table class="table table-hover table-sm">
-      <thead> <th>Reference</th><th>date</th><th>ref-commd</th><th>Entite</th><th>detail</th></thead>
+      <thead> <th>Reference</th><th>date</th><th>ref-commd</th><th>Entite</th><th>ACTION</th></thead>
       <tbody>
       <tr *ngFor="let l of livraisons" >
         <td>{{l.reference}}</td>
         <td>{{l.date}}</td>
         <td>{{l.referenceCommande}}</td>
         <td>{{l.referenceEntite}}</td>
-        <td><button class="btn btn-outline-success" (click)="livraisonItemsR(l)">!</button></td>
+        <td><button class="btn btn-outline-success" (click)="livraisonItemsR(l)">!</button>
+          <button class="btn btn-outline-danger" (click)="deleteLivraison(l)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </td>
+
       </tr>
       </tbody>
     </table>

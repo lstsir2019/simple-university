@@ -9,7 +9,7 @@ export class StockGlobalService {
 
   private _stockGlobalsLiverson:Array<StockGlobal>=[];
   constructor(private  http:HttpClient) { }
-  private url:string = "http://localhost:8040/stock-api/stocks/";
+  private url:string = "http://localhost:8042/stock-api/stocks/";
 
   public findStockGlobal(refcommande:string,refproduit:string){
     console.log(this.url+"commande/"+refcommande+"/produit/"+refproduit);
