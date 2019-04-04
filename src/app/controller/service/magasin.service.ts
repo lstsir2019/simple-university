@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MagasinService {
 
-  private _url: string = "http://localhost:8042re/magasin-api/magasins/";
+  private _url: string = "http://localhost:8040/magasin-api/magasins/";
 
   constructor(private http: HttpClient) {
   }
@@ -24,8 +24,8 @@ export class MagasinService {
         console.log("Error" + error);
       }
     );
-
   }
+
 
   public saveMagasin() {
     this.http.post<Magasin>(this._url, this._magasinCreate).subscribe(
@@ -56,15 +56,6 @@ export class MagasinService {
   }
 
   get magasins(): Array<Magasin> {
-    if (this._magasins == null) {
-      this.http.get<Array<Magasin>>(this.url + "magasins").subscribe(
-        date => {
-          this._magasins = date;
-        }, error => {
-          console.log("Error" + error);
-        }
-      );
-    }
     return this._magasins;
   }
 

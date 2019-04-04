@@ -25,6 +25,19 @@ export class StockService {
     );
   }
 
+  public findByCriteria(stockSearch: Stock) {
+    this.http.put<Array<Stock>>(this.url+"/search",stockSearch).subscribe(
+      data=>{
+        console.log("save avec success:"+data);
+        this._stocks=data;
+      },error=>{
+        console.log("error");
+      }
+    );
+  }
+
+
+
   public saveStockUpdate() {
   this.http.put<Stock>(this.url+"update",this.stockSelected).subscribe(
     data=>{
@@ -33,7 +46,7 @@ export class StockService {
     },error=>{
       console.log("error");
     }
-  )
+  );
   }
   get stocks(): Array<Stock> {
     return this._stocks;
@@ -58,4 +71,7 @@ export class StockService {
   set stockSelectedClone(value: Stock) {
     this._stockSelectedClone = value;
   }
+
+
+
 }

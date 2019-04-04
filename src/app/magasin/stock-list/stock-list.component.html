@@ -6,13 +6,12 @@
           <label class="input-group-text">Reference Commande</label>
         </div>
         <input type="text" class="form-control" [ngModel]="stockSearch.reference">
-        <!--[(ngModel)]="reception.referenceCommande"-->
       </div>
-      <div class="input-group  mx-sm-3">
+      <div class="input-group">
         <div class="input-group-prepend">
           <label class="input-group-text" for="magasin">Magasin</label>
         </div>
-        <select id="magasin" [ngModel]="stockSearch.magasinVo.reference">
+        <select id="magasin" class="custom-select" [ngModel]="stockSearch.magasinVo.reference">
           <option *ngFor="let m of magasins" value="{{m.reference}}">{{m.reference}}[{{m.libelle}}]</option>
         </select>
       </div>
@@ -35,7 +34,6 @@
   </div>
 </div>
 <div class="card">
-  <div class="card-header"></div>
   <div class="card-body">
     <table class="table table-bordered table-sm">
       <thead>

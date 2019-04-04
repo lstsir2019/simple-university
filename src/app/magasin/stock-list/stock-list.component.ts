@@ -17,6 +17,7 @@ export class StockListComponent implements OnInit {
   public stockSearch: Stock = new Stock('', '', 0, 0, 0, new Magasin(''));
 
   ngOnInit() {
+    this._stockservice.findAll();
   }
 
   get magasins() {
@@ -28,7 +29,7 @@ export class StockListComponent implements OnInit {
   }
 
   public findAllStocks() {
-    this._stockservice.findAll();
+   this._stockservice.findByCriteria(this.stockSearch);
   }
 
   get stockservice(): StockService {
