@@ -87,7 +87,7 @@ export class EchelleService {
 
 
   public getEchellesFromDatabase() {
-    this.http.get<Echelle>(this._url + 'all').subscribe(
+    this.http.get<Echelle>(this._url).subscribe(
       res => {
         // @ts-ignore
         this._echelles = res;
@@ -96,7 +96,7 @@ export class EchelleService {
   }
 
   public editEchelle(data){
-    this.http.put(this._url + "edit", data).subscribe(
+    this.http.put(this._url, data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
@@ -115,7 +115,7 @@ export class EchelleService {
     Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
       if (result.value) {
-        this.http.delete(this._url + "delete/" + data).subscribe(
+        this.http.delete(this._url + "/" + data).subscribe(
           (res) => {
             if (res == -1) {
               Swal(this.ERROR_INVALID_REF);

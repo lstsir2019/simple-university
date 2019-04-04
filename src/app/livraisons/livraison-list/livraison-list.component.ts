@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LivraisonService} from "../../controller/service/livraison.service";
 import {Livraison} from "../../controller/model/livraison.model";
+import {Stock} from "../../controller/model/stock.model";
 
 @Component({
   selector: 'app-livraison-list',
@@ -22,5 +23,11 @@ export class LivraisonListComponent implements OnInit {
   }
   get livraisonR(){
     return this.livraisonService.livraisonR;
+  }
+  public findByQueryLivraison(){
+    this.livraisonService.findByQueryLivraison();
+  }
+  get livraisonQuery(){
+    return this.livraisonService.livraisonQuery;
   }
 }

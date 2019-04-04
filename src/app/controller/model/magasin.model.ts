@@ -1,6 +1,7 @@
 export class Magasin {
-  public libelle:String;
-  public address:String;
-  public description:String;
-  constructor(public reference:String){}
+  public libelle:string;
+  public address:string;
+  public description:string;
+
+  constructor(public reference:string){}
 }
