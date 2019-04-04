@@ -33,9 +33,9 @@ export class NoteCreateComponent implements OnInit {
   public findByReference(element){
     return this.noteService.findByReference(element);
   }
-  public validateUpdateElement(){
-    return this.noteService.validatUpdatedElement();
-  }
+  /*public validateUpdateElement(note){
+    return this.noteService.validatUpdatedElement(note);
+  }*/
 
   public get notesElements() {
     return this.noteService.noteAnnuelCreate.notesElementVo;
@@ -47,6 +47,25 @@ export class NoteCreateComponent implements OnInit {
 
   public get note() {
     return this.noteService.noteCreate;
+  }
+  public get note3() {
+    return this.noteService.noteCreate3;
+  }
+  public updateReferencePersonnel(){
+    return this.noteService.updateReferencePersonnel();
+  }
+
+  public updateReferenceEvaluateur(){
+    return this.noteService.updateReferenceEvaluateur();
+  }
+  public updateObs(){
+    return this.noteService.updateObservation();
+  }
+  public updateNote(){
+    return this.noteService.updateNoteElement();
+  }
+  public updateElement(selectedElement2){
+    return this.noteService.updateElement(selectedElement2);
   }
 
   public get noteAnnuel() {
@@ -61,11 +80,16 @@ export class NoteCreateComponent implements OnInit {
 
   }
   selectedElement: string = '';
+  selectedElement2: string = '';
 
   //event handler for the select element's change event
   selectChangeHandler (event: any) {
     //update the ui
     this.selectedElement = event.target.value;
+  }
+  selectChangeHandler2 (event: any) {
+    //update the ui
+    this.selectedElement2 = event.target.value;
   }
 
 }

@@ -12,6 +12,7 @@ export class LivraisonListComponent implements OnInit {
   constructor(private livraisonService: LivraisonService) { }
 
   ngOnInit() {
+   this.livraisonService.findAll();
   }
   public get livraisons(){
     return this.livraisonService.livraisons;

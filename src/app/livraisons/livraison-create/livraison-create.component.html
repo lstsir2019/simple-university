@@ -1,398 +1,412 @@
-<!--<nav>-->
-  <!--<div class="nav nav-tabs" id="nav-tab" role="tablist">-->
-    <!--<a class="nav-item nav-link active" id="nav-livraison-tab" data-toggle="tab" href="#nav-livraison" role="tab" aria-controls="nav-livraison" aria-selected="true">livraison</a>-->
-    <!--<a class="nav-item nav-link" id="nav-item-tab" data-toggle="tab" href="#nav-item" role="tab" aria-controls="nav-item" aria-selected="false">livraison Item</a>-->
-  <!--</div>-->
-<!--</nav>-->
-<!--<div class="tab-content" id="nav-tabContent">-->
-  <!--<div class="tab-pane fade show active" id="nav-livraison" role="tabpanel" aria-labelledby="nav-livraison-tab">-->
-    <!--<div class="card">-->
-    <!--<div class="card-header text-center"> Creation Livraison</div>-->
-    <!--<div class="card-body">-->
-      <!--<div class="row">-->
-        <!--<div class="form-group  col-sm-3">-->
+<div>
+  <div class="card text-center">
+    <div class="card-header">CHOISIR TYPE DE LIVRAISON</div>
+    <div class="catd-body">
 
-          <!--<div class="input-group">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<div class="input-group-text">Reference</div>-->
-            <!--</div>-->
-            <!--<input type="text" [(ngModel)]="livraison.reference" class="form-control" >-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group col-sm-3">-->
+      <br>
+      <!-- Default inline 1-->
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample"
+               (click)="modeGlobal=2">
+        <label class="custom-control-label" for="defaultInline1">livraison detaillé</label>
+      </div>
 
-          <!--<div class="input-group">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<div class="input-group-text">date</div>-->
-            <!--</div>-->
-            <!--<input type="date" [(ngModel)]="livraison.date" class="form-control" >-->
-          <!--</div>-->
-        <!--</div>-->
+      <!-- Default inline 2-->
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample"
+               (click)="modeGlobal=1">
+        <label class="custom-control-label" for="defaultInline2">livraison total</label>
+      </div>
 
-        <!--<div class="form-group  col-sm-3">-->
+      <br>
+      <br>
+    </div>
 
-          <!--<div class="input-group">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<div class="input-group-text">reference Commande</div>-->
-            <!--</div>-->
-            <!--<input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group  col-sm-3">-->
+  </div>
 
-          <!--<div class="input-group">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<div class="input-group-text">Departement</div>-->
-            <!--</div>-->
-
-            <!--<select class="custom-select" id="inputGroupSelect01"  [(ngModel)]="livraison.referenceEntite">-->
-              <!--<option selected>Choose...</option>-->
-              <!--<option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-        <!--</div>-->
-
-      <!--</div>-->
-      <!--<div class="row text-center">-->
-        <!--<div class="col-12">-->
-        <!--<button class="btn btn-outline-info ">afficher</button>-->
-        <!--</div>-->
-      <!--</div>-->
-
-    <!--</div>-->
-  <!--</div>-->
-    <!--<div class="card">-->
-      <!--<div class="card-header text-center">RESULT</div>-->
-      <!--<div class="card-body text-center">-->
-        <!--<div class="row">-->
-          <!--<div class="col-sm-4">-->
-          <!--<table class="table table-sm table-hover table-bordered">-->
-            <!--<thead class="thead-dark">-->
-            <!--<th>COMMANDE EXPRESSION</th>-->
-            <!--<th>PRODUIT</th>-->
-            <!--<th>QUANTITE</th>-->
-            <!--<th>ACTION</th>-->
-
-            <!--</thead>-->
-           <!--<tbody>-->
-              <!--<tr>-->
-                 <!--<td>ref1</td>-->
-                <!--<td>HP</td>-->
-                <!--<td>5</td>-->
-                <!--<td><button class="btn btn-outline-info ">livré</button></td>-->
+</div>
 
 
-              <!--</tr>-->
-
-           <!--</tbody>-->
-
-          <!--</table>-->
-        <!--</div>-->
-          <!--<div class="col-sm-4">-->
-            <!---->
-
-          <!--</div>-->
-
-        <!--</div>-->
-
-
-
-      <!--</div>-->
-
-
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="tab-pane fade" id="nav-item" role="tabpanel" aria-labelledby="nav-item-tab">-->
-    <!--<div class="card">-->
-      <!--<div class="card-header"> Produit Livraison</div>-->
-      <!--<div class="card-body">-->
-        <!--<div class="row">-->
-          <!--<div class="form-group col-md-12">-->
-            <!--<label>Reference Produit</label>-->
-            <!--<input type="text" [(ngModel)]="livraisonItem.refenceProduit" class="form-control" >-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-          <!--<div class="form-group col-md-6">-->
-            <!--<div class="form-group">-->
-              <!--<label>Code magasin</label>-->
-              <!--<input type="text" [(ngModel)]="livraisonItem.codeMagasin" class="form-control" >-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group col-md-6">-->
-            <!--<div class="form-group">-->
-              <!--<label>Qte</label>-->
-              <!--<input type="number" [(ngModel)]="livraisonItem.qte" class="form-control" >-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<button (click)="addLivraisonItem()" class="btn btn-outline-primary">Ajouter un Produit</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header"> Livraison Detail</div>-->
-        <!--<div class="card-body" *ngIf="livraisonItems">-->
-          <!--<table class="table table-sm table-hover" >-->
-            <!--<thead>-->
-            <!--<th>Reference Produit</th><th>Magasin</th><th>Qte</th>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr *ngIf="livraisonItems.length==0">-->
-              <!--<td class="text-center font-italic" colspan="3">No Item added</td>-->
-            <!--</tr>-->
-            <!--<tr *ngFor="let l of livraisonItems">-->
-              <!--<td>{{l.refenceProduit}}</td>-->
-              <!--<td>{{l.codeMagasin}}</td>-->
-              <!--<td>{{l.qte}}</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-          <!--</table>-->
-        <!--</div>-->
-        <!--<button class="btn btn-outline-primary" (click)="saveLivraison()"><i class="fa fa-database"></i> Confirmation</button>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-<!--</div>-->
-
-<div *ngIf="modeGlobal==0">
-<div class="card" >
-       <div class="card-header text-center"> Creation Livraison</div>
-       <div class="card-body">
-        <div class="row">
-          <div class="form-group  col-sm-3">
-
-             <div class="input-group">
-              <div class="input-group-prepend">
+<!---------------------le premier cas--------------------->
+<div *ngIf="modeGlobal==1">
+  <div class="card">
+    <div class="card-header text-center"> Creation Livraison Total</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group  col-sm-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
               <div class="input-group-text">Reference</div>
-             </div>
-                <input type="text" [(ngModel)]="livraison.reference" class="form-control" >
-      </div>
-      </div>
-      <div class="form-group col-sm-3">
+            </div>
+            <input type="text" [(ngModel)]="livraison.reference" class="form-control">
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">date</div>
+            </div>
+            <input type="date" [(ngModel)]="livraison.date" class="form-control">
+          </div>
+        </div>
 
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text">date</div>
-      </div>
-      <input type="date" [(ngModel)]="livraison.date" class="form-control" >
-      </div>
-      </div>
+        <div class="form-group  col-sm-3">
 
-      <div class="form-group  col-sm-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">ref-cmd</div>
+            </div>
+            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control">
+          </div>
+        </div>
+        <div class="form-group  col-sm-2">
 
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text">reference Commande</div>
-      </div>
-      <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >
-      </div>
-      </div>
-      <div class="form-group  col-sm-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Entity</div>
+            </div>
 
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text">Departement</div>
-      </div>
+            <select class="custom-select" id="inputGroupSelect001" [(ngModel)]="livraison.referenceEntite">
+              <option selected>Choose...</option>
+              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+            </select>
+          </div>
 
-      <select class="custom-select" id="inputGroupSelect01"  [(ngModel)]="livraison.referenceEntite">
-      <option selected>Choose...</option>
-      <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
-      </select>
-      </div>
-      </div>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
 
+        </div>
       </div>
       <div class="row text-center">
-      <div class="col-12">
-      <button class="btn btn-outline-info " (click)="afficher()">ok</button>
 
       </div>
-      </div>
 
-      </div>
-</div>
-
-<!---------------------------------------------->
-
-<div class="row">
-<div class=" col-sm-5">
-
-  <div class="card">
-    <div class="card-header"> Create Livraison Item</div>
-    <div class="card-body">
-
-      <div class="row">
-        <div class="form-group col-md-12">
-          <select class="form-control">
-           <option>Cmd-expr/produit/Qte</option>
-
-          </select>
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-12">
-          <select class="form-control">
-            <option>magasin/Qte</option>
-
-          </select>
-
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="form-group col-md-12">
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Reference-Produit</div>
-            </div>
-            <input type="text" [(ngModel)]="livraisonItem.refenceProduit" class="form-control" >
-          </div>
-
-
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">magasin</div>
-            </div>
-            <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin">
-              <option>choose...</option>
-              <option value="mag1">mag1</option>
-              <option value="mag2">mag2</option>
-
-            </select>
-
-
-          </div>
-
-        </div>
-
-        <div class="form-group col-md-6">
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Qte</div>
-            </div>
-            <input type="number" [(ngModel)]="livraisonItem.qte" class="form-control" >
-          </div>
-
-        </div>
-
-      </div>
-      <div class="row">
-        <button (click)="addLivraisonItem()" class="btn btn-outline-primary centered">Ajouter un Produit</button>
-      </div>
     </div>
-
   </div>
 
-</div>
+  <!---------------------------------------------->
 
-
-<!----------------->
-  <div class=" col-sm-7">
-    <div class="card text-center">
-      <div class="card-header">livraison-Item List</div>
-      <div class="card-body">
   <div class="row">
-        <div class="card col-md-12" *ngIf="livraisonItems">
-          <table class="table table-sm table-hover" >
-            <thead>
-            <th>Reference Produit</th><th>Magasin</th><th>Qte</th><th>action</th>
-            </thead>
-            <tbody>
-            <tr *ngIf="livraisonItems.length==0">
-              <td class="text-center font-italic" colspan="3">No Item added</td>
-            </tr>
-            <tr *ngFor="let l of livraisonItems">
-              <td>{{l.refenceProduit}}</td>
-              <td>{{l.codeMagasin}}</td>
-              <td>{{l.qte}}</td>
-              <td class="something"><button class="btn btn-outline-danger">DELATE</button></td>
-            </tr>
-            </tbody>
-          </table>
+    <div class=" col-sm-5">
+
+      <div class="card">
+        <div class="card-header"> Create Livraison Item</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <select class="form-control">
+                <option>Cmd-expr/produit/Qte</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <select class="form-control">
+                <option>magasin/Qte</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline111"
+                       name="inlineDefaultRadiosExample">
+                <label class="custom-control-label" for="defaultInline111">ancient</label>
+              </div>
+
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline222"
+                       name="inlineDefaultRadiosExample">
+                <label class="custom-control-label" for="defaultInline222">newer</label>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference-Produit</div>
+                </div>
+                <input type="text" [(ngModel)]="livraisonItem.refenceProduit" class="form-control">
+              </div>
+
+
+            </div>
+
+            <div class="form-group col-md-6">
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Qte</div>
+                </div>
+                <input type="number" [(ngModel)]="livraisonItem.qte" class="form-control">
+              </div>
+
+            </div>
+
+          </div>
+          <div class="row">
+            <button (click)="addLivraisonItem()" class="btn btn-outline-primary centered">Ajouter un Produit</button>
+          </div>
         </div>
+
+      </div>
+
+    </div>
+
+
+    <!----------------->
+    <div class=" col-sm-7">
+      <div class="card text-center">
+        <div class="card-header">livraison-Item List</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="card col-md-12" *ngIf="livraisonItems">
+              <table class="table table-sm table-hover">
+                <thead>
+                <th>Reference Produit</th>
+                <th>Magasin</th>
+                <th>Qte</th>
+                <th>action</th>
+                </thead>
+                <tbody>
+                <tr *ngIf="livraisonItems.length==0">
+                  <td class="text-center font-italic" colspan="3">No Item added</td>
+                </tr>
+                <tr *ngFor="let l of livraisonItems">
+                  <td>{{l.refenceProduit}}</td>
+                  <td>{{l.codeMagasin}}</td>
+                  <td>{{l.qte}}</td>
+                  <td class="something">
+                    <button class="btn btn-outline-danger" (click)="deleteTableItem(l)"><i class="fa fa-trash"
+                                                                                           aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button class="btn btn-outline-primary centered" (click)="saveLivraison()"><i class="fa fa-database"></i>
+              Confirmation
+            </button>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
   </div>
-        <br>
-        <div class="row">
-          <button class="btn btn-outline-primary centered" (click)="saveLivraison()"><i class="fa fa-database"></i> Confirmation</button>
+
+</div>
+<!---------------------------------------------->
+
+
+<!----------------------------------------------le deusiem cas----------------------------------------------->
+
+<div *ngIf="modeGlobal==2">
+  <div class="card">
+    <div class="card-header text-center"> Creation Livraison Detaillé</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Ref-L</div>
+            </div>
+            <input type="text" [(ngModel)]="livraison.reference" class="form-control">
+          </div>
+        </div>
+        <div class="form-group col-sm-2">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">date</div>
+            </div>
+            <input type="date" [(ngModel)]="livraison.date" class="form-control">
+          </div>
         </div>
 
+        <div class="form-group  col-sm-2">
 
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">ref-cmd</div>
+            </div>
+            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control">
+          </div>
+        </div>
+        <div class="form-group  col-sm-2">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">ref-Rec</div>
+            </div>
+            <input type="text" class="form-control">
+
+          </div>
+        </div>
+        <div class="form-group  col-sm-2">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Ent</div>
+            </div>
+
+            <select class="custom-select" [(ngModel)]="livraison.referenceEntite">
+              <option selected>Choose...</option>
+              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group  col-sm-1">
+          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+
+        </div>
 
       </div>
 
 
     </div>
-
   </div>
-</div>
+
+  <!---------------------------------------------->
+
+  <div class="row">
+    <div class=" col-sm-5">
+
+      <div class="card">
+        <div class="card-header"> Create Livraison Item</div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <select class="form-control">
+                <option>Cmd-expr/produit/Qte</option>
+
+              </select>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <select class="form-control">
+                <option>magasin/Qte</option>
+
+              </select>
+
+            </div>
+
+            <div class="form-group col-md-6">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline11" name="inlineDefaultRadiosExample">
+                <label class="custom-control-label" for="defaultInline11">ancient</label>
+              </div>
+
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline22" name="inlineDefaultRadiosExample">
+                <label class="custom-control-label" for="defaultInline22">newer</label>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="form-group col-md-6">
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Reference-Produit</div>
+                </div>
+                <input type="text" [(ngModel)]="livraisonItem.refenceProduit" class="form-control">
+              </div>
+
+
+            </div>
+
+            <div class="form-group col-md-6">
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Qte</div>
+                </div>
+                <input type="number" [(ngModel)]="livraisonItem.qte" class="form-control">
+              </div>
+
+            </div>
+
+          </div>
+          <div class="row">
+            <button (click)="addLivraisonItem()" class="btn btn-outline-primary centered">Ajouter un Produit</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!----------------->
+    <div class=" col-sm-7">
+      <div class="card text-center">
+        <div class="card-header">livraison-Item List</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="card col-md-12" *ngIf="livraisonItems">
+              <table class="table table-sm table-hover">
+                <thead>
+                <th>Reference Produit</th>
+                <th>Magasin</th>
+                <th>Qte</th>
+                <th>action</th>
+                </thead>
+                <tbody>
+                <tr *ngIf="livraisonItems.length==0">
+                  <td class="text-center font-italic" colspan="3">No Item added</td>
+                </tr>
+                <tr *ngFor="let l of livraisonItems">
+                  <td>{{l.refenceProduit}}</td>
+                  <td>{{l.codeMagasin}}</td>
+                  <td>{{l.qte}}</td>
+                  <td class="something">
+                    <button class="btn btn-outline-danger" (click)="deleteTableItem(l)"><i class="fa fa-trash"
+                                                                                           aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button class="btn btn-outline-primary centered" (click)="saveLivraison()"><i class="fa fa-database"></i>
+              Confirmation
+            </button>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
 
 </div>
 <!---------------------------------------------->
 
-<div class="card text-center" *ngIf="modeGlobal==1">
-  <div class="card-header">RESULTAT DE Lvraison</div>
-  <div class="card-body">
-    <div class="row">
-
-      <table class="table table-sm table-hover table-bordered">
-        <thead class="thead-dark">
-
-        <th>reference Livraison</th>
-        <th>Date livraison</th>
-        <th>reference commande</th>
-        <th>Departement</th>
-
-
-        </thead>
-        <tbody>
-        <tr>
-          <td>{{livraison.reference}}</td>
-          <td>{{livraison.date}}</td>
-          <td>{{livraison.referenceCommande}}</td>
-          <td>{{livraison.referenceEntite}}</td>
-        </tr>
-        </tbody>
-      </table>
-
-    </div>
-    <br>
-    <br>
-    <div class="row">
-
-    <div class="card col-md-12" *ngIf="livraisonItems">
-    <table class="table table-sm table-hover" >
-    <thead>
-    <th>Reference Produit</th><th>Magasin</th><th>Qte</th><th>action</th>
-    </thead>
-    <tbody>
-    <tr *ngIf="livraisonItems.length==0">
-    <td class="text-center font-italic" colspan="3">No Item added</td>
-    </tr>
-    <tr *ngFor="let l of livraisonItems">
-    <td>{{l.refenceProduit}}</td>
-    <td>{{l.codeMagasin}}</td>
-    <td>{{l.qte}}</td>
-      <td class="something"><button class="btn btn-outline-danger">DELATE</button></td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    <div class="row">
-
-      <button class="btn btn-outline-primary centered" (click)="saveLivraison()"><i class="fa fa-database"></i> Confirmation</button>
-    </div>
-  </div>
-
-</div>
