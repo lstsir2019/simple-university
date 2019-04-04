@@ -28,15 +28,6 @@
         <div class="card-header">Produit</div>
         <div class="card-body">
           <div class="d-flex justify-content-sm-between">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label for="referenceCategorie" class="input-group-text" >Categorie</label>
-              </div>
-              <select id="referenceCategorie" [(ngModel)]="receptionItem.referenceCategorie" class="col-md-12 custom-select">
-                <option disabled>SELECT</option>
-                <option>elctro</option>
-              </select>
-            </div>
             <div class="input-group mx-sm-3">
               <div class="input-group-prepend">
                 <label for="referenceProduit" class="input-group-text" >Prduit</label>
@@ -71,14 +62,13 @@
       <div class="card-body">
         <table class="table table-sm table-hover" >
           <thead>
-          <th>Categorie</th><th>Produit</th><th>Magasin</th><th>Qte</th>
+          <th>Produit</th><th>Magasin</th><th>Qte</th>
           <th>action</th></thead>
           <tbody>
           <tr *ngIf="receptionItems.length==0">
             <td class="text-center font-italic" colspan="4">No Item added</td>
           </tr>
           <tr *ngFor="let item of receptionItems">
-            <td>{{item.referenceCategorie}}</td>
             <td>{{item.referenceProduit}}</td>
             <td>{{item.referenceMagasin}}</td>
             <td>{{item.qte}}</td>

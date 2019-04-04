@@ -1,31 +1,30 @@
 <div class="card">
   <div class="card-header">Receptions</div>
   <div class="card-body ">
-    <div class="d-flex justify-content-lg-between">
-      <div class="input-group">
+    <div class="d-flex justify-content-sm-between">
+      <div class="input-group mx-sm-3">
         <div class="input-group-prepend">
           <label class="input-group-text">Reception</label>
         </div>
-        <input type="text" class="form-control" [ngModel]="receptionSearch.reference">
+        <input type="text" class="form-control" [(ngModel)]="receptionSearch.reference">
       </div>
-      <div class="input-group">
+      <div class="input-group mx-sm-3" >
         <div class="input-group-prepend">
           <label class="input-group-text">Commande</label>
         </div>
-        <input type="text" class="form-control" [ngModel]="receptionSearch.referenceCommande">
+        <input type="text" class="form-control" [(ngModel)]="receptionSearch.referenceCommande">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <label class="input-group-text">Date Min</label>
         </div>
-        <input type="date" class="form-control" [ngModel]="receptionSearch.dataMin">
+        <input type="date" class="form-control" [(ngModel)]="receptionSearch.dateMin">
       </div>
-      <div class="input-group">
+      <div class="input-group mx-sm-3">
         <div class="input-group-prepend">
           <label class="input-group-text">Date Max</label>
         </div>
-        <input type="date" class="form-control" [ngModel]="receptionSearch.dataMax">
-        <!--[(ngModel)]="reception.referenceCommande"-->
+        <input type="date" class="form-control" [(ngModel)]="receptionSearch.dateMax">
       </div>
       <div class="input-group">
         <button type="button" class="btn-group-vertical" (click)="findByQuery()"><i class="fa fa-search"></i></button>
@@ -54,6 +53,7 @@
           <td>
             <button (click)="findReceptionItemsByReceptionReference(r)" data-toggle="modal" data-target="#exampleModal"
                     class="btn-info btn-sm fa fa-plus"></button>
+            <button (click)="deleteReception(r)" class="btn-danger btn-sm fa fa-trash-o"></button>
           </td>
         </tr>
         </tbody>
@@ -77,7 +77,6 @@
           <thead>
           <tr>
             <th>Magasin</th>
-            <th>Categorie</th>
             <th>Produit</th>
             <th>qte</th>
           </tr>
@@ -90,7 +89,6 @@
           <tbody *ngIf="receptionSelected!=null">
           <tr *ngFor="let item of receptionSelected.receptionItems">
             <td>{{item.referenceMagasin}}</td>
-            <td>{{item.referenceCategorie}}</td>
             <td>{{item.referenceProduit}}</td>
             <td>{{item.qte}}</td>
           </tr>
@@ -99,7 +97,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
       </div>
     </div>
   </div>
