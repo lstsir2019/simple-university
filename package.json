@@ -29,6 +29,7 @@
     "fontawesome": "^5.6.3",
     "jquery": "^3.3.1",
     "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.1.0",
     "ngx-bootstrap": "^3.2.0",
     "polyfill": "^0.1.0",
     "poper": "^0.1.1",

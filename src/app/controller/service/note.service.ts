@@ -16,7 +16,7 @@ export class NoteService {
 private _noteTmp:Note=new Note('','',0,'',this._elementVoCreate);
   private _noteAnnuelCreate:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
   private _noteAnnuelCreate2:NoteAnnuel=new NoteAnnuel('AAAA-MM-JJ','','',0);
-  private _noteCreate3:Note=new Note('','',0,'',this._elementVoCreate);
+  private _noteCreate3:Note=new Note('','',0,'',null);
 
   private _noteCreate2:Note=new Note('','',0,'',this._elementVoCreate);
   private _listeNotesAnnuel:Array<NoteAnnuel>;
@@ -250,6 +250,7 @@ public updateReferencePersonnel(){
 
 
 
+
   });
 }
 }
@@ -258,10 +259,9 @@ public updateReferencePersonnel(){
 
 
 
-public updateElement(selectedElement2:Element){
-  this.findByReferenceUpdate(selectedElement2);
+public updateElement(){
   if (this._noteCreate3.elementEvaluationVo == null) {
-    this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
+    this._noteCreate3=new Note('','',0,'',null);
 
     Swal({
       type: 'error',
@@ -321,6 +321,10 @@ public updateElement(selectedElement2:Element){
             text: 'Modification réussite',
             type: 'success',
           });
+
+        }
+        else{
+          this._noteAnnuelCreate.notesElementVo.push(this._noteTmp);
 
         }
 
@@ -629,7 +633,7 @@ this._noteCreate2=noteElement;
       if (this._validate == 0) {
         Swal({
           title: 'Erreur!',
-          text: "Erreur au niveau des Notes/Éléments : Existance d'une note qui ne convient pas à ce personnel",
+          text: "Erreur au niveau des Notes/Éléments : Existance d'une note qui ne convient pas à ce personnel ",
           type: 'error',
         });
       }
