@@ -38,9 +38,11 @@
               <div class="input-group-text">Entity</div>
             </div>
 
-            <select class="custom-select" id="inputGroupSelect001"  [(ngModel)]="livraison.referenceEntite">
+            <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
-              <option *ngFor="let l of livraisons" value="{{l.reference}}">{{l.reference}}</option>
+              <option  value="math">math</option>
+              <option  value="physique">physique</option>
+              <option  value="info">info</option>
             </select>
           </div>
 

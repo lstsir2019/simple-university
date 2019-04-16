@@ -75,15 +75,7 @@ export class LivraisonService {
   }
 
   get livraisons(): Array<Livraison> {
-    if (this._livraisons == null) {
-      this._http.get<Array<Livraison>>(this._url).subscribe(
-        data => {
-          this._livraisons = data;
-        }, error1 => {
-          console.log("errooorr list");
-        }
-      );
-    }
+
     return this._livraisons;
   }
 

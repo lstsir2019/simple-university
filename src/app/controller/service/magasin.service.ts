@@ -16,7 +16,6 @@ export class MagasinService {
   private _magasins: Array<Magasin>;
 
   public findAll() {
-
     this.http.get<Array<Magasin>>(this._url).subscribe(
       data => {
         this._magasins = data;
@@ -32,6 +31,7 @@ export class MagasinService {
       data => {
         this._magasinCreate = new Magasin("");
         console.log("Ajouter avec success:" + data);
+        this.findAll();
       },
       error => {
         console.log("error" + error);

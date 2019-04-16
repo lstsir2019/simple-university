@@ -15,6 +15,7 @@ export class LivraisonGlobaleComponent implements OnInit {
   constructor(private livraisonService: LivraisonService,private produitService:ProduitService,private stockGlobalService:StockGlobalService) { }
 
   ngOnInit() {
+    this.produitService.produitsFindAll();
   }
   public findStockGlobal(){
     console.log(this.livraison.referenceCommande+" "+this.livraisonItem.refenceProduit);

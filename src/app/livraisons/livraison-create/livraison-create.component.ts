@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LivraisonService} from '../../controller/service/livraison.service';
 import {LivraisonItem} from "../../controller/model/livraison-item.model";
 import {StockService} from "../../controller/service/stock.service";
@@ -12,52 +12,57 @@ import {StockGlobalService} from "../../controller/service/stock-global.service"
 })
 export class LivraisonCreateComponent implements OnInit {
 
-  mode:number=0;
+  mode: number = 0;
 
- modeGlobal:number=0;
-
-
+  modeGlobal: number = 0;
 
 
-  constructor(private livraisonService: LivraisonService,private produitService:ProduitService,private stockGlobalService:StockGlobalService,private stockService:StockService) { }
+  constructor(private livraisonService: LivraisonService, private produitService: ProduitService, private stockGlobalService: StockGlobalService, private stockService: StockService) {
+  }
 
   ngOnInit() {
-
+      this.livraisonService.findAll();
   }
 
 
-
-  public  get produits(){
+  public get produits() {
     return this.produitService.produits;
   }
 
-  public  ok(){
+  public ok() {
 
-    this.modeGlobal=1;
+    this.modeGlobal = 1;
   }
+
   public addLivraisonItem() {
     this.livraisonService.addLivraisonItem();
   }
-  public get  livraison() {
+
+  public get livraison() {
     return this.livraisonService.livraisonCreate;
-}
-  public get  livraisonItem() {
+  }
+
+  public get livraisonItem() {
     return this.livraisonService.livraisonItemCreate;
   }
-  public get  livraisonItems() {
+
+  public get livraisonItems() {
     return this.livraisonService.livraisonCreate.livraisonItemVos;
   }
-  public saveLivraison(){
+
+  public saveLivraison() {
     this.livraisonService.saveLivraison();
   }
-  public saveLivraisonDetail(){
+
+  public saveLivraisonDetail() {
     this.livraisonService.saveLivraisonDetail();
   }
 
-   public
-  public deleteTableItem(livraisonItem:LivraisonItem){
+  public
+
+  public deleteTableItem(livraisonItem: LivraisonItem) {
     this.livraisonService.livraisonCreate.livraisonItemVos.splice(
-      this.livraisonService.livraisonCreate.livraisonItemVos.indexOf(livraisonItem),1
+      this.livraisonService.livraisonCreate.livraisonItemVos.indexOf(livraisonItem), 1
     );
   }
 

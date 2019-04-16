@@ -36,8 +36,10 @@ export class StockService {
       }
     );
   }
-
+  private id:string;
   public saveStockUpdate() {
+    this.stockSelected.id=this.id;
+    console.log(this.id);
   this.http.put<Stock>(this.url+"update",this.stockSelected).subscribe(
     data=>{
       console.log("save avec success:"+data);
@@ -61,6 +63,7 @@ export class StockService {
 
   public setStockSelected(value: Stock) {
     this._stockSelected = new Stock(value.referenceReception,value.referenceProduit, value.qte,value.qteDeffectueuse,value.seuilAlert,new Magasin(value.magasinVo.reference));
+    this.id=value.id;
   }
 
   get stockSelectedClone(): Stock {
