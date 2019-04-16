@@ -11,6 +11,7 @@ export class MagasinCreateListeComponent implements OnInit {
   constructor(private magasinService:MagasinService) { }
 
   ngOnInit() {
+    this.magasinService.findAll();
   }
   get magasins(){
       return this.magasinService.magasins;

@@ -43,7 +43,8 @@
       </td>
 
       <td><button (click)="deleteNoteAnnuel(c)" class="btn btn-outline-danger">Supprimer</button></td>
-
+<td>        <button type="button" class="btn btn-outline-info" (click)="print(c)">Imprimer</button>
+</td>
 
 
 
@@ -122,7 +123,7 @@
 
 
 
-        <table class="table table-hover table-responsive-xl">
+        <table id="notesPersonnel" class="table table-hover table-responsive-xl">
           <thead class="theadx"><th>Référence Evaluateur</th><th>Élément</th><th>Note d'élément</th><th>Observation</th><th></th></thead>
           <tbody class="tbodyx">
           <tr *ngFor="let c of selectedNoteAnnuel.notesElementVo ">

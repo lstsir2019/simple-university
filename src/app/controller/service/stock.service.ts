@@ -9,6 +9,7 @@ import {Magasin} from '../model/magasin.model';
 export class StockService {
 
   private _stocks:Array<Stock>;
+  public stockSearch: Stock = new Stock('', '', 0, 0, 0, new Magasin(''));
   constructor(private  http:HttpClient) { }
   private url:string = "http://localhost:8042/stock-api/stocks/";
   private _stockSelected:Stock;
@@ -25,8 +26,8 @@ export class StockService {
     );
   }
 
-  public findByCriteria(stockSearch: Stock) {
-    this.http.post<Array<Stock>>(this.url+"/search",stockSearch).subscribe(
+  public findByCriteria() {
+    this.http.put<Array<Stock>>(this.url+"search",this.stockSearch).subscribe(
       data=>{
         console.log("save avec success:"+data);
         this._stocks=data;
@@ -35,8 +36,6 @@ export class StockService {
       }
     );
   }
-
-
 
   public saveStockUpdate() {
   this.http.put<Stock>(this.url+"update",this.stockSelected).subscribe(

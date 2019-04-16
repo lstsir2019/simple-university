@@ -5,32 +5,24 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Reference Commande</label>
         </div>
-        <input type="text" class="form-control" [ngModel]="stockSearch.reference">
-      </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="magasin">Magasin</label>
-        </div>
-        <select id="magasin" class="custom-select" [ngModel]="stockSearch.magasinVo.reference">
-          <option *ngFor="let m of magasins" value="{{m.reference}}">{{m.reference}}[{{m.libelle}}]</option>
-        </select>
+        <input type="text" class="form-control" ngDefaultControl >
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <label class="input-group-text" for="dateMin">DataMin</label>
         </div>
-        <input type="date" class="form-control" id="dateMin" [ngModel]="stockSearch.dateMin"> <!--[(ngModel)]="reception.referenceCommande"-->
+        <input type="date" class="form-control" ngDefaultControl  id="dateMin">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
-          <label class="input-group-text" for="dateMax">DataMax</label>
+          <label class="input-group-text" for="dateMax" >DataMax</label>
         </div>
-        <input type="date" class="form-control" id="dateMax"> <!--[(ngModel)]="reception.referenceCommande"-->
+        <input type="date" class="form-control" ngDefaultControl  id="dateMax"> <!--[(ngModel)]="reception.referenceCommande"-->
       </div>
     </div>
   </div>
   <div class="card-footer">
-    <button class="btn btn-secondary" (click)="findAllStocks()"><i class="fa fa-search"></i>Recherche</button>
+    <button class="btn btn-secondary" (click)="findStockByQuery()"><i class="fa fa-search"></i>Recherche</button>
   </div>
 </div>
 <div class="card">
@@ -49,7 +41,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let s of stocks">
-        <td>{{s.referenceReception}}</td>
+        <td>{{s.referenceReception}}[{{s.referenceCommande}}]</td>
         <td>{{s.magasinVo.libelle}} ({{s.magasinVo.reference}})</td>
         <td>{{s.referenceProduit}}</td>
         <td>{{s.qte}}</td>
