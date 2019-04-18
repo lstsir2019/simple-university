@@ -1,0 +1,181 @@
+<div >
+  <div class="card" >
+    <div class="card-header text-center"> Creation Livraison Total</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Reference</div>
+            </div>
+            <input type="text" [(ngModel)]="livraison.reference" class="form-control" >
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">date</div>
+            </div>
+            <input type="date" [(ngModel)]="livraison.date" class="form-control" >
+          </div>
+        </div>
+
+        <div class="form-group  col-sm-3">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">ref-cmd</div>
+            </div>
+            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >
+          </div>
+        </div>
+        <div class="form-group  col-sm-2">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Entity</div>
+            </div>
+
+            <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
+              <option selected>Choose...</option>
+              <option  value="math">math</option>
+              <option  value="physique">physique</option>
+              <option  value="info">info</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="col-1">
+          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+
+        </div>
+      </div>
+      <div class="row text-center">
+
+      </div>
+
+    </div>
+  </div>
+
+  <!---------------------------------------------->
+
+  <div class="row">
+    <div class=" col-sm-5">
+
+      <div class="card">
+        <div class="card-header"> Create Livraison Item</div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <select class="form-control" [(ngModel)]="livraisonItem.refenceProduit" (change)="findStockGlobal()" >
+                <option>Cmd-expr/produit/Qte</option>
+                <option *ngFor="let p of produits" >{{p.reference}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >
+                <option>magasin/Qte</option>
+                <option *ngFor="let stockGlobal of stockGlobals " value="{{stockGlobal.referenceMagasin}}">{{stockGlobal.referenceMagasin}}/{{stockGlobal.qte}}</option>
+              </select>
+
+            </div>
+            <div class="form-group col-md-6">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline111" name="inlineDefaultRadiosExample" (click)="livraisonItem.strategy='fifo'" >
+                <label class="custom-control-label" for="defaultInline111">ancient</label>
+              </div>
+
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="defaultInline222" name="inlineDefaultRadiosExample" (click)="livraisonItem.strategy='lifo'" >
+                <label class="custom-control-label" for="defaultInline222">newer</label>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <!--<div class="form-group col-md-6">-->
+              <!--<div class="input-group">-->
+
+                <!--<select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >-->
+                  <!--<option>magasin</option>-->
+                  <!--<option *ngFor="let stockGlobal of stockGlobals ">{{stockGlobal.referenceMagasin}}</option>-->
+                <!--</select>-->
+              <!--</div>-->
+
+
+
+            <!--</div>-->
+
+            <div class="form-group col-md-12">
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Qte</div>
+                </div>
+                <input type="number" [(ngModel)]="livraisonItem.qte" class="form-control" >
+              </div>
+
+            </div>
+
+          </div>
+          <div class="row">
+            <button (click)="addLivraisonItem()" class="btn btn-outline-primary centered">Ajouter un Produit</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!----------------->
+    <div class=" col-sm-7">
+      <div class="card text-center">
+        <div class="card-header">livraison-Item List</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="card col-md-12" *ngIf="livraisonItems">
+              <table class="table table-sm table-hover" >
+                <thead>
+                <th>Reference Produit</th><th>Magasin</th><th>Qte</th><th>action</th>
+                </thead>
+                <tbody>
+                <tr *ngIf="livraisonItems.length==0">
+                  <td class="text-center font-italic" colspan="3">No Item added</td>
+                </tr>
+                <tr *ngFor="let l of livraisonItems">
+                  <td>{{l.refenceProduit}}</td>
+                  <td>{{l.codeMagasin}}</td>
+                  <td>{{l.qte}}</td>
+                  <td class="something"><button class="btn btn-outline-danger" (click)="deleteTableItem(l)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button class="btn btn-outline-primary centered" (click)="saveLivraison()"><i class="fa fa-database"></i> Confirmation</button>
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

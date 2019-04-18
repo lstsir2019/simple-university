@@ -1,5 +1,10 @@
 import {Magasin} from "./magasin.model";
 
 export class Stock {
-  constructor(public reference:String,public referenceReception:String,public referenceProduit:String,public qte:number,public qteDeffectueuse:number,public seuilAlert:number,public magasin:Magasin = new Magasin("")){}
+  public dateMin:string ='';
+  public dateMax:string ='';
+  public id:string="";
+  public reference:string;
+  public referenceCommande:string ='';
+  constructor(public referenceReception:string,public referenceProduit:string,public qte:number,public qteDeffectueuse:number=0,public seuilAlert:number=0,public magasinVo:Magasin = new Magasin("")){}
 }

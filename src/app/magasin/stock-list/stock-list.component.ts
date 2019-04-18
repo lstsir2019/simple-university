@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {StockService} from "../../controller/service/stock.service";
+import {Component, OnInit} from '@angular/core';
+import {StockService} from '../../controller/service/stock.service';
+import {MagasinService} from '../../controller/service/magasin.service';
 
 @Component({
   selector: 'app-stock-list',
@@ -8,17 +9,19 @@ import {StockService} from "../../controller/service/stock.service";
 })
 export class StockListComponent implements OnInit {
 
-  constructor(private _stockservice:StockService) { }
+  constructor(private _stockservice: StockService, private magasinService: MagasinService) {
+  }
 
   ngOnInit() {
-  }
-
-  get stocks(){
-    return this._stockservice.stocks;
-  }
-
-  public findAllStocks(){
     this._stockservice.findAll();
+  }
+
+  get magasins() {
+    return this.magasinService.magasins;
+  }
+
+  get stocks() {
+    return this._stockservice.stocks;
   }
 
   get stockservice(): StockService {
@@ -31,5 +34,11 @@ export class StockListComponent implements OnInit {
 
   public stockSeleceted(s) {
     this._stockservice.setStockSelected(s);
+  }
+  public get stockSearch(){
+    return this._stockservice.stockSearch;
+  }
+  public findStockByQuery() {
+    this._stockservice.findByCriteria();
   }
 }

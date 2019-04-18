@@ -9,9 +9,12 @@ import {ProduitService} from "../controller/service/produit.service";
 })
 export class ProduitsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private produitService:ProduitService) { }
 
   ngOnInit() {
+    this.produitService.produitsFindAll();
+    this.produitService.typesFindAll();
+    this.produitService.categoriesFindAll();
   }
 
 

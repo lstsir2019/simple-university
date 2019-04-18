@@ -66,7 +66,7 @@ export class LoiEvolutionService {
   }
 
   public getLoisEvolutionsFromDatabase() {
-    this.http.get<Array<LoiEvolution>>(this._url + "all").subscribe(res => this._loisEvolution = res)
+    this.http.get<Array<LoiEvolution>>(this._url).subscribe(res => this._loisEvolution = res)
   }
 
   public ajouterLoiEvolution() {
@@ -90,7 +90,7 @@ export class LoiEvolutionService {
   public modifierLoiEvolution(data) {
     data.dateDebut = this.datePipe.transform(data.dateDebut, 'dd-MM-yyyy');
     data.dateFin = this.datePipe.transform(data.dateFin, 'dd-MM-yyyy');
-    this.http.put(this._url + 'edit', data).subscribe(
+    this.http.put(this._url , data).subscribe(
       (res) => {
         if (res == -1) {
           Swal(this.ERROR_NOT_ENOUGH_DATA);
@@ -108,7 +108,7 @@ export class LoiEvolutionService {
     Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
         if (result.value) {
-          this.http.delete(this._url + "delete/" + data).subscribe(
+          this.http.delete(this._url + "/" + data).subscribe(
             (res) => {
               if (res == -1) {
                 Swal(this.ERROR_INVALID_REF);

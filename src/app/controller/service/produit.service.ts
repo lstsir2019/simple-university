@@ -82,6 +82,7 @@ export class ProduitService {
     );
     return this.types;
  }
+
  public produitsFindAll(){
     this._http.get<Array<Produit>>(this._url5).subscribe(
       data=>{
@@ -91,7 +92,9 @@ export class ProduitService {
       },error1 => {
         console.log(error1);
       }
+
     );
+
  }
  public modyfieProduit(){
 
@@ -113,6 +116,7 @@ export class ProduitService {
     this._http.post<Produit>(this._url5,this._produitCreate).subscribe(
       data=>{
         this._produitCreate=new Produit("","");
+       this.produitsFindAll();
         console.log("Ajoute avec success");
       },error1 => {
 
@@ -148,6 +152,7 @@ export class ProduitService {
     this._http.post<CategoriProduit>(this._url,this._categorieCreate).subscribe(
       data=>{
         this._categorieCreate=new CategoriProduit("","");
+        this.categoriesFindAll();
         console.log("Ajoute avec success");
       },error1 => {
         console.log("error");
@@ -164,6 +169,7 @@ export class ProduitService {
       data=>{
         this._typeCreate=new TypeProduit("","");
         console.log("Ajoute avec success");
+        this.typesFindAll();
       },error1 => {
         console.log("error");
       }
@@ -186,15 +192,7 @@ export class ProduitService {
   }
 
   get categories(): Array<CategoriProduit> {
-    if (this._categories==null){
-      this._http.get<Array<CategoriProduit>>(this._url3).subscribe(
-        data=>{
-          this._categories=data;
-        },error1 => {
-          console.log("errooorr list");
-        }
-      );
-    }
+
     return this._categories;
   }
 
@@ -237,18 +235,7 @@ export class ProduitService {
   }
 
   get produits(): Array<Produit> {
-    if(this._produits==null){
-      this._http.get<Array<Produit>>(this._url5).subscribe(
-        data=>{
-          this._produits=data;
-        },error1 => {
-          console.log("errooorr list");
-        }
 
-
-
-      );
-    }
     return this._produits;
 
   }

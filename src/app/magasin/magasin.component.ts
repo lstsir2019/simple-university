@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MagasinService} from "../controller/service/magasin.service";
 
 @Component({
   selector: 'app-magasin',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagasinComponent implements OnInit {
 
-  constructor() { }
+  constructor(private magasinService:MagasinService) { }
 
   ngOnInit() {
+    this.magasinService.findAll();
   }
 
 }
