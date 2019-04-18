@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {StockGlobal} from "../model/stock-global.Model";
 
@@ -7,18 +7,21 @@ import {StockGlobal} from "../model/stock-global.Model";
 })
 export class StockGlobalService {
 
-  private _stockGlobalsLiverson:Array<StockGlobal>=[];
-  constructor(private  http:HttpClient) { }
-  private url:string = "http://localhost:8042/stock-api/stocks/";
+  public stockGlobals: Array<StockGlobal> = [];
+  private _stockGlobalsLiverson: Array<StockGlobal> = [];
+  private url: string = "http://localhost:8042/stock-api/stocks/";
 
-  public findStockGlobal(refcommande:string,refproduit:string){
-    console.log(this.url+"commande/"+refcommande+"/produit/"+refproduit);
-    this.http.get<Array<StockGlobal>>(this.url+"commande/"+refcommande+"/produit/"+refproduit).subscribe(
-      data=>{
-        this._stockGlobalsLiverson=data;
-        console.log("ha data"+data);
+  constructor(private  http: HttpClient) {
+  }
 
-      },error => {
+  public findStockGlobal(refcommande: string, refproduit: string) {
+    console.log(this.url + "commande/" + refcommande + "/produit/" + refproduit);
+    this.http.get<Array<StockGlobal>>(this.url + "commande/" + refcommande + "/produit/" + refproduit).subscribe(
+      data => {
+        this._stockGlobalsLiverson = data;
+        console.log("ha data" + data);
+
+      }, error => {
         console.log("error");
       }
     )
@@ -31,5 +34,18 @@ export class StockGlobalService {
 
   set stockGlobalsLiverson(value: Array<StockGlobal>) {
     this._stockGlobalsLiverson = value;
+  }
+
+  findAll() {
+    this.http.get<Array<StockGlobal>>(this.url + "stockglobal").subscribe(
+      data => {
+        this.stockGlobals = data;
+        data.forEach(value => {
+          console.log("ha data" + value.referenceCommande)
+        });
+
+      }, error => {
+        console.log("error");
+      });
   }
 }
