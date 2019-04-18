@@ -15,6 +15,9 @@ export class PaiementComponent implements OnInit {
   ngOnInit() {
   }
 
+  public get commandeCherch() {
+    return this.commandeService.commandecherch;
+  }
   public findPaiementByCommande(c:Commande){
     this.commandeService.findPaiementByCommande(c);
   }
@@ -29,6 +32,9 @@ export class PaiementComponent implements OnInit {
 
   public itemToModal(commandeSelected: Commande) {
     this.commandeService.itemToModal(commandeSelected);
+  }
+  public chercherCommande(){
+    this.commandeService.chercherCommande();
   }
 
 }
