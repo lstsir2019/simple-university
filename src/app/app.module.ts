@@ -71,6 +71,7 @@ import {DatePipe} from "@angular/common";
 import { PaiementComponent } from './commandes/paiement/paiement.component';
 import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
 import { CommandeAffectationComponent } from './commandes/commande-affectation/commande-affectation.component';
+import { TestPrintComponent } from './expression-besoins/test-print/test-print.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +139,7 @@ import { CommandeAffectationComponent } from './commandes/commande-affectation/c
     PaiementComponent,
     PaiemmentModalComponent,
     CommandeAffectationComponent,
+    TestPrintComponent,
 
   ],
   imports: [

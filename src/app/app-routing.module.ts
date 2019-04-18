@@ -20,6 +20,7 @@ import {ExpressionBesoinListComponent} from './expression-besoins/expression-bes
 import {PaiementComponent} from './commandes/paiement/paiement.component';
 import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
+import {TestPrintComponent} from './expression-besoins/test-print/test-print.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
@@ -61,6 +62,7 @@ const routes: Routes = [
   //expressionBesoin
   { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
   { path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
+  { path: 'pdf', component: TestPrintComponent}
 
 ];
 

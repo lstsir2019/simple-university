@@ -43,14 +43,23 @@
     <div class="col">
       <label>CATEGORIE PRODUIT</label>
 
-        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit">
+        <!--<input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit">-->
+
+      <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit"  >
+        <option >select</option>
+        <option *ngFor="let pc of produitCategories" (click)="setProduitsByCategorie(pc.libelle)">{{pc.libelle}}</option>
+      </select>
 
     </div>
 
     <div class="col">
       <label>REFERENCE PRODUIT</label>
 
-        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceProduit">
+        <!--<input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceProduit">-->
+      <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoinItem.referenceProduit"  >
+        <option >select</option>
+        <option *ngFor="let p of produits">{{p.libelle}}</option>
+      </select>
 
     </div>
 
