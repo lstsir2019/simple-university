@@ -36,8 +36,11 @@ export class CommandeService {
   public commandeSourceCreate:CommandeSource=new CommandeSource(0,'');
   public commandeItemSelected:CommandeItem;
   public commandecherch:Commande=new Commande('',0,'','','','');
+  private _fournisseurCreate:Fournisseur=new Fournisseur('','','');
+  public fournisseurtrover:Fournisseur;
   constructor(private http:HttpClient) { }
 
+  //======================function=======================
   public addCommandeItem() {
     this.commandeCreate.total+=this.commandeItemCreate.prix*this.commandeItemCreate.qte;
     let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit,this.commandeItemCreate.prix,this.commandeItemCreate.qte,this.commandeItemCreate.id);
@@ -238,8 +241,77 @@ export class CommandeService {
     );
   }
 
+  public crateFournisseur(){
+    this.http.post<number>('http://localhost:8090/faculte-commande/fournisseurs/',this.fournisseurCreate).subscribe({
+      next: data=>{
+        if (data == -1){
+          Swal({
+            title: 'cannot save !',
+            text: 'Référence déja utilisé',
+            type: 'error',
+          });
+        }
+        if (data == -2){
+          Swal({
+            title: 'cannot save !',
+            text: 'Référence ne peut pas etre vide',
+            type: 'error',
+          });
+        }
+        if (data == 1){
+          Swal({
+            title: 'info !',
+            text: 'fournisseur ajouter avec success',
+            type: 'success',
+          });
+        }
+        console.log("ok");
+        this.fournisseurCreate = new Fournisseur('','','');
+      } , error: error=>{
+        console.log(error);
+      }
+    });
+  }
+
+  //---
+  public fournisseurSerched:Fournisseur=new Fournisseur('','','');
+  public findOneFournisseurByReference(){
+
+    if (this.fournisseurSerched != null){
+      this.http.get<Fournisseur>('http://localhost:8090/faculte-commande/fournisseurs/reference/'+this.fournisseurSerched.reference).subscribe(
+        data=> {
+          console.log(data);
+          this.fournisseurtrover = data;
+        },error=> {
+          console.log(error);
+        }
+      );
+    }
+  }
+  public updateFournisseur(){
 
 
+      this.http.put<number>("http://localhost:8090/faculte-commande/fournisseurs/reference/"+this.fournisseurSerched.reference+"/fournisseur",this.fournisseurSerched).subscribe(
+        data=>{
+          console.log(data);
+          if (data == 1){
+            Swal({
+              title: 'info !',
+              text: 'fournisseur modifier avec success',
+              type: 'success',
+            });}
+        },error1 => {
+          console.log(error1);
+        }
+      );
+
+
+  }
+  
+  
+
+
+//=========================getter==================================================
 
   get url(): string {
     return this._url;
@@ -380,5 +452,14 @@ export class CommandeService {
 
   set commande(value: Commande) {
     this._commande = value;
+  }
+
+
+  get fournisseurCreate(): Fournisseur {
+    return this._fournisseurCreate;
+  }
+
+  set fournisseurCreate(value: Fournisseur) {
+    this._fournisseurCreate = value;
   }
 }
