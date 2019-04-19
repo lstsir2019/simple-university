@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-sm-between">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Commande</label>
+        </div>
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="referenceCmd">
+      </div>
+      <div class="input-group mx-sm-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Produit</label>
+        </div>
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="referenceProduit">
+      </div>
+      <div class="input-group">
+        <button class="btn btn-secondary btn-block" (click)="findStockGlobalByQuery()"><i class="fa fa-search"></i>Recherche
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-sm">
+      <thead>
+      <tr>
+        <th>Commande</th>
+        <th>Produit</th>
+        <th>Magasin</th>
+        <th>Qte</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="stocks.length==0">
+        <td colspan="4">No item</td>
+      </tr>
+      <tr *ngFor="let s of stocks">
+        <td>{{s.referenceCommande}}</td>
+        <td>{{s.referenceProduit}}</td>
+        <td>{{s.referenceMagasin}}</td>
+        <td>{{s.qte}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

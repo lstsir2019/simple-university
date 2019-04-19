@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {ReceptionService} from "../../controller/service/reception.service";
-import {Reception} from "../../controller/model/reception.model";
+import {Component, OnInit} from '@angular/core';
+import {ReceptionService} from '../../controller/service/reception.service';
+import {Reception} from '../../controller/model/reception.model';
 
 @Component({
   selector: 'app-reception-list',
@@ -9,18 +9,34 @@ import {Reception} from "../../controller/model/reception.model";
 })
 export class ReceptionListComponent implements OnInit {
 
-  constructor(private receptionService:ReceptionService ) { }
+  constructor(private receptionService: ReceptionService) {
+  }
 
   ngOnInit() {
     this.receptionService.findAll();
   }
-  public get receptions(){
+
+  public get receptions() {
     return this.receptionService.receptions;
   }
-   public findReceptionItemsByReceptionReference(reception:Reception){
+
+  public get receptionSearch() {
+    return this.receptionService.receptionSearch;
+  }
+
+  public findReceptionItemsByReceptionReference(reception: Reception) {
     this.receptionService.findReceptionItemsByReceptionReference(reception);
-   }
-   get receptionSelected(){
+  }
+
+  get receptionSelected() {
     return this.receptionService.receptionSelected;
-   }
+  }
+
+  public findByQuery() {
+    this.receptionService.findByQuery();
+  }
+
+  deleteReception(r) {
+    this.receptionService.deleteReception(r);
+  }
 }

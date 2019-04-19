@@ -23,6 +23,7 @@ export class PaiemmentModalComponent implements OnInit {
   }
   public  payerCommande(){
     return this.commandeService.payerCommande();
+
   }
   public get commandeSelected() {
     return this.commandeService.commandeSelected;

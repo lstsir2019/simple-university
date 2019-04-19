@@ -1,8 +1,8 @@
-<div class="d-flex justify-content-between flex-column">
+<!--<div class="d-flex justify-content-between flex-column">-->
   <div class="card">
   <div class="card-header">Reception</div>
     <div class="card-body">
-      <div class="d-flex justify-content-sm-around" >
+      <div class="d-flex justify-content-sm-between" >
         <div class="input-group">
           <div class="input-group-prepend">
             <label for="referencecommande" class="input-group-text" >Commande</label>
@@ -23,30 +23,22 @@
         </div>
       </div>
     </div>
-  </div>
   <div class="card">
         <div class="card-header">Produit</div>
         <div class="card-body">
           <div class="d-flex justify-content-sm-between">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label for="referenceCategorie" class="input-group-text" >Categorie</label>
-              </div>
-              <select id="referenceCategorie" [(ngModel)]="receptionItem.referenceCategorie" class="col-md-12 custom-select">
-                <option disabled>SELECT</option>
-                <option>elctro</option>
-              </select>
-            </div>
             <div class="input-group mx-sm-3">
               <div class="input-group-prepend">
-                <label for="referenceProduit" class="input-group-text" >Prduit</label>
+                <label for="referenceProduit" class="input-group-text" >Produit</label>
               </div>
               <select id="referenceProduit" [(ngModel)]="receptionItem.referenceProduit" class="custom-select" >
-                <option >pr-18</option>
-                <option >pr-28</option>
+                <option >pr-1</option>
+                <option >pr-2</option>
+                <option >pr-3</option>
+                <option >pr-4</option>
               </select>
             </div>
-            <div class="input-group mx-sm-3">
+            <div class="input-group ">
               <div class="input-group-prepend">
                 <label for="referenceMagasin" class="input-group-text">Magasin</label>
               </div>
@@ -54,16 +46,17 @@
                 <option *ngFor="let m of magasins" >{{m.reference}}</option>
               </select>
             </div>
-            <div class="input-group">
+            <div class="input-group mx-sm-3">
               <div class="input-group-prepend">
                 <label for="qte" class="input-group-text">Qte</label>
               </div>
               <input id="qte" [(ngModel)]="receptionItem.qte" type="number" min="0" step="1" class="form-control">
             </div>
+            <div class="input-group">
+              <button (click)="addReceptionItem()" class="btn btn-outline-dark btn-block"><i
+                class="fa fa-plus">Ajouter</i></button>
+            </div>
           </div>
-        </div>
-        <div class="card-footer">
-          <button (click)="addReceptionItem()" class="btn btn-dark"><i class="fa fa-plus">Ajouter</i></button>
         </div>
     </div>
   <div class="card">
@@ -71,14 +64,16 @@
       <div class="card-body">
         <table class="table table-sm table-hover" >
           <thead>
-          <th>Categorie</th><th>Produit</th><th>Magasin</th><th>Qte</th>
-          <th>action</th></thead>
+          <th>Produit</th>
+          <th>Magasin</th>
+          <th>Qte</th>
+          <th>Action</th>
+          </thead>
           <tbody>
           <tr *ngIf="receptionItems.length==0">
             <td class="text-center font-italic" colspan="4">No Item added</td>
           </tr>
           <tr *ngFor="let item of receptionItems">
-            <td>{{item.referenceCategorie}}</td>
             <td>{{item.referenceProduit}}</td>
             <td>{{item.referenceMagasin}}</td>
             <td>{{item.qte}}</td>
@@ -89,5 +84,6 @@
       </div>
       <button class="btn btn-outline-primary" (click)="saveReception()"><i class="fa fa-database"></i> Confirmation</button>
     </div>
-</div>
+  </div>
+
 

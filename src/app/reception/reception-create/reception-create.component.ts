@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReceptionService} from "../../controller/service/reception.service";
 import {MagasinService} from "../../controller/service/magasin.service";
 
@@ -16,7 +16,6 @@ export class ReceptionCreateComponent implements OnInit {
   }
 
   public saveReception(){
-    console.log("SaveReception Create");
     this.receptionservice.saveReception();
   }
   public addReceptionItem(){

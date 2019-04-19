@@ -14,9 +14,7 @@ export class ProduitCreateComponent implements OnInit {
   constructor(private produitService:ProduitService) { }
 
   ngOnInit() {
-    this.produitService.produitsFindAll();
-    this.produitService.typesFindAll();
-    this.produitService.categoriesFindAll();
+
 
   }
   public get categories(){

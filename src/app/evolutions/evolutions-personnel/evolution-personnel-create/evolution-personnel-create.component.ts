@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EvolutionPersonnelService} from "../../../controller/service/evolutions/evolution-personnel.service";
 import {EchelonService} from "../../../controller/service/evolutions/echelon.service";
-import {LoiEvolutionService} from "../../../controller/service/evolutions/loi-evolution.service";
-import {LoiEvolutionTypePersonnel} from "../../../controller/model/evolution/loi-evolution-type-personnel.model";
 import {LoiEvolutionTypePersonnelService} from "../../../controller/service/evolutions/loi-evolution-type-personnel.service";
 
 @Component({
@@ -35,8 +33,6 @@ export class EvolutionPersonnelCreateComponent implements OnInit {
   public get loisEvolutionTypePersonnel(){
     return this.loiEvolutionTypePersonnelService.loisEvolutionTypePersonnel;
   }
-
-
 
   ajouterEvolutionPersonnel(){
     this.evolutionPersonnelService.ajouterEvolutionPersonnel();

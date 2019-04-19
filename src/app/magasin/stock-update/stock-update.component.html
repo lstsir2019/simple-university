@@ -5,7 +5,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text" >Produit</label>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="stockSelected.referenceReception" disabled>
+        <input type="text" class="form-control" [(ngModel)]="stockSelected.referenceProduit" disabled>
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="card-footer">
-    <input type="submit" (click)="saveUpdate()" class="btn btn-info fa fa-check" value="save">
+    <input type="submit" (click)="saveUpdate()" class="btn btn-info fa fa-check" data-dismiss="modal" value="save">
   </div>
 </div>
 

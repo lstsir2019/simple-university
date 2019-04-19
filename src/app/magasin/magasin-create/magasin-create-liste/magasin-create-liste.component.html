@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">RESULTAT</div>
+  <div class="card-body">
+    <table class="table table-bordered table-sm">
+      <thead>
+      <tr>
+        <th>Magasin-reference</th>
+        <th>Magasin-libelle</th>
+        <th>Addresse</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let m of magasins">
+        <td>{{m.reference}}</td>
+        <td>{{m.libelle}}</td>
+        <td>{{m.address}}</td>
+        <td>{{m.description}}</td>
+        <td>
+          <button (click)="miseAjour(m)" data-toggle="modal" data-target="#exampleModal" class="btn-outline-primary"><i
+            class="fa fa-edit"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <app-magasin-update></app-magasin-update>
+  </div>
+</div>
