@@ -77,6 +77,7 @@ import {MagasinCreateListeComponent} from './magasin/magasin-create/magasin-crea
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 import {MagasinUpdateComponent} from './magasin/magasin-update/magasin-update.component';
 import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global-list.component';
+import {FooterComponent} from './footer/footer.component';
 
 
 @NgModule({
@@ -151,6 +152,7 @@ import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global
     CommandeAffectationComponent,
     MagasinUpdateComponent,
     StockGlobalListComponent,
+    FooterComponent,
 
   ],
   imports: [

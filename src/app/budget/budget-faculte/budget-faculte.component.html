@@ -6,33 +6,44 @@
           Création
         </div>
         <div class="card-body">
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="anneeMin">Année Min</label>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="anneeMin">Année</label>
+                </div>
+                <input [(ngModel)]="budgetFaculteVo.annee" aria-describedby="inputGroup-sizing-sm"
+                       aria-label="Sizing example input"
+                       class="form-control" id="anneeMin" min="0" required step="any"
+                       type="number">
+                <!--<div class="input-group-append">
+                  <button class="btn btn-outline-primary fa fa-search" (click)="bfinfo()"></button>
+                </div>-->
+              </div>
             </div>
-            <input type="number" [(ngModel)]="budgetFaculteVo.annee" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="anneeMin"
-                   aria-describedby="inputGroup-sizing-sm">
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary fa fa-search" (click)="bfinfo()"></button>
+            <div class="col-md-6">
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="anneeMax">Année Max</label>
+                </div>
+                <input [(ngModel)]="budgetFaculteVo1.annee" aria-describedby="inputGroup-sizing-sm"
+                       aria-label="Sizing example input"
+                       class="form-control" id="anneeMax" min="0" required step="any"
+                       type="number">
+                <div class="input-group-append">
+                  <button (click)="findByCreteriaAnneMinAndAnneMax()"
+                          class="btn btn-outline-primary fa fa-search"></button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="anneeMax">Année Max</label>
-            </div>
-            <input type="number" [(ngModel)]="budgetFaculteVo1.annee" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="anneeMax"
-                   aria-describedby="inputGroup-sizing-sm">
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary fa fa-search" (click)="findByAnneeMinAndAnneeMax()"></button>
-            </div>
+
           </div>
           <div class="input-group input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="coe">Crédit Ouvert Estimatif</label>
             </div>
             <input type="number" class="form-control"
+                   [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
                    [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" aria-label="Sizing example input" min="0"
                    step="any" required id="coe" aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -41,6 +52,7 @@
               <label class="input-group-text" for="cor">Crédit Ouvert Réel</label>
             </div>
             <input type="number" class="form-control"
+                   [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertReel:null"
                    [(ngModel)]="detaillesBudgetVo.creditOuvertReel" aria-label="Sizing example input" min="0" step="any"
                    required id="cor" aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -49,6 +61,7 @@
               <label class="input-group-text" for="engagepaye">Engagé payé</label>
             </div>
             <input type="number" class="form-control"
+                   [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engagePaye:null"
                    [(ngModel)]="detaillesBudgetVo.engagePaye" aria-label="Sizing example input" min="0" step="any"
                    required id="engagepaye" aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -57,9 +70,13 @@
               <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
             </div>
             <input type="number" class="form-control"
+                   [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engageNonPaye:null"
                    [(ngModel)]="detaillesBudgetVo.engageNonPaye" aria-label="Sizing example input" min="0" step="any"
                    required id="engagenonpaye" aria-describedby="inputGroup-sizing-sm">
           </div>
+          <!--<div class="col-md-12">
+            <button class="btn btn-block btn-outline-primary" (click)="updateBudgetFaculte()">Ok</button>
+          </div>-->
         </div>
       </div>
     </div>
@@ -82,11 +99,16 @@
             <tr *ngIf="budgetFacultes.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-              <tr *ngFor="let bf of budgetFacultes">
+            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
                 <td>{{bf.annee}}</td>
                 <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
                 <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
-                <td><button type="button" (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"></button></td>
+              <td>
+                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                        type="button"></button>
+                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
+                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
+              </td>
               </tr>
             </tbody>
           </table>

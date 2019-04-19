@@ -110,7 +110,8 @@
             <tr *ngIf="bcbs.length==0">
               <td class="text-center font-italic" colspan="8">No item found</td>
             </tr>
-            <tr *ngFor="let bcb of bcbs" (click)="selectedTableBudgetCompteBudgitaire(bcb)" ngClass="bcb.id==0?'table-warning':'table-default'">
+            <tr (click)="selectedTableBudgetCompteBudgitaire(bcb)" *ngFor="let bcb of bcbs"
+                [ngClass]="bcb.id==0?'table-warning':'table-default'">
               <td>{{ bcb.referenceCompteBudgitaire }}</td>
               <td>{{ bcb.detaillesBudgetVo.creditOuvertEstimatif }}</td>
               <td>{{ bcb.detaillesBudgetVo.creditOuvertReel }}</td>
@@ -119,9 +120,11 @@
               <td>{{ bcb.compteBudgitaireVo.code }}</td>
               <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
               <td>
-                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBcbInfos(bcb)" data-toggle="modal"
+                <button (click)="getBcbInfos(bcb)" *ngIf="bcb.id!=0" class="btn btn-outline-info fa fa-info mr-2"
+                        data-toggle="modal"
                         data-target="#exampleModalBcbInfo"></button>
-                <button class="btn btn-outline-danger fa fa-trash-o" (click)="deleteBudgetCompteBudgitaire(bcb)"></button>
+                <button (click)="deleteBudgetCompteBudgitaire(bcb)" *ngIf="bcb.id!=0"
+                        class="btn btn-outline-danger fa fa-trash-o"></button>
               </td>
             </tr>
             </tbody>
