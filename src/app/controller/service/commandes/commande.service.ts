@@ -6,6 +6,10 @@ import {Fournisseur} from '../../model/commandes/fournisseur.model';
 import {Paiement} from '../../model/commandes/paiement.model';
 import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
 import {CommandeSource} from '../../model/commandes/commandeSource.model';
+import Swal from "sweetalert2";
+import {Stock} from '../../model/stock.model';
+import {CategoriProduit} from '../../model/categori-produit.model';
+import {Produit} from '../../model/produit.model';
 
 
 @Injectable({
@@ -17,38 +21,69 @@ export class CommandeService {
   private _url3:string = "http://localhost:8090/faculte-commande/paiementes/reference/";
   private _url4:string = "http://localhost:8090/faculte-commande/paiementes"
 
-  private _commandeCreate:Commande = new Commande('' ,0,'','');
-  private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0);
-  private _commande:Commande=new Commande('',0,'','');
+  private _commandeCreate:Commande = new Commande('' ,0,'','','','');
+  private _commandeItemCreate:CommandeItem = new CommandeItem('',0,0,Number(''));
+  private _commande:Commande=new Commande('',0,'','','','');
   private _commandes:Array<Commande>;
   private _commandeSelected:Commande;
   private _paiementCreate:Paiement = new Paiement(Number(''),0,'','');
   private _fournisseurs:Array<Fournisseur>;
+  public produits:Array<Produit>;
+  private _categories:Array<CategoriProduit>;
   public commandeItems:Array<CommandeItem>;
   public expressionBesoinItems:Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect:ExpressionBesoinItem;
   public commandeSourceCreate:CommandeSource=new CommandeSource(0,'');
   public commandeItemSelected:CommandeItem;
+  public commandecherch:Commande=new Commande('',0,'','','','');
   constructor(private http:HttpClient) { }
 
   public addCommandeItem() {
     this.commandeCreate.total+=this.commandeItemCreate.prix*this.commandeItemCreate.qte;
-    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit,this.commandeItemCreate.prix,this.commandeItemCreate.qte);
+    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit,this.commandeItemCreate.prix,this.commandeItemCreate.qte,this.commandeItemCreate.id);
     this.commandeCreate.commandeItemVos.push(commandeItemClone);
-    this.commandeItemCreate=new CommandeItem("",0,0);
+    this.commandeItemCreate=new CommandeItem("",0,0,Number(''));
+  }
+
+  public findAll(){
+    this.http.get<Array<Commande>>(this.url).subscribe(
+      data=>{
+        console.log(data);
+        this.commandes=data;
+      },error => {
+        console.log("Error"+error);
+      }
+    );
   }
 
   public saveCommande(){
-    this.http.post<Commande>(this._url,this.commandeCreate).subscribe({
+    this.http.post<number>(this._url,this.commandeCreate).subscribe({
       next: data=>{
+        if (data == -2){
+          Swal({
+            title: 'cannot save !',
+            text: 'Référence déja utilisé',
+            type: 'error',
+          });
+        }
+        if (data == 1){
+          Swal({
+            title: 'info !',
+            text: 'Commande ajouter avec success',
+            type: 'success',
+          });
+          this.findAll();
+        }
       console.log("ok");
-      this.commandeCreate = new Commande('',0,'','');
-      this.commandeItemCreate = new CommandeItem("",0,0);
+      this.commandeCreate = new Commande('',0,'','','','');
+      this.commandeItemCreate = new CommandeItem("",0,0,Number(''));
     } , error: error=>{
       console.log("erreur");
     }
     });
   }
+
+
   
   
   public findCommandeItemsByCommandeReference(){
@@ -65,8 +100,30 @@ export class CommandeService {
   }
 
   public payerCommande(){
-      this.http.post<Paiement>(this._url4+"/referenceCommande/"+this.commandeSelected.reference+"/montant/"+this.paiementCreate.montant,this.paiementCreate).subscribe({
+      this.http.post<number>(this._url4+"/referenceCommande/"+this.commandeSelected.reference+"/montant/"+this.paiementCreate.montant,this.paiementCreate).subscribe({
         next: data=>{
+          if (data == -2){
+            Swal({
+              title: 'cannot payer !',
+              text: 'mantant superieur aux rest',
+              type: 'error',
+            });
+          }
+          if (data == -3){
+            Swal({
+              title: 'cannot payer !',
+              text: 'commande deja payer',
+              type: 'error',
+            });
+          }
+          if (data == 1){
+            Swal({
+              title: 'info !',
+              text: 'payermantant ',
+              type: 'success',
+            });
+            this.findAll();
+          }
           console.log("ok");
           this.paiementCreate = new Paiement(Number(''),0,'','');
         } , error: error=>{
@@ -97,6 +154,7 @@ export class CommandeService {
       this.http.get<Array<Paiement>>(this._url3+this.commandeSelected.reference).subscribe(
         data =>{
           this.commandeSelected.paiementVos = data;
+
         } , error =>{
           console.log("error whith loading paiements");
         }
@@ -134,18 +192,50 @@ export class CommandeService {
     );
   }
 
+  public chercherCommande(){
+    this.http.post<Array<Commande>>('http://localhost:8090/faculte-commande/commandes/chercherCommande',this.commandecherch).subscribe(
+      data=>{
+        this.commandes=data;
+      },error1 => {
+        console.log(error1);
+      }
+    );
+  }
+
   public deleteCommande(){
 
     if (this.commandeSelected!=null){
       this.http.delete("http://localhost:8090/faculte-commande/commandes/reference/"+this.commandeSelected.reference+"",{}).subscribe(
         data=>{
+          if (data == 1){
+            Swal({
+              title: 'info !',
+              text: 'commande suprimer',
+              type: 'success',
+            });
+            this.findAll();
+            this.commandeSelected.commandeItemVos=new Array<CommandeItem>();
+          }
+
           console.log("deleted ...");
+
         },error => {
           console.log("commande matmes7atche");
         }
       );
     }
 
+
+  }
+
+  public setProduitByVategorie(libelle:string){
+    this.http.get<Array<Produit>>('http://localhost:8090/faculte-commande/commandes/produits/libelle/'+libelle).subscribe(
+      data=>{
+        this.produits=data;
+      },error=>{
+        console.log(error);
+      }
+    );
   }
 
 
@@ -194,7 +284,7 @@ export class CommandeService {
 
   get commandeSelected(): Commande {
     if(this._commandeSelected == null){
-      this._commandeSelected = new Commande('',0,'','');
+      this._commandeSelected = new Commande('',0,'','','','');
     }
     return this._commandeSelected;
   }
@@ -231,6 +321,24 @@ export class CommandeService {
     this._fournisseurs = value;
   }
 
+
+  get categories(): Array<CategoriProduit> {
+    if(this._categories==null) {
+      this.http.get<Array<CategoriProduit>>('http://localhost:8090/faculte-commande/commandes/CategorieProduit/').subscribe(
+        data => {
+
+          this._categories = data;
+        } , error => {
+          console.log(error);
+        }
+      );
+    }
+    return this._categories;
+  }
+
+  set categories(value: Array<CategoriProduit>) {
+    this._categories = value;
+  }
 
   get url3(): string {
     return this._url3;

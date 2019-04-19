@@ -59,26 +59,24 @@ import {LoisEvolutionComponent} from "./evolutions/lois-evolution/lois-evolution
 import {LoiEvolutionCreateComponent} from "./evolutions/lois-evolution/loi-evolution-create/loi-evolution-create.component";
 import {LoiEvolutionTypePersonnelCreateComponent} from "./evolutions/lois-evolution/loi-evolution-type-personnel-create/loi-evolution-type-personnel-create.component";
 import {LoiEvolutionTypePersonnelListComponent} from "./evolutions/lois-evolution/loi-evolution-type-personnel-list/loi-evolution-type-personnel-list.component";
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {ModalModule} from 'ngx-bootstrap/modal';
 import {ExpressionBesoinItemManipComponent} from './expression-besoins/expression-besoin-item-manip/expression-besoin-item-manip.component';
-import { EtudiantAdminComponent } from './etudiant-admin/etudiant-admin.component';
-import { EtudiantCreateComponent } from './etudiant-admin/etudiant-create/etudiant-create.component';
-import { EtudiantListComponent } from './etudiant-admin/etudiant-list/etudiant-list.component';
+import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
+import {EtudiantCreateComponent} from './etudiant-admin/etudiant-create/etudiant-create.component';
+import {EtudiantListComponent} from './etudiant-admin/etudiant-list/etudiant-list.component';
 import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from "@angular/common";
-import { PaiementComponent } from './commandes/paiement/paiement.component';
-import { PaiemmentModalComponent } from './commandes/paiemment-modal/paiemment-modal.component';
-import { LivraisonDetailleComponent } from './livraisons/livraison-create/livraison-detaille/livraison-detaille.component';
-import { LivraisonGlobaleComponent } from './livraisons/livraison-create/livraison-globale/livraison-globale.component';
-import { MagasinCreateCreateComponent } from './magasin/magasin-create/magasin-create-create/magasin-create-create.component';
-import { MagasinCreateListeComponent } from './magasin/magasin-create/magasin-create-liste/magasin-create-liste.component';
-import { CommandeAffectationComponent } from './commandes/commande-affectation/commande-affectation.component';
-
-
-
-
+import {PaiementComponent} from './commandes/paiement/paiement.component';
+import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
+import {LivraisonDetailleComponent} from './livraisons/livraison-create/livraison-detaille/livraison-detaille.component';
+import {LivraisonGlobaleComponent} from './livraisons/livraison-create/livraison-globale/livraison-globale.component';
+import {MagasinCreateCreateComponent} from './magasin/magasin-create/magasin-create-create/magasin-create-create.component';
+import {MagasinCreateListeComponent} from './magasin/magasin-create/magasin-create-liste/magasin-create-liste.component';
+import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
+import {MagasinUpdateComponent} from './magasin/magasin-update/magasin-update.component';
+import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global-list.component';
 
 
 @NgModule({
@@ -151,6 +149,8 @@ import { CommandeAffectationComponent } from './commandes/commande-affectation/c
     MagasinCreateCreateComponent,
     MagasinCreateListeComponent,
     CommandeAffectationComponent,
+    MagasinUpdateComponent,
+    StockGlobalListComponent,
 
   ],
   imports: [
