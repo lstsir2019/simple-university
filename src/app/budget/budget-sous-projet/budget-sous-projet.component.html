@@ -98,6 +98,8 @@
                         (click)="setBudgetSousProjetInfos(bsp)" data-toggle="modal"
                         data-target="#exampleModalBspInfo"></button>
                 <button type="button" (click)="deleteBudgetSousProjet(bsp)" class="btn btn-outline-danger fa fa-trash"></button>
+                <button (click)="downloadPdf(bsp)" *ngIf="bsp.id!=0"
+                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
               </td>
             </tr>
             </tbody>

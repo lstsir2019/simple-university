@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 import {BudgetService} from '../../controller/service/budget.service';
-import Swal from "sweetalert2";
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-budget-sous-projet',
@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 export class BudgetSousProjetComponent implements OnInit {
 
   public _selectedBsp: BudgetSousProjetVo;
-  public bspInfo: BudgetSousProjetVo = new BudgetSousProjetVo();
+  private _bspInfo: BudgetSousProjetVo = new BudgetSousProjetVo();
 
   constructor(private budgetService: BudgetService) {
   }
@@ -27,8 +27,11 @@ export class BudgetSousProjetComponent implements OnInit {
     this.budgetService.findAllSousProjet();
   }
 
-  public tableBudgetSousProjetInfo(bsp) {
-    this.bspInfo = bsp;
+  get bspInfo(): BudgetSousProjetVo {
+    if (this._bspInfo == null || undefined) {
+      this._bspInfo = new BudgetSousProjetVo();
+    }
+    return this._bspInfo;
   }
 
   public get budgetSousprojet() {
@@ -43,40 +46,12 @@ export class BudgetSousProjetComponent implements OnInit {
     return this.budgetService.bsps;
   }
 
-  public deleteBudgetSousProjet(bsp: BudgetSousProjetVo) {
-    const index: number = this.budgetsSousProjets.indexOf(bsp);
-    if (bsp.id==0) {
-      if (index !== -1) {
-        this.budgetsSousProjets.splice(index, 1);
-      }
-    }else {
-      Swal({
-        title: 'Etes-vous sure?',
-        text: "Vous ne pouvez pas revenir en arrière!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimer!'
-      }).then((result) => {
-        if (result.value) {
-          if (index !== -1) {
-            this.budgetsSousProjets.splice(index, 1);
-          }
-          this.budgetService.deleteBudgetSousProjet(bsp).subscribe();
-          //this.budgetService.refreshAllFromBf();
-          Swal(
-            'Supprimmé!',
-            'Vos données ont été supprimés.',
-            'success'
-          );
-        }
-      });
-    }
+  set bspInfo(value: BudgetSousProjetVo) {
+    this._bspInfo = value;
   }
 
-  public update() {
-    this.budgetService.updateBudgetSousProjet(this.bspInfo.referenceSousProjet);
+  public deleteBudgetSousProjet(bsp: BudgetSousProjetVo) {
+    this.budgetService.deleteBudgetSousProjet(bsp);
   }
 
   public get sousProjets(){
@@ -99,5 +74,25 @@ export class BudgetSousProjetComponent implements OnInit {
     return this.budgetService.findAllByAnneeAndBudgetSousProjet();
   }
 
+  public tableBudgetSousProjetInfo(bsp) {
+    this._bspInfo = bsp;
+  }
 
+  public update() {
+    this.budgetService.updateBudgetSousProjet(this._bspInfo.referenceSousProjet);
+  }
+
+  public downloadPdf(bsp: BudgetSousProjetVo) {
+    let doc = new jsPDF();
+    doc.text('Annee : ' + bsp.budgetFaculteVo.annee, 10, 20);
+    doc.text('Référence : ' + bsp.referenceSousProjet, 10, 30);
+    doc.text('Antidident : ' + bsp.detaillesBudgetVo.antecedent, 10, 40);
+    doc.text('Credit ouvert estimatif : ' + bsp.detaillesBudgetVo.creditOuvertEstimatif, 10, 50);
+    doc.text('Credit ouvert reel : ' + bsp.detaillesBudgetVo.creditOuvertReel, 10, 60);
+    doc.text('Reliquat reel : ' + bsp.detaillesBudgetVo.reliquatReel, 10, 70);
+    doc.text('Reliquat estimatif  : ' + bsp.detaillesBudgetVo.reliquatEstimatif, 10, 80);
+    doc.text('Engagé payé : ' + bsp.detaillesBudgetVo.engagePaye, 10, 90);
+    doc.text('Engagé engage non payé : ' + bsp.detaillesBudgetVo.engageNonPaye, 10, 100);
+    doc.save('budget-faculte+' + bsp.budgetFaculteVo.annee + bsp.id + '.pdf');
+  }
 }

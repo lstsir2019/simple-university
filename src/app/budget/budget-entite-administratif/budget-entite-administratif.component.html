@@ -95,16 +95,21 @@
             <tr *ngIf="beas.length==0">
               <td class="text-center font-italic" colspan="6">No item found</td>
             </tr>
-            <tr *ngFor="let bea of beas" (click)="tableBudgetEntiteAdministratifInfo(bea)" ngClass="bea.id==0?'table-warning':'table-default'">
+            <tr (click)="tableBudgetEntiteAdministratifInfo(bea)" *ngFor="let bea of beas"
+                [ngClass]="bea.id==0?'table-warning':'table-default'">
               <td>{{ bea.referenceEntiteAdministratif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertEstimatif }}</td>
               <td>{{ bea.detaillesBudgetVo.creditOuvertReel }}</td>
               <td>{{ bea.detaillesBudgetVo.engagePaye }}</td>
               <td>{{ bea.detaillesBudgetVo.engageNonPaye }}</td>
-              <td>
-                <button class="btn btn-outline-info fa fa-info mr-2" (click)="getBeaInfos(bea)" data-toggle="modal"
+              <td class="justify-content-between">
+                <button (click)="getBeaInfos(bea)" *ngIf="bea.id!=0" class="btn btn-outline-info fa fa-info mr-2"
+                        data-toggle="modal"
                         data-target="#exampleModalBeaInfo"></button>
-                <button class="btn btn-outline-danger fa fa-trash-o" (click)="deleteEntiteAdministratif(bea)"></button>
+                <button (click)="deleteEntiteAdministratif(bea)" *ngIf="bea.id!=0"
+                        class="btn btn-outline-danger fa fa-trash-o"></button>
+                <button (click)="downloadPdf(bea)" *ngIf="bea.id!=0"
+                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
               </td>
             </tr>
             </tbody>

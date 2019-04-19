@@ -59,10 +59,12 @@ export class ReceptionService {
     if (this.receptionSelected != null) {
       console.log(this.url + "reference/" + this.receptionSelected.reference);
       this.http.delete<Reception>(this.url + "reference/" + this.receptionSelected.reference).subscribe(error => {
+
         console.log('Deleted Reception  with reference = ' + this.receptionSelected.reference + "" + error);
+
       });
       let index: number = this._receptions.indexOf(reception);
-      this._receptions.splice(index, 1);
+
     }
   }
 

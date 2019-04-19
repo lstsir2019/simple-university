@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CategoriProduit} from "../model/categori-produit.model";
 import {TypeProduit} from "../model/type-produit.model";
-import {HttpClient,HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Produit} from "../model/produit.model";
 import {reference} from "@angular/core/src/render3";
-import {Observable,throwError} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {getReact} from "./evolutions/Util/SwalReact";
+import swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -19,125 +21,162 @@ export class ProduitService {
   private _url5: string = "http://localhost:8070/produit_api/produit/";
   private _url7: string = "http://localhost:8070/produit_api/produit/chercher?reference=";
   private _url6: string = "http://localhost:8070/produit_api/categoriType/categorie/delete/";
-  private _url8:string="http://localhost:8070/produit_api/categoriType/type/delete/";
-  private _url9:string="http://localhost:8070/produit_api/categoriType";
+  private _url8: string = "http://localhost:8070/produit_api/categoriType/type/delete/";
+  private _url9: string = "http://localhost:8070/produit_api/categoriType";
 
 
-  private _produitModified:Produit=new Produit("","");
-  private referenceProduitModyf:string="";
-  private _categorieCreate: CategoriProduit=new CategoriProduit("","");
-  private _typeCreate:TypeProduit=new TypeProduit("","");
-  private _produitCreate:Produit=new Produit("","");
-  private _categories:Array<CategoriProduit>;
-  private _types:Array<TypeProduit>;
-  private _produits:Array<Produit>;
-  private referenceP:string="";
+  private _produitModified: Produit = new Produit("", "");
+  private referenceProduitModyf: string = "";
+  private _categorieCreate: CategoriProduit = new CategoriProduit("", "");
+  private _typeCreate: TypeProduit = new TypeProduit("", "");
+  private _produitCreate: Produit = new Produit("", "");
+  private _produitSearch: Produit = new Produit("", "");
+  private _categories: Array<CategoriProduit>;
+  private _types: Array<TypeProduit>;
+  private _produits: Array<Produit>;
+  private referenceP: string = "";
+  private SWAL = getReact('Produit', true);
 
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http: HttpClient) {
+  }
+
 /////////////////////////////////////////////////////
 
- public produitR(referenceP:string):Array<Produit>{
-      this._http.get<Array<Produit>>(this._url5+"chercher?reference="+referenceP).subscribe(
-       data=>{
-         this._produits=data;
-         console.log(" success");
-         console.log(this.produits);
-       },error1 => {
-          console.log("erroorr");
-       }
+  public produitR(referenceP: string): Array<Produit> {
+    this._http.get<Array<Produit>>(this._url5 + "chercher?reference=" + referenceP).subscribe(
+      data => {
+        this._produits = data;
+        console.log(" success");
+        console.log(this.produits);
+      }, error1 => {
+        console.log("erroorr");
+      }
+    );
+    return this._produits
 
-     );
-      return this._produits
+  }
 
- }
- public categorieR(libelleR:string):Array<CategoriProduit>{
-    this._http.get<Array<CategoriProduit>>(this._url9+"/categorie/chercher?libelle="+libelleR).subscribe(
-
-      data=>{
-        this.categories=data;
+  public categorieR(libelleR: string): Array<CategoriProduit> {
+    this._http.get<Array<CategoriProduit>>(this._url9 + "/categorie/chercher?libelle=" + libelleR).subscribe(
+      data => {
+        this.categories = data;
         console.log(" success");
 
-      },error1 => {
+      }, error1 => {
         console.log("erroorr");
 
       }
-
-
     );
-   return this.categories;
- }
+    return this.categories;
+  }
 
 
- public typeR(libelleR:string):Array<TypeProduit>{
-    this._http.get<Array<TypeProduit>>(this._url9+"/type/chercher?libelle="+libelleR).subscribe(
-        data=>{
-          this.types=data;
-          console.log(" success");
-        },error1 => {
+  public typeR(libelleR: string): Array<TypeProduit> {
+    this._http.get<Array<TypeProduit>>(this._url9 + "/type/chercher?libelle=" + libelleR).subscribe(
+      data => {
+        this.types = data;
+        console.log(" success");
+      }, error1 => {
         console.log("erroorr");
       }
-
-
     );
     return this.types;
- }
+  }
 
- public produitsFindAll(){
+  public produitsFindAll() {
     this._http.get<Array<Produit>>(this._url5).subscribe(
-      data=>{
-        if (data!=null){
-          this._produits=data;
-        }
-      },error1 => {
+      data => {
+
+        this._produits = data;
+
+      }, error1 => {
         console.log(error1);
       }
-
     );
 
- }
- public modyfieProduit(){
+  }
 
-    this._http.put<Produit>(this._url5+"/update/",this.produitModified).subscribe(
-      data=>{
+  public modyfieProduit() {
 
+    if (this._produitModified.libelle=="" ||this._produitModified.typeProduitVo.code==""||this._produitModified.categorieProduitVo.libelle=="" ) {
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }
+    this._http.put<number>(this._url5 + "/update/", this.produitModified).subscribe(
+      data => {
+
+        if (data==-1){
+          swal(this.SWAL.SEARCH_NOT_FOUND);
+
+        } else{
+          swal(this.SWAL.SUCCESS_EDIT);
+        }
         console.log(this.produitModified);
 
-      },error1 => {
+      }, error1 => {
         console.log(error1);
       }
-
     );
   }
 
 
-  public saveProduit(){
-    console.log(this._produitCreate)
-    this._http.post<Produit>(this._url5,this._produitCreate).subscribe(
-      data=>{
-        this._produitCreate=new Produit("","");
-       this.produitsFindAll();
-        console.log("Ajoute avec success");
-      },error1 => {
+  public saveProduit() {
+    console.log(this._produitCreate);
+    if (this._produitCreate.reference=="" || this._produitCreate.libelle=="" || this._produitCreate.typeProduitVo.code=="" || this._produitCreate.categorieProduitVo.libelle=="") {
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+      this._http.post<number>(this._url5, this._produitCreate).subscribe(
+        data => {
 
-        console.log("error");
+          if (data == -1) {
+            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+          } else {
+            this._produitCreate = new Produit("", "");
+            swal(this.SWAL.SUCCESS_CREATE);
+            this.produitsFindAll();
+            console.log("Ajoute avec success");
+          }
+
+        }, error1 => {
+
+          console.log("error");
+        }
+      );
+    }
+  }
+
+  public findByQuery() {
+
+    console.log(this.produitSearch.reference);
+    this._http.post<Array<Produit>>(this._url5 + "search/query", this.produitSearch).subscribe(
+      data => {
+        console.log(this.produitSearch.reference);
+        console.log(this.produitSearch.categorieProduitVo);
+        console.log(this.produitSearch.typeProduitVo);
+        console.log(this.produitSearch);
+        this._produits = data;
+        console.log(data);
+
+      }, error1 => {
+        console.log("erroooorr", error1);
       }
-
-
-    );
-
+    )
   }
-  public deleteProduit(reference:string){
-    return this._http.delete<Produit>(this._url5+"delete/"+reference);
+
+  public deleteProduit(reference: string) {
+    return this._http.delete<Produit>(this._url5 + "delete/" + reference);
   }
-  public deleteCategorie(libelle:string): Observable<CategoriProduit[]>{
+
+  public deleteCategorie(libelle: string): Observable<CategoriProduit[]> {
     console.log(this._url6 + libelle);
     return this.http.delete<CategoriProduit[]>(this._url6 + libelle);
   }
-  public deleteType(code:string):Observable<TypeProduit[]>{
-    console.log(this._url8+code);
-    return this._http.delete<TypeProduit[]>(this._url8+code);
+
+  public deleteType(code: string): Observable<TypeProduit[]> {
+    console.log(this._url8 + code);
+    return this._http.delete<TypeProduit[]>(this._url8 + code);
   }
+
   // public deleteCategorie(libelle:string){
   //   this._http.delete(this._url6+libelle).subscribe(
   //     data=>{
@@ -148,48 +187,66 @@ export class ProduitService {
   //   );
   // }
 
-  public saveCategorie(){
-    this._http.post<CategoriProduit>(this._url,this._categorieCreate).subscribe(
-      data=>{
-        this._categorieCreate=new CategoriProduit("","");
-        this.categoriesFindAll();
-        console.log("Ajoute avec success");
-      },error1 => {
-        console.log("error");
+  public saveCategorie() {
+    if (this._categorieCreate.libelle=="" || this._categorieCreate.referenceCompteBuditaire==""){
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    } else {
+      this._http.post<number>(this._url, this._categorieCreate).subscribe(
+        data => {
+          if (data==-1){
+            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS)
+          } else {
+            swal(this.SWAL.SUCCESS_CREATE);
+          }
+
+          this._categorieCreate = new CategoriProduit("", "");
+          this.categoriesFindAll();
+          console.log("Ajoute avec success");
+        }, error1 => {
+          console.log("error");
 
 
-      }
-
-
-    );
-
+        }
+      );
+    }
   }
-  public saveType(){
-    this._http.post<TypeProduit>(this._url2,this._typeCreate).subscribe(
-      data=>{
-        this._typeCreate=new TypeProduit("","");
-        console.log("Ajoute avec success");
-        this.typesFindAll();
-      },error1 => {
-        console.log("error");
-      }
 
-    );
+  public saveType() {
+    if (this._typeCreate.libelle=="" || this._typeCreate.code=="" ){
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    } else {
 
 
-  }
-  public categoriesFindAll() {
-    if (this._categories==null){
-      this._http.get<Array<CategoriProduit>>(this._url3).subscribe(
-        data=>{
-          this._categories=data;
-        },error1 => {
-          console.log("errooorr list");
+      this._http.post<number>(this._url2, this._typeCreate).subscribe(
+        data => {
+          if (data==-1){
+            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+          } else{
+            swal(this.SWAL.SUCCESS_CREATE);
+          }
+          this._typeCreate = new TypeProduit("", "");
+          console.log("Ajoute avec success");
+          this.typesFindAll();
+        }, error1 => {
+          console.log("error");
         }
       );
     }
 
   }
+
+  public categoriesFindAll() {
+
+      this._http.get<Array<CategoriProduit>>(this._url3).subscribe(
+        data => {
+          this._categories = data;
+        }, error1 => {
+          console.log("errooorr list");
+        }
+      );
+    }
+
+
 
   get categories(): Array<CategoriProduit> {
 
@@ -197,31 +254,28 @@ export class ProduitService {
   }
 
   get types(): Array<TypeProduit> {
-    if(this._types==null){
+    if (this._types == null) {
       this._http.get<Array<TypeProduit>>(this._url4).subscribe(
-        data=>{
-          this._types=data;
-        },error1 => {
+        data => {
+          this._types = data;
+        }, error1 => {
           console.log("errooorr list");
         }
-
       );
 
     }
     return this._types;
   }
+
   public typesFindAll() {
-    if(this._types==null){
+
       this._http.get<Array<TypeProduit>>(this._url4).subscribe(
-        data=>{
-          this._types=data;
-        },error1 => {
+        data => {
+          this._types = data;
+        }, error1 => {
           console.log("errooorr list");
         }
-
       );
-
-    }
 
   }
 
@@ -242,7 +296,7 @@ export class ProduitService {
 
 
   set produits(value: Array<Produit>) {
-    this._produits=value;
+    this._produits = value;
   }
 
   get produitCreate(): Produit {
@@ -250,15 +304,15 @@ export class ProduitService {
   }
 
   set produitCreate(value: Produit) {
-    this._produitCreate=value;
+    this._produitCreate = value;
   }
 
   set types(value: Array<TypeProduit>) {
-    this._types=value;
+    this._types = value;
   }
 
   set categories(value: Array<CategoriProduit>) {
-    this._categories=value;
+    this._categories = value;
   }
 
   get http(): HttpClient {
@@ -266,7 +320,7 @@ export class ProduitService {
   }
 
   set http(value: HttpClient) {
-    this._http=value;
+    this._http = value;
   }
 
   get categorieCreate(): CategoriProduit {
@@ -274,7 +328,7 @@ export class ProduitService {
   }
 
   set categorieCreate(value: CategoriProduit) {
-    this._categorieCreate=value;
+    this._categorieCreate = value;
   }
 
   get typeCreate(): TypeProduit {
@@ -282,6 +336,14 @@ export class ProduitService {
   }
 
   set typeCreate(value: TypeProduit) {
-    this._typeCreate=value;
+    this._typeCreate = value;
+  }
+
+  get produitSearch(): Produit {
+    return this._produitSearch;
+  }
+
+  set produitSearch(value: Produit) {
+    this._produitSearch = value;
   }
 }
