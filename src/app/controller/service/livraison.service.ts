@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {Livraison} from '../model/livraison.model';
 import {LivraisonItem} from '../model/livraison-item.model';
 import {HttpClient} from "@angular/common/http";
+import {getReact} from "./evolutions/Util/SwalReact";
+import swal from "sweetalert2";
+import {CommandeSourceWithProduit} from "../model/commande-source-with-produit.model";
 
 
 @Injectable({
@@ -12,9 +15,15 @@ export class LivraisonService {
   private _url2: string = "http://localhost:8098/Livraison-api/livraisonItems/";
   private _livraisonCreate: Livraison = new Livraison("", "", "", "");
   private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '', '', '');
+  private _livraisonDetailCreate: Livraison = new Livraison("", "", "", "");
+  private _livraisonDeatailItemCreate: LivraisonItem = new LivraisonItem("", "", "", "", "");
   private _livraisons: Array<Livraison>;
   private _livraisonR: Livraison;
-  private _livraisonQuery: Livraison=new Livraison("","","","");
+  public livraisonQuery: Livraison = new Livraison("", "", "", "");
+  private SWAL = getReact('Livraison', true);
+  private _commandesExpressions:Array<CommandeSourceWithProduit>;
+  private _magasin:string ="";
+
 
   // private _livraisonItems:Array<LivraisonItem>;
 
@@ -26,33 +35,90 @@ export class LivraisonService {
     console.log(this.livraisonItemCreate.codeMagasin);
     console.log(this.livraisonItemCreate.qte);
     console.log(this.livraisonItemCreate.refenceProduit);
-    let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin, this._livraisonItemCreate.referenceReception, this._livraisonItemCreate.strategy);
-    this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
+    if( this._livraisonItemCreate.codeMagasin=="" || this._livraisonItemCreate.refenceProduit=="" || this._livraisonItemCreate.qte=="" || this._livraisonItemCreate.strategy==""){
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+
+
+        let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin, this._livraisonItemCreate.referenceReception, this._livraisonItemCreate.strategy);
+        this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
+        this._livraisonItemCreate = new LivraisonItem("", "", "", "", "");
+
+    }
+
+
+  }
+  public addLivraisonItemDeatil() {
+    if (this._livraisonDeatailItemCreate.refenceProduit=="" || this._livraisonDeatailItemCreate.qte=="" || this._livraisonDeatailItemCreate.codeMagasin=="" || this._livraisonDeatailItemCreate.referenceReception==""){
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    } else {
+
+        let livraisonItemClone = new LivraisonItem(this._livraisonDeatailItemCreate.refenceProduit, this._livraisonDeatailItemCreate.qte, this._livraisonDeatailItemCreate.codeMagasin, this._livraisonDeatailItemCreate.referenceReception, this._livraisonDeatailItemCreate.strategy);
+        this._livraisonDetailCreate.livraisonItemVos.push(livraisonItemClone);
+        this._livraisonDeatailItemCreate = new LivraisonItem("", "", "", "", "");
+
+    }
+
 
   }
 
   public saveLivraison() {
-    this._http.post<Livraison>(this._url, this._livraisonCreate).subscribe(
-      data => {
-        this._livraisonCreate = new Livraison("", "", "", "");
-        console.log("Ajoute avec success");
-      },
-      error => {
-        console.log("error");
-      }
-    );
+    if (this._livraisonCreate.reference=="" ||this._livraisonCreate.date=="" || this._livraisonCreate.referenceCommande=="" || this._livraisonCreate.referenceEntite=="" ) {
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+      this._http.post<number>(this._url, this._livraisonCreate).subscribe(
+        data => {
+
+
+          this._livraisonCreate = new Livraison("", "", "", "");
+          if (data == -1) {
+            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+          }
+          if (data == -2) {
+            swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+          }
+          if (data == 1) {
+            swal(this.SWAL.SUCCESS_CREATE);
+          }
+
+          console.log("Ajoute avec success");
+        },
+        error => {
+          console.log("error");
+          swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+        }
+      );
+    }
   }
 
+
   public saveLivraisonDetail() {
-    this._http.post<Livraison>(this._url + "detaille/", this._livraisonCreate).subscribe(
-      data => {
-        this._livraisonCreate = new Livraison("", "", "", "");
-        console.log("Ajoute avec success");
-      },
-      error => {
-        console.log("error");
-      }
-    );
+    if (this._livraisonDetailCreate.reference=="" ||this._livraisonDetailCreate.date=="" || this._livraisonDetailCreate.referenceCommande=="" || this._livraisonDetailCreate.referenceEntite=="" ) {
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+
+
+      this._http.post<number>(this._url + "detaille/", this._livraisonDetailCreate).subscribe(
+        data => {
+          if (data == -1) {
+            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+          }
+          if (data == -2) {
+            swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+          }
+          if (data == 1) {
+            swal(this.SWAL.SUCCESS_CREATE);
+          }
+
+          this.livraisonDetailCreate = new Livraison("", "", "", "");
+
+          console.log("Ajoute avec success");
+        },
+        error => {
+          console.log("error");
+        }
+      );
+    }
   }
 
   public livraisonItemsR(livraison: Livraison) {
@@ -70,8 +136,10 @@ export class LivraisonService {
     }
 
   }
-  public deleteLivraison(reference:string){
-    this._http.delete<Livraison>(this.url+"delete/reference/"+reference).subscribe();
+
+  public deleteLivraison(reference: string) {
+    this._http.delete<Livraison>(this.url + "delete/reference/" + reference).subscribe();
+    this._livraisonR = new Livraison("", "", "", "");
   }
 
   get livraisons(): Array<Livraison> {
@@ -94,17 +162,30 @@ export class LivraisonService {
 
   }
 
-  public findByQueryLivraison(){
-    this._http.post<Array<Livraison>>(this._url+"/query",this.livraisonQuery).subscribe(
-      data=>{
-        if(data!=null){
-          this._livraisons=data;
-
-        }
-      },error1 => {
+  public findByQueryLivraison() {
+    this._http.post<Array<Livraison>>(this._url + "/query", this.livraisonQuery).subscribe(
+      data => {
+        console.log(this.livraisonQuery.dateMin);
+        console.log(this.livraisonQuery.dateMax);
+        this._livraisons = data;
+      }, error1 => {
         console.log("errooorr list" + error1);
       }
     );
+  }
+
+  public commandeExpresssionsFind(){
+    console.log(this._livraisonDetailCreate.referenceCommande);
+    console.log(this._livraisonDetailCreate.referenceEntite);
+   this._http.get<Array<CommandeSourceWithProduit>>(this._url+"commande/"+this._livraisonDetailCreate.referenceCommande+"/entity/"+this._livraisonDetailCreate.referenceEntite).subscribe(
+
+     data=>{
+        this._commandesExpressions=data;
+        console.log(data);
+      },error1 => {
+        console.log("errroorr ====>"+error1);
+     }
+   );
   }
 
   set livraisons(value: Array<Livraison>) {
@@ -152,12 +233,37 @@ export class LivraisonService {
     this._livraisonR = value;
   }
 
-  get livraisonQuery(): Livraison {
-    return this._livraisonQuery;
+
+  get livraisonDetailCreate(): Livraison {
+    return this._livraisonDetailCreate;
   }
 
-  set livraisonQuery(value: Livraison) {
-    this._livraisonQuery = value;
+  set livraisonDetailCreate(value: Livraison) {
+    this._livraisonDetailCreate = value;
+  }
+
+  get livraisonDeatailItemCreate(): LivraisonItem {
+    return this._livraisonDeatailItemCreate;
+  }
+
+  set livraisonDeatailItemCreate(value: LivraisonItem) {
+    this._livraisonDeatailItemCreate = value;
+  }
+
+  get magasin(): string {
+    return this._magasin;
+  }
+
+  set magasin(value: string) {
+    this._magasin = value;
+  }
+
+  get commandesExpressions(): Array<CommandeSourceWithProduit> {
+    return this._commandesExpressions;
+  }
+
+  set commandesExpressions(value: Array<CommandeSourceWithProduit>) {
+    this._commandesExpressions = value;
   }
 }
 
