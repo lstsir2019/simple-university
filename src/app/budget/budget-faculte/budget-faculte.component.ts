@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BudgetService} from '../../controller/service/budget.service';
-import Swal from 'sweetalert2';
+import * as jsPDF from 'jspdf';
+import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.model';
+
 @Component({
   selector: 'app-budget-faculte',
   templateUrl: './budget-faculte.component.html',
@@ -10,6 +12,8 @@ export class BudgetFaculteComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  public bfInfo: BudgetFaculteVo = new BudgetFaculteVo();
   constructor(private budgetService: BudgetService) {
   }
 
@@ -42,30 +46,32 @@ export class BudgetFaculteComponent implements OnInit {
   }
 
   public delete(annee: number) {
-    Swal({
-      title: 'Etes-vous sure?',
-      text: "Vous ne pouvez pas revenir en arrière!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimer!'
-    }).then((result) => {
-      if (result.value) {
-        if (annee!=null){
-          this.budgetService.deleteBudgetFaculte(annee).subscribe();
-          this.budgetService.refreshAllFromBf();
-        }
-        Swal(
-          'Supprimmé!',
-          'Vos données ont été supprimés.',
-          'success'
-        );
-      }
-    });
+    this.budgetService.deleteBudgetFaculte(annee);
   }
 
-  public get date(){
-    return new Date().getUTCFullYear();
+  public budgetSousProjetInfo(bf: BudgetFaculteVo) {
+    this.bfInfo = bf;
+  }
+
+  public findByCreteriaAnneMinAndAnneMax() {
+    return this.budgetService.findByCreteriaAnneMinAndAnneMax();
+  }
+
+  /*
+    public updateBudgetFaculte(){
+      this.budgetService.updateBudgetFaculte();
+    }*/
+
+  public downloadPdf(bf: BudgetFaculteVo) {
+    let doc = new jsPDF();
+    doc.text('Annee ' + bf.annee, 10, 20);
+    doc.text('Antidident : ' + bf.detaillesBudgetVo.antecedent, 10, 30);
+    doc.text('Credit ouvert estimatif : ' + bf.detaillesBudgetVo.creditOuvertEstimatif, 10, 40);
+    doc.text('Credit ouvert reel : ' + bf.detaillesBudgetVo.creditOuvertReel, 10, 50);
+    doc.text('Reliquat reel : ' + bf.detaillesBudgetVo.reliquatReel, 10, 60);
+    doc.text('Reliquat estimatif  : ' + bf.detaillesBudgetVo.reliquatEstimatif, 10, 70);
+    doc.text('Engagé payé : ' + bf.detaillesBudgetVo.engagePaye, 10, 80);
+    doc.text('Engagé engage non payé : ' + bf.detaillesBudgetVo.engageNonPaye, 10, 90);
+    doc.save('budget-faculte+' + bf.annee + '.pdf');
   }
 }
