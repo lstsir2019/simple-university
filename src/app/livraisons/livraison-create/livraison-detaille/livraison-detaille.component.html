@@ -31,9 +31,9 @@
 
             <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraison.referenceCommande"  >
               <option selected>Choose...</option>
-              <option  value="com-01">com-01</option>
-              <option  value="com-02">com-02</option>
-              <option  value="com-03">com-03</option>
+              <option  value="cmd-01">cmd-01</option>
+              <option  value="cmd-02">cmd-02</option>
+              <option  value="cmd-03">cmd-03</option>
             </select>
           </div>
         </div>
@@ -47,14 +47,14 @@
 
             <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
-              <option  value="math">math</option>
+              <option  value="dep-info">dep-info</option>
               <option  value="physique">physique</option>
               <option  value="info">info</option>
             </select>
           </div>
         </div>
         <div class="form-group  col-sm-1">
-          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+          <button class="btn btn-outline-info " (click)="findCommandeExpressions()">ok</button>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
             <div class="form-group col-md-12">
               <select class="form-control" [(ngModel)]="livraisonItem.refenceProduit"  >
                 <option>Cmd-expr/produit/Qte</option>
-                <option *ngFor="let p of produits" >{{p.reference}}</option>
+                <option *ngFor="let c of commandeExpressions" >{{c.referenceCommandeExpression}}/{{c.referenceProduit}}/{{c.qteNonLivre}}</option>
               </select>
 
             </div>
@@ -102,7 +102,7 @@
             <div class="form-group col-md-12">
               <select class="form-control" [(ngModel)]="livraisonItem.referenceReception"  >
                 <option>ref-recep/Magasin/qte</option>
-                <option *ngFor="let s of stocksDetails"  value="{{s.referenceReception}}">{{s.referenceReception}}/{{s.magasinVo.reference}}/{{s.qte}}</option>
+                <option *ngFor="let s of stocksDetails"  value="{{s.referenceReception}}" >{{s.referenceReception}}/{{s.magasinVo.reference}}/{{s.qte}}</option>
               </select>
 
               <!--<input type="text" [(ngModel)]="livraisonItem.referenceReception" class="form-control" >-->
@@ -114,9 +114,9 @@
 
 
 
-              <select class="form-control"  [(ngModel)]="livraisonItem.codeMagasin">
+              <select class="form-control"   [(ngModel)]="livraisonItem.codeMagasin">
                 <option>magasin</option>
-                <option value="mag-1" >mag-1</option>
+                <option value="mag-1"  >mag-1</option>
                 <option value="mag-2" >mag-2</option>
                 <option value="mag-3" >mag-3</option>
                 <option value="mag-4" >mag-4</option>

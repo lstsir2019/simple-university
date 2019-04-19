@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
 import {BudgetService} from '../../controller/service/budget.service';
-import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-compte-budgitaire',
@@ -26,10 +25,6 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
   public get budgetSousProjetClone() {
     return this.budgetService.budgetSousProjetCreateClone2;
   }
-  /*
-  public get budgetCompteBudgitaires() {
-    return this.budgetService.budgetCbs;
-  }*/
 
   public get compteBudgitaire() {
     return this.budgetService.compteBudgitaireCreate;
@@ -75,35 +70,7 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
   }
 
   public deleteBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo) {
-    const index: number = this.bcbs.indexOf(bcb);
-    if (bcb.id==0) {
-      if (index !== -1) {
-        this.bcbs.splice(index, 1);
-      }
-    }else {
-      Swal({
-        title: 'Etes-vous sure?',
-        text: "Vous ne pouvez pas revenir en arrière!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimer!'
-      }).then((result) => {
-        if (result.value) {
-          if (index !== -1) {
-            this.bcbs.splice(index, 1);
-          }
-          this.budgetService.deleteBudgetCompteBudgitaire(bcb.referenceCompteBudgitaire).subscribe();
-          //this.budgetService.refreshAllFromBf();
-          Swal(
-            'Supprimmé!',
-            'Vos données ont été supprimés.',
-            'success'
-          );
-        }
-      });
-    }
+    this.budgetService.deleteBudgetCompteBudgitaire(bcb);
   }
 
   public selectedTableBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo){

@@ -35,5 +35,6 @@ export class LivraisonListComponent implements OnInit {
     this.livraisons.splice(
       this.livraisons.indexOf(livraison),1
     );
+
   }
 }

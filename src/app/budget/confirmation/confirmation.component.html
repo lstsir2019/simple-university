@@ -13,17 +13,29 @@
             <th>code compte budgitaire</th>
           </tr>
           </thead>
-          <tbody>
-          <tr *ngIf="bfCreate==null"><td>no item found</td></tr>
-          <tr *ngFor="let bsp of bfCreate.budgetSousProjetVo">
-            <td rowspan="bsp.budgetEntiteAdministratifVo.length">{{bsp.referenceSousProjet}}</td>
-            <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo">
-              <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
-              <div *ngFor="let bcb of bea.budgetCompteBudgitaireVo">
-                <td>{{bcb.compteBudgitaireVo.code}}</td>
-              </div>
-            </div>
+          <!--<tr *ngIf="bfCreate.budgetSousProjetVo==null">
+            <td class="font-italic text-center" colspan="3">No item found</td>
+          </tr>-->
+          <tbody *ngFor="let bsp of bfCreate.budgetSousProjetVo">
+          <tr>
+            <td rowspan="bsp.budgetEntiteAdministratifVo.length"></td>
+            <td
+              rowspan="bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo.length">{{bsp.referenceSousProjet}}
+            </td>
+            <td>{{bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo[0].compteBudgitaireVo.code}}</td>
           </tr>
+          <tr *ngFor="let bcb of bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo; let i= index;">
+            <td *ngIf="i!=0">{{bcb.compteBudgitaireVo.code}}</td>
+          </tr>
+          <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo; let i=index;">
+            <tr *ngIf="i!=0">
+              <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
+              <td>{{bea.budgetCompteBudgitaireVo[0].compteBudgitaireVo.code}}</td>
+            </tr>
+            <tr *ngFor="let bcb of bea.budgetCompteBudgitaireVo; let i=index;">
+              <td *ngIf="i!=0">{{bcb.compteBudgitaireVo.code}}</td>
+            </tr>
+            </div>
           </tbody>
         </table>
         <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>
