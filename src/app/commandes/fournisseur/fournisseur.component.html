@@ -1,0 +1,109 @@
+<div class="col-md-12">
+  <!----============Creation==========--->
+  <div class="card spacer">
+    <div class="card-header text-black-50  mb-3">creation fournisseur</div>
+    <div class="card-body">
+      <div class="d-flex justify-content-sm-between">
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">reference</label>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="fournisseur.reference">
+        </div>
+        <div class="input-group mx-sm-3" >
+          <div class="input-group-prepend">
+            <label class="input-group-text">libelle</label>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="fournisseur.libelle">
+        </div>
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">raison social</label>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="fournisseur.raisonSocial" >
+        </div>
+        <div class="input-group mx-sm-3">
+          <button type="button" class="btn btn-outline-primary btn-block" (click)="createFournisseur()"><i class="fa fa-plus">Create</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!----============update==========--->
+
+  <div class="card spacer">
+
+    <div class="card-header text-black-50 mb-3">modifier les informatin d'un fornisseur</div>
+    <div class="card-body">
+      <div class="d-flex justify-content-sm-between">
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">reference</label>
+          </div>
+          <input type="text" class="form-control" placeholder="entrer reference de fornisseur" [(ngModel)]="fournisseurSerched.reference" >
+        </div>
+        <div class="input-group mx-sm-3">
+          <button type="button" class="btn btn-outline-primary btn-block" (click)="findOneFournisseurByReference()"><i class="fa fa-search">chercher</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">
+
+      <div class="container" *ngIf="fournisseurtrouver!=null">
+        <div class="card spacer">
+          <div class="card-header text-black-50  ">ancient information</div>
+          <table class="table table-hover  ">
+            <thead class="thead"><th>Reference</th><th>libelle</th><th>raison social</th></thead>
+            <tbody class="tbody">
+            <tr>
+              <td>{{fournisseurtrouver.reference}}</td>
+              <td>{{fournisseurtrouver.libelle}}</td>
+              <td>{{fournisseurtrouver.raisonSocial}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <div class="col-md-7">
+      <div class="container" *ngIf="fournisseurtrouver != null">
+        <div class="card  spacer">
+          <div class="card-header text-black-50 ">noveu information</div>
+          <table class="table table-hover">
+            <tbody class="tbody">
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >libelle</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.libelle">
+              </div>
+            </tr>
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >raison social</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.raisonSocial">
+              </div>
+            </tr>
+            <tr>
+              <div class=" col">
+                <button class="btn btn-block btn-outline-info" (click)="updatFor()">update</button>
+              </div>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
