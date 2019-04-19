@@ -29,6 +29,11 @@ export class LivraisonDetailleComponent implements OnInit {
     this.stockService.findStockDetaille(this.livraison.referenceCommande, this.livraisonItem.refenceProduit, strategy);
   }
 
+  public  getMagasin(magasinR:string){
+
+    this.livraisonService.magasin=magasinR;
+    console.log(this.livraisonService.magasin);
+  }
 
   public get stocksDetails() {
     return this.stockService.stocksDetaille;
@@ -37,22 +42,25 @@ export class LivraisonDetailleComponent implements OnInit {
   public get produits() {
     return this.produitService.produits;
   }
+  public get commandeExpressions(){
+    return this.livraisonService.commandesExpressions;
+  }
 
   public addLivraisonItem() {
 
-    this.livraisonService.addLivraisonItem();
+    this.livraisonService.addLivraisonItemDeatil();
   }
 
   public get livraison() {
-    return this.livraisonService.livraisonCreate;
+    return this.livraisonService.livraisonDetailCreate;
   }
 
   public get livraisonItem() {
-    return this.livraisonService.livraisonItemCreate;
+    return this.livraisonService.livraisonDeatailItemCreate;
   }
 
   public get livraisonItems() {
-    return this.livraisonService.livraisonCreate.livraisonItemVos;
+    return this.livraisonService.livraisonDetailCreate.livraisonItemVos;
   }
 
   public saveLivraisonDetail() {
@@ -60,9 +68,12 @@ export class LivraisonDetailleComponent implements OnInit {
   }
 
   public deleteTableItem(livraisonItem: LivraisonItem) {
-    this.livraisonService.livraisonCreate.livraisonItemVos.splice(
-      this.livraisonService.livraisonCreate.livraisonItemVos.indexOf(livraisonItem), 1
+    this.livraisonService.livraisonDetailCreate.livraisonItemVos.splice(
+      this.livraisonService.livraisonDetailCreate.livraisonItemVos.indexOf(livraisonItem), 1
     );
+  }
+  public findCommandeExpressions(){
+    this.livraisonService.commandeExpresssionsFind();
   }
 
   public stockSelecktedd(stock: Stock) {
