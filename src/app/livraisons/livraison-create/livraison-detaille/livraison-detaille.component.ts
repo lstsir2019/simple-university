@@ -7,6 +7,8 @@ import {LivraisonItem} from "../../../controller/model/livraison-item.model";
 import {Stock} from "../../../controller/model/stock.model";
 import {Magasin} from "../../../controller/model/magasin.model";
 import {StockDetailleServiceService} from "../../../controller/service/stock-detaille-service.service";
+import {CommandeSourceWithProduit} from "../../../controller/model/commande-source-with-produit.model";
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-livraison-detaille',
@@ -17,6 +19,8 @@ export class LivraisonDetailleComponent implements OnInit {
 
   referenceCmdStock: string = "";
   referenceProduit: string = "";
+  cmdExp: CommandeSourceWithProduit;
+  stockDeataol: Stock;
   public stockR: Stock = new Stock("", "", 0, 0, 0, new Magasin(""));
 
   constructor(private livraisonService: LivraisonService, private produitService: ProduitService, private stockGlobalService: StockGlobalService, private stockService: StockDetailleServiceService) {
@@ -25,13 +29,31 @@ export class LivraisonDetailleComponent implements OnInit {
   ngOnInit() {
   }
 
+  public getCommandeExpression() {
+
+
+    console.log("haaaaaaaaaaaaa l7ayaaaaaayaaaatt==>" + this.cmdExp.referenceCommandeExpression + "lmaamaaaaat==>" + this.cmdExp.qteNonLivre);
+    this.livraisonService.livraisonDeatailItemCreate.referenceCommandeExpression = this.cmdExp.referenceCommandeExpression;
+    console.log(this.livraisonService.livraisonDeatailItemCreate.referenceCommandeExpression);
+    console.log(this.livraisonService.livraisonDeatailItemCreate.refenceProduit);
+    this.livraisonService.livraisonDeatailItemCreate.refenceProduit = this.cmdExp.referenceProduit;
+
+  }
+
   public findStockDetaille(strategy: string) {
     this.stockService.findStockDetaille(this.livraison.referenceCommande, this.livraisonItem.refenceProduit, strategy);
   }
 
-  public  getMagasin(magasinR:string){
+  public getStockDeatil() {
+    this.livraisonService.livraisonDeatailItemCreate.codeMagasin = this.stockDeataol.magasinVo.reference;
+    this.livraisonService.livraisonDeatailItemCreate.referenceReception = this.stockDeataol.referenceReception;
+    console.log("haaaaaaaaaaa magasin====> " + this.livraisonService.livraisonDeatailItemCreate.codeMagasin);
+    console.log("haaaaaaaaa reception ===> " + this.livraisonService.livraisonDeatailItemCreate.referenceReception);
+  }
 
-    this.livraisonService.magasin=magasinR;
+  public getMagasin(magasinR: string) {
+
+    this.livraisonService.magasin = magasinR;
     console.log(this.livraisonService.magasin);
   }
 
@@ -42,13 +64,23 @@ export class LivraisonDetailleComponent implements OnInit {
   public get produits() {
     return this.produitService.produits;
   }
-  public get commandeExpressions(){
+
+  public get commandeExpressions() {
     return this.livraisonService.commandesExpressions;
   }
 
   public addLivraisonItem() {
+    if (parseFloat(this.livraisonService.livraisonDeatailItemCreate.qte) > parseFloat(this.cmdExp.qteNonLivre) || parseFloat(this.livraisonService.livraisonDeatailItemCreate.qte) > this.stockDeataol.qte) {
+      swal({
+        title: 'Erreur !',
+        text: "Il faut regler la qunatite",
+        type: 'error',
+        confirmButtonText: 'ok'
+      });
+    } else {
+      this.livraisonService.addLivraisonItemDeatil();
+    }
 
-    this.livraisonService.addLivraisonItemDeatil();
   }
 
   public get livraison() {
@@ -72,8 +104,13 @@ export class LivraisonDetailleComponent implements OnInit {
       this.livraisonService.livraisonDetailCreate.livraisonItemVos.indexOf(livraisonItem), 1
     );
   }
-  public findCommandeExpressions(){
+
+  public findCommandeExpressions() {
     this.livraisonService.commandeExpresssionsFind();
+  }
+
+  public selectedCommandeExpression(cmdExpression: CommandeSourceWithProduit) {
+
   }
 
   public stockSelecktedd(stock: Stock) {
