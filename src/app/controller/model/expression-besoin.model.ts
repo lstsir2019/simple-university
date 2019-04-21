@@ -5,5 +5,9 @@ export class ExpressionBesoin {
   constructor(public reference: string ,
               public codeEntity: string ,
               public codePersonel: string ,
-              public dateExpression: string) { }
+              public dateExpression: string,
+              public dateMin: string,
+              public dateMax: string
+
+  ) { }
 }

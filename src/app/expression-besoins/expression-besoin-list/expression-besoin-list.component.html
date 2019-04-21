@@ -6,28 +6,28 @@
       <div class="input-group-prepend">
         <span class="input-group-text" >Reference</span>
       </div>
-      <input type="text" class="form-control"  >
+      <input type="text" class="form-control"  [(ngModel)]="expressionBesoinSearch.reference">
     </div>
     <div class="input-group mb-2 col">
       <div class="input-group-prepend">
         <span class="input-group-text" >Date min</span>
       </div>
-      <input type="date" class="form-control"  >
+      <input type="date" class="form-control" [(ngModel)]="expressionBesoinSearch.dateMin" >
     </div>
     <div class="input-group mb-2 col">
       <div class="input-group-prepend">
         <span class="input-group-text" >Date max</span>
       </div>
-      <input type="date" class="form-control"  >
+      <input type="date" class="form-control" [(ngModel)]="expressionBesoinSearch.dateMax" >
     </div>
     <div class="input-group mb-2 col">
       <div class="input-group-prepend">
         <span class="input-group-text" >Entité admin</span>
       </div>
-      <input type="text" class="form-control"  >
+      <input type="text" class="form-control" [(ngModel)]="expressionBesoinSearch.codeEntity" >
     </div>
       <div class=" col">
-        <button class="btn btn-block btn-outline-info fa fa-search"> Recherche</button>
+        <button class="btn btn-block btn-outline-info fa fa-search" (click)="findByCriteria()"> Recherche</button>
       </div>
   </div>
 
@@ -81,6 +81,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Modal detail-->
 <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
