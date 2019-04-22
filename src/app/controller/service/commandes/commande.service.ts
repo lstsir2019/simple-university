@@ -50,7 +50,7 @@ export class CommandeService {
   //======================function=======================
   public addCommandeItem() {
     this.commandeCreate.total += this.commandeItemCreate.prix * this.commandeItemCreate.qte;
-    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.prix, this.commandeItemCreate.qte, this.commandeItemCreate.id);
+    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.qte, this.commandeItemCreate.prix, this.commandeItemCreate.id);
     this.commandeCreate.commandeItemVos.push(commandeItemClone);
     this.commandeItemCreate = new CommandeItem('', 0, 0,0);
   }
