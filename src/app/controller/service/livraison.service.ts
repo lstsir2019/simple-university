@@ -14,14 +14,16 @@ export class LivraisonService {
   private _url: string = "http://localhost:8098/Livraison-api/livraisons/";
   private _url2: string = "http://localhost:8098/Livraison-api/livraisonItems/";
   private _livraisonCreate: Livraison = new Livraison("", "", "", "");
-  private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '', '', '');
+  private _livraisonItemCreate: LivraisonItem = new LivraisonItem('', '', '', '', '','');
   private _livraisonDetailCreate: Livraison = new Livraison("", "", "", "");
-  private _livraisonDeatailItemCreate: LivraisonItem = new LivraisonItem("", "", "", "", "");
+  private _livraisonDeatailItemCreate: LivraisonItem = new LivraisonItem("", "", "", "", "","");
   private _livraisons: Array<Livraison>;
   private _livraisonR: Livraison;
   public livraisonQuery: Livraison = new Livraison("", "", "", "");
   private SWAL = getReact('Livraison', true);
   private _commandesExpressions:Array<CommandeSourceWithProduit>;
+  private _commandesExpressionsGlobals:Array<CommandeSourceWithProduit>;
+  private _commandeExpression:CommandeSourceWithProduit=new CommandeSourceWithProduit("","","");
   private _magasin:string ="";
 
 
@@ -40,9 +42,9 @@ export class LivraisonService {
     }else {
 
 
-        let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin, this._livraisonItemCreate.referenceReception, this._livraisonItemCreate.strategy);
+        let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin, this._livraisonItemCreate.referenceReception, this._livraisonItemCreate.strategy,this.livraisonItemCreate.referenceCommandeExpression);
         this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
-        this._livraisonItemCreate = new LivraisonItem("", "", "", "", "");
+        this._livraisonItemCreate = new LivraisonItem("", "", "", "", "","");
 
     }
 
@@ -53,9 +55,9 @@ export class LivraisonService {
       swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
 
-        let livraisonItemClone = new LivraisonItem(this._livraisonDeatailItemCreate.refenceProduit, this._livraisonDeatailItemCreate.qte, this._livraisonDeatailItemCreate.codeMagasin, this._livraisonDeatailItemCreate.referenceReception, this._livraisonDeatailItemCreate.strategy);
+        let livraisonItemClone = new LivraisonItem(this._livraisonDeatailItemCreate.refenceProduit, this._livraisonDeatailItemCreate.qte, this._livraisonDeatailItemCreate.codeMagasin, this._livraisonDeatailItemCreate.referenceReception, this._livraisonDeatailItemCreate.strategy,this.livraisonDeatailItemCreate.referenceCommandeExpression);
         this._livraisonDetailCreate.livraisonItemVos.push(livraisonItemClone);
-        this._livraisonDeatailItemCreate = new LivraisonItem("", "", "", "", "");
+        this._livraisonDeatailItemCreate = new LivraisonItem("", "", "", "", "","");
 
     }
 
@@ -173,6 +175,17 @@ export class LivraisonService {
       }
     );
   }
+  public commandeExpressionsFindGlobal(){
+    this._http.get<Array<CommandeSourceWithProduit>>(this._url+"commande/"+this._livraisonCreate.referenceCommande+"/entity/"+this._livraisonCreate.referenceEntite).subscribe(
+
+      data=>{
+        this.commandesExpressionsGlobals=data;
+        console.log(data);
+      },error1 => {
+        console.log("errroorr ====>"+error1);
+      }
+    );
+  }
 
   public commandeExpresssionsFind(){
     console.log(this._livraisonDetailCreate.referenceCommande);
@@ -264,6 +277,23 @@ export class LivraisonService {
 
   set commandesExpressions(value: Array<CommandeSourceWithProduit>) {
     this._commandesExpressions = value;
+  }
+
+
+  get commandesExpressionsGlobals(): Array<CommandeSourceWithProduit> {
+    return this._commandesExpressionsGlobals;
+  }
+
+  set commandesExpressionsGlobals(value: Array<CommandeSourceWithProduit>) {
+    this._commandesExpressionsGlobals = value;
+  }
+
+  get commandeExpression(): CommandeSourceWithProduit {
+    return this._commandeExpression;
+  }
+
+  set commandeExpression(value: CommandeSourceWithProduit) {
+    this._commandeExpression = value;
   }
 }
 

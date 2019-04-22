@@ -77,6 +77,7 @@ import {MagasinCreateListeComponent} from './magasin/magasin-create/magasin-crea
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 import {MagasinUpdateComponent} from './magasin/magasin-update/magasin-update.component';
 import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global-list.component';
+import {TestPrintComponent} from './expression-besoins/test-print/test-print.component';
 import { FournisseurComponent } from './commandes/fournisseur/fournisseur.component';
 import {FooterComponent} from './footer/footer.component';
 
@@ -153,6 +154,7 @@ import {FooterComponent} from './footer/footer.component';
     CommandeAffectationComponent,
     MagasinUpdateComponent,
     StockGlobalListComponent,
+    TestPrintComponent,
     FournisseurComponent,
     FooterComponent,
 
