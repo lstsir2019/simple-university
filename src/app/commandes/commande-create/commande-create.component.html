@@ -9,7 +9,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >Reference</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.reference" required>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.reference" >
         </div>
 
         <div class="input-group mb-3">
@@ -23,14 +23,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text" >Date</span>
           </div>
-          <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.dateCommande" required>
+          <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.dateCommande" >
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" >Fournisseur</span>
           </div>
-          <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.fournisseurVo.reference" required>
+          <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commande.fournisseurVo.reference" >
             <option value="">select</option>
             <option *ngFor="let c of fournisseurs()">{{c.reference}}</option>
           </select>
@@ -50,7 +50,7 @@
 
           <div class="col">
             <label>categorie</label>
-            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  required>
+            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  >
               <option value="">select</option>
               <option *ngFor="let c of categories" (click)="setProduitByCategorier(c.libelle)">{{c.libelle}}</option>
             </select>
@@ -58,7 +58,7 @@
           </div>
           <div class="col">
             <label>reference</label>
-            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItem.referenceProduit" required>
+            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItem.referenceProduit" >
               <option value="">select</option>
               <option *ngFor="let k of commandeItemCombo">{{k.reference}}</option>
             </select>
@@ -68,14 +68,14 @@
           <div class="col">
             <label>prix</label>
 
-            <input class="form-control" type="number" [(ngModel)]="commandeItem.prix" required min="0">
+            <input class="form-control" type="number" [(ngModel)]="commandeItem.prix"  min="0">
 
           </div>
 
           <div class="col">
             <label>quantite</label>
 
-            <input class="form-control" type="number" [(ngModel)]="commandeItem.qte" required min="0">
+            <input class="form-control" type="number" [(ngModel)]="commandeItem.qte"  min="0">
 
           </div>
 

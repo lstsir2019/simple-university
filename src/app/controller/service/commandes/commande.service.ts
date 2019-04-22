@@ -26,11 +26,11 @@ export class CommandeService {
   private _url4: string = 'http://localhost:8090/faculte-commande/paiementes';
 
   private _commandeCreate: Commande = new Commande('', 0, '', '', '', '');
-  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0, Number(''));
+  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0,0);
   private _commande: Commande = new Commande('', 0, '', '', '', '');
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
-  private _paiementCreate: Paiement = new Paiement(Number(''), 0, '', '');
+  private _paiementCreate: Paiement = new Paiement(0,0,'','');
   private _fournisseurs: Array<Fournisseur>;
   public produits: Array<Produit>;
   private _categories: Array<CategoriProduit>;
@@ -52,7 +52,7 @@ export class CommandeService {
     this.commandeCreate.total += this.commandeItemCreate.prix * this.commandeItemCreate.qte;
     let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.prix, this.commandeItemCreate.qte, this.commandeItemCreate.id);
     this.commandeCreate.commandeItemVos.push(commandeItemClone);
-    this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+    this.commandeItemCreate = new CommandeItem('', 0, 0,0);
   }
 
   public findAll() {
@@ -86,7 +86,7 @@ export class CommandeService {
         }
         console.log('ok');
         this.commandeCreate = new Commande('', 0, '', '', '', '');
-        this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+        this.commandeItemCreate = new CommandeItem('', 0, 0,0);
       }, error: error => {
         console.log('erreur');
       }
