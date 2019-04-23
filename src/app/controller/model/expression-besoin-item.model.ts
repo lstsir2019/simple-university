@@ -1,4 +1,3 @@
-import {ExpressionBesoin} from './expression-besoin.model';
 
 export class ExpressionBesoinItem {
 
@@ -11,6 +10,7 @@ export class ExpressionBesoinItem {
                   public quantiteAccorder: number,
                   public quantiteCommander: number,
                   public quantiteLivre: number,
+                  public entityAdmin: string,
 
 
 

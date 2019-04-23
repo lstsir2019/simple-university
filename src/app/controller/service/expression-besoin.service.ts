@@ -14,7 +14,7 @@ export class ExpressionBesoinService {
   public url:string = "http://localhost:8099/faculte-besoin/expressionbesoins/"
   public expressionBesoinCreate: ExpressionBesoin = new ExpressionBesoin('' , '' , '', '','','');
   public expressionBesoinItemCreate: ExpressionBesoinItem = new ExpressionBesoinItem(0,
-    '', '', 0,'',0,0,0);
+    '', '', 0,'',0,0,0,'');
   private _expressionBesoins:Array<ExpressionBesoin>;
   private _expressionBesoinSelect:ExpressionBesoin;
   private _expressionBesoinItemSelect:ExpressionBesoinItem;
@@ -28,9 +28,9 @@ export class ExpressionBesoinService {
 
 
   public addExpressionBesoinItem() {
-    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre );
+    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre,this.expressionBesoinItemCreate.entityAdmin );
     this.expressionBesoinCreate.expressionBesoinItemsVos.push(expressionBesoinItemClone);
-    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0 );
+    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0,'' );
   }
 
   public print():any{
@@ -197,7 +197,7 @@ export class ExpressionBesoinService {
 
   get expressionBesoinItemSelect(): ExpressionBesoinItem {
     if(this._expressionBesoinItemSelect == null){
-      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"",0,0,0);
+      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"",0,0,0,'');
     }
     return this._expressionBesoinItemSelect;
   }

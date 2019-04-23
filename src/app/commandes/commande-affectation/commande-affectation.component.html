@@ -29,8 +29,9 @@
     <div class="card">
       <div class="card-body">
         <table class="table table-hover">
-          <thead class="thead-light"><th>Ref Produit</th><th>Qte</th><th>Qte commande</th><th>Affecter</th></thead>
+          <thead class="thead-light"><th>Entité Admin</th><th>Ref Produit</th><th>Qte</th><th>Qte commande</th><th>Affecter</th></thead>
           <tr *ngFor="let res of expressionBesoinItems">
+            <td>{{res.entityAdmin}}</td>
             <td>{{res.referenceProduit}}</td>
             <td>{{res.quantiteAccorder}}</td>
             <td>{{res.quantiteCommander}}</td>
