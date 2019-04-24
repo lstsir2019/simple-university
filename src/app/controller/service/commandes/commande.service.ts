@@ -43,6 +43,7 @@ export class CommandeService {
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
   public fournisseurtrover: Fournisseur;
   public commandeItemsReception: Array<CommandeItem>;
+  public commandeSources : Array<CommandeSource>;
 
   constructor(private http: HttpClient) {
   }
@@ -330,6 +331,16 @@ export class CommandeService {
     );
 
 
+  }
+
+  public findCommandeSources(commandeItem: CommandeItem) {
+    this.http.post<Array<CommandeSource>>('http://localhost:8090/faculte-commande/commandes/commandeSources',commandeItem).subscribe(
+      data => {
+        this.commandeSources = data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 
