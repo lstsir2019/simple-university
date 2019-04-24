@@ -40,7 +40,7 @@ export class CommandeService {
   public commandeSourceCreate: CommandeSource = new CommandeSource(0, '');
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
-  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
+  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
   public fournisseurtrover: Fournisseur;
   public commandeItemsReception: Array<CommandeItem>;
 
@@ -287,7 +287,7 @@ export class CommandeService {
           });
         }
         console.log('ok');
-        this.fournisseurCreate = new Fournisseur('', '', '');
+        this.fournisseurCreate = new Fournisseur('', '', '','','');
       }, error: error => {
         console.log(error);
       }
@@ -295,7 +295,7 @@ export class CommandeService {
   }
 
   //---
-  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '');
+  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '','','');
 
   public findOneFournisseurByReference() {
 
@@ -324,6 +324,7 @@ export class CommandeService {
             type: 'success',
           });
         }
+        this.findOneFournisseurByReference();
       }, error1 => {
         console.log(error1);
       }
