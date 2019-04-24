@@ -14,9 +14,9 @@ export class ExpressionBesoinService {
   public url:string = "http://localhost:8099/faculte-besoin/expressionbesoins/"
   public expressionBesoinCreate: ExpressionBesoin = new ExpressionBesoin('' , '' , '', '','','');
   public expressionBesoinItemCreate: ExpressionBesoinItem = new ExpressionBesoinItem(0,
-    '', '', 0,'',0,0,0);
-  private _expressionBesoins:Array<ExpressionBesoin>;
-  private _expressionBesoinSelect:ExpressionBesoin;
+    '', '', 0,'',0,0,0,'');
+  public expressionBesoins:Array<ExpressionBesoin>;
+  public expressionBesoinSelect:ExpressionBesoin;
   private _expressionBesoinItemSelect:ExpressionBesoinItem;
   public expressionBesoinSearch:ExpressionBesoin = new ExpressionBesoin('','','','','','');
   public produitCategories:Array<CategoriProduit>;
@@ -28,9 +28,9 @@ export class ExpressionBesoinService {
 
 
   public addExpressionBesoinItem() {
-    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre );
+    let expressionBesoinItemClone = new ExpressionBesoinItem(this.expressionBesoinItemCreate.id,this.expressionBesoinItemCreate.referenceCategorieProduit, this.expressionBesoinItemCreate.referenceProduit, this.expressionBesoinItemCreate.quantiteDemande, this.expressionBesoinItemCreate.description,this.expressionBesoinItemCreate.quantiteAccorder,this.expressionBesoinItemCreate.quantiteCommander,this.expressionBesoinItemCreate.quantiteLivre,this.expressionBesoinItemCreate.entityAdmin );
     this.expressionBesoinCreate.expressionBesoinItemsVos.push(expressionBesoinItemClone);
-    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0 );
+    this.expressionBesoinItemCreate = new ExpressionBesoinItem(0,'','',0,'',0,0,0,'' );
   }
 
   public print():any{
@@ -73,9 +73,20 @@ export class ExpressionBesoinService {
     }
 
   }
+
+  public findAll(){
+    this.http.get<Array<ExpressionBesoin>>('http://localhost:8099/faculte-besoin/expressionbesoins/').subscribe(
+      data=>{
+        this.expressionBesoins=data;
+      }, error1 => {
+        console.log("error while loding all exp besoin =>"+error1);
+      }
+    );
+  }
+
   public findItemsByReference(expressionBesoin:ExpressionBesoin){
-    this._expressionBesoinSelect=expressionBesoin;
-    if (this._expressionBesoinSelect !=null){
+    this.expressionBesoinSelect=expressionBesoin;
+    if (this.expressionBesoinSelect !=null){
       this.http.get<Array<ExpressionBesoinItem>>("http://localhost:8099/faculte-besoin/expressionbesoins/items/"+this.expressionBesoinSelect.reference+"").subscribe(
         data=>{
           this.expressionBesoinSelect.expressionBesoinItemsVos=data;
@@ -100,7 +111,7 @@ export class ExpressionBesoinService {
             });
           }
 
-          if (data == -1) {
+          if (data == -2) {
             Swal({
               title: 'failed !',
               text: 'qte non acceptable',
@@ -145,6 +156,7 @@ export class ExpressionBesoinService {
             });
           }
           console.log("deleted ...");
+          this.findItemsByReference(this.expressionBesoinSelect);
         },error => {
           console.log("error while deleting ...");
         }
@@ -156,48 +168,29 @@ export class ExpressionBesoinService {
 
 
   public findByCriteria(){
-    /*let ref = this.expressionBesoinSearch.reference;
-    let ent = this.expressionBesoinSearch.codeEntity;
-    if (ref == ""){
-      ref = "null";
-    }
-    if (ent == ""){
-      ent = "null";
-    }*/
+
     this.http.post<Array<ExpressionBesoin>>("http://localhost:8099/faculte-besoin/expressionbesoins/search",this.expressionBesoinSearch).subscribe(
       data=>{
-        this._expressionBesoins = data;
+        this.expressionBesoins = data;
       },error1 => {
         console.log(error1);
       }
     );
   }
 
-  get expressionBesoins(): Array<ExpressionBesoin> {
-
-    return this._expressionBesoins;
-  }
-
-  set expressionBesoins(value: Array<ExpressionBesoin>) {
-    this._expressionBesoins = value;
-  }
 
 
-  get expressionBesoinSelect(): ExpressionBesoin {
-    if(this._expressionBesoinSelect == null){
-      this._expressionBesoinSelect = new ExpressionBesoin('',"","","",'','');
-    }
-    return this._expressionBesoinSelect;
-  }
 
-  set expressionBesoinSelect(value: ExpressionBesoin) {
-    this._expressionBesoinSelect = value;
-  }
+
+
+
+
+
 
 
   get expressionBesoinItemSelect(): ExpressionBesoinItem {
     if(this._expressionBesoinItemSelect == null){
-      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"",0,0,0);
+      this._expressionBesoinItemSelect = new ExpressionBesoinItem(0,"","",0,"",0,0,0,'');
     }
     return this._expressionBesoinItemSelect;
   }
@@ -234,6 +227,8 @@ export class ExpressionBesoinService {
       }
     );
   }
+
+
 
 
 }

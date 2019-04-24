@@ -48,6 +48,14 @@ export class CommandeAffectationComponent implements OnInit {
     return this.commandeService.commandeSourceCreate;
   }
 
+  public findCommandeSources(commandeItem: CommandeItem){
+    return this.commandeService.findCommandeSources(commandeItem);
+  }
+
+  public get commandeSources(){
+    return this.commandeService.commandeSources;
+  }
+
 
 
 }
