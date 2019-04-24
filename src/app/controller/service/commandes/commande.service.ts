@@ -37,7 +37,7 @@ export class CommandeService {
   public commandeItems: Array<CommandeItem>;
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
-  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '');
+  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0);
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');

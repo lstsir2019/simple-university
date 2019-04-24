@@ -47,7 +47,7 @@ export class ExpressionBesoinService {
 
 
   public saveExpressionBesoin(){
-    if (this.expressionBesoinSelect!=null){
+
       this.http.post<number>(this.url,this.expressionBesoinCreate).subscribe(
         date=>{
           if (date == -1){
@@ -70,7 +70,7 @@ export class ExpressionBesoinService {
           console.log("error");
         }
       );
-    }
+
 
   }
 
