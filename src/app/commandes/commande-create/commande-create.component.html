@@ -60,7 +60,7 @@
             <label>reference</label>
             <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItem.referenceProduit" required>
               <option value="">select</option>
-              <option *ngFor="let k of commandeItemCombo">{{k.reference}}</option>
+              <option *ngFor="let k of commandeItemCombo">{{k.libelle}}</option>
             </select>
 
           </div>
