@@ -7,7 +7,6 @@ import {Paiement} from '../../model/commandes/paiement.model';
 import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
 import {CommandeSource} from '../../model/commandes/commandeSource.model';
 import Swal from 'sweetalert2';
-import {Stock} from '../../model/stock.model';
 import {CategoriProduit} from '../../model/categori-produit.model';
 import {Produit} from '../../model/produit.model';
 import {getReact} from '../evolutions/Util/SwalReact';
@@ -42,7 +41,7 @@ export class CommandeService {
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
   public fournisseurtrover: Fournisseur;
-  public commandeItemsReception: Array<CommandeItem>;
+  public commandeItemsReception: Array<CommandeItem> = [];
 
   constructor(private http: HttpClient) {
   }
@@ -153,18 +152,19 @@ export class CommandeService {
       );
     }
   }
-   //anous
-  public findCommandeItemsReceptionByReference(commande: Commande) {
-    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + commande.reference + '/commande-items').subscribe(
+
+  //Anous
+  public findCommandeItemsReceptionByReference(reference: string) {
+    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + reference + '/commande-items').subscribe(
       data => {
         if (data == null) {
           Swal(this.SWAL.SEARCH_NOT_FOUND);
-          this.commandeItemsReception = new Array<CommandeItem>();
+          this.commandeItemsReception = [];
         } else {
           this.commandeItemsReception = data;
         }
       }, error => {
-        this.commandeItemsReception = new Array<CommandeItem>();
+        this.commandeItemsReception = [];
         Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
         console.log('error whith loading commandes items' + error);
       }
@@ -238,7 +238,7 @@ export class CommandeService {
               type: 'success',
             });
             this.findAll();
-            this.commandeSelected.commandeItemVos = new Array<CommandeItem>();
+            this.commandeSelected.commandeItemVos = [];
           }
 
           console.log('deleted ...');
