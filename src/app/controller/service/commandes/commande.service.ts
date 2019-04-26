@@ -211,6 +211,9 @@ export class CommandeService {
     this.http.post<CommandeSource>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
       data => {
         console.log(data);
+
+        this.findCommandeItemsByCommandeReference();
+        this.findExpressionBesoinItemsByProduit(this.commandeItemSelected);
       }, error1 => {
         console.log(error1);
       }
