@@ -7,6 +7,7 @@ import {Paiement} from '../../model/commandes/paiement.model';
 import {ExpressionBesoinItem} from '../../model/expression-besoin-item.model';
 import {CommandeSource} from '../../model/commandes/commandeSource.model';
 import Swal from 'sweetalert2';
+import {Stock} from '../../model/stock.model';
 import {CategoriProduit} from '../../model/categori-produit.model';
 import {Produit} from '../../model/produit.model';
 import {getReact} from '../evolutions/Util/SwalReact';
@@ -25,23 +26,24 @@ export class CommandeService {
   private _url4: string = 'http://localhost:8090/faculte-commande/paiementes';
 
   private _commandeCreate: Commande = new Commande('', 0, '', '', '', '');
-  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0, Number(''));
+  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0,0,0);
   private _commande: Commande = new Commande('', 0, '', '', '', '');
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
-  private _paiementCreate: Paiement = new Paiement(Number(''), 0, '', '');
+  private _paiementCreate: Paiement = new Paiement(0,0,'','');
   private _fournisseurs: Array<Fournisseur>;
   public produits: Array<Produit>;
   private _categories: Array<CategoriProduit>;
   public commandeItems: Array<CommandeItem>;
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
-  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '');
+  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0);
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
-  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
+  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
   public fournisseurtrover: Fournisseur;
-  public commandeItemsReception: Array<CommandeItem> = [];
+  public commandeItemsReception: Array<CommandeItem>;
+  public commandeSources : Array<CommandeSource>;
 
   constructor(private http: HttpClient) {
   }
@@ -49,9 +51,9 @@ export class CommandeService {
   //======================function=======================
   public addCommandeItem() {
     this.commandeCreate.total += this.commandeItemCreate.prix * this.commandeItemCreate.qte;
-    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.prix, this.commandeItemCreate.qte, this.commandeItemCreate.id);
+    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.qte, this.commandeItemCreate.prix, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
     this.commandeCreate.commandeItemVos.push(commandeItemClone);
-    this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+    this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
   }
 
   public findAll() {
@@ -85,7 +87,7 @@ export class CommandeService {
         }
         console.log('ok');
         this.commandeCreate = new Commande('', 0, '', '', '', '');
-        this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+        this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
         console.log('erreur');
       }
@@ -152,19 +154,18 @@ export class CommandeService {
       );
     }
   }
-
-  //Anous
-  public findCommandeItemsReceptionByReference(reference: string) {
-    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + reference + '/commande-items').subscribe(
+   //anous
+  public findCommandeItemsReceptionByReference(commande: Commande) {
+    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + commande.reference + '/commande-items').subscribe(
       data => {
         if (data == null) {
           Swal(this.SWAL.SEARCH_NOT_FOUND);
-          this.commandeItemsReception = [];
+          this.commandeItemsReception = new Array<CommandeItem>();
         } else {
           this.commandeItemsReception = data;
         }
       }, error => {
-        this.commandeItemsReception = [];
+        this.commandeItemsReception = new Array<CommandeItem>();
         Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
         console.log('error whith loading commandes items' + error);
       }
@@ -210,6 +211,9 @@ export class CommandeService {
     this.http.post<CommandeSource>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
       data => {
         console.log(data);
+
+        this.findCommandeItemsByCommandeReference();
+        this.findExpressionBesoinItemsByProduit(this.commandeItemSelected);
       }, error1 => {
         console.log(error1);
       }
@@ -238,7 +242,7 @@ export class CommandeService {
               type: 'success',
             });
             this.findAll();
-            this.commandeSelected.commandeItemVos = [];
+            this.commandeSelected.commandeItemVos = new Array<CommandeItem>();
           }
 
           console.log('deleted ...');
@@ -287,7 +291,7 @@ export class CommandeService {
           });
         }
         console.log('ok');
-        this.fournisseurCreate = new Fournisseur('', '', '');
+        this.fournisseurCreate = new Fournisseur('', '', '','','');
       }, error: error => {
         console.log(error);
       }
@@ -295,7 +299,7 @@ export class CommandeService {
   }
 
   //---
-  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '');
+  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '','','');
 
   public findOneFournisseurByReference() {
 
@@ -324,12 +328,23 @@ export class CommandeService {
             type: 'success',
           });
         }
+        this.findOneFournisseurByReference();
       }, error1 => {
         console.log(error1);
       }
     );
 
 
+  }
+
+  public findCommandeSources(commandeItem: CommandeItem) {
+    this.http.post<Array<CommandeSource>>('http://localhost:8090/faculte-commande/commandes/commandeSources',commandeItem).subscribe(
+      data => {
+        this.commandeSources = data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 

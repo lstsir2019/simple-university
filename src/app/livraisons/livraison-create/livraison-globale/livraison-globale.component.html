@@ -40,7 +40,7 @@
 
             <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
-              <option  value="math">math</option>
+              <option  value="dep-info">dep-info</option>
               <option  value="physique">physique</option>
               <option  value="info">info</option>
             </select>
@@ -48,7 +48,7 @@
 
         </div>
         <div class="col-1">
-          <button class="btn btn-outline-info " (click)="afficher()">ok</button>
+          <button class="btn btn-outline-info " (click)="findCommandesExpressions()">ok</button>
 
         </div>
       </div>
@@ -70,20 +70,28 @@
 
           <div class="row">
             <div class="form-group col-md-12">
-              <select class="form-control" [(ngModel)]="livraisonItem.refenceProduit" (change)="findStockGlobal()" >
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">CMD-EXP</div>
+                </div>
+              <select class="form-control" [(ngModel)]="cmdExp" (change)="getCommandeExpression()" >
                 <option>Cmd-expr/produit/Qte</option>
-                <option *ngFor="let p of produits" >{{p.reference}}</option>
+                <option *ngFor="let c of commandesExpressionsGmobal" [ngValue]="c" >{{c.referenceCommandeExpression}}/{{c.referenceProduit}}/{{c.qteNonLivre}}</option>
               </select>
-
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-12">
-              <select class="form-control" [(ngModel)]="livraisonItem.codeMagasin" >
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Stock-List</div>
+                </div>
+              <select class="form-control" [(ngModel)]="stotockGlobal" (change)="getStockGlobl()" >
                 <option>magasin/Qte</option>
-                <option *ngFor="let stockGlobal of stockGlobals " value="{{stockGlobal.referenceMagasin}}">{{stockGlobal.referenceMagasin}}/{{stockGlobal.qte}}</option>
+                <option *ngFor="let stockGlobal of stockGlobals " [ngValue]="stockGlobal">{{stockGlobal.referenceMagasin}}/{{stockGlobal.qte}}</option>
               </select>
-
+              </div>
             </div>
           </div>
           <div class="row">
@@ -142,7 +150,7 @@
 
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">Qte</div>
+                  <div class="input-group-text">QUANTITE</div>
                 </div>
                 <input type="number" [(ngModel)]="livraisonItem.qte" class="form-control" >
               </div>

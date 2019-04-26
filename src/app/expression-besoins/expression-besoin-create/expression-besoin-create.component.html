@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-4">
 <div class="card spacer">
-  <div class="card-header text-white  bg-info mb-3">CREATION DE BESOIN</div>
+  <div class="card-header   bg-light mb-3">CREATION DE BESOIN</div>
   <div class="card-body">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -37,20 +37,29 @@
 </div>
 <div class="col-md-8">
 <div class="card spacer">
-  <div class="card-header text-white bg-info mb-3">DETAIL</div>
+  <div class="card-header  bg-light mb-3">DETAIL</div>
   <div class="card-body">
   <div class="form-row">
     <div class="col">
       <label>CATEGORIE PRODUIT</label>
 
-        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit">
+        <!--<input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit">-->
+
+      <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoinItem.referenceCategorieProduit"  >
+        <option >select</option>
+        <option *ngFor="let pc of produitCategories" (click)="setProduitsByCategorie(pc.libelle)">{{pc.libelle}}</option>
+      </select>
 
     </div>
 
     <div class="col">
       <label>REFERENCE PRODUIT</label>
 
-        <input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceProduit">
+        <!--<input class="form-control" type="text" [(ngModel)]="expressionBesoinItem.referenceProduit">-->
+      <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expressionBesoinItem.referenceProduit"  >
+        <option >select</option>
+        <option *ngFor="let p of produits">{{p.libelle}}</option>
+      </select>
 
     </div>
 

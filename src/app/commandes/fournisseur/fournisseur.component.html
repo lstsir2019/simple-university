@@ -1,34 +1,50 @@
 <div class="col-md-12">
   <!----============Creation==========--->
   <div class="card spacer">
-    <div class="card-header text-black  mb-3">creation fournisseur</div>
+    <div class="card-header text-black mb-3">Creation fournisseur</div>
     <div class="card-body">
-      <div class="d-flex justify-content-sm-between">
-        <div class="input-group mx-sm-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text">reference</label>
-          </div>
-          <input type="text" class="form-control" [(ngModel)]="fournisseur.reference">
+      <div class="form-row">
+
+        <div class="col">
+          <label>reference</label>
+
+          <input class="form-control" type="text"  [(ngModel)]="fournisseur.reference" required="">
+
         </div>
-        <div class="input-group mx-sm-3" >
-          <div class="input-group-prepend">
-            <label class="input-group-text">libelle</label>
-          </div>
-          <input type="text" class="form-control" [(ngModel)]="fournisseur.libelle">
+
+        <div class="col">
+          <label>Libelle</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.libelle" required="">
+
         </div>
-        <div class="input-group mx-sm-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text">raison social</label>
-          </div>
-          <input type="text" class="form-control" [(ngModel)]="fournisseur.raisonSocial" >
+
+        <div class="col">
+          <label>Raison socilal</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.raisonSocial" required="">
+
         </div>
-        <div class="input-group mx-sm-3">
-          <button type="button" class="btn btn-outline-primary btn-block" (click)="createFournisseur()"><i class="fa fa-plus">Create</i>
-          </button>
+
+        <div class="col">
+          <label>Mobile</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.mobile" required="">
+
         </div>
+
+        <div class="col">
+          <label>Email</label>
+
+          <input class="form-control" type="email" [(ngModel)]="fournisseur.email" required="">
+
+        </div>
+
       </div>
+      <button (click)="createFournisseur()" class="btn btn-block btn-outline-info mt-4 fa fa-plus"> Ajouter</button>
     </div>
-  </div>
+  <!------>
+
 
   <!----============update==========--->
 
@@ -52,18 +68,19 @@
   </div>
 
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
 
       <div class="container" *ngIf="fournisseurtrouver!=null">
         <div class="card spacer">
           <div class="card-header text-black  ">ancient information</div>
           <table class="table table-hover  ">
-            <thead class="thead"><th>Reference</th><th>libelle</th><th>raison social</th></thead>
+            <thead class="thead"><th>Reference</th><th>Libelle</th><th>Mobile</th><th>Email</th></thead>
             <tbody class="tbody">
             <tr>
               <td>{{fournisseurtrouver.reference}}</td>
               <td>{{fournisseurtrouver.libelle}}</td>
-              <td>{{fournisseurtrouver.raisonSocial}}</td>
+              <td>{{fournisseurtrouver.mobile}}</td>
+              <td>{{fournisseurtrouver.email}}</td>
             </tr>
             </tbody>
           </table>
@@ -71,7 +88,7 @@
       </div>
     </div>
     <!---->
-    <div class="col-md-7">
+    <div class="col-md-5">
       <div class="container" *ngIf="fournisseurtrouver != null">
         <div class="card  spacer">
           <div class="card-header text-black ">noveu information</div>
@@ -88,9 +105,17 @@
             <tr>
               <div class="input-group mb-2 col">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" >raison social</span>
+                  <span class="input-group-text" >Mobile</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.raisonSocial">
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.mobile">
+              </div>
+            </tr>
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Email</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.email">
               </div>
             </tr>
             <tr>

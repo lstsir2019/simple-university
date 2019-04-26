@@ -42,10 +42,19 @@ export class CommandeAffectationComponent implements OnInit {
 
   public affecter(){
     return this.commandeService.affecter();
+
   }
 
   public get commandeSourceCreate(){
     return this.commandeService.commandeSourceCreate;
+  }
+
+  public findCommandeSources(commandeItem: CommandeItem){
+    return this.commandeService.findCommandeSources(commandeItem);
+  }
+
+  public get commandeSources(){
+    return this.commandeService.commandeSources;
   }
 
 

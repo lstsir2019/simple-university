@@ -20,6 +20,7 @@ import {ExpressionBesoinListComponent} from './expression-besoins/expression-bes
 import {PaiementComponent} from './commandes/paiement/paiement.component';
 import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
+import {TestPrintComponent} from './expression-besoins/test-print/test-print.component';
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
 
 const routes: Routes = [
@@ -63,6 +64,7 @@ const routes: Routes = [
   //expressionBesoin
   { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
   { path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
+  { path: 'pdf', component: TestPrintComponent}
 
 ];
 

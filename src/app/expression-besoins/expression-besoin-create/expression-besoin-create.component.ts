@@ -13,10 +13,19 @@ export class ExpressionBesoinCreateComponent implements OnInit {
   constructor(private expressionBesoinService: ExpressionBesoinService) { }
 
   ngOnInit() {
+    this.getCategories()
   }
 public get expressionBesoin() {
     return this.expressionBesoinService.expressionBesoinCreate;
 }
+
+  public get produitCategories(){
+    return this.expressionBesoinService.produitCategories;
+  }
+
+  public get produits(){
+    return this.expressionBesoinService.produits;
+  }
 
   public get expressionBesoinItem() {
     return this.expressionBesoinService.expressionBesoinItemCreate;
@@ -33,9 +42,19 @@ public get expressionBesoin() {
   public saveCommande(){
     this.expressionBesoinService.saveExpressionBesoin();
   }
+
+  public getCategories(){
+    this.expressionBesoinService.getCategories();
+  }
+
+
   public eleminer(expressionBesoinItem:ExpressionBesoinItem){
     this.expressionBesoinService.expressionBesoinCreate.expressionBesoinItemsVos.splice(
       this.expressionBesoinService.expressionBesoinCreate.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
     );
+  }
+
+  public setProduitsByCategorie(libelle : string){
+    return this.expressionBesoinService.setProduitsByCategorie(libelle);
   }
 }
