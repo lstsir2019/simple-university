@@ -3,6 +3,7 @@ import {CommandeService} from '../../controller/service/commandes/commande.servi
 import {Commande} from '../../controller/model/commandes/commande.model';
 import {CommandeItem} from '../../controller/model/commandes/commande-item.model';
 import {ExpressionBesoinItem} from '../../controller/model/expression-besoin-item.model';
+import {CommandeSource} from '../../controller/model/commandes/commandeSource.model';
 
 @Component({
   selector: 'app-commande-affectation',
@@ -43,6 +44,14 @@ export class CommandeAffectationComponent implements OnInit {
   public affecter(){
     return this.commandeService.affecter();
 
+  }
+
+  public deleteCommandeSource(){
+    return this.commandeService.deleteCommandeSource();
+  }
+
+  public setCommandeSourceSelect(commandeSource:CommandeSource){
+    return this.commandeService.setCommandeSourceSelect(commandeSource);
   }
 
   public get commandeSourceCreate(){
