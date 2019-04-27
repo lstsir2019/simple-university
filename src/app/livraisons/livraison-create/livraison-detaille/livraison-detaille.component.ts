@@ -79,6 +79,8 @@ export class LivraisonDetailleComponent implements OnInit {
       });
     } else {
       this.livraisonService.addLivraisonItemDeatil();
+      this.stockService.stocksDetaille=[];
+      this.livraisonService.commandesExpressions=[];
     }
 
   }

@@ -67,6 +67,10 @@ export class LivraisonGlobaleComponent implements OnInit {
         confirmButtonText: 'ok'})
     }else {
       this.livraisonService.addLivraisonItem();
+      this.livraisonService.commandesExpressionsGlobals=[];
+      this.stockGlobalService.stockGlobalsLiverson=[];
+
+
     }
   }
   public get  livraison() {
