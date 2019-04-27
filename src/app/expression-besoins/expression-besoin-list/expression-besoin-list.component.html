@@ -1,5 +1,5 @@
 <div class="card spacer">
-  <div class="card-header bg-info text-white">Recherche</div>
+  <div class="card-header bg-light ">Recherche</div>
   <div class="card-body">
     <div class="form-row">
     <div class="input-group mb-2 col">
@@ -41,9 +41,9 @@
 
     <div class="container">
       <div class="card spacer">
-        <div class="card-header bg-info text-white  ">Liste des expression besoin</div>
+        <div class="card-header bg-light  ">Liste des expression besoin</div>
       <table class="table table-hover  ">
-        <thead class="theadx"><th>reference</th><th>date</th><th>code personel</th><th>code entité</th><th>Detail</th></thead>
+        <thead class="theadx"><th>Reference</th><th>Date</th><th>Personel</th><th>Entité</th><th>Detail</th></thead>
         <tbody class="tbodyx">
 
         <tr *ngFor="let e of expressionBesoins" (click)="findItemsByReference(e)">
@@ -52,7 +52,7 @@
           <td>{{e.dateExpression}}</td>
           <td>{{e.codePersonel}}</td>
           <td>{{e.codeEntity }}</td>
-          <td ><button (click)="findItemsByReference(e)" class="btn btn-outline-info fa fa-angle-right"></button></td>
+          <td ><button (click)="findItemsByReference(e)"  class="btn btn-outline-info fa fa-angle-right"></button></td>
 
         </tr>
 
@@ -64,7 +64,7 @@
   <div class="col-md-6">
     <div class="container" *ngIf="expressionBesoinSelect != null">
       <div class="card  spacer">
-        <div class="card-header text-white bg-info ">Detail Expression Besoin {{expressionBesoinSelect.reference}}</div>
+        <div class="card-header  bg-light ">Detail Expression Besoin {{expressionBesoinSelect.reference}}</div>
       <table class="table table-hover">
         <thead class=""><th>Cat prod</th><th>Ref prod</th><th>Qte</th><th>Detail</th><th>Supprimer</th></thead>
         <tbody>

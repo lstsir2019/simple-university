@@ -26,23 +26,25 @@ export class CommandeService {
   private _url4: string = 'http://localhost:8090/faculte-commande/paiementes';
 
   private _commandeCreate: Commande = new Commande('', 0, '', '', '', '');
-  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0, Number(''));
+  private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0,0,0);
   private _commande: Commande = new Commande('', 0, '', '', '', '');
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
-  private _paiementCreate: Paiement = new Paiement(Number(''), 0, '', '');
+  private _paiementCreate: Paiement = new Paiement(0,0,'','');
   private _fournisseurs: Array<Fournisseur>;
   public produits: Array<Produit>;
   private _categories: Array<CategoriProduit>;
   public commandeItems: Array<CommandeItem>;
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
-  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '');
+  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','');
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
-  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
+  private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
   public fournisseurtrover: Fournisseur;
   public commandeItemsReception: Array<CommandeItem>;
+  public commandeSources : Array<CommandeSource>;
+  public commandeSourceSelect : CommandeSource;
 
   constructor(private http: HttpClient) {
   }
@@ -50,9 +52,9 @@ export class CommandeService {
   //======================function=======================
   public addCommandeItem() {
     this.commandeCreate.total += this.commandeItemCreate.prix * this.commandeItemCreate.qte;
-    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.prix, this.commandeItemCreate.qte, this.commandeItemCreate.id);
+    let commandeItemClone = new CommandeItem(this.commandeItemCreate.referenceProduit, this.commandeItemCreate.qte, this.commandeItemCreate.prix, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
     this.commandeCreate.commandeItemVos.push(commandeItemClone);
-    this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+    this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
   }
 
   public findAll() {
@@ -86,7 +88,7 @@ export class CommandeService {
         }
         console.log('ok');
         this.commandeCreate = new Commande('', 0, '', '', '', '');
-        this.commandeItemCreate = new CommandeItem('', 0, 0, Number(''));
+        this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
         console.log('erreur');
       }
@@ -210,6 +212,9 @@ export class CommandeService {
     this.http.post<CommandeSource>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
       data => {
         console.log(data);
+
+        this.findCommandeItemsByCommandeReference();
+        this.findExpressionBesoinItemsByProduit(this.commandeItemSelected);
       }, error1 => {
         console.log(error1);
       }
@@ -287,7 +292,7 @@ export class CommandeService {
           });
         }
         console.log('ok');
-        this.fournisseurCreate = new Fournisseur('', '', '');
+        this.fournisseurCreate = new Fournisseur('', '', '','','');
       }, error: error => {
         console.log(error);
       }
@@ -295,7 +300,7 @@ export class CommandeService {
   }
 
   //---
-  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '');
+  public fournisseurSerched: Fournisseur = new Fournisseur('', '', '','','');
 
   public findOneFournisseurByReference() {
 
@@ -324,6 +329,7 @@ export class CommandeService {
             type: 'success',
           });
         }
+        this.findOneFournisseurByReference();
       }, error1 => {
         console.log(error1);
       }
@@ -331,6 +337,34 @@ export class CommandeService {
 
 
   }
+
+  public findCommandeSources(commandeItem: CommandeItem) {
+    this.http.post<Array<CommandeSource>>('http://localhost:8090/faculte-commande/commandes/commandeSources',commandeItem).subscribe(
+      data => {
+        this.commandeSources = data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+  public deleteCommandeSource(){
+    this.http.delete('http://localhost:8090/faculte-commande/commandes/commandeSource/'+this.commandeSourceSelect.id).subscribe(
+        data=>{
+          this.findCommandeItemsByCommandeReference();
+          this.findExpressionBesoinItemsByProduit(this.commandeItemSelected);
+          console.log(data);
+        },error1 => {
+          console.log(error1);
+      }
+    );
+  }
+
+  public setCommandeSourceSelect(commandeSource: CommandeSource){
+      this.commandeSourceSelect=commandeSource;
+  }
+
+
 
 
 //=========================getter==================================================

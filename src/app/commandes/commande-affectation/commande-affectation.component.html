@@ -13,10 +13,12 @@
       </div>
       <div class="card-body">
         <table class="table table-hover">
-            <thead class="thead-light"><th>Ref Produit</th><th>Qte</th><th>expression besoins</th></thead>
+            <thead class="thead-light"><th>Ref Produit</th><th>Qte</th><th>Qte Affecté</th><th>Detail</th><th>expression besoins</th></thead>
             <tr *ngFor="let res of commandeItems">
               <td>{{res.referenceProduit}}</td>
               <td>{{res.qte}}</td>
+              <td>{{res.qteAffecte }}</td>
+              <td><button class="btn btn-outline-info fa fa-plus" data-toggle="modal" data-target="#commandeSourceModal" (click)="findCommandeSources(res)"></button> </td>
               <td><button class="btn btn-outline-info fa fa-plus" (click)="findExpressionBesoinItemsByProduit(res)"></button> </td>
             </tr>
         </table>
@@ -29,8 +31,9 @@
     <div class="card">
       <div class="card-body">
         <table class="table table-hover">
-          <thead class="thead-light"><th>Ref Produit</th><th>Qte</th><th>Qte commande</th><th>Affecter</th></thead>
+          <thead class="thead-light"><th>Entité Admin</th><th>Ref Produit</th><th>Qte</th><th>Qte commande</th><th>Affecter</th></thead>
           <tr *ngFor="let res of expressionBesoinItems">
+            <td>{{res.entityAdmin}}</td>
             <td>{{res.referenceProduit}}</td>
             <td>{{res.quantiteAccorder}}</td>
             <td>{{res.quantiteCommander}}</td>
@@ -61,6 +64,60 @@
 
         <input type="number" [(ngModel)]="commandeSourceCreate.qteAffecte">
         <button class="btn btn-info fa fa-plus" (click)="affecter()"  data-dismiss="modal"> Affecter</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abondonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal view commande source -->
+<div class="modal fade " id="commandeSourceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >détail du commande item séléctionné</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <table class="table table-hover">
+          <thead class="thead-light"><th>entité admin</th><th>Qte affecté</th><th>Qte livré</th><th>Annuler</th></thead>
+          <tr *ngFor="let res of commandeSources">
+            <td>{{res.entityAdmin}}</td>
+            <td>{{res.qteAffecte}}</td>
+            <td>{{res.qteLivre}}</td>
+            <td><button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger fa fa-trash" (click)="setCommandeSourceSelect(res)" ></button></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal delete-->
+<div class="modal fade " id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >supprimer expression besoin item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>l'élément selctionné va être supprimer</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger fa fa-trash" (click)="deleteCommandeSource()" data-dismiss="modal"> confirmer</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Abondonner</button>
       </div>
     </div>
