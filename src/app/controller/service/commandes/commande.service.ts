@@ -238,7 +238,7 @@ export class CommandeService {
           if (data == 1) {
             Swal({
               title: 'info !',
-              text: 'commande suprimer',
+              text: 'commande suprrimée',
               type: 'success',
             });
             this.findAll();
