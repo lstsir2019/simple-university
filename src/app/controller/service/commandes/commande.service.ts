@@ -37,13 +37,14 @@ export class CommandeService {
   public commandeItems: Array<CommandeItem>;
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
-  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0);
+  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','');
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
   public fournisseurtrover: Fournisseur;
   public commandeItemsReception: Array<CommandeItem>;
   public commandeSources : Array<CommandeSource>;
+  public commandeSourceSelect : CommandeSource;
 
   constructor(private http: HttpClient) {
   }
@@ -346,6 +347,24 @@ export class CommandeService {
       }
     );
   }
+
+  public deleteCommandeSource(){
+    this.http.delete('http://localhost:8090/faculte-commande/commandes/commandeSource/'+this.commandeSourceSelect.id).subscribe(
+        data=>{
+          this.findCommandeItemsByCommandeReference();
+          this.findExpressionBesoinItemsByProduit(this.commandeItemSelected);
+          console.log(data);
+        },error1 => {
+          console.log(error1);
+      }
+    );
+  }
+
+  public setCommandeSourceSelect(commandeSource: CommandeSource){
+      this.commandeSourceSelect=commandeSource;
+  }
+
+
 
 
 //=========================getter==================================================
