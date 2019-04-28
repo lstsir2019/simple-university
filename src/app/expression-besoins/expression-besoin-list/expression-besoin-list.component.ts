@@ -13,36 +13,43 @@ export class ExpressionBesoinListComponent implements OnInit {
   constructor(private expressionBesoinService:ExpressionBesoinService) { }
 
   ngOnInit() {
-    this.expressionBesoinService.expressionBesoins;
+    this.expressionBesoinService.findAll();
   }
 public get expressionBesoins(){
     return this.expressionBesoinService.expressionBesoins;
 }
 
-public get expressionBesoinSelect(){
+  public get expressionBesoinSelect(){
     return this.expressionBesoinService.expressionBesoinSelect;
-}
+  }
+
+  public get expressionBesoinSearch(){
+    return this.expressionBesoinService.expressionBesoinSearch;
+  }
 
 public findItemsByReference(expressionBesoin:ExpressionBesoin){
  return this.expressionBesoinService.findItemsByReference(expressionBesoin);
   }
-  /*public deleteItem(expressionBesoinItem:ExpressionBesoinItem){
-    this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
-      this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
-    );
-    return this.expressionBesoinService.deleteItem(expressionBesoinItem);
 
-  }*/
   public setItemSelect(expressionBesoinItem: ExpressionBesoinItem){
     return this.expressionBesoinService.setItemSelect(expressionBesoinItem);
   }
 
   public deleteItem(expressionBesoinItem: ExpressionBesoinItem){
-    this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
+    /*this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
       this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
-    );
+    );*/
     return this.expressionBesoinService.deleteItem();
 
   }
+
+  public findByCriteria(){
+    return this.expressionBesoinService.findByCriteria();
+  }
+
+
+
+
+
 
 }

@@ -64,8 +64,8 @@ export class NoteCreateComponent implements OnInit {
   public updateNote(){
     return this.noteService.updateNoteElement();
   }
-  public updateElement(selectedElement2){
-    return this.noteService.updateElement(selectedElement2);
+  public updateElement(){
+    return this.noteService.updateElement();
   }
 
   public get noteAnnuel() {

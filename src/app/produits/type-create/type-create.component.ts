@@ -13,7 +13,6 @@ export class TypeCreateComponent implements OnInit {
   constructor(private produitService:ProduitService) { }
 
   ngOnInit() {
-    this.produitService.typesFindAll();
   }
 
   public get typeProduit(){

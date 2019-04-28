@@ -3,39 +3,29 @@
     <div class="d-flex justify-content-sm-between">
       <div class="input-group">
         <div class="input-group-prepend">
-          <label class="input-group-text">Reference Commande</label>
+          <label class="input-group-text">Commande</label>
         </div>
-        <input type="text" class="form-control" [ngModel]="stockSearch.reference">
-        <!--[(ngModel)]="reception.referenceCommande"-->
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="stockSearch.referenceCommande">
       </div>
-      <div class="input-group  mx-sm-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="magasin">Magasin</label>
-        </div>
-        <select id="magasin" [ngModel]="stockSearch.magasinVo.reference">
-          <option *ngFor="let m of magasins" value="{{m.reference}}">{{m.reference}}[{{m.libelle}}]</option>
-        </select>
-      </div>
-      <div class="input-group">
+      <div class="input-group mx-sm-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="dateMin">DataMin</label>
         </div>
-        <input type="date" class="form-control" id="dateMin" [ngModel]="stockSearch.dateMin"> <!--[(ngModel)]="reception.referenceCommande"-->
+        <input type="date" class="form-control" [(ngModel)]="stockSearch.dateMin" id="dateMin">
+      </div>
+      <div class="input-group mx-sm-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="dateMax" >DataMax</label>
+        </div>
+        <input type="date" class="form-control" [(ngModel)]="stockSearch.dateMax" id="dateMax">
+        <!--[(ngModel)]="reception.referenceCommande"-->
       </div>
       <div class="input-group">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="dateMax">DataMax</label>
-        </div>
-        <input type="date" class="form-control" id="dateMax"> <!--[(ngModel)]="reception.referenceCommande"-->
+        <button class="btn btn-secondary btn-block" (click)="findStockByQuery()"><i class="fa fa-search"></i>Recherche
+        </button>
       </div>
     </div>
   </div>
-  <div class="card-footer">
-    <button class="btn btn-secondary" (click)="findAllStocks()"><i class="fa fa-search"></i>Recherche</button>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header"></div>
   <div class="card-body">
     <table class="table table-bordered table-sm">
       <thead>
@@ -51,7 +41,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let s of stocks">
-        <td>{{s.referenceReception}}</td>
+        <td>{{s.referenceReception}}[{{s.referenceCommande}}]</td>
         <td>{{s.magasinVo.libelle}} ({{s.magasinVo.reference}})</td>
         <td>{{s.referenceProduit}}</td>
         <td>{{s.qte}}</td>

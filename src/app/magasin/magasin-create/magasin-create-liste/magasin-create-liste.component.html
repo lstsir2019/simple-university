@@ -18,13 +18,18 @@
         <td>{{m.address}}</td>
         <td>{{m.description}}</td>
         <td>
-          <button (click)="miseAjour(A)" class="btn-outline-primary"><i class="fa fa-edit"></i></button>
+          <button (click)="miseAjour(m)" data-toggle="modal" data-target="#exampleModal" class="btn-outline-primary"><i
+            class="fa fa-edit"></i></button>
         </td>
       </tr>
       </tbody>
     </table>
-
   </div>
+</div>
 
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <app-magasin-update></app-magasin-update>
+  </div>
 </div>

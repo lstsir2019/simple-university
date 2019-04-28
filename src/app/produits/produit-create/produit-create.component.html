@@ -5,20 +5,14 @@
 
   </div>
        <div class="row ">
-         <div class="col-sm-3 " >
-           <div class="input-group ">
 
-             <input type="text"   [(ngModel)]="referenceP"/>
-             <button class="btn btn-outline-primary "  (click)="produitR(referenceP)"><i class="fa fa-search" aria-hidden="true"></i></button>
-           </div>
-         </div>
          <div class="col-sm-3 centered" >
            <div class="input-group">
              <div class="input-group-prepend">
                <span class="input-group-text">Categorie</span>
              </div>
 
-             <select class="custom-select" id="inputGroupSelect01"  >
+             <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="produitSearsh.categorieProduitVo.libelle" >
                <option selected>Choose...</option>
                <option *ngFor="let c of categories" value="{{c.libelle}}">{{c.libelle}}</option>
              </select>
@@ -32,7 +26,7 @@
                <span class="input-group-text">Type</span>
              </div>
 
-             <select class="custom-select" id="inputGroupSelect02"  >
+             <select class="custom-select" id="inputGroupSelect02"  [(ngModel)]="produitSearsh.typeProduitVo.code">
                <option selected>Choose...</option>
                <option *ngFor="let t of types" value="{{t.code}}">{{t.code}}</option>
              </select>
@@ -40,6 +34,13 @@
 
            </div>
 
+         </div>
+         <div class="col-sm-3 " >
+           <div class="input-group ">
+
+             <input type="text"   [(ngModel)]="produitSearsh.reference"/>
+             <button class="btn btn-outline-primary "  (click)="findByQuery()"><i class="fa fa-search" aria-hidden="true"></i></button>
+           </div>
          </div>
          <div class="col-sm-2 centered" >
 
@@ -55,7 +56,7 @@
   <div class="card-header">RESULTAT</div>
   <div class="card-body">
     <table class="table table-sm table-hover table-bordered">
-      <thead class="thead-dark">
+      <thead >
       <th>LiBELLE</th>
       <th>REFERENCE</th>
       <th>CATEGORIE</th>

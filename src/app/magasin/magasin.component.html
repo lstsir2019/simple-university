@@ -1,11 +1,24 @@
-<nav class="card">
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active " id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">Gestion de stock</a>
-    <a class="nav-item nav-link " id="nav-magasin-tab" data-toggle="tab" href="#nav-magasin" role="tab" aria-controls="nav-magasin" aria-selected="false">Magasin</a>
+<div class="container-fluid">
+  <nav>
+    <div class="nav  nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-stockGlobal-tab" data-toggle="tab" href="#nav-stockGlobal" role="tab"
+         aria-controls="nav-stockGlobal" aria-selected="false">stockGlobal</a>
+      <a class="nav-item nav-link  " id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab"
+         aria-controls="nav-list" aria-selected="false">Gestion de stack</a>
+      <a class="nav-item nav-link " id="nav-magasin-tab" data-toggle="tab" href="#nav-magasin" role="tab"
+         aria-controls="nav-magasin" aria-selected="false">Magasin</a>
+
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+      <app-stock-list></app-stock-list>
+    </div>
+    <div class="tab-pane fade " id="nav-magasin" role="tabpanel" aria-labelledby="nav-magasin-tab">
+      <app-magasin-create></app-magasin-create>
+    </div>
+    <div class="tab-pane fade " id="nav-stockGlobal" role="tabpanel" aria-labelledby="nav-stockGlobal-tab">
+      <app-stock-global-list></app-stock-global-list>
+    </div>
   </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab"><app-stock-list></app-stock-list></div>
-  <div class="tab-pane fade " id="nav-magasin" role="tabpanel" aria-labelledby="nav-magasin-tab"><app-magasin-create></app-magasin-create></div>
-  <div class="tab-pane fade " id="nav-update" role="tabpanel" aria-labelledby="nav-update-tab"><app-stock-update></app-stock-update></div>
 </div>

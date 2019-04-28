@@ -1,0 +1,30 @@
+<nav class="navbar navbar-light navbar-expand-lg  bg-light ">
+  <a class="navbar-brand">Espace Administrateur</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class=" nav-item ">
+        <a class="nav-link" href="#">A propos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Page d'accueil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Appels d'offre</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ajouter une appel d'offre</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Liste des appels d'offres</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><app-appel-offre-create></app-appel-offre-create></div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"><app-appel-offre-liste></app-appel-offre-liste></div>
+</div>
+

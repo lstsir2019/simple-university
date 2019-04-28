@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Commande} from "../../controller/model/commandes/commande.model";
 import {CommandeService} from "../../controller/service/commandes/commande.service";
+import {CommandeItem} from '../../controller/model/commandes/commande-item.model';
 
 @Component({
   selector: 'app-commande-list',
@@ -14,6 +15,11 @@ export class CommandeListComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  public get commandeCherch() {
+    return this.commandeService.commandecherch;
+  }
 
   public findCommandeItemByReference(c:Commande){
     this.commandeService.findCommandeItemByReference(c);
@@ -31,8 +37,12 @@ export class CommandeListComponent implements OnInit {
     this.commandeService.itemToModal(commandeSelected);
   }
 
-  public deletCommande(){
+  public deletCommande(commande:Commande){
     return this.commandeService.deleteCommande();
+  }
+
+  public chercherCommande(){
+    this.commandeService.chercherCommande();
   }
 
 }

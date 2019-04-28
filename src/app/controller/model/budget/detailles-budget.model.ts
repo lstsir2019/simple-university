@@ -1,16 +1,17 @@
 export class DetaillesBudget {
   constructor(
-    public antecedent?: number,
-    public creditOuvertEstimatif?: number,
-    public creditOuvertReel?: number,
-    public reliquatEstimatif?: number,
-    public reliquatReel?: number,
-    public engageNonPaye?: number,
-    public engagePaye?: number,
-    public reliquatPayeEstimatif?: number,
-    public reliquatPayereel?: number,
-    public reliquatNonPayeEstimatif?: number,
-    public reliquatNonPayReel?: number
+    public antecedent?: string,
+    public creditOuvertEstimatif?: string,
+    public creditOuvertReel?: string,
+    public reliquatEstimatif?: string,
+    public reliquatReel?: string,
+    public engageNonPaye?: string,
+    public engagePaye?: string,
+    public reliquatPayeEstimatif?: string,
+    public reliquatPayereel?: string,
+    public reliquatNonPayeEstimatif?: string,
+    public reliquatNonPayReel?: string,
+    public id?: number
   ) {
   }
 }

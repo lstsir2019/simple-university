@@ -1,93 +1,99 @@
-<div class="d-flex justify-content-between flex-column">
-  <div class="card">
+<!--<div class="d-flex justify-content-between flex-column">-->
+<div class="card">
   <div class="card-header">Reception</div>
+  <div class="card-body">
+    <div class="form-inline">
+      <div class="input-group mb-1">
+        <div class="input-group-prepend">
+          <label for="referencecommande" class="input-group-text">Commande</label>
+        </div>
+        <input type="text" class="form-control" id="referencecommande" [(ngModel)]="reception.referenceCommande">
+        <div class="input-group-append">
+          <button (click)="findCommndeItems()"
+                  class="btn btn-outline-primary fa fa-search"></button>
+        </div>
+      </div>
+      <div class="input-group mx-sm-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="referencereception">Reception</label>
+        </div>
+        <input type="text" class="form-control" id="referencereception" [(ngModel)]="reception.reference">
+      </div>
+      <div class="input-group mt-1">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="datereception">DateReception</label>
+        </div>
+        <input type="date" class="form-control" id="datereception" [(ngModel)]="reception.dateReception">
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">Produit</div>
     <div class="card-body">
-      <div class="d-flex justify-content-sm-around" >
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <label for="referencecommande" class="input-group-text" >Commande</label>
+      <div class="form-inline">
+        <div class="col-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Produit</div>
+            </div>
+            <select id="referenceProduit" [(ngModel)]="receptionItem.referenceProduit" class="form-control">
+              <option *ngFor="let c of commandeItems" value="{{c.referenceProduit}}">{{c.referenceProduit}}</option>
+            </select>
           </div>
-          <input type="text" class="form-control" id="referencecommande" [(ngModel)]="reception.referenceCommande" >
         </div>
-        <div class="input-group mx-sm-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="referencereception">Reception</label>
+        <div class="col-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Magasin</div>
+            </div>
+            <select id="referenceMagasin" [(ngModel)]="receptionItem.referenceMagasin" class="form-control">
+              <option *ngFor="let m of magasins">{{m.reference}}</option>
+            </select>
           </div>
-          <input type="text" class="form-control" id="referencereception" [(ngModel)]="reception.reference" >
         </div>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="datereception">DateReception</label>
+        <div class="col-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div for="qte" class="input-group-text">Qte</div>
+            </div>
+            <input id="qte" [(ngModel)]="receptionItem.qte" type="number" min="0" step="1" class="form-control">
           </div>
-          <input type="date" class="form-control" id="datereception" [(ngModel)]="reception.dateReception" >
+        </div>
+        <div class="col-2">
+          <button (click)="addReceptionItem()" class="btn btn-outline-dark btn-block"><i
+            class="fa fa-plus">Ajouter</i></button>
         </div>
       </div>
     </div>
   </div>
   <div class="card">
-        <div class="card-header">Produit</div>
-        <div class="card-body">
-          <div class="d-flex justify-content-sm-between">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label for="referenceCategorie" class="input-group-text" >Categorie</label>
-              </div>
-              <select id="referenceCategorie" [(ngModel)]="receptionItem.referenceCategorie" class="col-md-12 custom-select">
-                <option disabled>SELECT</option>
-                <option>elctro</option>
-              </select>
-            </div>
-            <div class="input-group mx-sm-3">
-              <div class="input-group-prepend">
-                <label for="referenceProduit" class="input-group-text" >Prduit</label>
-              </div>
-              <select id="referenceProduit" [(ngModel)]="receptionItem.referenceProduit" class="custom-select" >
-                <option >pr-18</option>
-                <option >pr-28</option>
-              </select>
-            </div>
-            <div class="input-group mx-sm-3">
-              <div class="input-group-prepend">
-                <label for="referenceMagasin" class="input-group-text">Magasin</label>
-              </div>
-              <select  id="referenceMagasin" [(ngModel)]="receptionItem.referenceMagasin"  class="custom-select">
-                <option *ngFor="let m of magasins" >{{m.reference}}</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label for="qte" class="input-group-text">Qte</label>
-              </div>
-              <input id="qte" [(ngModel)]="receptionItem.qte" type="number" min="0" step="1" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <button (click)="addReceptionItem()" class="btn btn-dark"><i class="fa fa-plus">Ajouter</i></button>
-        </div>
+    <div class="card-header"> Reception Detail</div>
+    <div class="card-body">
+      <table class="table table-sm table-hover">
+        <thead>
+        <th>Produit</th>
+        <th>Magasin</th>
+        <th>Qte</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr *ngIf="receptionItems.length==0">
+          <td class="text-center font-italic" colspan="4">No Item added</td>
+        </tr>
+        <tr *ngFor="let item of receptionItems">
+          <td>{{item.referenceProduit}}</td>
+          <td>{{item.referenceMagasin}}</td>
+          <td>{{item.qte}}</td>
+          <td>
+            <button (click)="deleteReceptionItems(item)"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-  <div class="card">
-      <div class="card-header"> Reception Detail</div>
-      <div class="card-body">
-        <table class="table table-sm table-hover" >
-          <thead>
-          <th>Categorie</th><th>Produit</th><th>Magasin</th><th>Qte</th>
-          <th>action</th></thead>
-          <tbody>
-          <tr *ngIf="receptionItems.length==0">
-            <td class="text-center font-italic" colspan="4">No Item added</td>
-          </tr>
-          <tr *ngFor="let item of receptionItems">
-            <td>{{item.referenceCategorie}}</td>
-            <td>{{item.referenceProduit}}</td>
-            <td>{{item.referenceMagasin}}</td>
-            <td>{{item.qte}}</td>
-            <td><button (click)="deleteReceptionItems(item)"><i class="fa fa-trash-o"></i></button></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <button class="btn btn-outline-primary" (click)="saveReception()"><i class="fa fa-database"></i> Confirmation</button>
-    </div>
+    <button class="btn btn-outline-primary" (click)="saveReception()"><i class="fa fa-database"></i> Confirmation
+    </button>
+  </div>
 </div>
+
 

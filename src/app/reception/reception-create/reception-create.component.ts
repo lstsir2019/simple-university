@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReceptionService} from "../../controller/service/reception.service";
 import {MagasinService} from "../../controller/service/magasin.service";
+import {CommandeService} from "../../controller/service/commandes/commande.service";
 
 @Component({
   selector: 'app-reception-create',
@@ -9,14 +10,14 @@ import {MagasinService} from "../../controller/service/magasin.service";
 })
 export class ReceptionCreateComponent implements OnInit {
 
-  constructor(private receptionservice:ReceptionService,private magasinService:MagasinService) { }
+  constructor(private commndeService: CommandeService, private receptionservice: ReceptionService, private magasinService: MagasinService) {
+  }
 
   ngOnInit() {
 
   }
 
   public saveReception(){
-    console.log("SaveReception Create");
     this.receptionservice.saveReception();
   }
   public addReceptionItem(){
@@ -38,4 +39,13 @@ export class ReceptionCreateComponent implements OnInit {
   public deleteReceptionItems(item) {
     this.receptionservice.deleteReceptionItems(item);
   }
+
+  public get commandeItems() {
+    return this.commndeService.commandeItemsReception;
+  }
+
+  /*public findCommndeItems() {
+    this.commndeService.findCommandeItemsReceptionByReference(this.reception.referenceCommande);
+  }*/
+
 }

@@ -21,6 +21,12 @@ export class CommandeCreateComponent implements OnInit {
     return this.commandeService.commandeItemCreate;
   }
 
+  public get commandeItemCombo(){
+    return this.commandeService.produits;
+  }
+  public get categories(){
+    return this.commandeService.categories;
+  }
   public get commandeItems() {
     return this.commandeService.commandeCreate.commandeItemVos;
   }
@@ -37,10 +43,15 @@ export class CommandeCreateComponent implements OnInit {
     return this.commandeService.fournisseurs;
   }
 
+  public setProduitByCategorier(libelle:string){
+    return this.commandeService.setProduitByVategorie(libelle);
+  }
+
   public eleminer(commandeItem:CommandeItem){
     this.commandeService.commandeCreate.commandeItemVos.splice(
       this.commandeService.commandeCreate.commandeItemVos.indexOf(commandeItem),1
     );
+    return this.commandeService.commandeCreate.total-=commandeItem.prix*commandeItem.qte;
   }
 }
 

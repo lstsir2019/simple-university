@@ -3,7 +3,7 @@
   <!-- creation commande -->
   <div class="col-md-4">
     <div class="card spacer">
-      <div class="card-header text-white  bg-info mb-3">CREATION DE COmmande</div>
+      <div class="card-header text-black mb-3">CREATION DE COmmande</div>
       <div class="card-body">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -44,20 +44,31 @@
   <!-- creation item -->
   <div class="col-md-8">
     <div class="card spacer">
-      <div class="card-header text-white bg-info mb-3">Produit</div>
+      <div class="card-header text-black mb-3">Produit</div>
       <div class="card-body">
         <div class="form-row">
-          <div class="col">
-            <label>reference produit</label>
 
-            <input class="form-control" type="text" [(ngModel)]="commandeItem.referenceProduit" required>
+          <div class="col">
+            <label>categorie</label>
+            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  required>
+              <option value="">select</option>
+              <option *ngFor="let c of categories" (click)="setProduitByCategorier(c.libelle)">{{c.libelle}}</option>
+            </select>
+
+          </div>
+          <div class="col">
+            <label>reference</label>
+            <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItem.referenceProduit" required>
+              <option value="">select</option>
+              <option *ngFor="let k of commandeItemCombo">{{k.libelle}}</option>
+            </select>
 
           </div>
 
           <div class="col">
             <label>prix</label>
 
-            <input class="form-control" type="number" [(ngModel)]="commandeItem.prix" required min="0">
+            <input class="form-control" type="number"  [(ngModel)]="commandeItem.prix" required min="0">
 
           </div>
 
@@ -88,7 +99,7 @@
           <td>{{c.referenceProduit}}</td>
           <td>{{c.prix}}</td>
           <td>{{c.qte}}</td>
-          <td><button class="btn btn-outline-danger fa fa-times" (click)="eleminer(e)"></button> </td>
+          <td><button class="btn btn-outline-danger fa fa-times" (click)="eleminer(c)"></button> </td>
         </tr>
         </tbody>
       </table>

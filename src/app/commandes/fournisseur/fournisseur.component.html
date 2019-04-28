@@ -1,0 +1,134 @@
+<div class="col-md-12">
+  <!----============Creation==========--->
+  <div class="card spacer">
+    <div class="card-header text-black mb-3">Creation fournisseur</div>
+    <div class="card-body">
+      <div class="form-row">
+
+        <div class="col">
+          <label>reference</label>
+
+          <input class="form-control" type="text"  [(ngModel)]="fournisseur.reference" required="">
+
+        </div>
+
+        <div class="col">
+          <label>Libelle</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.libelle" required="">
+
+        </div>
+
+        <div class="col">
+          <label>Raison socilal</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.raisonSocial" required="">
+
+        </div>
+
+        <div class="col">
+          <label>Mobile</label>
+
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.mobile" required="">
+
+        </div>
+
+        <div class="col">
+          <label>Email</label>
+
+          <input class="form-control" type="email" [(ngModel)]="fournisseur.email" required="">
+
+        </div>
+
+      </div>
+      <button (click)="createFournisseur()" class="btn btn-block btn-outline-info mt-4 fa fa-plus"> Ajouter</button>
+    </div>
+  <!------>
+
+
+  <!----============update==========--->
+
+  <div class="card spacer">
+
+    <div class="card-header text-black mb-3">modifier les informatin d'un fornisseur</div>
+    <div class="card-body">
+      <div class="d-flex justify-content-sm-between">
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">reference</label>
+          </div>
+          <input type="text" class="form-control" placeholder="entrer reference de fornisseur" [(ngModel)]="fournisseurSerched.reference" >
+        </div>
+        <div class="input-group mx-sm-3">
+          <button type="button" class="btn btn-outline-primary btn-block" (click)="findOneFournisseurByReference()"><i class="fa fa-search">chercher</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+
+      <div class="container" *ngIf="fournisseurtrouver!=null">
+        <div class="card spacer">
+          <div class="card-header text-black  ">ancient information</div>
+          <table class="table table-hover  ">
+            <thead class="thead"><th>Reference</th><th>Libelle</th><th>Mobile</th><th>Email</th></thead>
+            <tbody class="tbody">
+            <tr>
+              <td>{{fournisseurtrouver.reference}}</td>
+              <td>{{fournisseurtrouver.libelle}}</td>
+              <td>{{fournisseurtrouver.mobile}}</td>
+              <td>{{fournisseurtrouver.email}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <div class="col-md-5">
+      <div class="container" *ngIf="fournisseurtrouver != null">
+        <div class="card  spacer">
+          <div class="card-header text-black ">noveu information</div>
+          <table class="table table-hover">
+            <tbody class="tbody">
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >libelle</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.libelle">
+              </div>
+            </tr>
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Mobile</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.mobile">
+              </div>
+            </tr>
+            <tr>
+              <div class="input-group mb-2 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Email</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.email">
+              </div>
+            </tr>
+            <tr>
+              <div class=" col">
+                <button class="btn btn-block btn-outline-info" (click)="updatFor()">update</button>
+              </div>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

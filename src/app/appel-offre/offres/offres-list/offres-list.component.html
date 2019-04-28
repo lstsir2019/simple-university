@@ -1,0 +1,97 @@
+<div>
+  <div>
+    <div>
+      <div class="card">
+        <div class="card-header bg-info">Info Offre</div>
+        <div class="card-body">
+          <div class="form-inline justify-content-center">
+            <div class="input-group mt-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text">AppelOffre</span>
+              </div>
+
+              <select class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                      [(ngModel)]="appelOffreReference">
+                <option disabled>----SELECT----</option>
+                <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>
+              </select>
+              <div class="input-group-append">
+                <button (click)="findByAppelOffreRefernce()" class="btn btn-outline-primary"><i
+                  class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header text-white bg-info mb-3">Gestion des Appel d'offre</div>
+      <div class="card-body">
+        <table class="table table-hover table-sm">
+          <thead>
+          <th>Objectif/reference</th>
+          <th>Montant HT</th>
+          <th>TVA</th>
+          <th>Montant TTC</th>
+          <th>Action</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let a of offres">
+            <td>{{a.objectif}}/{{a.reference}}</td>
+            <td>{{a.montantHt}}</td>
+            <td>{{a.tva}}</td>
+            <td>{{a.montantTtc}}</td>
+            <td>
+              <button (click)="offreDetailByOffreReference(a)" data-toggle="modal" data-target="#exampleModal"
+                      class="btn btn-sm btn-outline-dark fa fa-plus"></button>
+              <button (click)="removeOffre(a)"
+                      class="btn btn-sm btn-outline-danger fa fa-trash"></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail d'offre {{offreSelected.reference}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-sm">
+          <thead>
+          <th>reference produit</th>
+          <th>prix unitaire</th>
+          <th>quatite</th>
+          <th>total</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ad of offreDetails">
+            <td>{{ad.refProduit}}</td>
+            <td>{{ad.prixUnitaire}}</td>
+            <td>{{ad.quantite}}</td>
+            <td>{{ad.total}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
