@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">CREATE MAGASIN</div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label for="magasinReference" class="input-group-text" >Referenece</label>
+      </div>
+      <input type="text" class="form-control"  id="magasinReference" [(ngModel)]="magasin.reference" >
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="magasinLibelle" >Libelle</label>
+      </div>
+      <input type="text" class="form-control" id="magasinLibelle" [(ngModel)]="magasin.libelle" >
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text"  for="magasinAddress">Addresse</label>
+      </div>
+      <input type="text" class="form-control" id="magasinAddress"  [(ngModel)]="magasin.address" >
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="magasinDescription">Description</label>
+      </div>
+      <textarea class="form-control" id="magasinDescription" [(ngModel)]="magasin.description"></textarea>
+    </div>
+  </div>
+  <div class="card-footer">
+    <input type="button" class="btn btn-outline-primary" value="save" (click)="saveMagasin()">
+  </div>
+</div>
