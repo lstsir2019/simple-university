@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {MagasinComponent} from "./magasin/magasin.component";
-import {ReceptionComponent} from "./reception/reception.component";
-import {ExpressionBesoinsComponent} from "./expression-besoins/expression-besoins.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {MagasinComponent} from './magasin/magasin.component';
+import {ReceptionComponent} from './reception/reception.component';
+import {ExpressionBesoinsComponent} from './expression-besoins/expression-besoins.component';
 import {BudgetComponent} from './budget/budget.component';
 import {MentionsComponent} from './evaluation-personnel/mentions/mentions.component';
 import {NotesComponent} from './evaluation-personnel/notes/notes.component';
 import {ElementsComponent} from './evaluation-personnel/elements/elements.component';
 import {EvaluationPersonnelComponent} from './evaluation-personnel/evaluation-personnel.component';
-import {CommandesComponent} from "./commandes/commandes.component";
-import {ProduitsComponent} from "./produits/produits.component";
-import {LivraisonsComponent} from "./livraisons/livraisons.component";
-import {EvolutionsComponent} from "./evolutions/evolutions.component";
+import {CommandesComponent} from './commandes/commandes.component';
+import {ProduitsComponent} from './produits/produits.component';
+import {LivraisonsComponent} from './livraisons/livraisons.component';
+import {EvolutionsComponent} from './evolutions/evolutions.component';
 import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
 import {CommandeCreateComponent} from './commandes/commande-create/commande-create.component';
 import {CommandeListComponent} from './commandes/commande-list/commande-list.component';
@@ -22,13 +22,16 @@ import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-mod
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 import {TestPrintComponent} from './expression-besoins/test-print/test-print.component';
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
+import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.component';
+import {AppelOffreComponent} from './appel-offre/appel-offre.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
-  { path: 'exepressionbesoins', component:ExpressionBesoinsComponent},
-  { path:'reception',component:ReceptionComponent},
-  { path: 'magasin',component:MagasinComponent},
-  { path: 'budget',component:BudgetComponent},
+  {path: 'exepressionbesoins', component: ExpressionBesoinsComponent},
+  {path: 'reception', component: ReceptionComponent},
+  {path: 'magasin', component: MagasinComponent},
+  {path: 'budget', component: BudgetComponent},
+  {path: 'appleoffre', component: AppelOffreComponent},
   /*{ path: 'evaluation', component: EvaluationPersonnelComponent,
     children: [
       // { path: '', redirectTo: 'elements', pathMatch: 'full' },
@@ -41,30 +44,28 @@ const routes: Routes = [
     ]
   },*/
 
-
-
-  {path: 'elements', component: ElementsComponent, },
+  {path: 'elements', component: ElementsComponent,},
 
   {path: 'mentions', component: MentionsComponent},
   {path: 'notes', component: NotesComponent},
-  { path: 'commande',component:CommandesComponent},
+  {path: 'commande', component: CommandesComponent},
 
-  { path: 'produit',component:ProduitsComponent},
-  { path: 'Livraison',component:LivraisonsComponent},
-  { path: 'evolution', component: EvolutionsComponent},
+  {path: 'produit', component: ProduitsComponent},
+  {path: 'Livraison', component: LivraisonsComponent},
+  {path: 'evolution', component: EvolutionsComponent},
 
   //commandes
 
-  { path: 'commandeCreate', component: CommandeCreateComponent},
-  { path: 'commandeListe', component: CommandeListComponent},
-  { path: 'paiement', component: PaiementComponent},
+  {path: 'commandeCreate', component: CommandeCreateComponent},
+  {path: 'commandeListe', component: CommandeListComponent},
+  {path: 'paiement', component: PaiementComponent},
   {path: 'affectation', component: CommandeAffectationComponent},
   {path: 'fournisseur', component: FournisseurComponent},
 
   //expressionBesoin
-  { path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
-  { path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
-  { path: 'pdf', component: TestPrintComponent}
+  {path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
+  {path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
+  {path: 'pdf', component: TestPrintComponent}
 
 ];
 
@@ -72,4 +73,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -1,32 +1,37 @@
 <nav class="navbar-expand-lg navbar-light bg-light mb-3">
-
-  <div class="collapse navbar-collapse">
-    <img class="col-md-2" src="assets/img/fstgWide.png" >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <img class="col-md-2" src="assets/img/fstgWide.png">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="appleoffre">AppleOffre</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="budget">Budget</a></li>
-
       <!--Drop down Commande -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
           Commande</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  routerLink="commandeCreate">Create </a>
-          <a class="dropdown-item"   routerLink="commandeListe">List</a>
-          <a class="dropdown-item"   routerLink="paiement">Paiemment</a>
-          <a class="dropdown-item"   routerLink="affectation">Affectation</a>
-          <a class="dropdown-item"   routerLink="fournisseur">fournisseur</a>
+          <a class="dropdown-item" routerLink="commandeCreate">Create </a>
+          <a class="dropdown-item" routerLink="commandeListe">List</a>
+          <a class="dropdown-item" routerLink="paiement">Paiemment</a>
+          <a class="dropdown-item" routerLink="affectation">Affectation</a>
+          <a class="dropdown-item" routerLink="fournisseur">fournisseur</a>
         </div>
       </li>
       <!--Commandes Finish-->
 
       <!--Drop down Evaluation Personnel -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Evaluation Personnel        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Evaluation Personnel </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  routerLink="elements">Éléments d'évaluation </a>
-          <a class="dropdown-item"   routerLink="mentions">Mentions</a>
-          <a class="dropdown-item"   routerLink="notes">Notes</a>
+          <a class="dropdown-item" routerLink="elements">Éléments d'évaluation </a>
+          <a class="dropdown-item" routerLink="mentions">Mentions</a>
+          <a class="dropdown-item" routerLink="notes">Notes</a>
         </div>
       </li>
       <!--Evaluation Personnel Finish-->
@@ -35,23 +40,21 @@ Evaluation Personnel        </a>
 
       <!--Drop down Exepression besoins -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
           Expression Besoin</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  routerLink="expressionBesoinCreate">Create </a>
-          <a class="dropdown-item"   routerLink="expressionBesoinList">List</a>
-          <a class="dropdown-item"   routerLink="pdf">pdf</a>
+          <a class="dropdown-item" routerLink="expressionBesoinCreate">Create </a>
+          <a class="dropdown-item" routerLink="expressionBesoinList">List</a>
+          <a class="dropdown-item" routerLink="pdf">pdf</a>
         </div>
       </li>
       <!--Exepression besoins Finish-->
-
-
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Livraison">Livraison</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="magasin">Magasin</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="produit">Produit</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="reception">Reception</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>
-
     </ul>
   </div>
 </nav>
