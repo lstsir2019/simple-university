@@ -9,6 +9,8 @@ import {Produit} from "../../controller/model/produit.model";
 })
 export class ProduitCreateComponent implements OnInit {
 
+  produitChercher:Produit;
+
 
   constructor(private produitService: ProduitService) {
   }
@@ -56,9 +58,11 @@ export class ProduitCreateComponent implements OnInit {
     );
   }
 
+
   public get produitModified() {
     return this.produitService.produitModified;
   }
+
 
   public modyfieProduit() {
 
@@ -67,9 +71,19 @@ export class ProduitCreateComponent implements OnInit {
 
   public produitSelectef(produit: Produit) {
     this.produitService.produitModified = produit;
+    let produitClone:Produit=new Produit(produit.libelle,produit.reference);
+    produitClone.categorieProduitVo.libelle=produit.categorieProduitVo.libelle;
+    produitClone.typeProduitVo.code=produit.typeProduitVo.code;
+    this.produitService.produitModified=produitClone;
+
   }
 
   public findByQuery() {
+    this.produitService.findByQuery();
+  }
+
+  public getProduitChercher(){
+    this.produitService.produitSearch=this.produitChercher;
     this.produitService.findByQuery();
   }
 }

@@ -112,6 +112,7 @@ export class ProduitService {
           swal(this.SWAL.SUCCESS_EDIT);
         }
         console.log(this.produitModified);
+        this.produitsFindAll();
 
       }, error1 => {
         console.log(error1);
@@ -254,16 +255,7 @@ export class ProduitService {
   }
 
   get types(): Array<TypeProduit> {
-    if (this._types == null) {
-      this._http.get<Array<TypeProduit>>(this._url4).subscribe(
-        data => {
-          this._types = data;
-        }, error1 => {
-          console.log("errooorr list");
-        }
-      );
 
-    }
     return this._types;
   }
 
