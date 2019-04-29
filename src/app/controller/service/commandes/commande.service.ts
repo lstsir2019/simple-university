@@ -157,8 +157,8 @@ export class CommandeService {
     }
   }
    //anous
-  public findCommandeItemsReceptionByReference(commande: Commande) {
-    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + commande.reference + '/commande-items').subscribe(
+  public findCommandeItemsReceptionByReference(reference: string) {
+    this.http.get<Array<CommandeItem>>(this._url + '/reference/' + reference + '/commande-items').subscribe(
       data => {
         if (data == null) {
           Swal(this.SWAL.SEARCH_NOT_FOUND);
@@ -367,7 +367,7 @@ export class CommandeService {
   }
 
   public chercherCommandeSource() {
-    this.http.post<Array<ExpressionBesoinItem>>('http://localhost:8099/faculte-besoin/item/searchByDate', this.commandeSourceCreate).subscribe(
+    this.http.post<Array<ExpressionBesoinItem>>('http://localhost:8099/faculte-besoin/item/search/referenceProduit/'+this.commandeItemSelected.referenceProduit, this.commandeSourceCreate).subscribe(
       data => {
         this.expressionBesoinItems=data;
         console.log(data);
