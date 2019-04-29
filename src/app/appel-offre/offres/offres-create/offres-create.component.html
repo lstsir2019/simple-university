@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header ">Info Offre</div>
+    <div class="card-body">
+      <div class="form-inline justify-content-center">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Objectif</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="offre.objectif"/>
+        </div>
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reference</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="offre.reference"/>
+        </div>
+        <div class="input-group mx-sm-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Fournisseur</span>
+          </div>
+          <input class="form-control" type="text" [(ngModel)]="offre.refrenceFournisseur"/>
+        </div>
+        <div class="input-group mx-sm-3 mt-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Date</span>
+          </div>
+          <input class="form-control" type="date" [(ngModel)]="offre.date"/>
+        </div>
+        <div class="input-group mt-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">AppelOffre</span>
+          </div>
+          <select class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                  [(ngModel)]="offre.appelOffreVo.reference">
+            <option disabled>----SELECT----</option>
+           <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>
+          </select>
+          <div class="input-group-append">
+            <button (click)="findAppelOffreByRefernce()" class="btn btn-outline-primary"><i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header mb-3"> Total d'Offre</div>
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Montant HT</span>
+            </div>
+            <input class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                   [(ngModel)]="offre.montantHt" disabled/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">TVA</span>
+            </div>
+            <input class="form-control" type="number" [(ngModel)]="offre.tva"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Montant TTC</span>
+            </div>
+            <input class="form-control" type="number" [(ngModel)]="offre.montantTtc" disabled/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header mb-3">Produit d'offre</div>
+        <div class="card-body">
+          <div class="form-inline">
+            <div class="col">
+              <label>Reference Produit</label>
+              <select class="form-control btn-block" type="text" [(ngModel)]="offreDetail.refProduit">
+                <option disabled>---Select---</option>
+                <option *ngFor="let aod of appleOffreDetails" value="{{aod.refProduit}}">
+                  {{aod.refProduit}}({{aod.quantite}})
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Prix Unitaire</label>
+              <input class="form-control" type="number" [(ngModel)]="offreDetail.prixUnitaire"/>
+            </div>
+            <div class="col">
+              <label>Quantite</label>
+              <input class="form-control" type="number" [(ngModel)]="offreDetail.quantite"/>
+            </div>
+            <div class="col">
+              <button class="btn btn-outline-info btn-block mt-4 mb-3 fa fa-plus" (click)="addOffreDetail()">ADD
+                Produit
+              </button>
+            </div>
+          </div>
+          <table class="table table-hover ">
+            <thead class="thead-light">
+            <th>refProduit</th>
+            <th>prixUnitaire</th>
+            <th>quantite</th>
+            <th>total</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+            <tr *ngIf="offre.offreDetailsVo=='null' || offre.offreDetailsVo.length=='0'">
+              <td colspan="4" class="text-center">No Item</td>
+            </tr>
+            <tr *ngFor="let a of offre.offreDetailsVo">
+              <td>{{a.refProduit}}</td>
+              <td>{{a.prixUnitaire}}</td>
+              <td>{{a.quantite}}</td>
+              <td>{{a.total}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="removeoffreDetailsVo(a)"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button (click)="saveOffre()" class="btn btn-block btn-outline-success fa fa-check">SaveOffre</button>
+  </div>
+</div>
+
+
+
+
+
+

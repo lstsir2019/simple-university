@@ -80,11 +80,25 @@ import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global
 import {TestPrintComponent} from './expression-besoins/test-print/test-print.component';
 import { FournisseurComponent } from './commandes/fournisseur/fournisseur.component';
 import {FooterComponent} from './footer/footer.component';
+import {AppelOffreComponent} from './appel-offre/appel-offre.component';
+import {OffresListComponent} from './appel-offre/offres/offres-list/offres-list.component';
+import {OffresCreateComponent} from './appel-offre/offres/offres-create/offres-create.component';
+import {OffresComponent} from './appel-offre/offres/offres.component';
+import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.component';
+import {AppelOffreCreateComponent} from './appel-offre/appel-offres/appel-offre-create/appel-offre-create.component';
+import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-liste/appel-offre-liste.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppelOffresComponent,
+    AppelOffreCreateComponent,
+    AppelOffreListeComponent,
+    OffresComponent,
+    OffresCreateComponent,
+    OffresListComponent,
+    AppelOffreComponent,
     HeaderComponent,
     ExpressionBesoinsComponent,
     ExpressionBesoinCreateComponent,

@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card spacer">
+      <div class="card-header mb-3">Gestion des Appel d'offre</div>
+      <div class="card-body">
+        <table class="table table-hover table-sm">
+          <thead>
+          <th>Objectif</th>
+          <th>Montant HT</th>
+          <th>TVA</th>
+          <th>Montant TTC</th>
+          <th>montant Garantie Temporaire</th>
+          <th>Action</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let a of appelOffres">
+            <td>{{a.objectif}}</td>
+            <td>{{a.montantHT}}</td>
+            <td>{{a.tva}}</td>
+            <td>{{a.montantTTC}}</td>
+            <td>{{a.montantGarantieTemp}}</td>
+            <td>
+              <button (click)="findAppelOffreDetailByObjectifAppelOffre(a)"
+                      class="btn btn-sm btn-outline-dark fa fa-plus"></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4" *ngIf="appelOffreSelected != null">
+    <div class="card spacer">
+      <div class="card-header mb-3">Detail de l'appel d'offre {{appelOffreSelected.objectif}}</div>
+      <div class="card-body">
+        <table class="table table-hover table-sm">
+          <thead>
+          <th>reference produit</th>
+          <th>prix unitaire</th>
+          <th>quatite</th>
+          <th>total</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ad of appelOffreSelected.appelOffreDetailVo">
+            <td>{{ad.refProduit}}</td>
+            <td>{{ad.prixUnitaire}}</td>
+            <td>{{ad.quantite}}</td>
+            <td>{{ad.total}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

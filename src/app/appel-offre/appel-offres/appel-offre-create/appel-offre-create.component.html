@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card spacer">
+      <div class="card-header mb-3">Info AppelOffre</div>
+      <div class="card-body">
+        <div class="input-group mb -3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Objectif</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="appelOffre.objectif"/>
+        </div>
+        <div class="input-group mt-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reference</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="appelOffre.reference"/>
+        </div>
+        <br>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Montant HT</span>
+          </div>
+          <input class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="appelOffre.montantHT" disabled/>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">TVA</span>
+          </div>
+          <input class="form-control" type="number" [(ngModel)]="appelOffre.tva"/>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Montant TTC</span>
+          </div>
+          <input class="form-control" type="number" [(ngModel)]="appelOffre.montantTTC" disabled/>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Montant Garantie Temporaire</span>
+          </div>
+          <input class="form-control" type="number" [(ngModel)]="appelOffre.montantGarantieTemp" disabled/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-8">
+    <div class="card spacer">
+      <div class="card-header mb-3">Produit de l'appel d'offre</div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="col">
+            <label>Reference Produit</label>
+            <input class="form-control" type="text" [(ngModel)]="appelOffreDetail.refProduit"/>
+          </div>
+          <div class="col">
+            <label>Prix Unitaire</label>
+            <input class="form-control" type="number" [(ngModel)]="appelOffreDetail.prixUnitaire"/>
+          </div>
+          <div class="col">
+            <label>Quantite</label>
+            <input class="form-control" type="number" [(ngModel)]="appelOffreDetail.quantite"/>
+          </div>
+        </div>
+        <div class="row" style="justify-content: center">
+          <button class="btn btn-outline-info mt-4 fa fa-plus" (click)="addAppelOffreDetail()">ADD Produit</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="spacer">
+      <table class="table table-hover ">
+        <thead class="thead-light">
+        <th>refProduit</th>
+        <th>prixUnitaire</th>
+        <th>quantite</th>
+        <th>total</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let a of appelOffreDetails">
+          <td>{{a.refProduit}}</td>
+          <td>{{a.prixUnitaire}}</td>
+          <td>{{a.quantite}}</td>
+          <td>{{a.total}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <button style="margin: auto" (click)="savAppelOffre()" class="btn btn-block btn-outline-success fa fa-check">Save
+        AppelOffre
+      </button>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
