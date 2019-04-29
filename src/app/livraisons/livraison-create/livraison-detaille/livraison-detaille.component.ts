@@ -9,7 +9,7 @@ import {Magasin} from "../../../controller/model/magasin.model";
 import {StockDetailleServiceService} from "../../../controller/service/stock-detaille-service.service";
 import {CommandeSourceWithProduit} from "../../../controller/model/commande-source-with-produit.model";
 import swal from "sweetalert2";
-
+import  * as $ from 'jquery';
 @Component({
   selector: 'app-livraison-detaille',
   templateUrl: './livraison-detaille.component.html',
@@ -27,6 +27,14 @@ export class LivraisonDetailleComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(document).ready(function () {
+      $("#defaultInline11 ,#defaultInline22").change(function () {
+        $(this).attr("checked" , "checked");
+        $("#btn1").click(function () {
+          $(":checked").prop("checked" , false).removeAttr("checked");
+        });
+      });
+    });
   }
 
   public getCommandeExpression() {
