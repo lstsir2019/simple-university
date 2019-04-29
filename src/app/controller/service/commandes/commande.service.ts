@@ -11,6 +11,7 @@ import {Stock} from '../../model/stock.model';
 import {CategoriProduit} from '../../model/categori-produit.model';
 import {Produit} from '../../model/produit.model';
 import {getReact} from '../evolutions/Util/SwalReact';
+import {text} from '@angular/core/src/render3';
 
 
 @Injectable({
@@ -37,7 +38,7 @@ export class CommandeService {
   public commandeItems: Array<CommandeItem>;
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
-  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','');
+  public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','','','');
   public commandeItemSelected: CommandeItem;
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
@@ -209,8 +210,13 @@ export class CommandeService {
   }
 
   public affecter() {
-    this.http.post<CommandeSource>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
+    this.http.post<number>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
       data => {
+        if (data==-1) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-2) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-3) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-4) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-5) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
         console.log(data);
 
         this.findCommandeItemsByCommandeReference();
@@ -239,7 +245,7 @@ export class CommandeService {
           if (data == 1) {
             Swal({
               title: 'info !',
-              text: 'commande suprimer',
+              text: 'commande suprrimée',
               type: 'success',
             });
             this.findAll();
@@ -356,6 +362,17 @@ export class CommandeService {
           console.log(data);
         },error1 => {
           console.log(error1);
+      }
+    );
+  }
+
+  public chercherCommandeSource() {
+    this.http.post<Array<ExpressionBesoinItem>>('http://localhost:8099/faculte-besoin/item/searchByDate', this.commandeSourceCreate).subscribe(
+      data => {
+        this.expressionBesoinItems=data;
+        console.log(data);
+      }, error1 => {
+        console.log(error1);
       }
     );
   }
