@@ -382,6 +382,17 @@ export class CommandeService {
   }
 
 
+  public printCommande(reference:string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:8090/faculte-commande/commandes/pdf/reference/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
+
 
 
 //=========================getter==================================================

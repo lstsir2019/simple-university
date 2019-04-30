@@ -38,13 +38,14 @@
       <div class="card spacer">
         <div class="card-header text-black">Liste des commandes</div>
         <table class="table table-hover  ">
-          <thead class="theadx"><th>Reference</th><th>total</th><th>detail</th><th>suprimer</th></thead>
+          <thead class="theadx"><th>Reference</th><th>Total</th><th>Detail</th><th>Delete</th><th>Print</th></thead>
           <tbody class="tbodyx">
           <tr *ngFor="let c of commandes" >
             <td>{{c.reference}}</td>
             <td>{{c.total}}</td>
             <td ><button (click)="findCommandeItemByReference(c)" class="btn btn-outline-dark fa fa-plus"></button></td>
             <td><button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger fa fa-trash" (click)="itemToModal(c)" ></button></td>
+            <td ><button (click)="printCommande(c.reference)" class="btn btn-outline-primary fa fa-print"></button></td>
           </tr>
           </tbody>
         </table>

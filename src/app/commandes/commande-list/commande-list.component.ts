@@ -44,6 +44,9 @@ export class CommandeListComponent implements OnInit {
   public chercherCommande(){
     this.commandeService.chercherCommande();
   }
+  public printCommande(reference:string){
+    return this.commandeService.printCommande(reference);
+  }
 
 }
 
