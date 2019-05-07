@@ -15,9 +15,9 @@ export class ExpressionBesoinListComponent implements OnInit {
   ngOnInit() {
     this.expressionBesoinService.findAll();
   }
-public get expressionBesoins(){
+  public get expressionBesoins(){
     return this.expressionBesoinService.expressionBesoins;
-}
+  }
 
   public get expressionBesoinSelect(){
     return this.expressionBesoinService.expressionBesoinSelect;
@@ -32,15 +32,12 @@ public findItemsByReference(expressionBesoin:ExpressionBesoin){
   }
 
   public setItemSelect(expressionBesoinItem: ExpressionBesoinItem){
+
     return this.expressionBesoinService.setItemSelect(expressionBesoinItem);
   }
 
   public deleteItem(expressionBesoinItem: ExpressionBesoinItem){
-    /*this.expressionBesoinSelect.expressionBesoinItemsVos.splice(
-      this.expressionBesoinSelect.expressionBesoinItemsVos.indexOf(expressionBesoinItem),1
-    );*/
     return this.expressionBesoinService.deleteItem();
-
   }
 
   public findByCriteria(){
