@@ -512,7 +512,7 @@ export class CommandeService {
   }
 
   get fournisseurs(): Array<Fournisseur> {
-    /*if (this._fournisseurs != null) {
+    if (this._fournisseurs != null) {
       this.http.get<Array<Fournisseur>>(this._url1).subscribe(
         data => {
           this._fournisseurs = data;
@@ -520,7 +520,7 @@ export class CommandeService {
           console.log('error whith loading fournisseurs');
         }
       );
-    }*/
+    }
     return this._fournisseurs;
   }
 
