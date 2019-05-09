@@ -7,27 +7,27 @@
     <table class="table">
       <tr>
         <td>Description</td>
-        <td>{{expressionBesoinItemSelect.description}}</td>
+        <td>{{expressionBesoinItemUpdate.description}}</td>
       </tr>
       <tr>
         <td>QTE Demandé</td>
-        <td>{{expressionBesoinItemSelect.quantiteDemande}}</td>
+        <td><input type="number" class="form-control"   [(ngModel)]="expressionBesoinItemUpdate.quantiteDemande"></td>
       </tr>
       <tr>
         <td>QTE Commandé</td>
-        <td>{{expressionBesoinItemSelect.quantiteCommander}}</td>
+        <td>{{expressionBesoinItemUpdate.quantiteCommander}}</td>
       </tr>
       <tr>
         <td>QTE livré</td>
-        <td>{{expressionBesoinItemSelect.quantiteLivre}}</td>
+        <td>{{expressionBesoinItemUpdate.quantiteLivre}}</td>
       </tr>
       <tr >
         <td>QTE Accordé</td>
-        <td><input type="number" class="form-control"   [(ngModel)]="expressionBesoinItemSelect.quantiteAccorder"></td>
+        <td><input type="number" class="form-control"   [(ngModel)]="expressionBesoinItemUpdate.quantiteAccorder"></td>
       </tr>
 
 
     </table>
 
-    <button  (click)="accorder(expressionBesoinItemSelect)" data-dismiss="modal" class="btn btn-outline-info btn-block" > Accorder</button>
+    <button  (click)="accorder()" data-dismiss="modal" class="btn btn-outline-info btn-block" > Accorder</button>
 

@@ -42,7 +42,8 @@
             <td>{{c.reference}}</td>
             <td>{{c.total}}</td>
             <td>{{c.totalPaiement}}</td>
-            <td ><button (click)="findPaiementByCommande(c)" class="btn btn-outline-dark fa fa-plus"></button></td>
+            <td ><button (click)="findPaiementByCommande(c)" class="btn btn-outline-dark fa fa-plus"></button>
+              <button (click)="printPaiement(c.reference)" class="btn btn-outline-primary fa fa-print"></button></td>
           </tr>
           </tbody>
         </table>

@@ -20,7 +20,8 @@ export class ExpressionBesoinService {
   private _expressionBesoinItemSelect:ExpressionBesoinItem;
   public expressionBesoinSearch:ExpressionBesoin = new ExpressionBesoin('','','','','','');
   public produitCategories:Array<CategoriProduit>;
-  public produits:Array<Produit>
+  public produits:Array<Produit>;
+  public expressionBesoinItemUpdate:ExpressionBesoinItem;
 
   constructor(private http:HttpClient) {
 
@@ -98,15 +99,16 @@ export class ExpressionBesoinService {
 
   }
 
-  public accorder(expressionBesoinItem: ExpressionBesoinItem){
-    if (expressionBesoinItem !=null){
+  public accorder(){
+
+
       console.log("koko");
-      this.http.put('http://localhost:8099/faculte-besoin/item/accorder',expressionBesoinItem).subscribe(
+      this.http.put('http://localhost:8099/faculte-besoin/item/accorder',this.expressionBesoinItemUpdate).subscribe(
         data=>{
           if (data == -1) {
             Swal({
               title: 'failed !',
-              text: 'déja accorder',
+              text: 'qte demandé non acceptable(Qté demandé doit tjr être superieure à qte accordé)',
               type: 'error',
             });
           }
@@ -114,7 +116,7 @@ export class ExpressionBesoinService {
           if (data == -2) {
             Swal({
               title: 'failed !',
-              text: 'qte non acceptable',
+              text: 'qte accordé non acceptable(Qté accordé doit tjr être superieure à qte commandé)',
               type: 'error',
             });
           }
@@ -122,18 +124,20 @@ export class ExpressionBesoinService {
           if (data == 1) {
             Swal({
               title: 'done !!',
-              text: 'une qte a été accorder',
+              text: 'modification éffectué .. !',
               type: 'success',
             });
           }
-          console.log("Done ... !");},
+          console.log("Done ... !");
+          this.findItemsByReference(this.expressionBesoinSelect);
+        },
             error=>{
             console.log(error);
             }
 
       );
     }
-  }
+
 
   public deleteItem(){
 
@@ -200,6 +204,18 @@ export class ExpressionBesoinService {
   }
 
   public setItemSelect(expressionBesoinItem: ExpressionBesoinItem) {
+    let expressionBesoinItemClone:ExpressionBesoinItem = new ExpressionBesoinItem(
+      expressionBesoinItem.id,
+      expressionBesoinItem.referenceCategorieProduit,
+      expressionBesoinItem.referenceProduit,
+      expressionBesoinItem.quantiteDemande,
+      expressionBesoinItem.description,
+      expressionBesoinItem.quantiteAccorder,
+      expressionBesoinItem.quantiteCommander,
+      expressionBesoinItem.quantiteLivre,
+      expressionBesoinItem.entityAdmin
+    );
+    this.expressionBesoinItemUpdate = expressionBesoinItemClone;
     this.expressionBesoinItemSelect = expressionBesoinItem;
   }
 

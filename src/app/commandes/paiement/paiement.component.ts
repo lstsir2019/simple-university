@@ -37,4 +37,7 @@ export class PaiementComponent implements OnInit {
     this.commandeService.chercherCommande();
   }
 
+  public printPaiement(reference:string){
+    return this.commandeService.printPaiement(reference);
+  }
 }

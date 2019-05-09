@@ -38,13 +38,14 @@
       <div class="card spacer">
         <div class="card-header text-black">Liste des commandes</div>
         <table class="table table-hover  ">
-          <thead class="theadx"><th>Reference</th><th>total</th><th>detail</th><th>suprimer</th></thead>
+          <thead class="theadx"><th>Reference</th><th>Total</th><th>Action</th></thead>
           <tbody class="tbodyx">
           <tr *ngFor="let c of commandes" >
             <td>{{c.reference}}</td>
             <td>{{c.total}}</td>
-            <td ><button (click)="findCommandeItemByReference(c)" class="btn btn-outline-dark fa fa-plus"></button></td>
-            <td><button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger fa fa-trash" (click)="itemToModal(c)" ></button></td>
+            <td ><button (click)="findCommandeItemByReference(c)" class="btn btn-outline-dark fa fa-plus"></button>
+            <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger fa fa-trash" (click)="itemToModal(c)" ></button>
+            <button (click)="printCommande(c.reference)" class="btn btn-outline-primary fa fa-print"></button></td>
           </tr>
           </tbody>
         </table>
@@ -57,12 +58,16 @@
       <div class="card  spacer">
         <div class="card-header text-black">list des produits {{commandeSelected.reference}}</div>
         <table class="table table-hover">
-          <thead class="theadx"><th>Reference</th><th>prix</th><th>qte</th></thead>
+          <thead class="theadx"><th>Reference</th><th>prix</th><th>qte</th><th>Action</th></thead>
           <tbody class="tbodyx">
           <tr *ngFor="let c of commandeSelected.commandeItemVos">
             <td>{{c.referenceProduit}}</td>
             <td>{{c.prix}}</td>
             <td>{{c.qte}}</td>
+            <td>
+              <button data-toggle="modal" data-target="#deleteItemModal" class="btn btn-danger fa fa-trash" (click)="commandeItemToModal(c)" ></button>
+              <button data-toggle="modal" data-target="#updateItemModal" class="btn btn-success fa fa-plus" (click)="commandeItemToModal(c)" ></button>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -93,3 +98,57 @@
     </div>
   </div>
 </div>
+
+<!-- Supprimer commande-->
+<div class="modal fade " id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >supprimer commande</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>l'élément selctionné va être supprimer</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger fa fa-trash" (click)="deleteCommandeItem()" data-dismiss="modal"> confirmer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abondonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- update item-->
+<div class="modal fade " id="updateItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >update item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" >qte</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItemSelected.qte" >
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" >prix</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="commandeItemSelected.prix" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success fa fa-apple" (click)="updateItem()" data-dismiss="modal"> confirmer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abondonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
