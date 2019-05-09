@@ -39,7 +39,7 @@ export class CommandeService {
   public expressionBesoinItems: Array<ExpressionBesoinItem>;
   public expressionBesoinItemSelect: ExpressionBesoinItem;
   public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','','','');
-  public commandeItemSelected: CommandeItem;
+  public commandeItemSelected: CommandeItem=new CommandeItem('',0,0,0,0);
   public commandecherch: Commande = new Commande('', 0, '', '', '', '');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '','','');
   public fournisseurtrover: Fournisseur;
@@ -61,7 +61,6 @@ export class CommandeService {
   public findAll() {
     this.http.get<Array<Commande>>(this.url).subscribe(
       data => {
-        console.log(data);
         this.commandes = data;
       }, error => {
         console.log('Error' + error);
@@ -134,6 +133,7 @@ export class CommandeService {
             type: 'success',
           });
           this.findAll();
+          this.findPaiementByCommande(this.commandeSelected);
         }
         console.log('ok');
         this.paiementCreate = new Paiement(Number(''), 0, '', '');
@@ -324,7 +324,6 @@ export class CommandeService {
 
   public updateFournisseur() {
 
-
     this.http.put<number>('http://localhost:8090/faculte-commande/fournisseurs/reference/' + this.fournisseurSerched.reference + '/fournisseur', this.fournisseurSerched).subscribe(
       data => {
         console.log(data);
@@ -381,7 +380,6 @@ export class CommandeService {
       this.commandeSourceSelect=commandeSource;
   }
 
-
   public printCommande(reference:string){
     const httpOptions = {
 
@@ -390,6 +388,60 @@ export class CommandeService {
     return this.http.get("http://localhost:8090/faculte-commande/commandes/pdf/reference/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
       var downloadURL = URL.createObjectURL(resultBlob);
       window.open(downloadURL);});
+  }
+
+  public printPaiement(reference:string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:8090/faculte-commande/paiementes/pdf/paiement/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
+
+  public deleteCommandeItem() {
+
+    if (this.commandeSelected != null) {
+      this.http.delete('http://localhost:8090/faculte-commande/items/deletItem/id/' + this.commandeItemSelected.id, {}).subscribe(
+        data => {
+          if (data == 1) {
+            Swal({
+              title: 'info !',
+              text: 'item suprrimée',
+              type: 'success',
+            });
+            this.findAll();
+            this.findCommandeItemByReference(this.commandeSelected);
+          }
+
+          console.log('deleted ...');
+
+        }, error => {
+          console.log('commandeitem matmes7atche'+error);
+        }
+      );
+    }
+  }
+
+  public updateItem() {
+     this.http.put('http://localhost:8090/faculte-commande/items/update/id/'+this.commandeItemSelected.id+'/qte/'+this.commandeItemSelected.qte+'/prix/' + this.commandeItemSelected.prix,{}).subscribe(
+       data=>{
+         if (data == 1) {
+           Swal({
+             title: 'info !',
+             text: 'item modifie',
+             type: 'success',
+           });
+           this.findAll();
+           this.findCommandeItemByReference(this.commandeSelected);
+         }else Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+       },error1 => {
+         console.log(error1);
+       }
+     );
+
   }
 
 
@@ -527,6 +579,10 @@ export class CommandeService {
 
   public itemToModal(commandeSelected: Commande) {
     this.commandeSelected = commandeSelected;
+  }
+
+  public commandeItemToModal(commandeItemSelected: CommandeItem) {
+    this.commandeItemSelected = commandeItemSelected;
   }
 
 
