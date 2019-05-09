@@ -45,4 +45,9 @@ export class OffresListComponent implements OnInit {
   removeOffre(a: Offre) {
     this.offreService.removeOffre(a);
   }
+
+  chekBestOffre(a : Offre) {
+    this.appelOffreService.chekBestOffre(a);
+
+  }
 }

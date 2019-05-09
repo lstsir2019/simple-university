@@ -21,6 +21,10 @@ export class CommandeListComponent implements OnInit {
     return this.commandeService.commandecherch;
   }
 
+  public  get commandeItemSelected(){
+    return this.commandeService.commandeItemSelected;
+  }
+
   public findCommandeItemByReference(c:Commande){
     this.commandeService.findCommandeItemByReference(c);
   }
@@ -36,6 +40,9 @@ export class CommandeListComponent implements OnInit {
   public itemToModal(commandeSelected: Commande) {
     this.commandeService.itemToModal(commandeSelected);
   }
+  public commandeItemToModal(commandeItemSelected: CommandeItem){
+    this.commandeService.commandeItemToModal(commandeItemSelected);
+  }
 
   public deletCommande(commande:Commande){
     return this.commandeService.deleteCommande();
@@ -47,6 +54,12 @@ export class CommandeListComponent implements OnInit {
   public printCommande(reference:string){
     return this.commandeService.printCommande(reference);
   }
+  public deleteCommandeItem(){
+    return this.commandeService.deleteCommandeItem();
+  }
 
+  public updateItem(){
+    return this.commandeService.updateItem();
+  }
 }
 
