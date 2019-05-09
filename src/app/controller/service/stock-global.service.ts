@@ -8,6 +8,7 @@ import {StockGlobal} from "../model/stock-global.Model";
 export class StockGlobalService {
 
   public stockGlobals: Array<StockGlobal> = [];
+  public stockGlobalSearch:StockGlobal=new StockGlobal("","","",0);
   private _stockGlobalsLiverson: Array<StockGlobal> = [];
   private url: string = "http://localhost:8042/stock-api/stocks/";
 
@@ -28,14 +29,6 @@ export class StockGlobalService {
   }
 
 
-  get stockGlobalsLiverson(): Array<StockGlobal> {
-    return this._stockGlobalsLiverson;
-  }
-
-  set stockGlobalsLiverson(value: Array<StockGlobal>) {
-    this._stockGlobalsLiverson = value;
-  }
-
   findAll() {
     this.http.get<Array<StockGlobal>>(this.url + "stockglobal").subscribe(
       data => {
@@ -47,5 +40,27 @@ export class StockGlobalService {
       }, error => {
         console.log("error");
       });
+  }
+
+  public searchStockGlobal(){
+    this.http.post<Array<StockGlobal>>(this.url + "stockglobal",this.stockGlobalSearch).subscribe(
+      data => {
+        this.stockGlobals = data;
+        data.forEach(value => {
+          console.log("ha data" + value.referenceCommande)
+        });
+
+      }, error => {
+        console.log("error");
+      });
+  }
+
+
+  get stockGlobalsLiverson(): Array<StockGlobal> {
+    return this._stockGlobalsLiverson;
+  }
+
+  set stockGlobalsLiverson(value: Array<StockGlobal>) {
+    this._stockGlobalsLiverson = value;
   }
 }

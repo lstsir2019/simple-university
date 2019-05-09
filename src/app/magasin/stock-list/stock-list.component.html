@@ -27,10 +27,12 @@
     </div>
   </div>
   <div class="card-body">
+    <div class="table-responsive">
     <table class="table table-bordered table-sm">
       <thead>
       <tr>
-        <th>Reception</th>
+        <th>Reception / commande</th>
+        <th>dateReception</th>
         <th>Magasin</th>
         <th>Produit</th>
         <th>Qte</th>
@@ -42,19 +44,21 @@
       <tbody>
       <tr *ngFor="let s of stocks">
         <td>{{s.referenceReception}}[{{s.referenceCommande}}]</td>
+        <td> {{s.dateReception}}</td>
         <td>{{s.magasinVo.libelle}} ({{s.magasinVo.reference}})</td>
         <td>{{s.referenceProduit}}</td>
         <td>{{s.qte}}</td>
         <td>{{s.qteDeffectueuse}}</td>
         <td>{{s.seuilAlert}}</td>
         <td>
-          <button class="btn-info btn-sm"><i class="fa fa-plus"></i></button>
+         <!-- <button class="btn-info btn-sm"><i class="fa fa-plus"></i></button>-->
           <button class="btn-info btn-sm" data-toggle="modal" (click)="stockSeleceted(s)"
                   data-target="#exampleModalCenter"><i class="fa fa-edit"></i></button>
         </td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 <!--Modell-->

@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <img class="col-md-2" src="assets/img/fstgWide.png">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="appleoffre">AppleOffre</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="budget">Budget</a></li>
       <!--Drop down Commande -->
@@ -14,7 +14,7 @@
            aria-haspopup="true" aria-expanded="false">
           Commande</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="commandeCreate">Create </a>
+          <a class="dropdown-item" routerLink="commandeCreate">Create</a>
           <a class="dropdown-item" routerLink="commandeListe">List</a>
           <a class="dropdown-item" routerLink="paiement">Paiemment</a>
           <a class="dropdown-item" routerLink="affectation">Affectation</a>
@@ -22,20 +22,6 @@
         </div>
       </li>
       <!--Commandes Finish-->
-
-      <!--Drop down Evaluation Personnel -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Evaluation Personnel </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="elements">Éléments d'évaluation </a>
-          <a class="dropdown-item" routerLink="mentions">Mentions</a>
-          <a class="dropdown-item" routerLink="notes">Notes</a>
-        </div>
-      </li>
-      <!--Evaluation Personnel Finish-->
-
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="evolution">Evolution</a></li>
 
       <!--Drop down Exepression besoins -->
@@ -50,11 +36,24 @@
         </div>
       </li>
       <!--Exepression besoins Finish-->
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Livraison">Livraison</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="magasin">Magasin</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="produit">Produit</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="reception">Reception</a></li>
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="magasin">Magasin</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Livraison">Livraison</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="produit">Produit</a></li>
+      <!--Drop down Evaluation Personnel -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Evaluation Personnel </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="elements">Éléments d'évaluation </a>
+          <a class="dropdown-item" routerLink="mentions">Mentions</a>
+          <a class="dropdown-item" routerLink="notes">Notes</a>
+        </div>
+      </li>
+      <!--Evaluation Personnel Finish-->
+
+     <!-- <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>-->
     </ul>
   </div>
 </nav>

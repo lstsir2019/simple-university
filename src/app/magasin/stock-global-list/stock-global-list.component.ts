@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {StockGlobalService} from "../../controller/service/stock-global.service";
+import {StockGlobalService} from '../../controller/service/stock-global.service';
 
 @Component({
   selector: 'app-stock-global-list',
@@ -8,8 +8,8 @@ import {StockGlobalService} from "../../controller/service/stock-global.service"
 })
 export class StockGlobalListComponent implements OnInit {
 
-  referenceCmd: string = "";
-  referenceProduit: string = "";
+  referenceCmd: string = '';
+  referenceProduit: string = '';
 
   constructor(private stockGlobalService: StockGlobalService) {
   }
@@ -18,11 +18,15 @@ export class StockGlobalListComponent implements OnInit {
     return this.stockGlobalService.stockGlobals;
   }
 
+  get stockGlobal() {
+    return this.stockGlobalService.stockGlobalSearch;
+  }
+
   ngOnInit() {
     this.stockGlobalService.findAll();
   }
 
   findStockGlobalByQuery() {
-
+    this.stockGlobalService.searchStockGlobal();
   }
 }

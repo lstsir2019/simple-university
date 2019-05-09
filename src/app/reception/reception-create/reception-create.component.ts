@@ -44,8 +44,8 @@ export class ReceptionCreateComponent implements OnInit {
     return this.commndeService.commandeItemsReception;
   }
 
-  /*public findCommndeItems() {
+  public findCommndeItems() {
     this.commndeService.findCommandeItemsReceptionByReference(this.reception.referenceCommande);
-  }*/
+  }
 
 }

@@ -23,7 +23,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="datereception">DateReception</label>
         </div>
-        <input type="date" class="form-control" id="datereception" [(ngModel)]="reception.dateReception">
+        <input type="date"  class="form-control" id="datereception" [(ngModel)]="reception.dateReception">
       </div>
     </div>
   </div>
@@ -69,6 +69,7 @@
   <div class="card">
     <div class="card-header"> Reception Detail</div>
     <div class="card-body">
+      <div class="table-responsive">
       <table class="table table-sm table-hover">
         <thead>
         <th>Produit</th>
@@ -90,6 +91,7 @@
         </tr>
         </tbody>
       </table>
+      </div>
     </div>
     <button class="btn btn-outline-primary" (click)="saveReception()"><i class="fa fa-database"></i> Confirmation
     </button>
