@@ -14,18 +14,34 @@ export class ExpressionBesoinItemManipComponent implements OnInit {
   ngOnInit() {
   }
 
-  get expressionBesoinItemSelect() {
-    return this.expressionBesoinService.expressionBesoinItemSelect;
-  }
-
-  get expressionBesoinSelect(){
-    return this.expressionBesoinService.expressionBesoinSelect;
+  get expressionBesoinItemUpdate() {
+    return this.expressionBesoinService.expressionBesoinItemUpdate;
   }
 
 
 
-  public accorder(expressionBesoinItem: ExpressionBesoinItem){
-    return this.expressionBesoinService.accorder(expressionBesoinItem);
+
+
+  public accorder(){
+
+    //this.expressionBesoinService.expressionBesoinItemUpdate=expressionBesoinItem;
+
+    /*let expressionBesoinItemClone:ExpressionBesoinItem = new ExpressionBesoinItem(
+      expressionBesoinItem.id,
+      expressionBesoinItem.referenceCategorieProduit,
+      expressionBesoinItem.referenceProduit,
+      expressionBesoinItem.quantiteDemande,
+      expressionBesoinItem.description,
+      expressionBesoinItem.quantiteAccorder,
+      expressionBesoinItem.quantiteCommander,
+      expressionBesoinItem.quantiteLivre,
+      expressionBesoinItem.entityAdmin
+    );*/
+
+    //this.expressionBesoinService.expressionBesoinItemUpdate=expressionBesoinItemClone;
+
+
+    return this.expressionBesoinService.accorder();
   }
 
 }
