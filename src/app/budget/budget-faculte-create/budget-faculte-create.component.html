@@ -1,0 +1,48 @@
+<div class="card-body justify-content-center">
+  <div class="input-group input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="anneeMin">Année Min</label>
+    </div>
+    <input [(ngModel)]="budgetFaculteVo.annee" aria-describedby="inputGroup-sizing-sm"
+           aria-label="Sizing example input"
+           class="form-control" id="anneeMin" min="0" required step="any"
+           type="number">
+  </div>
+  <div class="input-group input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="coe">Crédit Ouvert Estimatif</label>
+    </div>
+    <input type="number" class="form-control"
+           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
+           [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" aria-label="Sizing example input" min="0"
+           step="any" required id="coe" aria-describedby="inputGroup-sizing-sm">
+  </div>
+  <div class="input-group input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="cor">Crédit Ouvert Réel</label>
+    </div>
+    <input type="number" class="form-control"
+           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertReel:null"
+           [(ngModel)]="detaillesBudgetVo.creditOuvertReel" aria-label="Sizing example input" min="0" step="any"
+           required id="cor" aria-describedby="inputGroup-sizing-sm">
+  </div>
+  <div class="input-group input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="engagepaye">Engagé payé</label>
+    </div>
+    <input type="number" class="form-control"
+           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engagePaye:null"
+           [(ngModel)]="detaillesBudgetVo.engagePaye" aria-label="Sizing example input" min="0" step="any"
+           required id="engagepaye" aria-describedby="inputGroup-sizing-sm">
+  </div>
+  <div class="input-group input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+    </div>
+    <input type="number" class="form-control"
+           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engageNonPaye:null"
+           [(ngModel)]="detaillesBudgetVo.engageNonPaye" aria-label="Sizing example input" min="0" step="any"
+           required id="engagenonpaye" aria-describedby="inputGroup-sizing-sm">
+  </div>
+</div>
+
