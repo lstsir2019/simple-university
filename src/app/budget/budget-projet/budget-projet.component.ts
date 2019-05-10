@@ -4,11 +4,11 @@ import {BudgetService} from '../../controller/service/budget.service';
 import * as jsPDF from 'jspdf';
 
 @Component({
-  selector: 'app-budget-entite-administratif',
-  templateUrl: './budget-entite-administratif.component.html',
-  styleUrls: ['./budget-entite-administratif.component.css']
+  selector: 'app-budget-projet',
+  templateUrl: './budget-projet.component.html',
+  styleUrls: ['./budget-projet.component.css']
 })
-export class BudgetEntiteAdministratifComponent implements OnInit {
+export class BudgetProjetComponent implements OnInit {
 
   private _selectedBea: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo();
   private _budgetEntiteAdministratifInfo:BudgetEntiteAdministratifVo=new BudgetEntiteAdministratifVo();

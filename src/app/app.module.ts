@@ -18,7 +18,7 @@ import {StockListComponent} from "./magasin/stock-list/stock-list.component";
 import {StockUpdateComponent} from "./magasin/stock-update/stock-update.component";
 import {BudgetComponent} from './budget/budget.component';
 import {BudgetSousProjetComponent} from './budget/budget-sous-projet/budget-sous-projet.component';
-import {BudgetEntiteAdministratifComponent} from './budget/budget-entite-administratif/budget-entite-administratif.component';
+import {BudgetProjetComponent} from './budget/budget-projet/budget-projet.component';
 import {BudgetCompteBudgitaireComponent} from './budget/budget-compte-budgitaire/budget-compte-budgitaire.component';
 import {ConfirmationComponent} from './budget/confirmation/confirmation.component';
 import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.component';
@@ -86,6 +86,7 @@ import {OffresComponent} from './appel-offre/offres/offres.component';
 import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.component';
 import {AppelOffreCreateComponent} from './appel-offre/appel-offres/appel-offre-create/appel-offre-create.component';
 import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-liste/appel-offre-liste.component';
+import { BudgetFaculteCreateComponent } from './budget/budget-faculte-create/budget-faculte-create.component';
 
 
 @NgModule({
@@ -113,7 +114,7 @@ import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-l
     BudgetComponent,
     BudgetFaculteComponent,
     BudgetSousProjetComponent,
-    BudgetEntiteAdministratifComponent,
+    BudgetProjetComponent,
     BudgetCompteBudgitaireComponent,
     ConfirmationComponent,
     DetaillesComponent,
@@ -169,6 +170,7 @@ import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-l
     StockGlobalListComponent,
     FournisseurComponent,
     FooterComponent,
+    BudgetFaculteCreateComponent,
 
   ],
   imports: [
