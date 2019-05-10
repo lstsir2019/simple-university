@@ -37,4 +37,7 @@ export class LivraisonListComponent implements OnInit {
     );
 
   }
+  public print(livraison:Livraison){
+    this.livraisonService.print(livraison.reference);
+  }
 }

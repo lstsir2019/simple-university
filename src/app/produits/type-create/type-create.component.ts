@@ -42,4 +42,7 @@ export class TypeCreateComponent implements OnInit {
   public typeR(libelleR:string){
     return this.produitService.typeR(libelleR);
   }
+  public print(type:TypeProduit){
+    this.produitService.printType(type.code);
+  }
 }

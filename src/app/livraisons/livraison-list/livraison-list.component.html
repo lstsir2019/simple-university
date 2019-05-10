@@ -74,8 +74,9 @@
         <td>{{l.date}}</td>
         <td>{{l.referenceCommande}}</td>
         <td>{{l.referenceEntite}}</td>
-        <td><button class="btn btn-outline-success" (click)="livraisonItemsR(l)">!</button>
+        <td><button class="btn btn-outline-success" (click)="livraisonItemsR(l)"><i class="fa fa-info"></i></button>
           <button class="btn btn-outline-danger" (click)="deleteLivraison(l)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button class="btn btn-outline-primary" (click)="print(l)" ><i class="fa fa-print" aria-hidden="true"></i></button>
         </td>
 
       </tr>

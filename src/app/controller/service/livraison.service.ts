@@ -204,6 +204,14 @@ export class LivraisonService {
       }
     );
   }
+  public print(reference:string):any{
+    const httpOptions = {
+      responseType : 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url+"/pdf/reference/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
 
   set livraisons(value: Array<Livraison>) {
     this._livraisons = value;

@@ -89,6 +89,7 @@ import {AppelOffreCreateComponent} from './appel-offre/appel-offres/appel-offre-
 import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-liste/appel-offre-liste.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -171,6 +172,7 @@ import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-l
     TestPrintComponent,
     FournisseurComponent,
     FooterComponent,
+
 
   ],
   imports: [
