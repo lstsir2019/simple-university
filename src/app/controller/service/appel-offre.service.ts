@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {AppelOffre} from '../model/appel-offre.model';
 import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 import {HttpClient} from '@angular/common/http';
+import {Offre} from '../model/offre.model';
+import {AppRoutingModule} from '../../app-routing.module';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class AppelOffreService {
   private _appelOffreSelected: AppelOffre;
   public allAppelOffres: Array<AppelOffre> = new Array<AppelOffre>();
   public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<AppelOffreDetail>();
+  private _appelOffreSearch : AppelOffre = new AppelOffre("",0,0,0,0);
 
   constructor(private http: HttpClient) {
   }
@@ -66,6 +69,8 @@ export class AppelOffreService {
     }
   }
 
+
+
   get appelOffres(): Array<AppelOffre> {
     return this._appelOffres;
   }
@@ -103,7 +108,15 @@ export class AppelOffreService {
 
     }
   }
-
+  public findAppelOffreByCriteria() {
+    this.http.post<Array<AppelOffre>>(this._url + 'criteria',this.appelOffreSearch).subscribe(
+      data => {
+        this._appelOffres = data;
+      }, error => {
+        console.log('erroooor while loading AppelOffre details....');
+      }
+    );
+  }
   public findAppelOffreByRefernce(ref: string) {
     this.http.get<Array<AppelOffreDetail>>(this._url + 'appelOffre/reference/' + ref).subscribe(
       data => {
@@ -113,4 +126,38 @@ export class AppelOffreService {
       }
     );
   }
+
+  chekBestOffre(a: Offre) {
+    this.http.put<number>(this.url + '/offre/reference/' + a.reference, a).subscribe(
+      data => {
+        console.log('ok');
+
+      }, error => {
+        console.log('error' + error);
+      }
+    );
+  }
+
+  removeAppelOffre(a: AppelOffre) {
+    let number = this._appelOffres.indexOf(a);
+    this._appelOffres.splice(number,1);
+    this.http.delete(this.url + 'reference/' + a.reference, ).subscribe(
+      data => {
+        console.log('ok');
+      }, error => {
+        console.log('error' + error);
+      }
+    );
+
+  }
+
+
+  get appelOffreSearch(): AppelOffre {
+    return this._appelOffreSearch;
+  }
+
+  set appelOffreSearch(value: AppelOffre) {
+    this._appelOffreSearch = value;
+  }
+
 }

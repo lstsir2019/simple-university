@@ -1,56 +1,153 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="">
     <div class="card spacer">
       <div class="card-header mb-3">Gestion des Appel d'offre</div>
+
+      <div class="form-inline justify-content-center">
+        <div class="input-group mx-sm-3 mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Objectif</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="appelOffreSearch.objectif"/>
+        </div>
+        <div class="input-group mx-sm-3 mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reference</span>
+          </div>
+          <input class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                 [(ngModel)]="appelOffreSearch.reference"/>
+        </div>
+        <div class="input-group mx-sm-3 mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">AppelOffre</span>
+          </div>
+          <select class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                  [(ngModel)]="appelOffreSearch.reference">
+            <option disabled>----SELECT----</option>
+       <!--     <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>-->
+          </select>
+        </div>
+        <div class="input-group mx-sm-3 mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">date Min</span>
+          </div>
+          <input class="form-control" type="date" [(ngModel)]="appelOffreSearch.dateMin"/>
+        </div>
+        <div class="input-group mx-sm-3 mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">date Max </span>
+          </div>
+          <input class="form-control" type="date" [(ngModel)]="appelOffreSearch.dateMax"/>
+        </div>
+        <div class="input-group mx-sm-3 mb-2">
+          <button class="btn btn-outline-info btn-block" (click)="findAppelOffreByCriteria()"><i class="fa fa-search">chercher</i></button>
+        </div>
+      </div>
+
+
       <div class="card-body">
+        <div class="table-responsive">
         <table class="table table-hover table-sm">
           <thead>
           <th>Objectif</th>
-          <th>Montant HT</th>
+          <th>reference</th>
+          <th>HT</th>
           <th>TVA</th>
-          <th>Montant TTC</th>
-          <th>montant Garantie Temporaire</th>
+          <th>TTC</th>
+          <th>MGT</th><!--garantie temporaire-->
           <th>Action</th>
           </thead>
           <tbody>
           <tr *ngFor="let a of appelOffres">
             <td>{{a.objectif}}</td>
+            <td>{{a.reference}}</td>
             <td>{{a.montantHT}}</td>
             <td>{{a.tva}}</td>
             <td>{{a.montantTTC}}</td>
             <td>{{a.montantGarantieTemp}}</td>
             <td>
-              <button (click)="findAppelOffreDetailByObjectifAppelOffre(a)"
-                      class="btn btn-sm btn-outline-dark fa fa-plus"></button>
+              <button (click)="findAppelOffreDetailByObjectifAppelOffre(a)" data-toggle="modal" data-target="#exampleModal"
+                      class="btn btn-sm btn-outline-dark"><i class="fa fa-plus">Detail</i></button>
+              <button (click)="findOffreDetailByAppelOffre(a)" data-toggle="modal" data-target="#offreModal"
+                      class="btn btn-sm btn-outline-info"><i class="fa fa-search">Offres</i></button>
+              <button (click)="removeAppelOffre(a)"
+                      class="btn btn-sm btn-outline-danger"><i class="fa fa-remove">supprimer</i></button>
+              <button (click)="changeAppelOffreToCommande(a)"
+                      class="btn btn-sm btn-outline-success"><i class="fa fa-send">commande</i></button>
             </td>
           </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4" *ngIf="appelOffreSelected != null">
-    <div class="card spacer">
-      <div class="card-header mb-3">Detail de l'appel d'offre {{appelOffreSelected.objectif}}</div>
-      <div class="card-body">
-        <table class="table table-hover table-sm">
-          <thead>
-          <th>reference produit</th>
-          <th>prix unitaire</th>
-          <th>quatite</th>
-          <th>total</th>
-          </thead>
-          <tbody>
-          <tr *ngFor="let ad of appelOffreSelected.appelOffreDetailVo">
-            <td>{{ad.refProduit}}</td>
-            <td>{{ad.prixUnitaire}}</td>
-            <td>{{ad.quantite}}</td>
-            <td>{{ad.total}}</td>
-          </tr>
-          </tbody>
-        </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail de l'appel d'offre {{appelOffreSelected.objectif}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="" *ngIf="appelOffreSelected != null">
+        <div class="card spacer">
+            <div class="table-responsive">
+            <table class="table table-hover table-sm">
+              <thead>
+              <th>reference produit</th>
+              <th>prix unitaire</th>
+              <th>quatite</th>
+              <th>total</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let ad of appelOffreSelected.appelOffreDetailVo">
+                <td>{{ad.refProduit}}</td>
+                <td>{{ad.prixUnitaire}}</td>
+                <td>{{ad.quantite}}</td>
+                <td>{{ad.total}}</td>
+              </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" id="offreModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="offreModalLabel">Offre de l'appel d'offre {{appelOffreSelected.reference}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="" *ngIf="appelOffreSelected != null">
+        <div class="card spacer">
+          <app-offres-list></app-offres-list>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

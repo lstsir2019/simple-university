@@ -18,6 +18,7 @@ export class OffresCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appelOffreService.findAll();
   }
 
   public get appleOffreDetails(){

@@ -8,14 +8,14 @@
              aria-selected="true">Budget Faculte</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" id="budgetprojet-tab" data-toggle="tab" href="#budgetprojet"
+             role="tab" aria-controls="budgetprojet"
+             aria-selected="false">Budget Projet</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" id="budgetSousProjet-tab" data-toggle="tab" href="#budgetSousProjet" role="tab"
              aria-controls="budgetSousProjet"
              aria-selected="false">Budget Sous Projet</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="budgetEntiteAdministratif-tab" data-toggle="tab" href="#budgetEntiteAdministratif"
-             role="tab" aria-controls="budgetEntiteAdministratif"
-             aria-selected="false">Budget Entité Administratif</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="budgetCompteBudgitaire-tab" data-toggle="tab" href="#budgetCompteBudgitaire"
@@ -34,12 +34,12 @@
           <app-budget-faculte></app-budget-faculte>
 
         </div>
+        <div class="tab-pane fade mt-md-2" id="budgetprojet" role="tabpanel"
+             aria-labelledby="budgetprojet-tab">
+          <app-budget-projet></app-budget-projet>
+        </div>
         <div class="tab-pane fade mt-md-2" id="budgetSousProjet" role="tabpanel" aria-labelledby="budgetSousProjet-tab">
           <app-budget-sous-projet></app-budget-sous-projet>
-        </div>
-        <div class="tab-pane fade mt-md-2" id="budgetEntiteAdministratif" role="tabpanel"
-             aria-labelledby="budgetEntiteAdministratif-tab">
-          <app-budget-entite-administratif></app-budget-entite-administratif>
         </div>
         <div class="tab-pane fade mt-md-2" id="budgetCompteBudgitaire" role="tabpanel"
              aria-labelledby="budgetCompteBudgitaire-tab">

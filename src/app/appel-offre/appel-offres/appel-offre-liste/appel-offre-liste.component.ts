@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AppelOffreService} from '../../../controller/service/appel-offre.service';
 import {AppelOffre} from '../../../controller/model/appel-offre.model';
+import {OffreService} from '../../../controller/service/offre.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,7 +12,7 @@ import {AppelOffre} from '../../../controller/model/appel-offre.model';
 })
 export class AppelOffreListeComponent implements OnInit {
 
-  constructor(private appelOffreService: AppelOffreService) { }
+  constructor(private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService) { }
 
   ngOnInit() {
     this.appelOffreService.findAll();
@@ -21,10 +23,32 @@ export class AppelOffreListeComponent implements OnInit {
     this.appelOffreService.findAppelOffreDetailByObjectifAppelOffre(appelOffre);
 
   }
+  public get appelOffreSearch(){
+    return this.appelOffreService.appelOffreSearch;
+  }
   public get appelOffres() {
     return this.appelOffreService.appelOffres;
   }
+
   public get appelOffreSelected() {
     return this.appelOffreService.appelOffreSelected;
+  }
+
+  findAppelOffreByCriteria() {
+    this.appelOffreService.findAppelOffreByCriteria();
+  }
+
+  findOffreDetailByAppelOffre(a) {
+  this.offreService.findByAppelOffreRefernce(a.reference);
+  }
+
+  removeAppelOffre(a) {
+    this.appelOffreService.removeAppelOffre(a);
+
+
+  }
+
+  changeAppelOffreToCommande(a) {
+    this.router.navigate(["/commandeCreate"]);
   }
 }

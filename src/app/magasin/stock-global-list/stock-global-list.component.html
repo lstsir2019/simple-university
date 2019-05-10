@@ -5,13 +5,19 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Commande</label>
         </div>
-        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="referenceCmd">
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="stockGlobal.referenceCommande">
       </div>
       <div class="input-group mx-sm-3">
         <div class="input-group-prepend">
           <label class="input-group-text">Produit</label>
         </div>
-        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="referenceProduit">
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="stockGlobal.referenceProduit">
+      </div>
+      <div class="input-group mx-sm-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Magasin</label>
+        </div>
+        <input type="text" class="form-control" placeholder="reference" [(ngModel)]="stockGlobal.referenceMagasin">
       </div>
       <div class="input-group">
         <button class="btn btn-secondary btn-block" (click)="findStockGlobalByQuery()"><i class="fa fa-search"></i>Recherche
@@ -20,6 +26,7 @@
     </div>
   </div>
   <div class="card-body">
+    <div class="table-responsive">
     <table class="table table-bordered table-sm">
       <thead>
       <tr>
@@ -41,5 +48,6 @@
       </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </div>
