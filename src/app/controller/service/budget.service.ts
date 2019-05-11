@@ -56,7 +56,7 @@ export class BudgetService {
   public budgetFaculteSearchByAnneeMinMax: BudgetFaculteVo = new BudgetFaculteVo(0);
 
 
-  // -----------------------------Methodes Find--------------------------
+  // ----------------------------- Methodes Find --------------------------
 
   public findByAnneeMinAndMax() {
     this.http.post<Array<BudgetFaculteVo>>(this._url_bf, this.budgetFaculteSearchByAnneeMinMax).subscribe(
@@ -119,7 +119,8 @@ export class BudgetService {
     );
   }
 
-  // -------------------------Methodes Ajoute New--------------------
+  // ------------------------- Ajouter New Budget--------------------
+
   public saveBudgetFaculte() {
     this.http.post<BudgetFaculteVo>(this._url_bf, this.budgetFaculteCreate).subscribe(
       data => {
@@ -164,6 +165,8 @@ export class BudgetService {
     bcb.compteBudgitaireVo=CompteBudgitaireVoClone;
     this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
   }
+
+  //-----------------------------------------------------------------
 
 
   /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);
