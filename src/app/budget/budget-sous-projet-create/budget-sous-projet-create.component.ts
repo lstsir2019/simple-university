@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BudgetService} from "../../controller/service/budget.service";
 
 @Component({
   selector: 'app-budget-sous-projet-create',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetSousProjetCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
+  }
+
+  public get budgetSousProjetCreate(){
+    return this.budgetService.budgetSousProjetCreate;
+  }
+  public ajouterNewBudgetSousProjet(){
+    this.budgetService.ajouterNewBudgetSousProjet();
   }
 
 }

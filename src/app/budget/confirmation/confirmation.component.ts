@@ -10,45 +10,13 @@ import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model'
 })
 export class ConfirmationComponent implements OnInit {
 
-  private _selectedBcb:BudgetCompteBudgitaireVo;
+
   constructor(private _budgetService: BudgetService) {
   }
 
-  public get bfCreate() {
-    return this._budgetService.budgetFaculteCreate;
-  }
-
-  get budgetService(): BudgetService {
-    return this._budgetService;
-  }
-
-  set budgetService(value: BudgetService) {
-    this._budgetService = value;
-  }
 
   ngOnInit() {
   }
 
-  public setSelectedBcb(bsb:BudgetCompteBudgitaireVo){
-    this._selectedBcb=bsb;
-  }
-  /*
-  public get bsps(){
-    if (this._bfCreate==null) {
-      this._bfCreate=this._budgetService.budgetFaculteCreate;
-    }
-    return this._budgetService.budgetFaculteCreate.budgetSousProjetVo;
-  }
-  */
-  public saveAll() {
-    this._budgetService.saveAllInBudgetFaculte();
-  }
 
-  get selectedBcb(): BudgetCompteBudgitaireVo {
-    return this._selectedBcb;
-  }
-
-  set selectedBcb(value: BudgetCompteBudgitaireVo) {
-    this._selectedBcb = value;
-  }
 }
