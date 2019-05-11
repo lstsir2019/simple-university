@@ -157,6 +157,9 @@ export class ProduitService {
         console.log(this.produitSearch);
         this._produits = data;
         console.log(data);
+        this.produitSearch=new Produit("","");
+        this.produitSearch.typeProduitVo=new TypeProduit("","");
+        this.produitSearch.categorieProduitVo=new CategoriProduit("","");
 
       }, error1 => {
         console.log("erroooorr", error1);
@@ -270,6 +273,23 @@ export class ProduitService {
       );
 
   }
+  public printCategorie(libelle:string):any{
+    const httpOptions = {
+      responseType : 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url9+"/pdf/Libelle/"+libelle,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+  public printType(code:string):any{
+    const httpOptions = {
+      responseType : 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url9+"/pdf/code/"+code,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
 
 
   get produitModified(): Produit {

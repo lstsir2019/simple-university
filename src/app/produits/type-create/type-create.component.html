@@ -12,8 +12,9 @@
       <div class="col-sm-6">
         <div class="input-group ">
 
-          <input type="text"   [(ngModel)]="libelleR"/>
-          <button class="btn btn-outline-primary " (click)="typeR(libelleR)" ><i class="fa fa-search" aria-hidden="true"></i></button>
+          <input type="text" [(ngModel)]="libelleR"/>
+          <button class="btn btn-outline-primary " (click)="typeR(libelleR)"><i class="fa fa-search"
+                                                                                aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
@@ -21,7 +22,7 @@
     <br>
     <br>
     <table class="table  table-hover table-sm table-bordered">
-      <thead >
+      <thead>
       <th class="something">LABELLE</th>
       <th class="something">CODE PRODUIT</th>
       <th class="something">ACTION</th>
@@ -30,8 +31,11 @@
       <tr *ngFor="let t of types">
         <td class="something">{{t.libelle}}</td>
         <td class="something">{{t.code}}</td>
-        <td class="something"><button class="btn btn-outline-danger" (click)="deleteType(t)"><i class="fa fa-trash" aria-hidden="true"></i>
-        </button></td>
+        <td class="something">
+          <button class="btn btn-outline-danger" (click)="deleteType(t)"><i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-outline-primary" (click)="print(t)" ><i class="fa fa-print" aria-hidden="true"></i></button>
+        </td>
       </tr>
 
       </tbody>
@@ -55,18 +59,19 @@
           <div class="input-group-prepend">
             <div class="input-group-text widthLabel">LIBELLE</div>
           </div>
-          <input type="text" [(ngModel)]="typeProduit.libelle" class="form-control" >
+          <input type="text" [(ngModel)]="typeProduit.libelle" class="form-control">
         </div>
 
         <div class="input-group">
           <div class="input-group-prepend">
             <div class="input-group-text widthLabel">CODE</div>
           </div>
-          <input type="text" [(ngModel)]="typeProduit.code" class="form-control" >
+          <input type="text" [(ngModel)]="typeProduit.code" class="form-control">
         </div>
 
-        <div class="form-group" style="width:70%;margin:0 auto" >
-          <button type="submit" name="button" class="btn btn-info" style="margin-top:30px" (click)="saveType()">insert</button>
+        <div class="form-group" style="width:70%;margin:0 auto">
+          <button type="submit" name="button" class="btn btn-info" style="margin-top:30px" (click)="saveType()">insert
+          </button>
         </div>
       </div>
 

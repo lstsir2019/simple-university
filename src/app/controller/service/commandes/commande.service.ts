@@ -264,8 +264,10 @@ export class CommandeService {
   }
 
   public setProduitByVategorie(libelle: string) {
+    console.log("haaaaaaa lhayaaat"+libelle);
     this.http.get<Array<Produit>>('http://localhost:8090/faculte-commande/commandes/produits/libelle/' + libelle).subscribe(
       data => {
+        console.log("haaa produit ... !"+data);
         this.produits = data;
       }, error => {
         console.log(error);

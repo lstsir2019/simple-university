@@ -45,4 +45,8 @@ export class CategorieTypeCreateComponent implements OnInit {
   public categorieR(libelleR:string){
     return this.produitService.categorieR(libelleR);
   }
+
+  public print(categorie:CategoriProduit){
+    this.produitService.printCategorie(categorie.libelle);
+  }
 }
