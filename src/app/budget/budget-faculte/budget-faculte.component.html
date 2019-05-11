@@ -11,7 +11,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="anneeMin">Année Min</label>
               </div>
-              <input [(ngModel)]="budgetFaculteVo.annee" aria-describedby="inputGroup-sizing-sm"
+              <input [(ngModel)]="budgetFaculteSearsh.anneeMin" aria-describedby="inputGroup-sizing-sm"
                      aria-label="Sizing example input"
                      class="form-control" id="anneeMin" min="0" required step="any"
                      type="number">
@@ -22,7 +22,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="anneeMax">Année Max</label>
               </div>
-              <input [(ngModel)]="budgetFaculteVo1.annee" aria-describedby="inputGroup-sizing-sm"
+              <input [(ngModel)]="budgetFaculteSearsh.anneeMax" aria-describedby="inputGroup-sizing-sm"
                      aria-label="Sizing example input"
                      class="form-control" id="anneeMax" min="0" required step="any"
                      type="number">
@@ -30,7 +30,7 @@
           </div>
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button (click)="findByCreteriaAnneMinAndAnneMax()"
+              <button (click)="findByAnneeMinAndMax()"
                       class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
           </div>
@@ -60,18 +60,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetFacultes.length==0">
+            <tr *ngIf="budgetFaculteList.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
+            <tr *ngFor="let bf of budgetFaculteList">
               <td>{{bf.annee}}</td>
               <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                <button  class="btn btn-outline-danger fa fa-trash-o"
                         type="button"></button>
-                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
-                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
+                <button (click)="findBudgetProjet(bf)" *ngIf="bf.id!=0"
+                        class="btn btn-outline-secondary fa fa-plus ml-2"></button>
               </td>
             </tr>
             </tbody>

@@ -11,10 +11,10 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="refsp">Réf sous projet</label>
               </div>
-              <select [(ngModel)]="budgetSousProjetClone.referenceSousProjet" id="refsp" class="select form-control"
+              <select  id="refsp" class="select form-control"
                       required>
                 <option selected disabled>-------SELECT-------</option>
-                <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+                <option ></option>
               </select>
             </div>
           </div>
@@ -23,16 +23,16 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="refea">Réf CB</label>
               </div>
-              <select [(ngModel)]="beaCreateClone.referenceEntiteAdministratif" id="refea" class="select form-control"
+              <select  id="refea" class="select form-control"
                       required>
                 <option value="">----------SELECT-----------</option>
-                <option *ngFor="let ea of entiteAdministratif" value="{{ea.referenceEntiteAdministratif}}">{{ea.referenceEntiteAdministratif}}</option>
+                <option ></option>
               </select>
             </div>
           </div>
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button (click)="findByCreteriaAnneMinAndAnneMax()"
+              <button
                       class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
           </div>
@@ -64,18 +64,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetFacultes.length==0">
+            <tr *ngIf="budgetCompteBudgiaireList.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
-              <td>{{bf.annee}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
+            <tr *ngFor="let bcb of budgetCompteBudgiaireList">
+              <td>{{bcb.reference}}</td>
+              <td>{{bcb.budgetSousProjetVo.referenceSousProjet}}</td>
+              <td>{{bcb.compteBudgitaireVo.code}}</td>
+              <td>{{bcb.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bcb.detaillesBudgetVo.creditOuvertReel}}</td>
+
               <td>
-                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                <button  class="btn btn-outline-danger fa fa-trash-o"
                         type="button"></button>
-                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
-                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
               </td>
             </tr>
             </tbody>

@@ -14,16 +14,16 @@
                 <label class="input-group-text" for="refsp">Référence sous projet</label>
               </div>
               <select name="" id="refsp" class="select form-control"
-                      [(ngModel)]="budgetSousProjetClone.referenceSousProjet" required>
+                       required>
                 <option selected disabled>------SELECT-------</option>
-                <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+                <option ></option>
               </select>
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button (click)="findByCreteriaAnneMinAndAnneMax()"
+              <button
                       class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
           </div>
@@ -49,25 +49,24 @@
             <thead>
             <tr>
               <th scope="1">Reference</th>
-              <th scope="1">Libelle</th>
               <th scope="1">COE</th>
               <th scope="1">COR</th>
               <th scope="1">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetFacultes.length==0">
+            <tr *ngIf="budgetSousProjet.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
-              <td>{{bf.annee}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
+            <tr  *ngFor="let bsp of budgetSousProjet">
+              <td>{{bsp.referenceSousProjet}}</td>
+              <td>{{bsp.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bsp.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                <button  class="btn btn-outline-danger fa fa-trash-o"
                         type="button"></button>
-                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
-                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
+                <button (click)="findBudgetCompteBudgitaire(bsp)" *ngIf="bf.id!=0"
+                        class="btn btn-outline-secondary fa fa-plus ml-2"></button>
               </td>
             </tr>
             </tbody>

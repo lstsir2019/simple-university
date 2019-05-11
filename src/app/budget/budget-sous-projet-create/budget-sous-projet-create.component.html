@@ -5,19 +5,15 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="reference">Référence</label>
       </div>
-      <select [(ngModel)]="budgetSousprojet.referenceSousProjet" id="reference" class="select form-control"
-              required>
-        <option disabled selected>----------SELECT-----------</option>
-        <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
-      </select>
+      <input type="text" class="form-control" id="reference" [(ngModel)]="budgetSousProjetCreate.referenceSousProjet">
 
     </div>
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverestimatif">Crédit Ouvert Estimatif</label>
       </div>
-      <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
-             [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
+      <input type="number"
+             [(ngModel)]="budgetSousProjetCreate.detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -25,8 +21,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverreel">Crédit Ouvert Reel</label>
       </div>
-      <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertReel:null"
-             class="form-control" [(ngModel)]="detaillesBudgetVo.creditOuvertReel"
+      <input type="number"
+             class="form-control" [(ngModel)]="budgetSousProjetCreate.detaillesBudgetVo.creditOuvertReel"
              aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -34,8 +30,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagepaye">Engagé payé</label>
       </div>
-      <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engagePaye:null" class="form-control"
-             [(ngModel)]="detaillesBudgetVo.engagePaye"
+      <input type="number"  class="form-control"
+             [(ngModel)]="budgetSousProjetCreate.detaillesBudgetVo.engagePaye"
              aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -43,14 +39,14 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
       </div>
-      <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engageNonPaye:null"
-             class="form-control" [(ngModel)]="detaillesBudgetVo.engageNonPaye"
+      <input type="number"
+             class="form-control" [(ngModel)]="budgetSousProjetCreate.detaillesBudgetVo.engageNonPaye"
              aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
              aria-describedby="inputGroup-sizing-sm">
     </div>
     <div class="row">
 
-      <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i class="fa fa-plus">Ajouter</i></button>
+      <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalSousProjet" (click)="ajouterNewBudgetSousProjet()"><i class="fa fa-plus">Ajouter</i></button>
 
 
     </div>
