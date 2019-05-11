@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
-import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
+import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
 import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
 
 @Component({
@@ -11,7 +11,7 @@ import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-com
 export class DetaillesComponent implements OnInit {
 
   @Input() _selectedBsp:BudgetSousProjetVo=new BudgetSousProjetVo();
-  @Input() _selectedBudgetEntiteAdministratif:BudgetEntiteAdministratifVo=new BudgetEntiteAdministratifVo();
+  @Input() _selectedBudgetEntiteAdministratif:BudgetProjetVo=new BudgetProjetVo();
   @Input() _selectedBudgetCompteBudgitaire:BudgetCompteBudgitaireVo=new BudgetCompteBudgitaireVo();
   constructor() { }
 

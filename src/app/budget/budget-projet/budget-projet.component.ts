@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
+import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
 import {BudgetService} from '../../controller/service/budget.service';
 import * as jsPDF from 'jspdf';
 
@@ -10,8 +10,8 @@ import * as jsPDF from 'jspdf';
 })
 export class BudgetProjetComponent implements OnInit {
 
-  private _selectedBea: BudgetEntiteAdministratifVo = new BudgetEntiteAdministratifVo();
-  private _budgetEntiteAdministratifInfo:BudgetEntiteAdministratifVo=new BudgetEntiteAdministratifVo();
+  private _selectedBea: BudgetProjetVo = new BudgetProjetVo();
+  private _budgetEntiteAdministratifInfo:BudgetProjetVo=new BudgetProjetVo();
 
   constructor(private budgetService: BudgetService) {
   }
@@ -20,7 +20,7 @@ export class BudgetProjetComponent implements OnInit {
     this.budgetService.findAllEntiteAdministratif();
   }
 
-  public tableBudgetEntiteAdministratifInfo(bea:BudgetEntiteAdministratifVo){
+  public tableBudgetEntiteAdministratifInfo(bea:BudgetProjetVo){
     this.budgetEntiteAdministratifInfo=bea;
   }
 
@@ -32,7 +32,7 @@ export class BudgetProjetComponent implements OnInit {
     this.budgetService.updateBudgetEntiteAdministratif(this._budgetEntiteAdministratifInfo.referenceEntiteAdministratif);
   }
 
-  public deleteEntiteAdministratif(bea: BudgetEntiteAdministratifVo) {
+  public deleteEntiteAdministratif(bea: BudgetProjetVo) {
     this.budgetService.deleteBudgetEntiteAdmin(bea);
   }
 
@@ -67,19 +67,19 @@ export class BudgetProjetComponent implements OnInit {
     return this.budgetService.addBudgetEntiteAdministratif();
   }
 
-  public getBeaInfos(bear: BudgetEntiteAdministratifVo) {
+  public getBeaInfos(bear: BudgetProjetVo) {
     this._selectedBea = bear;
   }
 
-  get budgetEntiteAdministratifInfo(): BudgetEntiteAdministratifVo {
+  get budgetEntiteAdministratifInfo(): BudgetProjetVo {
     return this._budgetEntiteAdministratifInfo;
   }
 
-  set budgetEntiteAdministratifInfo(value: BudgetEntiteAdministratifVo) {
+  set budgetEntiteAdministratifInfo(value: BudgetProjetVo) {
     this._budgetEntiteAdministratifInfo = value;
   }
 
-  public downloadPdf(bea: BudgetEntiteAdministratifVo) {
+  public downloadPdf(bea: BudgetProjetVo) {
     let doc = new jsPDF();
     doc.text('Annee ' + bea.budgetSousProjetVo.budgetFaculteVo.annee, 10, 20);
     doc.text('Reference sous projet ' + bea.budgetSousProjetVo.referenceSousProjet, 10, 30);

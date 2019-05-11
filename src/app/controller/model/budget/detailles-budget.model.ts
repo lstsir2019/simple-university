@@ -1,4 +1,4 @@
-export class DetaillesBudget {
+export class DetaillesBudgetVo {
   constructor(
     public antecedent?: string,
     public creditOuvertEstimatif?: string,

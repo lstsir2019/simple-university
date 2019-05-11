@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BudgetService} from '../../controller/service/budget.service';
 import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
-import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
+import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
 
 @Component({
   selector: 'app-confirmation',
