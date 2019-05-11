@@ -1,130 +1,81 @@
 <div class="container-fluid">
-  <div class="row col-md-12 justify-content-between">
-    <div class="col-md-5">
-      <div class="card">
-        <div class="card-header text-center">
-          Création
-        </div>
-        <div class="card-body">
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="refsp">Réf sous projet</label>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        Budget Compte Budgitaire
+      </div>
+      <div>
+        <div class="card-body d-lg-flex justify-content-center">
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="refsp">Réf sous projet</label>
+              </div>
+              <select [(ngModel)]="budgetSousProjetClone.referenceSousProjet" id="refsp" class="select form-control"
+                      required>
+                <option selected disabled>-------SELECT-------</option>
+                <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+              </select>
             </div>
-            <select [(ngModel)]="budgetSousProjetClone.referenceSousProjet" id="refsp" class="select form-control"
-                    required>
-              <option selected disabled>-------SELECT-------</option>
-              <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
-            </select>
           </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="refea">Réf entite admin</label>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="refea">Réf CB</label>
+              </div>
+              <select [(ngModel)]="beaCreateClone.referenceEntiteAdministratif" id="refea" class="select form-control"
+                      required>
+                <option value="">----------SELECT-----------</option>
+                <option *ngFor="let ea of entiteAdministratif" value="{{ea.referenceEntiteAdministratif}}">{{ea.referenceEntiteAdministratif}}</option>
+              </select>
             </div>
-            <select [(ngModel)]="beaCreateClone.referenceEntiteAdministratif" id="refea" class="select form-control"
-                    required>
-              <option value="">----------SELECT-----------</option>
-              <option *ngFor="let ea of entiteAdministratif" value="{{ea.referenceEntiteAdministratif}}">{{ea.referenceEntiteAdministratif}}</option>
-            </select>
           </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button (click)="findByCreteriaAnneMinAndAnneMax()"
+                      class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
-            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertEstimatif:null" [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
-                   aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
-            </div>
-            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertReel:null" [(ngModel)]="detaillesBudgetVo.creditOuvertReel" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="engagepaye">Engagé payé</label>
-            </div>
-            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engagePaye:null" [(ngModel)]="detaillesBudgetVo.engagePaye" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
-            </div>
-            <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engageNonPaye:null" [(ngModel)]="detaillesBudgetVo.engageNonPaye" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="code">Code</label>
-            </div>
-            <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.code:null" [(ngModel)]="compteBudgitaire.code" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="code"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="libelle">Libellé</label>
-            </div>
-            <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.libelle:null" [(ngModel)]="compteBudgitaire.libelle" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="libelle"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <input type="button" (click)="addBudgetCompteBudgitaire()" class="form-control btn btn-success"
-                     value="Ajouter">
-            </div>
-            <div class="col-6">
-              <input type="button" (click)="update()" class="form-control btn btn-primary"
-                     value="Ok">
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalCompte"><i class="fa fa-plus">Nouveau Budget</i></button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-7">
-      <div class="card">
-        <div class="card-header text-center">
-          List
-        </div>
-        <div class="card-body">
-          <table class="table table-sm table-hover">
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="card-title">List</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-sm">
             <thead>
             <tr>
-              <th scope="1">RCB</th>
+              <th scope="1">reference</th>
+              <th scope="1">Sous Projet</th>
+              <th scope="1">Compte Budgitair</th>
               <th scope="1">COE</th>
               <th scope="1">COR</th>
-              <th scope="1">EP</th>
-              <th scope="1">ENP</th>
-              <th scope="1">Code</th>
-              <th scope="1">Libellé</th>
               <th scope="1">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="bcbs.length==0">
-              <td class="text-center font-italic" colspan="8">No item found</td>
+            <tr *ngIf="budgetFacultes.length==0">
+              <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr (click)="selectedTableBudgetCompteBudgitaire(bcb)" *ngFor="let bcb of bcbs"
-                [ngClass]="bcb.id==0?'table-warning':'table-default'">
-              <td>{{ bcb.referenceCompteBudgitaire }}</td>
-              <td>{{ bcb.detaillesBudgetVo.creditOuvertEstimatif }}</td>
-              <td>{{ bcb.detaillesBudgetVo.creditOuvertReel }}</td>
-              <td>{{ bcb.detaillesBudgetVo.engagePaye }}</td>
-              <td>{{ bcb.detaillesBudgetVo.engageNonPaye }}</td>
-              <td>{{ bcb.compteBudgitaireVo.code }}</td>
-              <td>{{ bcb.compteBudgitaireVo.libelle }}</td>
+            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
+              <td>{{bf.annee}}</td>
+              <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button (click)="getBcbInfos(bcb)" *ngIf="bcb.id!=0" class="btn btn-outline-info fa fa-info mr-2"
-                        data-toggle="modal"
-                        data-target="#exampleModalBcbInfo"></button>
-                <button (click)="deleteBudgetCompteBudgitaire(bcb)" *ngIf="bcb.id!=0"
-                        class="btn btn-outline-danger fa fa-trash-o"></button>
+                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                        type="button"></button>
+                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
+                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
               </td>
             </tr>
             </tbody>
@@ -133,9 +84,30 @@
       </div>
     </div>
   </div>
+  <div id="chartContainer" class="col-md-6 offset-3"></div>
 </div>
-<!--Modal-->
-<div class="modal fade" id="exampleModalBcbInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <app-detailles [_selectedBudgetCompteBudgitaire]="_selectedBcb"></app-detailles>
+
+
+<div class="modal" id="myModalCompte">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create Budget Compte Budgitaire</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-budget-compte-budgitaire-create></app-budget-compte-budgitaire-create>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
 </div>

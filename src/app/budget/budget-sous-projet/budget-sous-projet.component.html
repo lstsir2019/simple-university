@@ -1,104 +1,72 @@
+
+
 <div class="container-fluid">
-  <div class="row col-md-12">
-    <div class="col-md-5">
-      <div class="card">
-        <div class="card-header text-center">
-          Création
-        </div>
-        <div class="card-body">
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="reference">Référence</label>
-            </div>
-            <select [(ngModel)]="budgetSousprojet.referenceSousProjet" id="reference" class="select form-control"
-                    required>
-              <option disabled selected>----------SELECT-----------</option>
-              <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
-            </select>
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary fa fa-search" (click)="findAllByAnneeAndBudgetSousProjet()"></button>
+  <div class="col-md-12 justify-content-between">
+    <div class="card">
+      <div class="card-header text-center">
+        Budget Sous Projet
+      </div>
+      <div>
+        <div class="card-body d-lg-flex justify-content-center">
+          <div class="col-md-5">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="refsp">Référence sous projet</label>
+              </div>
+              <select name="" id="refsp" class="select form-control"
+                      [(ngModel)]="budgetSousProjetClone.referenceSousProjet" required>
+                <option selected disabled>------SELECT-------</option>
+                <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+              </select>
             </div>
           </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="creditouverestimatif">Crédit Ouvert Estimatif</label>
+
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button (click)="findByCreteriaAnneMinAndAnneMax()"
+                      class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
-            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
-                   [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
-                   aria-describedby="inputGroup-sizing-sm">
           </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="creditouverreel">Crédit Ouvert Reel</label>
-            </div>
-            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.creditOuvertReel:null"
-                   class="form-control" [(ngModel)]="detaillesBudgetVo.creditOuvertReel"
-                   aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="engagepaye">Engagé payé</label>
-            </div>
-            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engagePaye:null" class="form-control"
-                   [(ngModel)]="detaillesBudgetVo.engagePaye"
-                   aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
-            </div>
-            <input type="number" [value]="!!bspInfo ? bspInfo.detaillesBudgetVo.engageNonPaye:null"
-                   class="form-control" [(ngModel)]="detaillesBudgetVo.engageNonPaye"
-                   aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <input type="button" (click)="addBudgetSousProjet()" class="form-control btn btn-success" value="Ajouter"/>
-            </div>
-            <div class="col-6">
-              <input type="button" (click)="update()" class="form-control btn btn-primary" value="Ok"/>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i class="fa fa-plus">Nouveau Budget</i></button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-7">
-      <div class="card">
-        <div class="card-header text-center">
-          List
-        </div>
-        <div class="card-body">
+
+  </div>
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="card-title">List</h4>
+      </div>
+      <div class="card-body text-center">
+        <div class="table-responsive">
           <table class="table table-hover table-sm">
             <thead>
             <tr>
-              <th scope="1">RSP</th>
+              <th scope="1">Reference</th>
+              <th scope="1">Libelle</th>
               <th scope="1">COE</th>
               <th scope="1">COR</th>
-              <th scope="1">EP</th>
-              <th scope="1">ENP</th>
-              <th scope="1">Actions</th>
+              <th scope="1">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetsSousProjets.length==0">
-              <td class="text-center font-italic" colspan="6">No item added</td>
+            <tr *ngIf="budgetFacultes.length==0">
+              <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr *ngFor="let bsp of budgetsSousProjets" (click)="tableBudgetSousProjetInfo(bsp)" class="{{bsp.id==0?'table-warning':'table-default'}}">
-              <td>{{ bsp.referenceSousProjet }}</td>
-              <td>{{ bsp.detaillesBudgetVo.creditOuvertEstimatif }}</td>
-              <td>{{ bsp.detaillesBudgetVo.creditOuvertReel }}</td>
-              <td>{{ bsp.detaillesBudgetVo.engagePaye }}</td>
-              <td>{{ bsp.detaillesBudgetVo.engageNonPaye }}</td>
+            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
+              <td>{{bf.annee}}</td>
+              <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button *ngIf="bsp.id!=0" type="button" class="btn btn-outline-info fa fa-info mr-2"
-                        (click)="setBudgetSousProjetInfos(bsp)" data-toggle="modal"
-                        data-target="#exampleModalBspInfo"></button>
-                <button type="button" (click)="deleteBudgetSousProjet(bsp)" class="btn btn-outline-danger fa fa-trash"></button>
-                <button (click)="downloadPdf(bsp)" *ngIf="bsp.id!=0"
+                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
+                        type="button"></button>
+                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
                         class="btn btn-outline-secondary fa fa-print ml-2"></button>
               </td>
             </tr>
@@ -110,9 +78,27 @@
   </div>
 </div>
 
-<!--modal pour infos-->
-<div class="modal fade" id="exampleModalBspInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <app-detailles [_selectedBsp]="_selectedBsp"></app-detailles>
+<div class="modal" id="myModalSousProjet">
+  <div class="modal-dialog">
+    <div class="modal-content centered">
+      <!-- Modal Header -->
+      <div class="modal-header text-center ">
+        <h4 class="modal-title">Create Budget Sous Projet</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-budget-sous-projet-create></app-budget-sous-projet-create>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
 </div>
 

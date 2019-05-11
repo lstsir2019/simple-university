@@ -87,6 +87,9 @@ import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.comp
 import {AppelOffreCreateComponent} from './appel-offre/appel-offres/appel-offre-create/appel-offre-create.component';
 import {AppelOffreListeComponent} from './appel-offre/appel-offres/appel-offre-liste/appel-offre-liste.component';
 import { BudgetFaculteCreateComponent } from './budget/budget-faculte-create/budget-faculte-create.component';
+import { BudgetProjetCreateComponent } from './budget/budget-projet-create/budget-projet-create.component';
+import { BudgetSousProjetCreateComponent } from './budget/budget-sous-projet-create/budget-sous-projet-create.component';
+import { BudgetCompteBudgitaireCreateComponent } from './budget/budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
 
 
 
@@ -172,6 +175,9 @@ import { BudgetFaculteCreateComponent } from './budget/budget-faculte-create/bud
     FournisseurComponent,
     FooterComponent,
     BudgetFaculteCreateComponent,
+    BudgetProjetCreateComponent,
+    BudgetSousProjetCreateComponent,
+    BudgetCompteBudgitaireCreateComponent,
 
 
   ],
