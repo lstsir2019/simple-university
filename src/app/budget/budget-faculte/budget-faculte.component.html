@@ -60,9 +60,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetFaculteList.length==0">
+            <!--<tr *ngIf="budgetFaculteList.length<=0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
-            </tr>
+            </tr>-->
             <tr *ngFor="let bf of budgetFaculteList">
               <td>{{bf.annee}}</td>
               <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>

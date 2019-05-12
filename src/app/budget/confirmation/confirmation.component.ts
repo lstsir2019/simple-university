@@ -11,12 +11,15 @@ import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model'
 export class ConfirmationComponent implements OnInit {
 
 
-  constructor(private _budgetService: BudgetService) {
+  constructor(private budgetService: BudgetService) {
   }
 
 
   ngOnInit() {
   }
 
+  public get budgetFaculte(){
+    return this.budgetService.budgetFacultePrincipal;
+  }
 
 }

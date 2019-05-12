@@ -2,40 +2,29 @@
   <div class="col-md-12">
     <div class="card text-center">
       <div class="card-header">
-        Détails budget de l'année {{bfCreate.annee}}
+        Détails budget de l'année {{budgetFaculte.annee}}
       </div>
       <div class="card-body">
         <table class="table table-bordered">
           <thead>
           <tr>
-            <th>reference sous projet</th>
-            <th>reference entite administratif</th>
-            <th>code compte budgitaire</th>
+            <th>Reference Projet</th>
+            <th>Reference Sous Projet</th>
+            <th>Code compte budgitaire</th>
           </tr>
           </thead>
           <!--<tr *ngIf="bfCreate.budgetSousProjetVo==null">
             <td class="font-italic text-center" colspan="3">No item found</td>
           </tr>-->
-          <tbody *ngFor="let bsp of bfCreate.budgetSousProjetVo">
+          <tbody *ngFor="let bp of budgetFaculte.budgetProjetVo">
           <tr>
-            <td rowspan="bsp.budgetEntiteAdministratifVo.length"></td>
-            <td
-              rowspan="bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo.length">{{bsp.referenceSousProjet}}
+            <td rowspan="bp.budgetSousProjetVos.length">{{bp.referenceProjet}}</td>
+            <td *ngFor="let bsp of bp.budgetSousProjetVos">
+              <tr>{{bsp.referenceSousProjet}}</tr>
             </td>
-            <td>{{bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo[0].compteBudgitaireVo.code}}</td>
+              <td rowspan="bp.budgetSousProjetVos.length">{{bp.referenceProjet}}</td>
           </tr>
-          <tr *ngFor="let bcb of bsp.budgetEntiteAdministratifVo[0].budgetCompteBudgitaireVo; let i= index;">
-            <td *ngIf="i!=0">{{bcb.compteBudgitaireVo.code}}</td>
-          </tr>
-          <div *ngFor="let bea of bsp.budgetEntiteAdministratifVo; let i=index;">
-            <tr *ngIf="i!=0">
-              <td rowspan="bea.budgetCompteBudgitaireVo.length">{{bea.referenceEntiteAdministratif}}</td>
-              <td>{{bea.budgetCompteBudgitaireVo[0].compteBudgitaireVo.code}}</td>
-            </tr>
-            <tr *ngFor="let bcb of bea.budgetCompteBudgitaireVo; let i=index;">
-              <td *ngIf="i!=0">{{bcb.compteBudgitaireVo.code}}</td>
-            </tr>
-            </div>
+
           </tbody>
         </table>
         <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>

@@ -15,6 +15,7 @@ export class BudgetFaculteComponent implements OnInit {
 
 
   constructor(private budgetService: BudgetService) {
+
   }
 
 

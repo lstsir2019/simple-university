@@ -1,8 +1,8 @@
 export class DetaillesBudgetVo {
   constructor(
     public antecedent?: string,
-    public creditOuvertEstimatif?: string,
-    public creditOuvertReel?: string,
+    public creditOuvertEstimatif: string="",
+    public creditOuvertReel: string="",
     public reliquatEstimatif?: string,
     public reliquatReel?: string,
     public engageNonPaye?: string,

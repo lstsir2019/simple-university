@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid">
   <div class="col-md-12 justify-content-between">
     <div class="card">
@@ -14,9 +12,9 @@
                 <label class="input-group-text" for="refsp">Référence sous projet</label>
               </div>
               <select name="" id="refsp" class="select form-control"
-                       required>
+                      required>
                 <option selected disabled>------SELECT-------</option>
-                <option ></option>
+                <option></option>
               </select>
             </div>
           </div>
@@ -24,12 +22,13 @@
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
               <button
-                      class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
+                class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
             </div>
           </div>
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i class="fa fa-plus">Nouveau Budget</i></button>
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i
+                class="fa fa-plus">Nouveau Budget</i></button>
             </div>
           </div>
         </div>
@@ -58,14 +57,14 @@
             <tr *ngIf="budgetSousProjet.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr  *ngFor="let bsp of budgetSousProjet">
+            <tr *ngFor="let bsp of budgetSousProjet">
               <td>{{bsp.referenceSousProjet}}</td>
               <td>{{bsp.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{bsp.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button  class="btn btn-outline-danger fa fa-trash-o"
+                <button class="btn btn-outline-danger fa fa-trash-o"
                         type="button"></button>
-                <button (click)="findBudgetCompteBudgitaire(bsp)" *ngIf="bf.id!=0"
+                <button (click)="findBudgetCompteBudgitaire(bsp)"
                         class="btn btn-outline-secondary fa fa-plus ml-2"></button>
               </td>
             </tr>

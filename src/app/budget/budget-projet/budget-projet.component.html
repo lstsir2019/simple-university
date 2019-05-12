@@ -54,7 +54,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetProjetList.length==0">
+            <tr *ngIf="budgetProjetList == null|| budgetProjetList.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
             <tr *ngFor="let bp of budgetProjetList">
