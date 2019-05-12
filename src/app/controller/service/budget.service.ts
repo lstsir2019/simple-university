@@ -81,10 +81,10 @@ export class BudgetService {
   }
 
   public findBudgetProjet(bf: BudgetFaculteVo) {
-    this.budgetFacultePrincipal = bf;
     this.budgetProjetPrincipal=new BudgetProjetVo();
     this.budgetSousProjetPrincipal=new BudgetSousProjetVo();
     this.budgetCompteBudgitairePrincipal=new BudgetCompteBudgitaireVo();
+    this.budgetFacultePrincipal = bf;
     if (bf.budgetProjetVos == null || bf.budgetProjetVos.length == 0) {
       this.http.get<Array<BudgetProjetVo>>(this._url_bp + '/annee/' + bf.annee).subscribe(
         data => {
@@ -102,9 +102,10 @@ export class BudgetService {
   }
 
   public findBudgetSousProjet(bp: BudgetProjetVo) {
-    this.budgetProjetPrincipal = bp;
     this.budgetSousProjetPrincipal=new BudgetSousProjetVo();
     this.budgetCompteBudgitairePrincipal=new BudgetCompteBudgitaireVo();
+    this.budgetProjetPrincipal = bp;
+
     this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp + '/referenceprojet/' + bp.referenceProjet + '/annee/' + this.budgetFacultePrincipal.annee).subscribe(
       data => {
         if (data != null) {
@@ -284,3 +285,4 @@ export class BudgetService {
 
   //update budget sous projet
 }
+
