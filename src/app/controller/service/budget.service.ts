@@ -106,18 +106,20 @@ export class BudgetService {
     this.budgetProjetPrincipal = bp;
 
     let index=this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
-
-
-    this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp + '/referenceprojet/' + bp.referenceProjet + '/annee/' + this.budgetFacultePrincipal.annee).subscribe(
-      data => {
-        if (data != null) {
-          this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos=data;
-          //this.budgetProjetPrincipal.budgetSousProjetVos = data;
+    if (bp.budgetSousProjetVos == null || bp.budgetSousProjetVos.length == 0) {
+      this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp + '/referenceprojet/' + bp.referenceProjet + '/annee/' + this.budgetFacultePrincipal.annee).subscribe(
+        data => {
+          if (data != null) {
+            this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos=data;
+            //this.budgetProjetPrincipal.budgetSousProjetVos = data;
+          }
+        }, error => {
+          console.log('error');
         }
-      }, error => {
-        console.log('error');
-      }
-    );
+      );
+    }
+
+
   }
 
   public findBudgetCompteBudgitaire(bsp: BudgetSousProjetVo) {
