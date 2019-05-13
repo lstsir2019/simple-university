@@ -28,5 +28,8 @@ export class BudgetProjetComponent implements OnInit {
     this.budgetService.findBudgetSousProjet(bp);
   }
 
+  public detail(bp:BudgetProjetVo){
+    this.budgetService.detaillBudgetProjet(bp);
+  }
 
 }

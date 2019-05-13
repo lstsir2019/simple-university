@@ -13,6 +13,7 @@
         <option >----------SELECT-----------</option>
         <option ></option>
       </select>
+      <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
@@ -46,7 +47,7 @@
              aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
              aria-describedby="inputGroup-sizing-sm">
     </div>
-    <div class="input-group input-group mb-3">
+    <div *ngIf="mode==1" class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="code">Code</label>
       </div>
@@ -54,7 +55,7 @@
              aria-label="Sizing example input" min="0" step="any" required id="code"
              aria-describedby="inputGroup-sizing-sm">
     </div>
-    <div class="input-group input-group mb-3">
+    <div *ngIf="mode==1" class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="libelle">Libellé</label>
       </div>

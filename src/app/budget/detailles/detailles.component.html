@@ -1,83 +1,39 @@
+<div class="card">
 
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Information sur <i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.referenceEntiteAdministratif:null) || (!!_selectedBsp?_selectedBsp.referenceSousProjet:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.referenceCompteBudgitaire:null)}}</i></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="card-body text-center">
+
+    <div class="input-group input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12 offset-md-1">
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Antécédent: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.antecedent:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.antecedent:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.antecedent:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat réel: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatReel:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatReel:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatReel:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat éstimatif: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatEstimatif:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatEstimatif:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatEstimatif:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert réel: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.creditOuvertReel:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.creditOuvertReel:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.creditOuvertReel:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Credit ouvert éstimatif: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.creditOuvertEstimatif:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.creditOuvertEstimatif:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.creditOuvertEstimatif:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé payé: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.engagePaye:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.engagePaye:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.engagePaye:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Engagé non payé: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.engageNonPaye:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.engageNonPaye:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.engageNonPaye:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé éstimatif: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatNonPayeEstimatif:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatNonPayeEstimatif:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatNonPayeEstimatif:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat non payé réel: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatNonPayReel:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatNonPayReel:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatNonPayReel:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé éstimatif: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatPayeEstimatif:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatPayeEstimatif:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatPayeEstimatif:null)}}</i></p>
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="form-row justify-content-between">
-                <label><b>Reliquat payé réel: </b></label>
-                <p><i>{{(!!_selectedBudgetEntiteAdministratif?_selectedBudgetEntiteAdministratif.detaillesBudgetVo.reliquatPayereel:null) || (!!_selectedBsp?_selectedBsp.detaillesBudgetVo.reliquatPayereel:null) || (!!_selectedBudgetCompteBudgitaire?_selectedBudgetCompteBudgitaire.detaillesBudgetVo.reliquatPayereel:null)}}</i></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <input type="number"  [value]="detail.creditOuvertEstimatif" class="form-control"
+             aria-label="Sizing example input" min="0" step="any" id="creditouverestimatif"
+             aria-describedby="inputGroup-sizing-sm" disabled>
     </div>
+    <div class="input-group input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
+      </div>
+      <input type="number"  [value]="detail.creditOuvertReel" class="form-control"
+             aria-label="Sizing example input" min="0" step="any"  id="creditouverreel"
+             aria-describedby="inputGroup-sizing-sm" disabled>
+    </div>
+    <div class="input-group input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="engagepaye">Engagé payé</label>
+      </div>
+      <input type="number"  [value]="detail.engagePaye" class="form-control"
+             aria-label="Sizing example input" min="0" step="any"  id="engagepaye"
+             aria-describedby="inputGroup-sizing-sm" disabled>
+    </div>
+    <div class="input-group input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+      </div>
+      <input type="number"  [value]="detail.engageNonPaye" class="form-control"
+             aria-label="Sizing example input" min="0" step="any"  id="engagenonpaye"
+             aria-describedby="inputGroup-sizing-sm" disabled>
+    </div>
+
   </div>
+</div>

@@ -237,6 +237,22 @@ export class BudgetService {
   }
 
   //-----------------------------------------------------------------
+  public detail:DetaillesBudgetVo;
+
+
+
+  public detaillBudgetFaculte(bf:BudgetFaculteVo){
+    this.detail=bf.detaillesBudgetVo;
+  }
+  public detaillBudgetProjet(bp:BudgetProjetVo){
+    this.detail=bp.detaillesBudgetVo;
+  }
+  public detaillBudgetSousProjet(bsp:BudgetSousProjetVo){
+    this.detail=bsp.detaillesBudgetVo;
+  }
+  public detaillBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo){
+    this.detail=bcb.detaillesBudgetVo;
+  }
 
   //----------------------Remove Budget ----------------------------
 
