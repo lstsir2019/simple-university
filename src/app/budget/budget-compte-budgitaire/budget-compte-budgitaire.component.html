@@ -55,8 +55,8 @@
           <table class="table table-hover table-sm">
             <thead>
             <tr>
-              <th scope="1">reference</th>
-              <th scope="1">Sous Projet</th>
+
+
               <th scope="1">Compte Budgitair</th>
               <th scope="1">COE</th>
               <th scope="1">COR</th>
@@ -64,12 +64,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetCompteBudgiaireList.length==0">
+            <tr *ngIf="budgetCompteBudgiaireList==null || budgetCompteBudgiaireList.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
             <tr *ngFor="let bcb of budgetCompteBudgiaireList">
-              <td>{{bcb.reference}}</td>
-              <td>{{bcb.budgetSousProjetVo.referenceSousProjet}}</td>
+
+
               <td>{{bcb.compteBudgitaireVo.code}}</td>
               <td>{{bcb.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{bcb.detaillesBudgetVo.creditOuvertReel}}</td>
