@@ -10,20 +10,36 @@
           <tr>
             <th>Reference Projet</th>
             <th>Reference Sous Projet</th>
-            <th>Code compte budgitaire</th>
+            <th>Reference C-B</th>
+
           </tr>
           </thead>
           <!--<tr *ngIf="bfCreate.budgetSousProjetVo==null">
             <td class="font-italic text-center" colspan="3">No item found</td>
           </tr>-->
-          <tbody *ngFor="let bp of budgetFaculte.budgetProjetVo">
+          <tbody >
+          <ng-container *ngFor="let bp of budgetFaculte.budgetProjetVos">
           <tr>
-            <td rowspan="bp.budgetSousProjetVos.length">{{bp.referenceProjet}}</td>
-            <td *ngFor="let bsp of bp.budgetSousProjetVos">
-              <tr>{{bsp.referenceSousProjet}}</tr>
-            </td>
-              <td rowspan="bp.budgetSousProjetVos.length">{{bp.referenceProjet}}</td>
+            <td [attr.rowspan]="rep+2">{{bp.referenceProjet}}</td>
           </tr>
+           <ng-container *ngFor="let bsp of bp.budgetSousProjetVos">
+            <tr >
+              <td [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length+1">{{bsp.referenceSousProjet}}</td>
+            </tr>
+             <ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">
+               <tr >
+                 <td >{{bcb.reference}}</td>
+               </tr>
+
+             </ng-container>
+
+
+           </ng-container>
+
+
+
+
+          </ng-container>
 
           </tbody>
         </table>

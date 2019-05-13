@@ -8,6 +8,8 @@ import {BudgetService} from "../../controller/service/budget.service";
 })
 export class BudgetCompteBudgitaireCreateComponent implements OnInit {
 
+  public mode:number=0;
+
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
@@ -18,7 +20,15 @@ export class BudgetCompteBudgitaireCreateComponent implements OnInit {
   }
   public ajouterNewBudgetCompteBudegtaireProjet(){
     return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
+    this.mode=0;
   }
 
+  public changeMode(){
+    if (this.mode==0){
+      this.mode=1;
+    }else if (this.mode==1){
+      this.mode=0
+    }
+  }
 
 }

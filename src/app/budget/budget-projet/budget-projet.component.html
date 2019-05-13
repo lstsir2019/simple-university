@@ -65,6 +65,7 @@
                 <button  class="btn btn-outline-danger fa fa-trash-o"
                         type="button"></button>
                 <button  (click)="findBudgetSousProjet(bp)" class="btn btn-outline-secondary fa fa-plus ml-2"></button>
+                <button class="btn btn-outline-primary" (click)="detail(bp)" data-toggle="modal" data-target="#detailProjet">!</button>
               </td>
             </tr>
             </tbody>
@@ -98,3 +99,27 @@
     </div>
   </div>
 </div>
+<div class="modal" id="detailProjet">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Budget Faculte</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-detailles></app-detailles>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
+

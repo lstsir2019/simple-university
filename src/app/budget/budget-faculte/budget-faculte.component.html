@@ -50,7 +50,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-hover table-sm">
+          <table class="table table-hover table-sm text-center">
             <thead>
             <tr>
               <th scope="1">Annee</th>
@@ -72,6 +72,7 @@
                         type="button"></button>
                 <button (click)="findBudgetProjet(bf)" *ngIf="bf.id!=0"
                         class="btn btn-outline-secondary fa fa-plus ml-2"></button>
+                <button class="btn btn-outline-primary" (click)="detail(bf)" data-toggle="modal" data-target="#detailFaculte">!</button>
               </td>
             </tr>
             </tbody>
@@ -97,6 +98,29 @@
       <div class="modal-body">
 
       <app-budget-faculte-create></app-budget-faculte-create>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal" id="detailFaculte">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Budget Faculte</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-detailles></app-detailles>
 
       </div>
 
