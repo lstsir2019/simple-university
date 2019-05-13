@@ -17,7 +17,6 @@ export class BudgetService {
   constructor(private http: HttpClient) {
   }
 
-
   //---------------------- Les urls----------------------------------
   public _host = 'http://localhost:8099/budget-api/';
 
@@ -343,6 +342,25 @@ export class BudgetService {
 
   //-------------------------------------------------------------------
 
+  //--------------------Confiramation----------------------
+
+  values:Array<number>=new Array<number>();
+
+  public  size(){
+    this.budgetFacultePrincipal.budgetProjetVos.forEach(
+      bp=>{
+        let number=0;
+        bp.budgetSousProjetVos.forEach(
+          bsp=>
+            number +=bsp.budgetCompteBudgitaireVos.length
+        );
+        this.values.push(number);
+      }
+    );
+    console.log(this.values);
+  }
+
+
   /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);
    let detaills=new DetaillesBudgetVo(bf.detaillesBudgetVo.antecedent,bf.detaillesBudgetVo.creditOuvertEstimatif,bf.detaillesBudgetVo.creditOuvertReel);
    detaills.engageNonPaye=bf.detaillesBudgetVo.engageNonPaye;
@@ -445,22 +463,6 @@ export class BudgetService {
 
   //update budget sous projet
 
-
-values:Array<number>=new Array<number>();
-
-public  size(){
-  this.budgetFacultePrincipal.budgetProjetVos.forEach(
-    bp=>{
-      let number=0;
-      bp.budgetSousProjetVos.forEach(
-        bsp=>
-          number +=bsp.budgetCompteBudgitaireVos.length
-      );
-      this.values.push(number);
-    }
-  );
-  console.log(this.values);
-}
 
 }
 
