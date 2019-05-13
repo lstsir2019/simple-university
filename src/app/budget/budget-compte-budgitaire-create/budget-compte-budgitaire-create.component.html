@@ -50,7 +50,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="code">Code</label>
       </div>
-      <input type="text"   class="form-control"
+      <input type="text"  [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="code"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -58,7 +58,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="libelle">Libellé</label>
       </div>
-      <input type="text"   class="form-control"
+      <input type="text"  [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle"  class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="libelle"
              aria-describedby="inputGroup-sizing-sm">
     </div>
