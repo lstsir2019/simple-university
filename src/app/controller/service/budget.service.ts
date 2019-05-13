@@ -105,10 +105,14 @@ export class BudgetService {
     this.budgetCompteBudgitairePrincipal=new BudgetCompteBudgitaireVo();
     this.budgetProjetPrincipal = bp;
 
+    let index=this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
+
+
     this.http.get<Array<BudgetSousProjetVo>>(this._url_bsp + '/referenceprojet/' + bp.referenceProjet + '/annee/' + this.budgetFacultePrincipal.annee).subscribe(
       data => {
         if (data != null) {
-          this.budgetProjetPrincipal.budgetSousProjetVos = data;
+          this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos=data;
+          //this.budgetProjetPrincipal.budgetSousProjetVos = data;
         }
       }, error => {
         console.log('error');
@@ -119,11 +123,18 @@ export class BudgetService {
   public findBudgetCompteBudgitaire(bsp: BudgetSousProjetVo) {
     this.budgetSousProjetPrincipal = bsp;
     this.budgetCompteBudgitairePrincipal=new BudgetCompteBudgitaireVo();
+
+    let index=this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
+
+    let indexSou=this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(this.budgetSousProjetPrincipal);
+
+
     if (bsp.budgetCompteBudgitaireVos == null || bsp.budgetCompteBudgitaireVos.length == 0) {
       this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb + '/referenceprojet/' + this.budgetProjetPrincipal.referenceProjet + '/referencesousprojet/' + bsp.referenceSousProjet + '/annee/' + this.budgetFacultePrincipal.annee).subscribe(
         data => {
           if (data != null) {
-            bsp.budgetCompteBudgitaireVos = data;
+            this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos=data;
+         //   bsp.budgetCompteBudgitaireVos = data;
           }
         }, error => {
           console.log('error');
