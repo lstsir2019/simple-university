@@ -98,7 +98,6 @@ export class BudgetService {
         }
       );
     }
-
   }
 
   public findBudgetSousProjet(bp: BudgetProjetVo) {
@@ -133,8 +132,7 @@ export class BudgetService {
     }
   }
 
-  // ------------------------- Ajouter New Budget--------------------
-
+  // ------------------------- Ajouter New Budget -------------------------
   public saveBudgetFaculte() {
     this.http.post<BudgetFaculteVo>(this._url_bf, this.budgetFaculteCreate).subscribe(
       data => {
@@ -163,7 +161,9 @@ export class BudgetService {
     detaills.engagePaye = this.budgetSousProjetCreate.detaillesBudgetVo.engagePaye;
     detaills.id = null;
     bsp.detaillesBudgetVo = detaills;
-    this.budgetProjetPrincipal.budgetSousProjetVos.push(bsp);
+    let index=this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
+    this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.push(bsp);
+   // this.budgetProjetPrincipal.budgetSousProjetVos.push(bsp);
   }
 
   public ajouterNewBudgetCompteBudegtaireProjet() {
@@ -177,7 +177,10 @@ export class BudgetService {
     let CompteBudgitaireVoClone = new CompteBudgitaireVo(this.budgetCompteBudgitaireCreate.compteBudgitaireVo.id, this.budgetCompteBudgitaireCreate.compteBudgitaireVo.code, this.budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle);
     bcb.detaillesBudgetVo = detaills;
     bcb.compteBudgitaireVo = CompteBudgitaireVoClone;
-    this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
+    let index=this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
+    let indexSou=this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(this.budgetSousProjetPrincipal);
+    this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos.push(bcb)
+    //this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
   }
 
   //-----------------------------------------------------------------
