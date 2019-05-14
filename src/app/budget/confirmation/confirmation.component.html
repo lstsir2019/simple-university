@@ -55,15 +55,19 @@
               <table border="1" width="100%" >
 
 
-                  <ng-container *ngFor="let bsp of bp.budgetSousProjetVos">
-                    <tr >
-                  <td width="50%" [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length+1">{{bsp.referenceSousProjet}}</td>
-                </tr>
-                    <ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">
-                  <tr><td width="50%">{{bcb.compteBudgitaireVo.libelle}}</td></tr>
-                    </ng-container>
-                </ng-container>
+                  <!--<ng-container *ngFor="let bsp of bp.budgetSousProjetVos">-->
+                    <!--<tr >-->
+                  <!--<td [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length+1">{{bsp.referenceSousProjet}}</td>-->
+                <!--</tr>-->
+                    <!--<ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">-->
+                  <!--<tr><td>{{bcb.compteBudgitaireVo.libelle}}</td></tr>-->
+                    <!--</ng-container>-->
+                <!--</ng-container>-->
 
+                <tr *ngFor="let bsp of bp.budgetSousProjetVos">
+                  <td width="50%">{{bsp.referenceSousProjet}}</td>
+                  <td width="50%"><div *ngFor="let bcb of bsp.budgetCompteBudgitaireVos" style="border: 1px solid black ">{{bcb.compteBudgitaireVo.code}}</div></td>
+                </tr>
 
               </table>
             </div>
