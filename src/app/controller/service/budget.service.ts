@@ -40,7 +40,7 @@ export class BudgetService {
 
   public budgetCompteBudgitairePrincipal: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo(null, '');
 
-  //------------------------List to remove --------------------------------
+  //------------------------List to remove --------------------------------------------------
 
   public budgetProjetToRemove: Array<BudgetProjetVo> = new Array<BudgetProjetVo>();
 
@@ -48,7 +48,7 @@ export class BudgetService {
 
   public budgetCompteBudgitaireToRemove: Array<BudgetCompteBudgitaireVo> = new Array<BudgetCompteBudgitaireVo>();
 
-  //----------------------------------------------------------------------
+  //-------------------------------------------------------------------------------------------
 
 
   //----------------- Variables du pointage [(ngModel)] sur les formulaires--------------------
@@ -199,7 +199,7 @@ export class BudgetService {
     bp.detaillesBudgetVo = detaills;
     this.budgetFacultePrincipal.budgetProjetVos.push(bp);
     this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal,this.budgetFacultePrincipal.budgetProjetVos);
-
+    this.budgetProjetCreate=new BudgetProjetVo();
   }
 
   public ajouterNewBudgetSousProjet() {
@@ -212,7 +212,7 @@ export class BudgetService {
     let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
     this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.push(bsp);
     this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
-
+    this.budgetSousProjetCreate=new BudgetSousProjetVo();
     // this.budgetProjetPrincipal.budgetSousProjetVos.push(bsp);
   }
 
@@ -231,14 +231,12 @@ export class BudgetService {
     let indexSou = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(this.budgetSousProjetPrincipal);
     this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos.push(bcb);
     this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos);
-
+    this.budgetCompteBudgitaireCreate=new BudgetCompteBudgitaireVo();
     //this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
   }
 
-  //-----------------------------------------------------------------
-  public detail:DetaillesBudgetVo;
-
-
+  //---------------------------  Budget Detailles -------------------------
+  public detail:DetaillesBudgetVo=new DetaillesBudgetVo();
 
   public detaillBudgetFaculte(bf:BudgetFaculteVo){
     this.detail=bf.detaillesBudgetVo;
@@ -253,7 +251,7 @@ export class BudgetService {
     this.detail=bcb.detaillesBudgetVo;
   }
 
-  //----------------------Remove Budget ----------------------------
+  //----------------------Remove Budget -----------------------------------
 
   public removeBudgetProjet(bp: BudgetProjetVo) {
     if (bp != null) {
@@ -347,6 +345,7 @@ export class BudgetService {
   values:Array<number>=new Array<number>();
 
   public  size(){
+    this.values=new Array<number>();
     this.budgetFacultePrincipal.budgetProjetVos.forEach(
       bp=>{
         let number=0;
