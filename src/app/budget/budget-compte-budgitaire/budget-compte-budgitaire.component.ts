@@ -14,10 +14,25 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+
+  public get budgetSousProjet(){
+    return this.budgetService.budgetSousProjetPrincipal;
+  }
+
+
 
   public get budgetCompteBudgiaireList(){
     return this.budgetService.budgetSousProjetPrincipal.budgetCompteBudgitaireVos;
+  }
+
+  public detail(bcb:BudgetCompteBudgitaireVo){
+    this.budgetService.detaillBudgetCompteBudgitaire(bcb);
+  }
+
+  public remove(bcb:BudgetCompteBudgitaireVo){
+    this.budgetService.removeBudgetCompteBudgitaire(bcb);
   }
 
 

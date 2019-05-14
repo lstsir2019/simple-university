@@ -236,7 +236,7 @@ export class BudgetService {
   }
 
   //-----------------------------------------------------------------
-  public detail:DetaillesBudgetVo;
+  public detail:DetaillesBudgetVo=new DetaillesBudgetVo();
 
 
 
@@ -347,6 +347,7 @@ export class BudgetService {
   values:Array<number>=new Array<number>();
 
   public  size(){
+    this.values=new Array<number>();
     this.budgetFacultePrincipal.budgetProjetVos.forEach(
       bp=>{
         let number=0;

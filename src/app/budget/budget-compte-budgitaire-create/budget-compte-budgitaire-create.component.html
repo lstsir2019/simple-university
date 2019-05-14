@@ -11,7 +11,7 @@
       <select [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" id="refea" class="select form-control"
               required>
         <option >----------SELECT-----------</option>
-        <option ></option>
+        <option *ngFor="let compte of compteBudgitaireList" >{{compte.code}}</option>
       </select>
       <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>

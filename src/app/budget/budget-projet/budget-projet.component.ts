@@ -19,6 +19,10 @@ export class BudgetProjetComponent implements OnInit {
 
   }
 
+  public get budgetFaculte(){
+    return this.budgetService.budgetFacultePrincipal;
+  }
+
 
   public get budgetProjetList(){
     return this.budgetService.budgetFacultePrincipal.budgetProjetVos;
@@ -26,10 +30,14 @@ export class BudgetProjetComponent implements OnInit {
 
   public findBudgetSousProjet(bp:BudgetProjetVo){
     this.budgetService.findBudgetSousProjet(bp);
+    this.budgetService.detaillBudgetProjet(bp);
   }
 
   public detail(bp:BudgetProjetVo){
     this.budgetService.detaillBudgetProjet(bp);
+  }
+  public remove(bp:BudgetProjetVo){
+    this.budgetService.removeBudgetProjet(bp);
   }
 
 }

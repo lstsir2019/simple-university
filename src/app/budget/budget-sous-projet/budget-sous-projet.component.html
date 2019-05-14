@@ -2,35 +2,12 @@
   <div class="col-md-12 justify-content-between">
     <div class="card">
       <div class="card-header text-center">
-        Budget Sous Projet
+        <h4 class="card-title"> budget Faculte:{{budgetProjet.budgetFaculteVo.annee}} / budget Projet:{{budgetProjet.referenceProjet}}</h4>
       </div>
       <div>
         <div class="card-body d-lg-flex justify-content-center">
-          <div class="col-md-5">
-            <div class="input-group input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="refsp">Référence sous projet</label>
-              </div>
-              <select name="" id="refsp" class="select form-control"
-                      required>
-                <option selected disabled>------SELECT-------</option>
-                <option></option>
-              </select>
-            </div>
-          </div>
+          <app-budget-detail></app-budget-detail>
 
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button
-                class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i
-                class="fa fa-plus">Nouveau Budget</i></button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -40,7 +17,16 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="card-title">List</h4>
+
+        <div class="row justify-content-between">
+          <h4 class="card-title">List Sous Projet</h4>
+          <div class="col-md-2">
+            <div class="input-group input-group mb-3">
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i
+                class="fa fa-plus">Nouveau</i></button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card-body text-center">
         <div class="table-responsive">
@@ -63,9 +49,10 @@
               <td>{{bsp.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
                 <button class="btn btn-outline-danger fa fa-trash-o"
-                        type="button"></button>
+                      (click)="remove(bsp)"  type="button"></button>
                 <button (click)="findBudgetCompteBudgitaire(bsp)"
                         class="btn btn-outline-secondary fa fa-plus ml-2"></button>
+                <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bsp)" data-toggle="modal" data-target="#detailSousProjet"></button>
               </td>
             </tr>
             </tbody>
@@ -89,6 +76,30 @@
       <div class="modal-body">
 
         <app-budget-sous-projet-create></app-budget-sous-projet-create>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="detailSousProjet">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Budget Faculte</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-detailles></app-detailles>
 
       </div>
 

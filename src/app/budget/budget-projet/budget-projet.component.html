@@ -2,35 +2,15 @@
   <div class="col-md-12 justify-content-between">
     <div class="card">
       <div class="card-header text-center">
-        Budget Projet
+        <h4 class="card-title">  Budget faculte : {{budgetFaculte.annee}}</h4>
+
       </div>
       <div>
         <div class="card-body d-lg-flex justify-content-center">
-          <div class="col-md-5">
-            <div class="input-group input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="refsp">Référence projet</label>
-              </div>
-              <select name="" id="refsp" class="select form-control"
-              >
-                <option selected disabled>------SELECT-------</option>
-                <option></option>
-              </select>
-            </div>
-          </div>
 
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button
-                class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalProjet"><i
-                class="fa fa-plus">Nouveau Budget</i></button>
-            </div>
-          </div>
+          <app-budget-detail></app-budget-detail>
+
+
         </div>
       </div>
     </div>
@@ -40,7 +20,16 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="card-title">List</h4>
+        <div class="row justify-content-between">
+          <h4 class="card-title">List Budget Projet</h4>
+          <div class="col-md-2">
+            <div class="input-group input-group mb-3">
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalProjet"><i
+                class="fa fa-plus">Nouveau</i></button>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="card-body text-center">
         <div class="table-responsive">
@@ -63,9 +52,9 @@
               <td>{{bp.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
                 <button  class="btn btn-outline-danger fa fa-trash-o"
-                        type="button"></button>
+                       (click)="remove(bp)" type="button"></button>
                 <button  (click)="findBudgetSousProjet(bp)" class="btn btn-outline-secondary fa fa-plus ml-2"></button>
-                <button class="btn btn-outline-primary" (click)="detail(bp)" data-toggle="modal" data-target="#detailProjet">!</button>
+                <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bp)" data-toggle="modal" data-target="#detailProjet"></button>
               </td>
             </tr>
             </tbody>
