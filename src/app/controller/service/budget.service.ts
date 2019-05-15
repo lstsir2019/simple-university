@@ -301,7 +301,6 @@ export class BudgetService {
 
   }
 
-
   //-------------------------------- les Calcules --------------------------
 
   public calculedetailleBudgetFaculte(bf: BudgetFaculteVo, BudgetProjetVos: Array<BudgetProjetVo>) {
@@ -340,8 +339,22 @@ export class BudgetService {
 
   //-------------------------------------------------------------------
 
-  //--------------------Confiramation----------------------
+  //--------------------Confiramation----------------------------------
 
+
+  public confirme(){
+
+  }
+
+
+
+
+
+
+
+
+
+  //-------------------------------------------------------------------
   values:Array<number>=new Array<number>();
 
   public  size(){
