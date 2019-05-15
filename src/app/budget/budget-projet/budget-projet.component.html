@@ -8,7 +8,25 @@
       <div>
         <div class="card-body d-lg-flex justify-content-center">
 
-          <app-budget-detail></app-budget-detail>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Année</label>
+              </div>
+              <select  class="form-control" [(ngModel)]="budgetFaculeteSelected" (change)="findBudgetProjet()">
+                <option>---------SELECT---------</option>
+                <option *ngFor="let bf of budgetFaculteList" [ngValue]="bf">{{bf.annee}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalProjet"><i
+                class="fa fa-plus">Nouveau Budget</i></button>
+            </div>
+          </div>
+
+
 
 
         </div>
@@ -20,15 +38,10 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header text-center">
-        <div class="row justify-content-between">
+
           <h4 class="card-title">List Budget Projet</h4>
-          <div class="col-md-2">
-            <div class="input-group input-group mb-3">
-              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalProjet"><i
-                class="fa fa-plus">Nouveau</i></button>
-            </div>
-          </div>
-        </div>
+
+
 
       </div>
       <div class="card-body text-center">
@@ -53,7 +66,7 @@
               <td>
                 <button  class="btn btn-outline-danger fa fa-trash-o"
                        (click)="remove(bp)" type="button"></button>
-                <button  (click)="findBudgetSousProjet(bp)" class="btn btn-outline-secondary fa fa-plus ml-2"></button>
+
                 <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bp)" data-toggle="modal" data-target="#detailProjet"></button>
               </td>
             </tr>

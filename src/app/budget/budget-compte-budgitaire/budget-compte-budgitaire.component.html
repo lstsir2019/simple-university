@@ -6,7 +6,22 @@
       </div>
       <div>
         <div class="card-body d-lg-flex justify-content-center">
-          <app-budget-detail></app-budget-detail>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Budget-Sous-Projet</label>
+              </div>
+              <select  class="form-control" [(ngModel)]="budgetSousProjetSelected" (change)="findBudgetCompteBudgitaire()">
+                <option>---------SELECT---------</option>
+                <option *ngFor="let bsp of budgetSousProjetList" [ngValue]="bsp">{{bsp.referenceSousProjet}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalCompte"><i class="fa fa-plus">Nouveau</i></button>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -16,14 +31,7 @@
     <div class="card">
       <div class="card-header text-center">
 
-        <div class="row justify-content-between">
-          <h4 class="card-title">List Budget Compte Budgitaire</h4>
-          <div class="col-md-2">
-            <div class="input-group input-group mb-3">
-              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalCompte"><i class="fa fa-plus">Nouveau</i></button>
-            </div>
-          </div>
-        </div>
+        <h4 class="card-title">List Budget Compte Budgitaire</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">

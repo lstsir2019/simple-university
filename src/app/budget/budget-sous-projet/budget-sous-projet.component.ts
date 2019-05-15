@@ -18,6 +18,7 @@ export class BudgetSousProjetComponent implements OnInit {
   ngOnInit() {
 
   }
+  budgetPtogetSelected:BudgetProjetVo;
 
   public get budgetProjet(){
     return this.budgetService.budgetProjetPrincipal;
@@ -26,6 +27,7 @@ export class BudgetSousProjetComponent implements OnInit {
  public get budgetSousProjet(){
     return this.budgetService.budgetProjetPrincipal.budgetSousProjetVos;
  }
+
 
  public findBudgetCompteBudgitaire(bsp: BudgetSousProjetVo){
 
@@ -39,4 +41,12 @@ export class BudgetSousProjetComponent implements OnInit {
  public remove(bsp: BudgetSousProjetVo){
     this.budgetService.removeBudgetSousProjet(bsp);
  }
+  public findBudgetSousProjet(){
+    this.budgetService.findBudgetSousProjet(this.budgetPtogetSelected);
+
+  }
+
+  public get budgetProjetList(){
+    return this.budgetService.budgetFacultePrincipal.budgetProjetVos;
+  }
 }
