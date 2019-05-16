@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
 import {BudgetService} from '../../controller/service/budget.service';
+import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 
 @Component({
   selector: 'app-budget-compte-budgitaire',
@@ -14,10 +15,36 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  budgetSousProjetSelected:BudgetSousProjetVo;
+
+  public get budgetSousProjet(){
+    return this.budgetService.budgetSousProjetPrincipal;
+  }
+
+
+  public findBudgetCompteBudgitaire(){
+
+    console.log("haaaaaaaaaaaaaaaaa sous projet "+this.budgetSousProjetSelected);
+    this.budgetService.findBudgetCompteBudgitaire(this.budgetSousProjetSelected);
+
+  }
+  public get budgetSousProjetList(){
+    return this.budgetService.budgetProjetPrincipal.budgetSousProjetVos;
   }
 
   public get budgetCompteBudgiaireList(){
     return this.budgetService.budgetSousProjetPrincipal.budgetCompteBudgitaireVos;
+  }
+
+  public detail(bcb:BudgetCompteBudgitaireVo){
+    this.budgetService.detaillBudgetCompteBudgitaire(bcb);
+  }
+
+  public remove(bcb:BudgetCompteBudgitaireVo){
+    this.budgetService.removeBudgetCompteBudgitaire(bcb);
   }
 
 

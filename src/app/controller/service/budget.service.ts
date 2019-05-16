@@ -169,6 +169,7 @@ export class BudgetService {
       data => {
         if (data != null) {
           this.compteBudgitaireList = data;
+          console.log(data);
         }
       }, error => {
         console.log('error');

@@ -5,37 +5,76 @@
         Détails budget de l'année {{budgetFaculte.annee}}
       </div>
       <div class="card-body">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th>Reference Projet</th>
-            <th>Reference Sous Projet</th>
-            <th>Reference C-B</th>
+        <!--<table class="table table-bordered">-->
+          <!--<thead>-->
+          <!--<tr>-->
+            <!--<th>Reference Projet</th>-->
+            <!--<th>Reference Sous Projet</th>-->
+            <!--<th>Reference C-B</th>-->
 
-          </tr>
-          </thead>
-          <!--<tr *ngIf="bfCreate.budgetSousProjetVo==null">
-            <td class="font-italic text-center" colspan="3">No item found</td>
-          </tr>-->
-          <tbody >
-          <ng-container *ngFor="let bp of budgetFaculte.budgetProjetVos">
-          <tr>
-            <td [attr.rowspan]="rep+2">{{bp.referenceProjet}}</td>
-          </tr>
-           <ng-container *ngFor="let bsp of bp.budgetSousProjetVos">
-            <tr >
-              <td [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length+1">{{bsp.referenceSousProjet}}</td>
-            </tr>
-             <ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">
-               <tr >
-                 <td >{{bcb.reference}}</td>
-               </tr>
-             </ng-container>
-           </ng-container>
-          </ng-container>
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--&lt;!&ndash;<tr *ngIf="bfCreate.budgetSousProjetVo==null">-->
+            <!--<td class="font-italic text-center" colspan="3">No item found</td>-->
+          <!--</tr>&ndash;&gt;-->
+          <!--<tbody>-->
 
-          </tbody>
-        </table>
+              <!--<tr *ngFor="let bp of budgetFaculte.budgetProjetVos;let i=index;">-->
+                <!--<td [attr.rowspan]="rep[budgetFaculte.budgetProjetVos.indexOf(bp)]">{{bp.referenceProjet}}</td>-->
+                  <!--<ng-container *ngFor="let bsp of bp.budgetSousProjetVos">-->
+                      <!--<td [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length">-->
+                                <!--<tr>{{bsp.referenceSousProjet}}</tr>-->
+                      <!--</td>-->
+                      <!--<td>-->
+                         <!--<div class="flex-column">-->
+                          <!--<ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">-->
+                            <!--<div><label>{{bcb.compteBudgitaireVo.libelle}}</label></div>-->
+
+                          <!--</ng-container>-->
+                         <!--</div>-->
+                      <!--</td>-->
+                  <!--</ng-container>-->
+              <!--</tr>-->
+
+
+          <!--</tbody>-->
+        <!--</table>-->
+
+
+        <div>
+          <div class="row" >
+            <div class="col-md-3"   >Budget Projet</div>
+            <div class="col-md-5"  >Budget Sous Projet</div>
+            <div class="col-md-4"  >Budget Compte Budgitaire</div>
+
+          </div>
+          <div *ngFor="let bp of budgetFaculte.budgetProjetVos"  class="row" style="margin-bottom: 1px">
+
+            <div class="col-md-3" style="border: 1px solid black " ><div >{{bp.referenceProjet}}</div></div>
+            <div class="col-md-9">
+              <table border="1" width="100%" >
+
+
+                  <!--<ng-container *ngFor="let bsp of bp.budgetSousProjetVos">-->
+                    <!--<tr >-->
+                  <!--<td [attr.rowspan]="bsp.budgetCompteBudgitaireVos.length+1">{{bsp.referenceSousProjet}}</td>-->
+                <!--</tr>-->
+                    <!--<ng-container *ngFor="let bcb of bsp.budgetCompteBudgitaireVos">-->
+                  <!--<tr><td>{{bcb.compteBudgitaireVo.libelle}}</td></tr>-->
+                    <!--</ng-container>-->
+                <!--</ng-container>-->
+
+                <tr *ngFor="let bsp of bp.budgetSousProjetVos">
+                  <td width="50%">{{bsp.referenceSousProjet}}</td>
+                  <td width="50%"><div *ngFor="let bcb of bsp.budgetCompteBudgitaireVos" style="border: 1px solid black ">{{bcb.compteBudgitaireVo.code}}</div></td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+
         <button class="btn btn-outline-primary btn-block" (click)="saveAll()">Confirmation</button>
       </div>
     </div>

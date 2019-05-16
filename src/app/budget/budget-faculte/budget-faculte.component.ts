@@ -35,6 +35,7 @@ export class BudgetFaculteComponent implements OnInit {
 
   public findBudgetProjet(bf: BudgetFaculteVo){
     this.budgetService.findBudgetProjet(bf);
+    this.budgetService.detaillBudgetFaculte(bf);
   }
 
   public detail(bf:BudgetFaculteVo){

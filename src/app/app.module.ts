@@ -90,6 +90,7 @@ import { BudgetFaculteCreateComponent } from './budget/budget-faculte-create/bud
 import { BudgetProjetCreateComponent } from './budget/budget-projet-create/budget-projet-create.component';
 import { BudgetSousProjetCreateComponent } from './budget/budget-sous-projet-create/budget-sous-projet-create.component';
 import { BudgetCompteBudgitaireCreateComponent } from './budget/budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
+import { BudgetDetailComponent } from './budget/budget-detail/budget-detail.component';
 
 
 
@@ -178,6 +179,7 @@ import { BudgetCompteBudgitaireCreateComponent } from './budget/budget-compte-bu
     BudgetProjetCreateComponent,
     BudgetSousProjetCreateComponent,
     BudgetCompteBudgitaireCreateComponent,
+    BudgetDetailComponent,
 
 
   ],

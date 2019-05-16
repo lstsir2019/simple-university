@@ -13,14 +13,19 @@ export class BudgetCompteBudgitaireCreateComponent implements OnInit {
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
+    this.budgetService.findAllCompteBudgitaire();
   }
 
+  public get compteBudgitaireList(){
+    return this.budgetService.compteBudgitaireList;
+  }
   public get budgetCompteBudgitaireCreate(){
     return this.budgetService.budgetCompteBudgitaireCreate;
   }
   public ajouterNewBudgetCompteBudegtaireProjet(){
-    return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
     this.mode=0;
+    return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
+
   }
 
   public changeMode(){

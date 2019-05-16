@@ -14,9 +14,6 @@ export class ConfirmationComponent implements OnInit {
 
   constructor(private budgetService: BudgetService) {
   }
- rep1:number=0;
- rep2:number=0;
-
   ngOnInit() {
    // this.sizeList();
   }
@@ -42,16 +39,12 @@ export class ConfirmationComponent implements OnInit {
    //  console.log("haaaaaaaaaaaaaaaaaaaaaaa"+this.rep1);
 
 
-  }
-  public get rep(){
-    let x:number;
-    this.budgetService.budgetFacultePrincipal.budgetProjetVos.forEach(function (value) {
-      value.budgetSousProjetVos.forEach(function (value) {
-        x+=value.budgetCompteBudgitaireVos.length;
-      })
-    });
-    return x;
-  }
+   }
+  // public get rep():Array<number>{
+  //   return this.budgetService.values;
+  // }
+
+
 
 
 }
