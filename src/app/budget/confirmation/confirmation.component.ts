@@ -45,6 +45,7 @@ export class ConfirmationComponent implements OnInit {
   // }
 
 
-
-
+  saveAll() {
+    this.budgetService.confirmeBudgetFaculte();
+  }
 }

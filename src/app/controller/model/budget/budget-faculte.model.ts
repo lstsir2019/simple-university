@@ -10,4 +10,6 @@ export class BudgetFaculteVo {
   public anneeMax:string="2050";
   constructor(public id?: number, public annee?: number) {
   }
+
+
 }
