@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BudgetService} from '../../controller/service/budget.service';
 import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
-import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-entite-administratif.model';
+import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-confirmation',
@@ -10,45 +11,41 @@ import {BudgetEntiteAdministratifVo} from '../../controller/model/budget/budget-
 })
 export class ConfirmationComponent implements OnInit {
 
-  private _selectedBcb:BudgetCompteBudgitaireVo;
-  constructor(private _budgetService: BudgetService) {
-  }
 
-  public get bfCreate() {
-    return this._budgetService.budgetFaculteCreate;
+  constructor(private budgetService: BudgetService) {
   }
-
-  get budgetService(): BudgetService {
-    return this._budgetService;
-  }
-
-  set budgetService(value: BudgetService) {
-    this._budgetService = value;
-  }
-
   ngOnInit() {
+   // this.sizeList();
   }
 
-  public setSelectedBcb(bsb:BudgetCompteBudgitaireVo){
-    this._selectedBcb=bsb;
-  }
-  /*
-  public get bsps(){
-    if (this._bfCreate==null) {
-      this._bfCreate=this._budgetService.budgetFaculteCreate;
-    }
-    return this._budgetService.budgetFaculteCreate.budgetSousProjetVo;
-  }
-  */
-  public saveAll() {
-    this._budgetService.saveAllInBudgetFaculte();
+  public get budgetFaculte(){
+    return this.budgetService.budgetFacultePrincipal;
   }
 
-  get selectedBcb(): BudgetCompteBudgitaireVo {
-    return this._selectedBcb;
-  }
+  public sizeList(){
+   
+   // this.budgetService.budgetFacultePrincipal.budgetProjetVos.forEach(function (value) {
+   //
+   //     value.budgetSousProjetVos.forEach(function (value) {
+   //
+   //     });
+   // });
+   //
+   //  for (var i = 0; i <this.budgetService.budgetFacultePrincipal.budgetProjetVos.length; i++) {
+   //    for (var j = 0; j <this.budgetService.budgetFacultePrincipal.budgetProjetVos[i].budgetSousProjetVos.length ; j++) {
+   //      this.rep1++;
+   //    }
+   //  }
+   //  console.log("haaaaaaaaaaaaaaaaaaaaaaa"+this.rep1);
 
-  set selectedBcb(value: BudgetCompteBudgitaireVo) {
-    this._selectedBcb = value;
+
+   }
+  // public get rep():Array<number>{
+  //   return this.budgetService.values;
+  // }
+
+
+  saveAll() {
+    this.budgetService.confirmeBudgetFaculte();
   }
 }

@@ -3,7 +3,7 @@
     <div class="input-group-prepend">
       <label class="input-group-text" for="anneeMin">Année</label>
     </div>
-    <input [(ngModel)]="budgetFaculteVo.annee" aria-describedby="inputGroup-sizing-sm"
+    <input [(ngModel)]="budgetFaculteCreate.annee" aria-describedby="inputGroup-sizing-sm"
            aria-label="Sizing example input"
            class="form-control" id="anneeMin" min="0" required step="any"
            type="number">
@@ -13,8 +13,8 @@
       <label class="input-group-text" for="coe">Crédit Ouvert Estimatif</label>
     </div>
     <input type="number" class="form-control"
-           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertEstimatif:null"
-           [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" aria-label="Sizing example input" min="0"
+
+           [(ngModel)]="budgetFaculteCreate.detaillesBudgetVo.creditOuvertEstimatif" aria-label="Sizing example input" min="0"
            step="any" required id="coe" aria-describedby="inputGroup-sizing-sm">
   </div>
   <div class="input-group input-group mb-3">
@@ -22,8 +22,8 @@
       <label class="input-group-text" for="cor">Crédit Ouvert Réel</label>
     </div>
     <input type="number" class="form-control"
-           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.creditOuvertReel:null"
-           [(ngModel)]="detaillesBudgetVo.creditOuvertReel" aria-label="Sizing example input" min="0" step="any"
+
+           [(ngModel)]="budgetFaculteCreate.detaillesBudgetVo.creditOuvertReel" aria-label="Sizing example input" min="0" step="any"
            required id="cor" aria-describedby="inputGroup-sizing-sm">
   </div>
   <div class="input-group input-group mb-3">
@@ -31,8 +31,8 @@
       <label class="input-group-text" for="engagepaye">Engagé payé</label>
     </div>
     <input type="number" class="form-control"
-           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engagePaye:null"
-           [(ngModel)]="detaillesBudgetVo.engagePaye" aria-label="Sizing example input" min="0" step="any"
+
+           [(ngModel)]="budgetFaculteCreate.detaillesBudgetVo.engagePaye" aria-label="Sizing example input" min="0" step="any"
            required id="engagepaye" aria-describedby="inputGroup-sizing-sm">
   </div>
   <div class="input-group input-group mb-3">
@@ -40,12 +40,12 @@
       <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
     </div>
     <input type="number" class="form-control"
-           [value]="!!bfInfo?bfInfo.detaillesBudgetVo.engageNonPaye:null"
-           [(ngModel)]="detaillesBudgetVo.engageNonPaye" aria-label="Sizing example input" min="0" step="any"
+
+           [(ngModel)]="budgetFaculteCreate.detaillesBudgetVo.engageNonPaye" aria-label="Sizing example input" min="0" step="any"
            required id="engagenonpaye" aria-describedby="inputGroup-sizing-sm">
   </div>
   <div class="input-group input-group mb-3 centered">
-    <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalFaculte"><i class="fa fa-plus">Ajouter</i></button>
+    <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalFaculte" (click)="saveBudgetFaculte()"><i class="fa fa-plus">Ajouter</i></button>
   </div>
 </div>
 

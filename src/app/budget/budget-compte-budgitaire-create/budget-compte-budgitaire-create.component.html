@@ -3,31 +3,23 @@
     Création
   </div>
   <div class="card-body">
+
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="refsp">Réf sous projet</label>
+        <label class="input-group-text" for="refea">Réf C-B</label>
       </div>
-      <select [(ngModel)]="budgetSousProjetClone.referenceSousProjet" id="refsp" class="select form-control"
+      <select [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" id="refea" class="select form-control"
               required>
-        <option selected disabled>-------SELECT-------</option>
-        <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+        <option >----------SELECT-----------</option>
+        <option *ngFor="let compte of compteBudgitaireList" value="{{compte.code}}" >{{compte.code}}/{{compte.libelle}}</option>
       </select>
-    </div>
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="refea">Réf entite admin</label>
-      </div>
-      <select [(ngModel)]="beaCreateClone.referenceEntiteAdministratif" id="refea" class="select form-control"
-              required>
-        <option value="">----------SELECT-----------</option>
-        <option *ngFor="let ea of entiteAdministratif" value="{{ea.referenceEntiteAdministratif}}">{{ea.referenceEntiteAdministratif}}</option>
-      </select>
+      <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
       </div>
-      <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertEstimatif:null" [(ngModel)]="detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
+      <input type="number"  [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertEstimatif" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -35,7 +27,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
       </div>
-      <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.creditOuvertReel:null" [(ngModel)]="detaillesBudgetVo.creditOuvertReel" class="form-control"
+      <input type="number"  [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertReel" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -43,7 +35,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagepaye">Engagé payé</label>
       </div>
-      <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engagePaye:null" [(ngModel)]="detaillesBudgetVo.engagePaye" class="form-control"
+      <input type="number"  [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engagePaye" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
              aria-describedby="inputGroup-sizing-sm">
     </div>
@@ -51,28 +43,28 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
       </div>
-      <input type="number" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.detaillesBudgetVo.engageNonPaye:null" [(ngModel)]="detaillesBudgetVo.engageNonPaye" class="form-control"
+      <input type="number"  [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engageNonPaye" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
              aria-describedby="inputGroup-sizing-sm">
     </div>
-    <div class="input-group input-group mb-3">
+    <div *ngIf="mode==1" class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="code">Code</label>
       </div>
-      <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.code:null" [(ngModel)]="compteBudgitaire.code" class="form-control"
+      <input type="text"  [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="code"
              aria-describedby="inputGroup-sizing-sm">
     </div>
-    <div class="input-group input-group mb-3">
+    <div *ngIf="mode==1" class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="libelle">Libellé</label>
       </div>
-      <input type="text" [value]="!!_tableBudgetCompteBudgitaireInfo?_tableBudgetCompteBudgitaireInfo.compteBudgitaireVo.libelle:null" [(ngModel)]="compteBudgitaire.libelle" class="form-control"
+      <input type="text"  [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle"  class="form-control"
              aria-label="Sizing example input" min="0" step="any" required id="libelle"
              aria-describedby="inputGroup-sizing-sm">
     </div>
     <div class="row">
-      <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalCompte"><i class="fa fa-plus">Ajouter</i></button>
+      <button   class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalCompte" (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
 
 
     </div>

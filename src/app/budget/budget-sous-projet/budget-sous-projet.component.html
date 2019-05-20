@@ -1,37 +1,29 @@
-
-
 <div class="container-fluid">
   <div class="col-md-12 justify-content-between">
     <div class="card">
       <div class="card-header text-center">
-        Budget Sous Projet
+        <h4 class="card-title"> budget Faculte:{{budgetProjet.budgetFaculteVo.annee}} / budget Projet:{{budgetProjet.referenceProjet}}</h4>
       </div>
       <div>
         <div class="card-body d-lg-flex justify-content-center">
-          <div class="col-md-5">
+          <div class="col-md-3">
             <div class="input-group input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="refsp">Référence sous projet</label>
+                <label class="input-group-text" >Budget-Projet</label>
               </div>
-              <select name="" id="refsp" class="select form-control"
-                      [(ngModel)]="budgetSousProjetClone.referenceSousProjet" required>
-                <option selected disabled>------SELECT-------</option>
-                <option *ngFor="let sp of sousProjets" value="{{sp.referenceSousProjet}}">{{sp.referenceSousProjet}}</option>
+              <select  class="form-control" [(ngModel)]="budgetPtogetSelected" (change)="findBudgetSousProjet()">
+                <option>---------SELECT---------</option>
+                <option *ngFor="let bp of budgetProjetList" [ngValue]="bp">{{bp.referenceProjet}}</option>
               </select>
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i
+                class="fa fa-plus">Nouveau Budget</i></button>
+            </div>
+          </div>
 
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button (click)="findByCreteriaAnneMinAndAnneMax()"
-                      class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="input-group input-group mb-3">
-              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalSousProjet"><i class="fa fa-plus">Nouveau Budget</i></button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -41,7 +33,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="card-title">List</h4>
+          <h4 class="card-title">List Sous Projet</h4>
       </div>
       <div class="card-body text-center">
         <div class="table-responsive">
@@ -49,25 +41,24 @@
             <thead>
             <tr>
               <th scope="1">Reference</th>
-              <th scope="1">Libelle</th>
               <th scope="1">COE</th>
               <th scope="1">COR</th>
               <th scope="1">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="budgetFacultes.length==0">
+            <tr *ngIf="budgetSousProjet==null || budgetSousProjet.length==0">
               <td colspan="4" class="font-italic text-center">No item Found</td>
             </tr>
-            <tr (click)="budgetSousProjetInfo(bf)" *ngFor="let bf of budgetFacultes">
-              <td>{{bf.annee}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
-              <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
+            <tr *ngFor="let bsp of budgetSousProjet">
+              <td>{{bsp.referenceSousProjet}}</td>
+              <td>{{bsp.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bsp.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button (click)="delete(bf.annee)" class="btn btn-outline-danger fa fa-trash-o"
-                        type="button"></button>
-                <button (click)="downloadPdf(bf)" *ngIf="bf.id!=0"
-                        class="btn btn-outline-secondary fa fa-print ml-2"></button>
+                <button class="btn btn-outline-danger fa fa-trash-o"
+                      (click)="remove(bsp)"  type="button"></button>
+
+                <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bsp)" data-toggle="modal" data-target="#detailSousProjet"></button>
               </td>
             </tr>
             </tbody>
@@ -91,6 +82,30 @@
       <div class="modal-body">
 
         <app-budget-sous-projet-create></app-budget-sous-projet-create>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="detailSousProjet">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Budget Faculte</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <app-detailles></app-detailles>
 
       </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BudgetService} from "../../controller/service/budget.service";
 
 @Component({
   selector: 'app-budget-compte-budgitaire-create',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetCompteBudgitaireCreateComponent implements OnInit {
 
-  constructor() { }
+  public mode:number=0;
+
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
+    this.budgetService.findAllCompteBudgitaire();
+  }
+
+  public get compteBudgitaireList(){
+    return this.budgetService.compteBudgitaireList;
+  }
+  public get budgetCompteBudgitaireCreate(){
+    return this.budgetService.budgetCompteBudgitaireCreate;
+  }
+  public ajouterNewBudgetCompteBudegtaireProjet(){
+    this.mode=0;
+    return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
+
+  }
+
+  public changeMode(){
+    if (this.mode==0){
+      this.mode=1;
+    }else if (this.mode==1){
+      this.mode=0
+    }
   }
 
 }
