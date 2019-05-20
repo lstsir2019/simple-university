@@ -12,6 +12,10 @@ import {CategoriProduit} from '../../model/categori-produit.model';
 import {Produit} from '../../model/produit.model';
 import {getReact} from '../evolutions/Util/SwalReact';
 import {text} from '@angular/core/src/render3';
+import {Offre} from '../../model/offre.model';
+import {AppelOffre} from '../../model/appel-offre.model';
+import {OffreDetail} from '../../model/offre-detail.model';
+import {OffresComponent} from '../../../appel-offre/offres/offres.component';
 
 
 @Injectable({
@@ -443,6 +447,16 @@ export class CommandeService {
          console.log(error1);
        }
      );
+
+  }
+
+  public offreToCommande(offre:Offre){
+    for(var item of offre.offreDetailsVo){
+      this.commandeCreate.total += item.prixUnitaire*item.quantite;
+      let commandeItemClone = new CommandeItem(item.refProduit, item.quantite,item.prixUnitaire, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
+      this.commandeCreate.commandeItemVos.push(commandeItemClone);
+      this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
+    }
 
   }
 
