@@ -3,6 +3,7 @@ import {AppelOffreService} from '../../../controller/service/appel-offre.service
 import {AppelOffre} from '../../../controller/model/appel-offre.model';
 import {OffreService} from '../../../controller/service/offre.service';
 import {Router} from '@angular/router';
+import {CommandeService} from '../../../controller/service/commandes/commande.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class AppelOffreListeComponent implements OnInit {
 
-  constructor(private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService) { }
+  constructor(private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService,private cs:CommandeService) { }
 
   ngOnInit() {
     this.appelOffreService.findAll();
@@ -49,6 +50,7 @@ export class AppelOffreListeComponent implements OnInit {
   }
 
   changeAppelOffreToCommande(a) {
+    this.cs.offreToCommande(a.offreDetails);
     this.router.navigate(["/commandeCreate"]);
   }
 }

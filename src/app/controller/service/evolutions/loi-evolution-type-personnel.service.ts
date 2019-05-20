@@ -9,7 +9,7 @@ import {getReact} from "./Util/SwalReact";
 })
 export class LoiEvolutionTypePersonnelService {
 
-  private _url = 'http://localhost:8099/evolution/loi/loi-type-personnel/';
+  private _url = 'http://localhost:8015/evolution/loi/loi-type-personnel/';
   private _loiEvolutionTypePersonnel = new LoiEvolutionTypePersonnel('', '', null, null, 0, null);
   private _loisEvolutionTypePersonnel = new Array<LoiEvolutionTypePersonnel>();
   private _searchInput: string;
