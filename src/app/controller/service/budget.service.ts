@@ -180,6 +180,7 @@ export class BudgetService {
 
 
   // ------------------------- Ajouter New Budget -------------------------
+
   public saveBudgetFaculte() {
     this.http.post<BudgetFaculteVo>(this._url_bf, this.budgetFaculteCreate).subscribe(
       data => {
@@ -243,7 +244,7 @@ export class BudgetService {
     //this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
   }
 
-  //---------------------------  Budget Detailles -------------------------
+  //---------------------------  Budget Detailles --------------------------
   public detail: DetaillesBudgetVo = new DetaillesBudgetVo();
 
   public detaillBudgetFaculte(bf: BudgetFaculteVo) {
@@ -382,25 +383,33 @@ export class BudgetService {
     this.budgetProjetRemoved.forEach(bp => {
         console.log('hhhhhhhhhhhhhh' + bp.id);
         this.http.delete(this._url_bp + '/' + bp.id).subscribe(
-          console.log('removed' + bp.id)
+          data => {
+            console.log('removed' + bp.id);
+          }
         );
       }
     );
   }
 
   private deleteBudgetSousProjet() {
-    this.budgetSousProjetRemoved.forEach(bsp =>
-      this.http.delete(this._url_bsp + '/' + bsp.id).subscribe(
-        console.log('removed' + bsp.id)
-      )
+    this.budgetSousProjetRemoved.forEach(bsp => {
+        this.http.delete(this._url_bsp + '/' + bsp.id).subscribe(
+          data => {
+            console.log('removed' + bsp.id);
+          }
+        );
+      }
     );
   }
 
   private deleteBudgetCompteBudgitaire() {
-    this.budgetCompteBudgitaireRemoved.forEach(bcb =>
-      this.http.delete(this._url_bcb + '/' + bcb.id).subscribe(
-        console.log('removed' + bcb.id)
-      )
+    this.budgetCompteBudgitaireRemoved.forEach(bcb => {
+        this.http.delete(this._url_bcb + '/' + bcb.id).subscribe(
+          data => {
+            console.log('removed' + bcb.id);
+          }
+        );
+      }
     );
     this.budgetCompteBudgitaireRemoved = new Array<BudgetCompteBudgitaireVo>();
   }
@@ -434,22 +443,6 @@ export class BudgetService {
 
 
   //-------------------------------------------------------------------
-  values: Array<number> = new Array<number>();
-
-  public size() {
-    this.values = new Array<number>();
-    this.budgetFacultePrincipal.budgetProjetVos.forEach(
-      bp => {
-        let number = 0;
-        bp.budgetSousProjetVos.forEach(
-          bsp =>
-            number += bsp.budgetCompteBudgitaireVos.length
-        );
-        this.values.push(number);
-      }
-    );
-    console.log(this.values);
-  }
 
 
   /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);
