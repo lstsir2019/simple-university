@@ -10,7 +10,7 @@ import {AppRoutingModule} from '../../app-routing.module';
 })
 export class AppelOffreService {
 
-  private _url = 'http://localhost:8090/AppelOffre/AppelOffres/';
+  private _url = 'http://localhost:8091/AppelOffre/AppelOffres/';
   private _appelOffreCreate: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
   private _appelOffreDetailCreate: AppelOffreDetail = new AppelOffreDetail('', 0, 0, 0);
   private _appelOffres: Array<AppelOffre>;

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BudgetFaculteVo} from '../model/budget/budget-faculte.model';
 import {BudgetSousProjetVo} from '../model/budget/budget-sous-projet.model';
 import {BudgetProjetVo} from '../model/budget/budget-projet.model';
@@ -40,13 +40,13 @@ export class BudgetService {
 
   public budgetCompteBudgitairePrincipal: BudgetCompteBudgitaireVo = new BudgetCompteBudgitaireVo(null, '');
 
-  //------------------------List to remove --------------------------------------------------
+  //------------------------List of removed items --------------------------------------------------
 
-  public budgetProjetToRemove: Array<BudgetProjetVo> = new Array<BudgetProjetVo>();
+  public budgetProjetRemoved: Array<BudgetProjetVo> = new Array<BudgetProjetVo>();
 
-  public budgetSousProjetToRemove: Array<BudgetSousProjetVo> = new Array<BudgetSousProjetVo>();
+  public budgetSousProjetRemoved: Array<BudgetSousProjetVo> = new Array<BudgetSousProjetVo>();
 
-  public budgetCompteBudgitaireToRemove: Array<BudgetCompteBudgitaireVo> = new Array<BudgetCompteBudgitaireVo>();
+  public budgetCompteBudgitaireRemoved: Array<BudgetCompteBudgitaireVo> = new Array<BudgetCompteBudgitaireVo>();
 
   //-------------------------------------------------------------------------------------------
 
@@ -180,10 +180,16 @@ export class BudgetService {
 
 
   // ------------------------- Ajouter New Budget -------------------------
+
   public saveBudgetFaculte() {
     this.http.post<BudgetFaculteVo>(this._url_bf, this.budgetFaculteCreate).subscribe(
       data => {
         console.log('new Budget Create' + data.annee);
+        Swal({
+          type: 'success',
+          title: 'succés',
+          text: 'Sauvegardé avec succées!'
+        });
         //this.budgetFaculteList.push(data);
       }, error1 => {
         console.log('errror');
@@ -199,8 +205,8 @@ export class BudgetService {
     detaills.id = null;
     bp.detaillesBudgetVo = detaills;
     this.budgetFacultePrincipal.budgetProjetVos.push(bp);
-    this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal,this.budgetFacultePrincipal.budgetProjetVos);
-    this.budgetProjetCreate=new BudgetProjetVo();
+    this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
+    this.budgetProjetCreate = new BudgetProjetVo();
   }
 
   public ajouterNewBudgetSousProjet() {
@@ -210,10 +216,12 @@ export class BudgetService {
     detaills.engagePaye = this.budgetSousProjetCreate.detaillesBudgetVo.engagePaye;
     detaills.id = null;
     bsp.detaillesBudgetVo = detaills;
+    console.log(this.budgetSousProjetCreate);
     let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
     this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.push(bsp);
-    this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
-    this.budgetSousProjetCreate=new BudgetSousProjetVo();
+    console.log(bsp);
+    this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
+    this.budgetSousProjetCreate = new BudgetSousProjetVo();
     // this.budgetProjetPrincipal.budgetSousProjetVos.push(bsp);
   }
 
@@ -231,77 +239,78 @@ export class BudgetService {
     let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
     let indexSou = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(this.budgetSousProjetPrincipal);
     this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos.push(bcb);
-    this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos);
-    this.budgetCompteBudgitaireCreate=new BudgetCompteBudgitaireVo();
+    this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSou].budgetCompteBudgitaireVos);
+    this.budgetCompteBudgitaireCreate = new BudgetCompteBudgitaireVo();
     //this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos.push(bcb);
   }
 
-  //---------------------------  Budget Detailles -------------------------
-  public detail:DetaillesBudgetVo=new DetaillesBudgetVo();
+  //---------------------------  Budget Detailles --------------------------
+  public detail: DetaillesBudgetVo = new DetaillesBudgetVo();
 
-  public detaillBudgetFaculte(bf:BudgetFaculteVo){
-    this.detail=bf.detaillesBudgetVo;
+  public detaillBudgetFaculte(bf: BudgetFaculteVo) {
+    this.detail = bf.detaillesBudgetVo;
   }
-  public detaillBudgetProjet(bp:BudgetProjetVo){
-    this.detail=bp.detaillesBudgetVo;
+
+  public detaillBudgetProjet(bp: BudgetProjetVo) {
+    this.detail = bp.detaillesBudgetVo;
   }
-  public detaillBudgetSousProjet(bsp:BudgetSousProjetVo){
-    this.detail=bsp.detaillesBudgetVo;
+
+  public detaillBudgetSousProjet(bsp: BudgetSousProjetVo) {
+    this.detail = bsp.detaillesBudgetVo;
   }
-  public detaillBudgetCompteBudgitaire(bcb:BudgetCompteBudgitaireVo){
-    this.detail=bcb.detaillesBudgetVo;
+
+  public detaillBudgetCompteBudgitaire(bcb: BudgetCompteBudgitaireVo) {
+    this.detail = bcb.detaillesBudgetVo;
   }
 
   //----------------------Remove Budget -----------------------------------
 
   public removeBudgetProjet(bp: BudgetProjetVo) {
     if (bp != null) {
-      if (bp.id == null) {
+      if (bp.id != null) {
         let bpClone = bp;
-        this.budgetProjetToRemove.push(bpClone);
+        this.budgetProjetRemoved.push(bpClone);
       }
       let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(bp);
       this.budgetFacultePrincipal.budgetProjetVos.splice(index, 1);
-      this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal,this.budgetFacultePrincipal.budgetProjetVos);
-      console.log(this.budgetProjetToRemove);
+      this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
+      console.log(this.budgetProjetRemoved);
       console.log(this.budgetFacultePrincipal.budgetProjetVos);
     }
   }
 
   public removeBudgetSousProjet(bsp: BudgetSousProjetVo) {
     if (bsp != null) {
-      if (bsp.id == null) {
+      if (bsp.id != null) {
         let bspClone = bsp;
-        this.budgetSousProjetToRemove.push(bspClone);
+        this.budgetSousProjetRemoved.push(bspClone);
       }
       let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
       let indexSP = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(bsp);
       this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.splice(indexSP, 1);
-      this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
+      this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
 
-      console.log(this.budgetProjetToRemove);
+      console.log(this.budgetProjetRemoved);
       console.log(this.budgetFacultePrincipal.budgetProjetVos);
     }
   }
 
   public removeBudgetCompteBudgitaire(bcb: BudgetCompteBudgitaireVo) {
-
     if (bcb != null) {
-      if (bcb.id == null) {
+      if (bcb.id != null) {
         let bcbClone = bcb;
-        this.budgetCompteBudgitaireToRemove.push(bcbClone);
+        this.budgetCompteBudgitaireRemoved.push(bcbClone);
       }
       let index = this.budgetFacultePrincipal.budgetProjetVos.indexOf(this.budgetProjetPrincipal);
       let indexSP = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.indexOf(this.budgetSousProjetPrincipal);
       let indexCB = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos.indexOf(bcb);
       this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos.splice(indexCB, 1);
-      this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP],this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos);
-      console.log(this.budgetProjetToRemove);
+      this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos);
+      console.log(this.budgetProjetRemoved);
       console.log(this.budgetFacultePrincipal.budgetProjetVos);
     }
 
   }
-
 
   //-------------------------------- les Calcules --------------------------
 
@@ -312,8 +321,8 @@ export class BudgetService {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
     });
-    bf.detaillesBudgetVo.reliquatReel=reliquatReel.toString();
-    bf.detaillesBudgetVo.reliquatEstimatif=reliquatEstimatif.toString();
+    bf.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
+    bf.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
   }
 
   public calculedetailleBudgetProjet(bp: BudgetProjetVo, budgetSousProjetVos: Array<BudgetSousProjetVo>) {
@@ -323,8 +332,8 @@ export class BudgetService {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
     });
-    bp.detaillesBudgetVo.reliquatReel=reliquatReel.toString();
-    bp.detaillesBudgetVo.reliquatEstimatif=reliquatEstimatif.toString();
+    bp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
+    bp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
   }
 
   public calculedetailleBudgetSousProjet(bsp: BudgetSousProjetVo, budgetCompteBudgitaireVo: Array<BudgetCompteBudgitaireVo>) {
@@ -334,31 +343,106 @@ export class BudgetService {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
     });
-    bsp.detaillesBudgetVo.reliquatReel=reliquatReel.toString();
-    bsp.detaillesBudgetVo.reliquatEstimatif=reliquatEstimatif.toString();
+    bsp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
+    bsp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
   }
 
 
   //-------------------------------------------------------------------
 
-  //--------------------Confiramation----------------------
-
-  values:Array<number>=new Array<number>();
-
-  public  size(){
-    this.values=new Array<number>();
-    this.budgetFacultePrincipal.budgetProjetVos.forEach(
-      bp=>{
-        let number=0;
-        bp.budgetSousProjetVos.forEach(
-          bsp=>
-            number +=bsp.budgetCompteBudgitaireVos.length
+  public deleteBudgetFaculte(bf: BudgetFaculteVo) {
+    Swal({
+      title: 'Etes-vous sure?',
+      text: 'Vous ne pouvez pas revenir en arrière!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        if (bf.annee != null) {
+          this.http.delete(this._url_bf + 'annee/' + bf.annee).subscribe(
+            data => {
+            }, error => {
+              console.log(error);
+            }
+          );
+        }
+        Swal(
+          'Supprimmé!',
+          'Vos données ont été supprimés.',
+          'success'
         );
-        this.values.push(number);
+      }
+    });
+  }
+
+  private deleteBudgetProjet() {
+    console.log('hello Let\'s remove');
+    this.budgetProjetRemoved.forEach(bp => {
+        console.log('hhhhhhhhhhhhhh' + bp.id);
+        this.http.delete(this._url_bp + '/' + bp.id).subscribe(
+          data => {
+            console.log('removed' + bp.id);
+          }
+        );
       }
     );
-    console.log(this.values);
   }
+
+  private deleteBudgetSousProjet() {
+    this.budgetSousProjetRemoved.forEach(bsp => {
+        this.http.delete(this._url_bsp + '/' + bsp.id).subscribe(
+          data => {
+            console.log('removed' + bsp.id);
+          }
+        );
+      }
+    );
+  }
+
+  private deleteBudgetCompteBudgitaire() {
+    this.budgetCompteBudgitaireRemoved.forEach(bcb => {
+        this.http.delete(this._url_bcb + '/' + bcb.id).subscribe(
+          data => {
+            console.log('removed' + bcb.id);
+          }
+        );
+      }
+    );
+    this.budgetCompteBudgitaireRemoved = new Array<BudgetCompteBudgitaireVo>();
+  }
+
+
+  //--------------------Confiramation----------------------------------
+
+  public confirmeBudgetFaculte() {
+
+    this.deleteBudgetCompteBudgitaire();
+    this.deleteBudgetSousProjet();
+    this.deleteBudgetProjet();
+
+    this.http.post(this._url_bf, this.budgetFacultePrincipal).subscribe(
+      data => {
+        this.budgetCompteBudgitairePrincipal = new BudgetCompteBudgitaireVo(null, '');
+        this.budgetSousProjetPrincipal = new BudgetSousProjetVo(null, '');
+        this.budgetProjetPrincipal = new BudgetProjetVo(null, '');
+        this.budgetFacultePrincipal = new BudgetFaculteVo();
+        this.budgetFaculteList = new Array<BudgetFaculteVo>();
+        Swal({
+          type: 'success',
+          title: 'succés',
+          text: 'Sauvegardé avec succées!'
+        });
+      }, error1 => {
+        console.log('errrorr' + error1.toString());
+      }
+    );
+  }
+
+
+  //-------------------------------------------------------------------
 
 
   /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);

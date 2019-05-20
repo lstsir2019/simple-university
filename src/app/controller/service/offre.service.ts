@@ -10,7 +10,7 @@ import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 })
 export class OffreService {
 
-  private _url = 'http://localhost:8090/appelOffre-api/offres/';
+  private _url = 'http://localhost:8091/appelOffre-api/offres/';
   private urlOffreDetail = 'http://localhost:8090/appelOffre-api/offreDetails';
 
 
