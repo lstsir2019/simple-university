@@ -1,0 +1,128 @@
+<div  class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Entite Administratif :</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="entiteAdministratif.referenceEntiteAdministratif" >
+       <!-- <div class="input-group-append">
+          <button (click)="findEntite()" class="btn btn-outline-primary fa fa-search"></button>
+        </div>-->
+      </div>
+      <div class="col-sm-12">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" >Type Entité adminsitratif</span>
+          </div>
+          <!-- <input class="form-control" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" />-->
+          <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.typeEntiteAdministratifVo.libelle" >
+            <option  *ngFor="let t of listTypeEntite" > {{t.libelle}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="col-sm-12">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" >Sous Projet</span>
+          </div>
+         <!-- <input class="form-control" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" />-->
+           <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" >
+             <option  *ngFor="let e of listSousProjet" > {{e.referenceSousProjet}}</option>
+           </select>
+        </div>
+
+      </div>
+
+      <div id="ajouter" class="container">
+        <div class="row" style="justify-content: center">
+          <input type="button" class="btn btn-outline-primary" value="Ajouter" (click)="addEntiteAdministratif()"  (click)="saveEntiteAdministratif()">
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-sm-6" >
+      <div class="card">
+        <div class="card-header"> les entites administratifs</div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col" >Entite Admin</th>
+            <th scope="col" >Sous Projet</th>
+            <th scope="col" >Type Entite Admin</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let e of entiteAdministratifs">
+            <td>{{e.referenceEntiteAdministratif}}</td>
+            <td>{{e.sousProjetVo.referenceSousProjet}}</td>
+            <td>{{e.typeEntiteAdministratifVo.libelle}}</td>
+
+            <td><button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+              <button  (click)="deleteEntite(e)" class=" fa fa-trash btn btn-danger "></button></td>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="DivDuForm2">
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Entite Administratif :</span>
+                </div>
+                <input class="form-control" type="text"   />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn btn-primary ">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabe">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Voulez vous vraiment supprimer l'entite administratif ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" >supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,7 +20,7 @@ export class BudgetService {
   }
 
   //---------------------- Les urls----------------------------------
-  public url_mandat = 'http://localhost:8090/mandat/mandats/';
+  public url_mandat = 'http://localhost:8090/mandat/mandat/';
 
   public _host = 'http://localhost:8099/budget-api/';
 
@@ -91,7 +91,7 @@ export class BudgetService {
     this.http.get<Array<BudgetFaculteVo>>(this._url_bf).subscribe(
       data => {
         if (data == null || data.length == 0) {
-          Swal({
+          Swal.fire({
             type: 'error',
             title: 'Aucun informations trouvés',
             text: 'Something went wrong!'
@@ -99,7 +99,7 @@ export class BudgetService {
         }
         this.allBudgetFaculte = data;
       }, error1 => {
-        Swal({
+        Swal.fire({
           type: 'error',
           title: 'Aucun informations trouvés',
           text: 'Something went wrong!'
@@ -113,7 +113,7 @@ export class BudgetService {
     this.http.post<Array<BudgetFaculteVo>>(this._url_bf + '/anneemin/anneemax/', this.budgetFaculteSearchByAnneeMinMax).subscribe(
       data => {
         if (data == null || data.length == 0) {
-          Swal({
+          Swal.fire({
             type: 'error',
             title: 'Aucun informations trouvés',
             text: 'Something went wrong!'
@@ -121,7 +121,7 @@ export class BudgetService {
         }
         this.budgetFaculteList = data;
       }, error1 => {
-        Swal({
+        Swal.fire({
           type: 'error',
           title: 'Aucun informations trouvés',
           text: 'Something went wrong!'
@@ -237,7 +237,7 @@ export class BudgetService {
     this.http.post<BudgetFaculteVo>(this._url_bf, this.budgetFaculteCreate).subscribe(
       data => {
         console.log('new Budget Create' + data.annee);
-        Swal({
+        Swal.fire({
           type: 'success',
           title: 'succés',
           text: 'Sauvegardé avec succées!'
@@ -403,7 +403,7 @@ export class BudgetService {
   //-------------------------------------------------------------------
 
   public deleteBudgetFaculte(bf: BudgetFaculteVo) {
-    Swal({
+    Swal.fire({
       title: 'Etes-vous sure?',
       text: 'Vous ne pouvez pas revenir en arrière!',
       type: 'warning',
@@ -421,7 +421,7 @@ export class BudgetService {
             }
           );
         }
-        Swal(
+        Swal.fire(
           'Supprimmé!',
           'Vos données ont été supprimés.',
           'success'
@@ -482,7 +482,7 @@ export class BudgetService {
         this.budgetProjetPrincipal = new BudgetProjetVo(null, '');
         this.budgetFacultePrincipal = new BudgetFaculteVo();
         this.budgetFaculteList = new Array<BudgetFaculteVo>();
-        Swal({
+        Swal.fire({
           type: 'success',
           title: 'succés',
           text: 'Sauvegardé avec succées!'

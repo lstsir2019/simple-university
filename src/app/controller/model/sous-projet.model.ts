@@ -1,7 +1,4 @@
 export class SousProjet {
-   public   referenceSousProjet:string="";
 
-  constructor(referenceSousProjet: string) {
-    this.referenceSousProjet = referenceSousProjet;
-  }
+  constructor( public id:number,public referenceSousProjet:string){}
 }

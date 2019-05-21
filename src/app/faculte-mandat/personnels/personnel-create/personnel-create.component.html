@@ -1,0 +1,210 @@
+<br>
+<div class="container">
+  <br>
+  <div>
+    <div class="card text-center">
+      <div class="card-header">CHOISIR TYPE DE PERSONNEL</div>
+      <div class="card-body  ">
+        <div class="col-sm-7 ">
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Type personnel</span>
+            </div>
+            <!--<input class="form-control" type="text" [(ngModel)]="personnel.typePersonnelVo.libelle" />-->
+            <select class="form-control form-control-sm " [(ngModel)]="personnel.typePersonnelVo.libelle">
+              <option value="00">====select====</option>
+              <option  *ngFor="let tp of listTypePersonnels"  >  {{tp.libelle}} </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div>
+      <div class="card text-center" *ngIf="personnel.typePersonnelVo.libelle != '00' " >
+        <div class="card-header">INFORMATIONS</div>
+        <div class="card-body  ">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Nom :</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.nom"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Prenom :</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.prenom"/>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date debut type Personnel</span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="personnel.dateDebutTypePersonnel"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Cin:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.cin"/>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Numero de location:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.numeroLocation"/>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date d'activation:</span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="personnel.dateActivation"/>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Grade:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.grade"/>
+             <!-- <select class="form-control form-control-sm" [(ngModel)]="personnel.grade">
+                <option>select</option>
+                <option *ngFor="let p of listPers">{{p.grade}}</option>
+              </select>-->
+
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Code d'echelle:</span>
+              </div>
+             <!-- <input class="form-control" type="text" [(ngModel)]="personnel.codeEchelle"/>-->
+              <select (click)="findEchelonByEchelle()" class="form-control form-control-sm" [(ngModel)]="personnel.referenceEchelle">
+                <option  disabled value >select</option>
+                <option  *ngFor="let p of echelles">{{p.reference}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Code d'echelon:</span>
+              </div>
+            <!--  <input class="form-control" type="text" [(ngModel)]="personnel.codeEchelon"/>-->
+              <select class="form-control form-control-sm" [(ngModel)]="personnel.referenceEchelon">
+                <option disabled  >select</option>
+                <option *ngFor="let p of echlonsByEchelle">{{p.reference}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Lieu D'affectation:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.lieuAffectation"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Etat social:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.etatSocial"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Nombre d'enfants</span>
+              </div>
+              <input class="form-control" type="number" [(ngModel)]="personnel.nombreEnfants"/>
+            </div>
+          </div>
+
+
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Lieu de naissance:</span>
+              </div>
+              <input class="form-control" type="text" [(ngModel)]="personnel.lieuNaissance"/>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date de Naissance: </span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="personnel.dateNaissance"/>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date d'exercice d'echelle:</span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="personnel.dateExerciceEchelle"/>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-sm-6 display:inline-block">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date d'acces a la fonction publique</span>
+              </div>
+              <input class="form-control" type="date" [(ngModel)]="personnel.dateAccesFonctionPublique"/>
+            </div>
+          </div>
+        </div>
+
+
+
+        </div>
+
+        <div id="ajouter" class="container">
+          <div class="row" style="justify-content: center">
+            <input type="button" class="btn btn-outline-primary" value="Ajoutez personnel" (click)="savePersonnel()">
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

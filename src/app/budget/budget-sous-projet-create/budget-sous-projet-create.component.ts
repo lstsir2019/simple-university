@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BudgetService} from '../../controller/service/budget.service';
 import {getReact} from '../../controller/service/evolutions/Util/SwalReact';
 import swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-sous-projet-create',
@@ -26,10 +27,10 @@ export class BudgetSousProjetCreateComponent implements OnInit {
 
   public ajouterNewBudgetSousProjet() {
     if (this.budgetSousProjetCreate.referenceSousProjet=="" || this.budgetSousProjetCreate.detaillesBudgetVo.creditOuvertEstimatif==null || this.budgetSousProjetCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetSousProjetCreate.detaillesBudgetVo.engagePaye==null || this.budgetSousProjetCreate.detaillesBudgetVo.engageNonPaye==null){
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       this.budgetService.ajouterNewBudgetSousProjet();
-      swal(this.SWAL.SUCCESS_CREATE);
+      Swal.fire(this.SWAL.SUCCESS_CREATE);
     }
 
 
