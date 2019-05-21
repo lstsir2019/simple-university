@@ -6,7 +6,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
       </div>
-      <input type="number"  [value]="detail.creditOuvertEstimatif" class="form-control"
+      <input type="number" [(ngModel)]="detail.creditOuvertEstimatif" [value]="detail.creditOuvertEstimatif" class="form-control"
              aria-label="Sizing example input" min="0" step="any" id="creditouverestimatif"
              aria-describedby="inputGroup-sizing-sm" >
     </div>
@@ -14,7 +14,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
       </div>
-      <input type="number"  [value]="detail.creditOuvertReel" class="form-control"
+      <input type="number" [(ngModel)]="detail.creditOuvertReel" [value]="detail.creditOuvertReel" class="form-control"
              aria-label="Sizing example input" min="0" step="any"  id="creditouverreel"
              aria-describedby="inputGroup-sizing-sm" >
     </div>
@@ -22,7 +22,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagepaye">Engagé payé</label>
       </div>
-      <input type="number"  [value]="detail.engagePaye" class="form-control"
+      <input type="number" [(ngModel)]="detail.engagePaye" [value]="detail.engagePaye" class="form-control"
              aria-label="Sizing example input" min="0" step="any"  id="engagepaye"
              aria-describedby="inputGroup-sizing-sm" >
     </div>
@@ -30,9 +30,25 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
       </div>
-      <input type="number"  [value]="detail.engageNonPaye" class="form-control"
+      <input type="number" [(ngModel)]="detail.engageNonPaye" [value]="detail.engageNonPaye" class="form-control"
              aria-label="Sizing example input" min="0" step="any"  id="engagenonpaye"
              aria-describedby="inputGroup-sizing-sm" >
+    </div>
+    <div class="input-group input-group mb-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="reliquatReel">Reliquat Reel</label>
+      </div>
+      <input type="number" [(ngModel)]="detail.reliquatReel" [value]="detail.reliquatReel" class="form-control"
+             aria-label="Sizing example input" min="0" step="any"  id="reliquatReel"
+             aria-describedby="inputGroup-sizing-sm" disabled >
+    </div>
+    <div class="input-group input-group mb-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="reliquatEstimatif">Reliquat Estimatif</label>
+      </div>
+      <input type="number" [(ngModel)]="detail.reliquatEstimatif" [value]="detail.reliquatEstimatif" class="form-control"
+             aria-label="Sizing example input" min="0" step="any"  id="reliquatEstimatif"
+             aria-describedby="inputGroup-sizing-sm" disabled >
     </div>
 
   </div>

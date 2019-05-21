@@ -18,7 +18,7 @@ export class BudgetProjetComponent implements OnInit {
   budgetFaculeteSelected:BudgetFaculteVo;
 
   ngOnInit() {
-
+    this.budgetService.findByAnneeMinAndMax();
   }
 
   public get budgetFaculte(){
@@ -33,10 +33,7 @@ export class BudgetProjetComponent implements OnInit {
     return this.budgetService.budgetFacultePrincipal.budgetProjetVos;
   }
 
-  public findBudgetSousProjet(bp:BudgetProjetVo){
-    this.budgetService.findBudgetSousProjet(bp);
-    this.budgetService.detaillBudgetProjet(bp);
-  }
+
 
   public detail(bp:BudgetProjetVo){
     this.budgetService.detaillBudgetProjet(bp);

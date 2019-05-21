@@ -74,6 +74,7 @@ export class ProduitCreateComponent implements OnInit {
     let produitClone:Produit=new Produit(produit.libelle,produit.reference);
     produitClone.categorieProduitVo.libelle=produit.categorieProduitVo.libelle;
     produitClone.typeProduitVo.code=produit.typeProduitVo.code;
+
     this.produitService.produitModified=produitClone;
 
   }
