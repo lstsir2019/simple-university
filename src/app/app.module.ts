@@ -91,6 +91,22 @@ import { BudgetProjetCreateComponent } from './budget/budget-projet-create/budge
 import { BudgetSousProjetCreateComponent } from './budget/budget-sous-projet-create/budget-sous-projet-create.component';
 import { BudgetCompteBudgitaireCreateComponent } from './budget/budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
 import { BudgetDetailComponent } from './budget/budget-detail/budget-detail.component';
+import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
+import {ProjetCreateComponent} from './faculte-mandat/projets/projet-create/projet-create.component';
+import {SousProjetListComponent} from './faculte-mandat/projets/sous-projet-list/sous-projet-list.component';
+import {PersonnelsComponent} from './faculte-mandat/personnels/personnels.component';
+import {PersonnelCreateComponent} from './faculte-mandat/personnels/personnel-create/personnel-create.component';
+import {TypePersonnelComponent} from './faculte-mandat/personnels/type-personnel/type-personnel.component';
+import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
+import {CreateResponsabiliteComponent} from './faculte-mandat/responsabilites/create-responsabilite/create-responsabilite.component';
+import {ListResponsabiliteComponent} from './faculte-mandat/responsabilites/list-responsabilite/list-responsabilite.component';
+import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
+import {ListEntiteAdministartifComponent} from './controller/model/list-entite-administartif.component';
+import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
+import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
+import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';
+import {MandatListComponent} from './faculte-mandat/mandats/mandat-list/mandat-list.component';
+import { FaculteMandatComponent } from './faculte-mandat/faculte-mandat.component';
 
 
 
@@ -180,7 +196,22 @@ import { BudgetDetailComponent } from './budget/budget-detail/budget-detail.comp
     BudgetSousProjetCreateComponent,
     BudgetCompteBudgitaireCreateComponent,
     BudgetDetailComponent,
-
+    ProjetsComponent,
+    ProjetCreateComponent,
+    SousProjetListComponent,
+    PersonnelsComponent,
+    PersonnelCreateComponent,
+    TypePersonnelComponent,
+    ResponsabilitesComponent,
+    CreateResponsabiliteComponent,
+    ListResponsabiliteComponent,
+    EntiteAdministratifsComponent,
+    ListEntiteAdministartifComponent,
+    CreateEntiteAdministratifComponent,
+    MandatsComponent,
+    MandatCreateComponent,
+    MandatListComponent,
+    FaculteMandatComponent
 
   ],
   imports: [

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BudgetService} from "../../controller/service/budget.service";
+import {getReact} from '../../controller/service/evolutions/Util/SwalReact';
+import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-budget-projet-create',
@@ -8,15 +11,24 @@ import {BudgetService} from "../../controller/service/budget.service";
 })
 export class BudgetProjetCreateComponent implements OnInit {
 
+  private SWAL = getReact('BudgetProjet', true);
+
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
   }
   public get budgetProjetCreate(){
+
     return this.budgetService.budgetProjetCreate;
   }
   public ajouterNewBudgetProjet(){
-    this.budgetService.ajouterNewBudgetProjet();
+    if (this.budgetProjetCreate.referenceProjet=="" || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertEstimatif==null || this.budgetProjetCreate.detaillesBudgetVo.engagePaye==null || this.budgetProjetCreate.detaillesBudgetVo.engageNonPaye==null) {
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+      this.budgetService.ajouterNewBudgetProjet();
+      Swal.fire(this.SWAL.SUCCESS_CREATE);
+    }
+
   }
 
 }

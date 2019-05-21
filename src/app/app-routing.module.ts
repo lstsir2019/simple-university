@@ -23,6 +23,15 @@ import {CommandeAffectationComponent} from './commandes/commande-affectation/com
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
 import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.component';
 import {AppelOffreComponent} from './appel-offre/appel-offre.component';
+import {PersonnelsComponent} from './faculte-mandat/personnels/personnels.component';
+import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
+import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
+import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
+import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
+import {PersonnelCreateComponent} from './faculte-mandat/personnels/personnel-create/personnel-create.component';
+import {ProjetCreateComponent} from './faculte-mandat/projets/projet-create/projet-create.component';
+import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
+import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';
 
 const routes: Routes = [
   {path: 'etudiant-admin', component: EtudiantAdminComponent},
@@ -65,6 +74,12 @@ const routes: Routes = [
   {path: 'expressionBesoinCreate', component: ExpressionBesoinCreateComponent},
   {path: 'expressionBesoinList', component: ExpressionBesoinListComponent},
 
+//mandats
+  {path: 'personnelCreate', component: PersonnelsComponent},
+  {path: 'projetSousProjetCreate', component: ProjetsComponent},
+  {path: 'entiteAdministratifCreate', component: EntiteAdministratifsComponent},
+  {path: 'responsabiliteCreate', component: ResponsabilitesComponent },
+  {path: 'mandatCreate', component: MandatsComponent},
 
 ];
 

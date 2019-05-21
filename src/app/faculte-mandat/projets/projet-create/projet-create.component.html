@@ -1,0 +1,123 @@
+<br>
+<div  class="container ">
+
+
+  <div class="row">
+    <!--<div class="col-sm-3">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Libelle Projet :</span>
+        <input type="text" class="form-control"  [(ngModel)]="projet.libelleP">
+      </div>
+    </div>
+    </div>-->
+    <div class="col-md-4">
+    <div class="input-group input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" >Libelle Projet :</label>
+      </div>
+      <input [(ngModel)]="projet.libelleP" aria-describedby="inputGroup-sizing-sm"  class="form-control" type="text">
+      <div class="input-group-append">
+        <button (click)="findSousProjet()" class="btn btn-outline-primary fa fa-search"></button>
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-3">
+
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Libelle sous Projet :</span>
+          <input type="text" class="form-control" [(ngModel)]="sousProjet.referenceSousProjet">
+        </div>
+      </div>
+      <div  class="container">
+        <div class="row" style="justify-content: center">
+          <input type="button" class="btn btn-outline-primary" value="Ajoutez sousProjet"  (click)="addSousProjet()">
+        </div>
+      </div>
+    </div>
+
+      <div class="col-sm-5" >
+        <div> Les sous projets :</div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Libelle</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of sousProjets">
+            <td>{{p.referenceSousProjet}}</td>
+            <td><button class="btn btn-outline-danger fa fa-times" (click)="eleminer(p)"></button> </td>
+            <!--<td><button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+            <button (click)="deleteProjet(p)" class=" fa fa-trash btn btn-danger "></button></td>-->
+          </tr>
+          <div id="ajouter" class="container">
+            <div class="row" style="justify-content: center">
+              <button  (click)="saveProjet()"   class="btn btn-outline-dark "> SAVE </button>
+            </div>
+          </div>
+          </tbody>
+        </table>
+      </div>
+
+
+</div>
+
+
+<div class="row">
+  <div class=" col-sm-6">
+
+    <div class="card">
+      <div class="card-header"> Liste des Projets</div>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col" >LibelleP</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of Projets">
+          <td>{{p.libelleP}}</td>
+          <td>
+            <button (click)="findSousProjetByLibelleProjet(p)" class="btn btn-outline-info fa fa-plus"></button>
+            <button (click)="deleteProjet(p)" class=" fa fa-trash btn btn-danger "></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-sm-6" *ngIf="projetSelected != null" >
+    <div class="card-header"> Liste des sous Projet de projet selectionné {{projetSelected.libelleP}}</div>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col" >Libelle sous projet</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sp of projetSelected.sousProjetsVo">
+        <td>{{sp.referenceSousProjet}}</td>
+        <td><button class="btn btn-outline-danger fa fa-times" (click)="deleteSousProjet(sp)"></button> </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+

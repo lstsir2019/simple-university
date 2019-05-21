@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Reception} from "../model/reception.model";
-import {ReceptionItem} from "../model/reception-item.model";
-import {HttpClient} from "@angular/common/http";
+import {Reception} from '../model/reception.model';
+import {ReceptionItem} from '../model/reception-item.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +31,14 @@ export class ReceptionService {
   public saveReception() {
     this.http.post<number>(this.url, this.receptionCreate).subscribe(
       data => {
-        if (data > 0) this.receptionCreate = new Reception("", "", "");
+        if (data > 0) {
+          this.receptionCreate = new Reception('', '', '');
+        } else {
+          console.log(data);
+        }
       },
       error => {
-        console.log("error" + error);
+        console.log('error' + error);
       }
     );
   }
@@ -42,13 +46,13 @@ export class ReceptionService {
   public findReceptionItemsByReceptionReference(reception: Reception) {
     this.receptionSelected = reception;
     if (this.receptionSelected != null) {
-      console.log(this.urlReceptionItem + "reference/" + this.receptionSelected.reference);
-      this.http.get<Array<ReceptionItem>>(this.urlReceptionItem + "reference/" + this.receptionSelected.reference).subscribe(
+      console.log(this.urlReceptionItem + 'reference/' + this.receptionSelected.reference);
+      this.http.get<Array<ReceptionItem>>(this.urlReceptionItem + 'reference/' + this.receptionSelected.reference).subscribe(
         date => {
           this._receptionSelected.receptionItems = date;
           console.log(date);
         }, error => {
-          console.log("Error" + error);
+          console.log('Error' + error);
         }
       );
     }
@@ -57,10 +61,10 @@ export class ReceptionService {
   public deleteReception(reception: Reception) {
     this.receptionSelected = reception;
     if (this.receptionSelected != null) {
-      console.log(this.url + "reference/" + this.receptionSelected.reference);
-      this.http.delete<Reception>(this.url + "reference/" + this.receptionSelected.reference).subscribe(error => {
+      console.log(this.url + 'reference/' + this.receptionSelected.reference);
+      this.http.delete<Reception>(this.url + 'reference/' + this.receptionSelected.reference).subscribe(error => {
 
-        console.log('Deleted Reception  with reference = ' + this.receptionSelected.reference + "" + error);
+        console.log('Deleted Reception  with reference = ' + this.receptionSelected.reference + '' + error);
 
       });
       let index: number = this._receptions.indexOf(reception);
@@ -68,13 +72,24 @@ export class ReceptionService {
     }
   }
 
+  public imprimer(reference: string) {
+    const httpOptions = {
+
+      responseType: 'blob' as 'json'
+    };
+    return this.http.get(this.url + '/pdf/reference/' + reference, httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);
+    });
+  }
+
   public findByQuery() {
     console.log(this.receptionSearch);
-    this.http.post<Array<Reception>>(this.url + "search", this.receptionSearch).subscribe(
+    this.http.post<Array<Reception>>(this.url + 'search', this.receptionSearch).subscribe(
       date => {
         this._receptions = date;
       }, error => {
-        console.log("Error");
+        console.log('Error');
       }
     );
   }
@@ -84,7 +99,7 @@ export class ReceptionService {
       date => {
         this._receptions = date;
       }, error => {
-        console.log("Error" + error);
+        console.log('Error' + error);
       }
     );
   }

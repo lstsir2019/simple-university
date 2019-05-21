@@ -35,6 +35,9 @@ export class ReceptionListComponent implements OnInit {
   public findByQuery() {
     this.receptionService.findByQuery();
   }
+  public  imprimer(r:Reception) {
+    this.receptionService.imprimer(r.reference);
+  }
 
   deleteReception(r) {
     this.receptionService.deleteReception(r);
