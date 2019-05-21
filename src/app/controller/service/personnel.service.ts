@@ -178,7 +178,7 @@ export class PersonnelService {
 
       }, error => {
         console.log('Error' + error);
-        //Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+        //Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
       }
     );
   }

@@ -442,7 +442,7 @@ export class CommandeService {
            });
            this.findAll();
            this.findCommandeItemByReference(this.commandeSelected);
-         }else Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+         }else Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
        },error1 => {
          console.log(error1);
        }
@@ -450,8 +450,8 @@ export class CommandeService {
 
   }
 
-  public offreToCommande(offre:Offre){
-    for(var item of offre.offreDetailsVo){
+  public offreToCommande(offre:Offre,offreDetailsVo:Array<OffreDetail>){
+    for(var item of offreDetailsVo){
       this.commandeCreate.total += item.prixUnitaire*item.quantite;
       let commandeItemClone = new CommandeItem(item.refProduit, item.quantite,item.prixUnitaire, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
       this.commandeCreate.commandeItemVos.push(commandeItemClone);

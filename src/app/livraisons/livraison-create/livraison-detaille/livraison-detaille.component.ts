@@ -10,6 +10,7 @@ import {StockDetailleServiceService} from "../../../controller/service/stock-det
 import {CommandeSourceWithProduit} from "../../../controller/model/commande-source-with-produit.model";
 import swal from "sweetalert2";
 import  * as $ from 'jquery';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-livraison-detaille',
   templateUrl: './livraison-detaille.component.html',
@@ -79,7 +80,7 @@ export class LivraisonDetailleComponent implements OnInit {
 
   public addLivraisonItem() {
     if (parseFloat(this.livraisonService.livraisonDeatailItemCreate.qte) > parseFloat(this.cmdExp.qteNonLivre) || parseFloat(this.livraisonService.livraisonDeatailItemCreate.qte) > this.stockDeataol.qte) {
-      swal({
+      Swal.fire({
         title: 'Erreur !',
         text: "Il faut regler la qunatite",
         type: 'error',

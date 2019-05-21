@@ -13,7 +13,7 @@ import {CommandeService} from '../../../controller/service/commandes/commande.se
 })
 export class AppelOffreListeComponent implements OnInit {
 
-  constructor(private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService,private cs:CommandeService) { }
+  constructor(private commandeService:CommandeService,private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService) { }
 
   ngOnInit() {
     this.appelOffreService.findAll();
@@ -41,6 +41,7 @@ export class AppelOffreListeComponent implements OnInit {
 
   findOffreDetailByAppelOffre(a) {
   this.offreService.findByAppelOffreRefernce(a.reference);
+  this.appelOffreService.findOffreSelectedByRefernceAppelOffre(a.reference);
   }
 
   removeAppelOffre(a) {
@@ -49,8 +50,8 @@ export class AppelOffreListeComponent implements OnInit {
 
   }
 
-  changeAppelOffreToCommande(a) {
-    this.cs.offreToCommande(a.offreDetails);
+  changeOffreToCommande(a) {
+   //this.commandeService.offreToCommande(a.offreSelectedVo);
     this.router.navigate(["/commandeCreate"]);
   }
 }
