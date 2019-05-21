@@ -8,6 +8,8 @@ import {CompteBudgitaireVo} from '../model/budget/compte-budgitaire.model';
 import {DetaillesBudgetVo} from '../model/budget/detailles-budget.model';
 import Swal from 'sweetalert2';
 import {forEach} from '@angular/router/src/utils/collection';
+import {Projet} from '../model/projet.model';
+import {SousProjet} from '../model/sous-projet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class BudgetService {
   }
 
   //---------------------- Les urls----------------------------------
+  public url_mandat = 'http://localhost:8090/mandat/mandats/';
+
   public _host = 'http://localhost:8099/budget-api/';
 
   public _url_bf = this._host + 'budget-facultes/';
@@ -65,7 +69,15 @@ export class BudgetService {
 
   public compteBudgitaireList: Array<CompteBudgitaireVo> = new Array<CompteBudgitaireVo>();
 
-  //----------------------------------------
+  //---------------------------------------------------
+
+  public allBudgetFaculte: Array<BudgetFaculteVo> = new Array<BudgetFaculteVo>();
+
+  public AllProjet: Array<Projet> = new Array<Projet>();
+
+  public sousProjetsByProjet: Array<SousProjet> = new Array<SousProjet>();
+
+  //---------------------------------------------------
 
   //resultat de recheres par Annee Min and Max s'enregistrent dans ces variables
   public budgetFaculteList: Array<BudgetFaculteVo> = new Array<BudgetFaculteVo>();
@@ -74,6 +86,28 @@ export class BudgetService {
 
 
   // ----------------------------- Methodes Find --------------------------
+
+  public findAllBudgetFaculte() {
+    this.http.get<Array<BudgetFaculteVo>>(this._url_bf).subscribe(
+      data => {
+        if (data == null || data.length == 0) {
+          Swal({
+            type: 'error',
+            title: 'Aucun informations trouvés',
+            text: 'Something went wrong!'
+          });
+        }
+        this.allBudgetFaculte = data;
+      }, error1 => {
+        Swal({
+          type: 'error',
+          title: 'Aucun informations trouvés',
+          text: 'Something went wrong!'
+        });
+        console.log('errrrrrrror ' + error1);
+      }
+    );
+  }
 
   public findByAnneeMinAndMax() {
     this.http.post<Array<BudgetFaculteVo>>(this._url_bf + '/anneemin/anneemax/', this.budgetFaculteSearchByAnneeMinMax).subscribe(
@@ -175,7 +209,25 @@ export class BudgetService {
         console.log('error');
       }
     );
+  }
 
+  public findAllProjet() {
+    this.http.get<Array<Projet>>(this.url_mandat + '').subscribe(
+      data => {
+        if (data != null) {
+          this.AllProjet = data;
+          console.log(data);
+        }
+      }, error => {
+        console.log('error');
+      }
+    );
+
+  }
+
+  public findSousProjetByProjet() {
+    let p = this.AllProjet.find(a => a.libelleP == this.budgetProjetPrincipal.referenceProjet);
+    this.sousProjetsByProjet = p.sousProjetsVo;
   }
 
 
