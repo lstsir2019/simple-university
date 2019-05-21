@@ -75,10 +75,10 @@ export class CommandeService {
   public saveCommande() {
     this.http.post<number>(this._url, this.commandeCreate).subscribe({
       next: data => {
-        if (data == -2) {
+        if (data <0) {
           Swal.fire({
             title: 'cannot save !',
-            text: 'Référence déja utilisé',
+            text: 'Référence déja utilisé ou bien vide',
             type: 'error',
           });
         }
@@ -94,7 +94,7 @@ export class CommandeService {
         this.commandeCreate = new Commande('', 0, '', '', '', '');
         this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
-        console.log('erreur');
+        console.log(error);
       }
     });
   }

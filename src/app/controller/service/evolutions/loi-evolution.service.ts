@@ -75,14 +75,14 @@ export class LoiEvolutionService {
     this.http.post(this._url, this._loiEvolution).subscribe(
       (res) => {
         if (res == -1) {
-          Swal(this.ERROR_NOT_ENOUGH_DATA);
+          Swal.fire(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal(this.ERROR_REF_ALREADY_EXISTS);
+          Swal.fire(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
           this.getLoisEvolutionsFromDatabase();
-          Swal(this.SUCCESS_SUCCESS_CREATE);
+          Swal.fire(this.SUCCESS_SUCCESS_CREATE);
         } else {
-          Swal(this.ERROR_UNKNOWN_ERROR);
+          Swal.fire(this.ERROR_UNKNOWN_ERROR);
         }
       },error1 => {
         console.log()
@@ -95,32 +95,32 @@ export class LoiEvolutionService {
     this.http.put(this._url , data).subscribe(
       (res) => {
         if (res == -1) {
-          Swal(this.ERROR_NOT_ENOUGH_DATA);
+          Swal.fire(this.ERROR_NOT_ENOUGH_DATA);
         } else if (res == -2) {
-          Swal(this.ERROR_REF_ALREADY_EXISTS);
+          Swal.fire(this.ERROR_REF_ALREADY_EXISTS);
         } else if (res == 1) {
-          Swal(this.SUCCESS_SUCCESS_EDIT);
+          Swal.fire(this.SUCCESS_SUCCESS_EDIT);
         } else {
-          Swal(this.ERROR_UNKNOWN_ERROR);
+          Swal.fire(this.ERROR_UNKNOWN_ERROR);
         }
       });
   }
 
   deleteLoiEvolution(data) {
-    Swal(this.CONFIRMATION_DELETE_CONFIRMATION)
+    Swal.fire(this.CONFIRMATION_DELETE_CONFIRMATION)
       .then((result) => {
         if (result.value) {
           this.http.delete(this._url + "/" + data).subscribe(
             (res) => {
               if (res == -1) {
-                Swal(this.ERROR_INVALID_REF);
+                Swal.fire(this.ERROR_INVALID_REF);
               } else if (res == -2) {
-                Swal(this.ERROR_REF_DOES_NOT_EXIST);
+                Swal.fire(this.ERROR_REF_DOES_NOT_EXIST);
               } else if (res == 1) {
                 this.getLoisEvolutionsFromDatabase();
-                Swal(this.SUCCESS_SUCCESS_DELETE);
+                Swal.fire(this.SUCCESS_SUCCESS_DELETE);
               } else {
-                Swal(this.ERROR_UNKNOWN_ERROR);
+                Swal.fire(this.ERROR_UNKNOWN_ERROR);
               }
             });
         }
@@ -131,7 +131,7 @@ export class LoiEvolutionService {
     if (this.searchInput !== "") {
       this.loisEvolution = this.loisEvolution.filter(echelon => echelon.reference.includes(this.searchInput));
       if (this.loisEvolution === undefined || this.loisEvolution.length == 0) {
-        Swal(this.SEARCH_NOT_FOUND).then(() => {
+        Swal.fire(this.SEARCH_NOT_FOUND).then(() => {
           this.getLoisEvolutionsFromDatabase();
         });
       }
