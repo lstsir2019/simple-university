@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BudgetService} from "../../controller/service/budget.service";
+import {getReact} from '../../controller/service/evolutions/Util/SwalReact';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-budget-compte-budgitaire-create',
@@ -9,6 +11,7 @@ import {BudgetService} from "../../controller/service/budget.service";
 export class BudgetCompteBudgitaireCreateComponent implements OnInit {
 
   public mode:number=0;
+  private SWAL = getReact('BudgetCompteBudgitaire', true);
 
   constructor(private budgetService: BudgetService) { }
 
@@ -24,7 +27,13 @@ export class BudgetCompteBudgitaireCreateComponent implements OnInit {
   }
   public ajouterNewBudgetCompteBudegtaireProjet(){
     this.mode=0;
-    return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
+    if (this.budgetCompteBudgitaireCreate.compteBudgitaireVo.code==null || this.budgetCompteBudgitaireCreate.budgetSousProjetVo==null || this.budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertEstimatif==null || this.budgetCompteBudgitaireCreate.detaillesBudgetVo.engagePaye==null || this.budgetCompteBudgitaireCreate.detaillesBudgetVo.engageNonPaye==null) {
+      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+    }else {
+      return this.budgetService.ajouterNewBudgetCompteBudegtaireProjet();
+      swal(this.SWAL.SUCCESS_CREATE);
+    }
+
 
   }
 
