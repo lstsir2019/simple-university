@@ -36,7 +36,7 @@ export class CommandeService {
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
   private _paiementCreate: Paiement = new Paiement(0,0,'','');
-  private _fournisseurs: Array<Fournisseur>;
+  public fournisseurs: Array<Fournisseur>;
   public produits: Array<Produit>;
   private _categories: Array<CategoriProduit>;
   public commandeItems: Array<CommandeItem>;
@@ -460,6 +460,18 @@ export class CommandeService {
 
   }
 
+  public getFournisseurs(){
+
+      this.http.get<Array<Fournisseur>>(this._url1).subscribe(
+        data => {
+          this.fournisseurs = data;
+        }, error => {
+          console.log('error whith loading fournisseurs');
+        }
+      );
+
+  }
+
 
 
 
@@ -527,23 +539,7 @@ export class CommandeService {
     this._url1 = value;
   }
 
-  get fournisseurs(): Array<Fournisseur> {
-    if (this._fournisseurs != null) {
-      this.http.get<Array<Fournisseur>>(this._url1).subscribe(
-        data => {
-          this._fournisseurs = data;
-        }, error => {
-          console.log('error whith loading fournisseurs');
-        }
-      );
-    }
-    return this._fournisseurs;
-  }
 
-
-  set fournisseurs(value: Array<Fournisseur>) {
-    this._fournisseurs = value;
-  }
 
 
   get categories(): Array<CategoriProduit> {
