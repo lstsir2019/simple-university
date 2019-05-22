@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ResponsabiliteService} from '../../../controller/service/responsabilite.service';
-
+import { AlertsService } from 'angular-alert-module';
 
 @Component({
   selector: 'app-create-responsabilite',
@@ -13,7 +13,6 @@ export class CreateResponsabiliteComponent implements OnInit {
 
   ngOnInit() {
     this.responsabiliteService.findAll();
-    this.responsabiliteService.findResponsabilite();
   }
 
   public get responsabilite(){
