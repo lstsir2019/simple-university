@@ -16,19 +16,23 @@ export class BudgetProjetCreateComponent implements OnInit {
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
+    this.budgetService.findAllProjet();
   }
   public get budgetProjetCreate(){
 
     return this.budgetService.budgetProjetCreate;
   }
   public ajouterNewBudgetProjet(){
-    if (this.budgetProjetCreate.referenceProjet=="" || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertEstimatif==null || this.budgetProjetCreate.detaillesBudgetVo.engagePaye==null || this.budgetProjetCreate.detaillesBudgetVo.engageNonPaye==null) {
+    if (this.budgetProjetCreate.referenceProjet=="" || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetProjetCreate.detaillesBudgetVo.creditOuvertEstimatif==null ) {
       Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     }else {
       this.budgetService.ajouterNewBudgetProjet();
       Swal.fire(this.SWAL.SUCCESS_CREATE);
     }
 
+  }
+  public get allProjet(){
+    return this.budgetService.AllProjet;
   }
 
 }

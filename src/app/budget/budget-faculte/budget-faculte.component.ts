@@ -11,6 +11,7 @@ import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.mode
 export class BudgetFaculteComponent implements OnInit {
 
   ngOnInit() {
+
   }
 
 
