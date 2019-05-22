@@ -12,21 +12,20 @@ export class PersonnelService {
 
 
   public url = 'http://localhost:9999/personnel/personnels/';
-  public url2 ='http://localhost:9999/personnel/personnels/personnelAll/';
-  public url3 ='http://localhost:9999/personnel/personnels/deletePersonnel/';
-  public url4 ='http://localhost:9999/personnel/personnels/cin/';
-  public url5 ='http://localhost:9999/typePersonnel/typePersonnels/typePersonnelAll/';
-  public url6 ='http://localhost:9999/personnel/personnels/updatePersonnel/';
+  public url2 = 'http://localhost:9999/personnel/personnels/personnelAll/';
+  public url3 = 'http://localhost:9999/personnel/personnels/deletePersonnel/';
+  public url4 = 'http://localhost:9999/personnel/personnels/cin/';
+  public url5 = 'http://localhost:9999/typePersonnel/typePersonnels/typePersonnelAll/';
+  public url6 = 'http://localhost:9999/personnel/personnels/updatePersonnel/';
 
   public personnelCreate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   public personnelToUpdate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   public typePersonnelCreate: TypePersonnel = new TypePersonnel('');
 
 
-
   private _personnelSelected: Personnel;
   public pSelected: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-  public listPers : Array<Personnel>;
+  public listPers: Array<Personnel>;
   public listTypePersonnels: Array<TypePersonnel>;
 
   constructor(private http: HttpClient) {
@@ -44,18 +43,18 @@ export class PersonnelService {
   public savePersonnel() {
     this.http.post(this.url, this.personnelCreate).subscribe(
       data => {
-        if (data ==1) {
+        if (data == 1) {
           Swal.fire('Informations', 'Personnel ajouter avec success', 'success');
           console.log('personnel ajouter avec success');
           this.personnelCreate = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
           this.typePersonnelCreate = new TypePersonnel('');
           this.findAll();
         }
-       else if (data ==-1) {
+        else if (data == -1) {
           Swal.fire('Informations', 'CIN existe déja ', 'error');
 
         }
-       else {
+        else {
           Swal.fire('Erreur', 'Personnel creation erreur ', 'error');
 
         }
@@ -82,18 +81,19 @@ export class PersonnelService {
   }
 
   get listPersonnels(): Array<Personnel> {
-    if (this.listPers == null) {
-      this.http.get<Array<Personnel>>(this.url2).subscribe(
-        data => {
-          this.listPers = data;
-          console.log('find list personnel');
-
-        }, error => {
-          console.log('error list personnel');
-        }
-      );
-    }
     return this.listPers;
+  }
+
+  findPersonels() {
+    this.http.get<Array<Personnel>>(this.url2).subscribe(
+      data => {
+        this.listPers = data;
+        console.log('find list personnel');
+
+      }, error => {
+        console.log('error list personnel');
+      }
+    );
   }
 
 
@@ -182,11 +182,6 @@ export class PersonnelService {
       }
     );
   }
-
-
-
-
-
 
 
 }
