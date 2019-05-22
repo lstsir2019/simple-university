@@ -75,10 +75,10 @@ export class CommandeService {
   public saveCommande() {
     this.http.post<number>(this._url, this.commandeCreate).subscribe({
       next: data => {
-        if (data == -2) {
+        if (data <0) {
           Swal.fire({
             title: 'cannot save !',
-            text: 'Référence déja utilisé',
+            text: 'Référence déja utilisé ou bien vide',
             type: 'error',
           });
         }
@@ -94,7 +94,7 @@ export class CommandeService {
         this.commandeCreate = new Commande('', 0, '', '', '', '');
         this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
-        console.log('erreur');
+        console.log(error);
       }
     });
   }
@@ -442,7 +442,7 @@ export class CommandeService {
            });
            this.findAll();
            this.findCommandeItemByReference(this.commandeSelected);
-         }else Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+         }else Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
        },error1 => {
          console.log(error1);
        }
@@ -450,8 +450,8 @@ export class CommandeService {
 
   }
 
-  public offreToCommande(offre:Offre){
-    for(var item of offre.offreDetailsVo){
+  public offreToCommande(offre:Offre,offreDetailsVo:Array<OffreDetail>){
+    for(var item of offreDetailsVo){
       this.commandeCreate.total += item.prixUnitaire*item.quantite;
       let commandeItemClone = new CommandeItem(item.refProduit, item.quantite,item.prixUnitaire, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
       this.commandeCreate.commandeItemVos.push(commandeItemClone);

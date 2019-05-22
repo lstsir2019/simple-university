@@ -3,6 +3,7 @@ import {OffreService} from '../../../controller/service/offre.service';
 import {AppelOffre} from '../../../controller/model/appel-offre.model';
 import {AppelOffreService} from '../../../controller/service/appel-offre.service';
 import {OffreDetail} from '../../../controller/model/offre-detail.model';
+import {CommandeService} from '../../../controller/service/commandes/commande.service';
 
 @Component({
   selector: 'app-offres-create',
@@ -13,17 +14,18 @@ export class OffresCreateComponent implements OnInit {
   appleOffresDet: any;
 
 
-
-  constructor(private offreService: OffreService, private appelOffreService: AppelOffreService) {
+  constructor(private offreService: OffreService, private appelOffreService: AppelOffreService, private commandeService: CommandeService) {
   }
 
   ngOnInit() {
     this.appelOffreService.findAll();
+     this.offreService.allFournisseur();
   }
 
-  public get appleOffreDetails(){
+  public get appleOffreDetails() {
     return this.appelOffreService.appleOffreDetailsByReference;
   }
+
   public get offreDetail() {
     return this.offreService.offreDetailCreate;
   }
@@ -40,7 +42,7 @@ export class OffresCreateComponent implements OnInit {
     this.offreService.addOffreDetail();
   }
 
-  public get allAppelOffre(){
+  public get allAppelOffre() {
     return this.appelOffreService.allAppelOffres;
   }
 
@@ -51,5 +53,10 @@ export class OffresCreateComponent implements OnInit {
   removeoffreDetailsVo(item: OffreDetail) {
     let index: number = this.offre.offreDetailsVo.indexOf(item);
     this.offre.offreDetailsVo.splice(index, 1);
+  }
+
+  public get fournisseurs() {
+    return this.offreService._fournisseurs;
+
   }
 }

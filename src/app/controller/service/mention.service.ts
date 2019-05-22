@@ -26,7 +26,7 @@ export class MentionService {
 
   public saveMention() {
     if(this.mentionCreate.reference==='' || this.mentionCreate.libelle===''){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque d'infos:Référence ou libellé",
         type: 'error',
@@ -37,7 +37,7 @@ export class MentionService {
       this.http.post(this._url, this._mentionCreate).subscribe(
         (res) => {
           if (res == 1) {
-            Swal({
+            Swal.fire({
               title: 'Création Mention',
               text: 'Création réussite',
               type: 'success',
@@ -46,13 +46,13 @@ export class MentionService {
             this._listeMention.push(mentionclone);
             this._mentionCreate = new Mention('', '', 0, 0);
           } else if (res == -1) {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: 'Mention existe déjà',
               type: 'error',
             });
           } else {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: "L'intervalle de cette mention existe déjà ",
               type: 'error',
@@ -76,7 +76,7 @@ export class MentionService {
   }
 
   public deleteMention(mentionSupp:Mention) {
-    Swal({
+    Swal.fire({
       title: 'Suppression',
       text: "Vous voulez vraiment supprimer cette mention",
       type: 'warning',
@@ -97,7 +97,7 @@ export class MentionService {
               }
 
 
-              Swal({
+              Swal.fire({
                 title: 'Suppression Mention',
                 text: 'Suppression réussite',
                 type: 'success',
@@ -107,7 +107,7 @@ export class MentionService {
 
 
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Suppression échouée:Erreur Inconnue',
                 type: 'error',
@@ -138,7 +138,7 @@ export class MentionService {
   }
 
   public editReference(mentionEdit:Mention,nvmention:Mention){
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -157,7 +157,7 @@ export class MentionService {
               this.findAll(); 
               this._mentionCreate1 = new Mention('','',0,0); 
               this.findByReference(nvmention); 
-              Swal({
+              Swal.fire({
                 title: 'Modification mention',
                 text: 'Modification réussite',
                 type: 'success',
@@ -167,7 +167,7 @@ export class MentionService {
             else if(res==-1 || res==-2) {
               this.findByReference(mentionEdit);
 
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: "Manque d'informations: Référence ou libellé",
                 type: 'error',
@@ -176,7 +176,7 @@ export class MentionService {
 
             else if(res==-3) {
               this.findByReference(mentionEdit);
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Mention deja existante',
                 type: 'error',
@@ -184,7 +184,7 @@ export class MentionService {
             }
             else {
               this.findByReference(mentionEdit);
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',
@@ -208,7 +208,7 @@ export class MentionService {
 
 
   public editNotemax(mentionEdit:Mention,nvmention:Mention){
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -228,7 +228,7 @@ export class MentionService {
               this._mentionCreate1 = new Mention('','',0,0); 
                this.findByReference(mentionEdit); 
 
-              Swal({
+              Swal.fire({
                 title: 'Modification Mention',
                 text: 'Modification réussite',
                 type: 'success',
@@ -236,7 +236,7 @@ export class MentionService {
 
             }
             else if (res==-1 || res ==-2) {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:La note max doit etre supérieure à la note min',
                 type: 'error',
@@ -244,7 +244,7 @@ export class MentionService {
             }
 
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',
@@ -263,7 +263,7 @@ export class MentionService {
 
   }
   public editNotemin(mentionEdit:Mention,nvmention:Mention){
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -283,7 +283,7 @@ export class MentionService {
               this._mentionCreate1 = new Mention('','',0,0);
               this.findByReference(mentionEdit);
 
-              Swal({
+              Swal.fire({
                 title: 'Modification Mention',
                 text: 'Modification réussite',
                 type: 'success',
@@ -293,7 +293,7 @@ export class MentionService {
             else if (res==-1 || res==-2) {
               this.findByReference(mentionEdit);
 
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:La note min doit etre inférieure à la note max',
                 type: 'error',
@@ -302,7 +302,7 @@ export class MentionService {
             else {
               this.findByReference(mentionEdit);
 
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',

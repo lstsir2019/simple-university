@@ -42,13 +42,13 @@ export class MagasinService {
           this.magasinToUpdate.address = data.address;
           this.magasinToUpdate.libelle = data.libelle;
           this.magasinToUpdate.description = data.description;
-          Swal(this.SWAL.SUCCESS_EDIT);
+          Swal.fire(this.SWAL.SUCCESS_EDIT);
         } else {
-          Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+          Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
         }
       }, error => {
         console.log("Error" + error);
-        Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+        Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
       }
     );
   }
@@ -59,14 +59,14 @@ export class MagasinService {
       data => {
         this._magasinCreate = new Magasin("");
         if (data == 1) {
-          Swal(this.SWAL.SUCCESS_CREATE);
+          Swal.fire(this.SWAL.SUCCESS_CREATE);
           this.findAll();
         } else {
-          Swal(this.SWAL.ERROR_INVALID_REF);
+          Swal.fire(this.SWAL.ERROR_INVALID_REF);
         }
       },
       error => {
-        Swal({
+        Swal.fire({
           title: 'Erreur !',
           text: error,
           type: 'error',

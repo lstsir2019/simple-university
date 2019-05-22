@@ -59,7 +59,7 @@ private _noteTmp:Note=new Note('','',0,'',this._elementVoCreate);
 
     this._noteAnnuelCreate.notesElementVo.push(note);
 
-    Swal({
+    Swal.fire({
       type: 'error',
       title: 'Erreur',
       text: "Élément deja évaluer",
@@ -75,7 +75,7 @@ private _noteTmp:Note=new Note('','',0,'',this._elementVoCreate);
 
 public updateNoteElement(){
 
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -93,7 +93,7 @@ public updateNoteElement(){
           this._noteCreate2.noteElement=this._noteCreate3.noteElement;
           this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-          Swal({
+          Swal.fire({
             title: 'Modification Note Element',
             text: 'Modification réussite',
             type: 'success',
@@ -102,7 +102,7 @@ public updateNoteElement(){
         else {
           this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-          Swal({
+          Swal.fire({
             type: 'error',
             title: 'Erreur',
             text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate2.elementEvaluationVo.reference+' : '+this._noteCreate2.elementEvaluationVo.baremMax,
@@ -126,14 +126,14 @@ public updateObservation(){
   if (this._noteCreate3.observation === '') {
     this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-    Swal({
+    Swal.fire({
       type: 'error',
       title: 'Erreur',
       text: "Manque d'infos:la nouvelle observation",
     });
   }
   else {
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -149,7 +149,7 @@ public updateObservation(){
         this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
 
-        Swal({
+        Swal.fire({
           title: 'Modification Observation',
           text: 'Modification réussite',
           type: 'success',
@@ -171,14 +171,14 @@ public updateReferenceEvaluateur(){
   if (this._noteCreate3.referenceEvaluateur === '') {
     this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-    Swal({
+    Swal.fire({
       type: 'error',
       title: 'Erreur',
       text: "Manque d'infos:la nouvelle référence evaluateur",
     });
   }
   else {
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -194,7 +194,7 @@ public updateReferenceEvaluateur(){
         this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
 
-        Swal({
+        Swal.fire({
           title: 'Modification Référence evaluateur',
           text: 'Modification réussite',
           type: 'success',
@@ -217,14 +217,14 @@ public updateReferencePersonnel(){
   if (this._noteCreate3.referencePersonnel === '') {
     this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-    Swal({
+    Swal.fire({
       type: 'error',
       title: 'Erreur',
       text: "Manque d'infos:la nouvelle référence Personnel",
     });
   }
   else {
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -240,7 +240,7 @@ public updateReferencePersonnel(){
         this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
 
-              Swal({
+              Swal.fire({
                 title: 'Modification Référence personnel',
                 text: 'Modification réussite',
                 type: 'success',
@@ -263,7 +263,7 @@ public updateElement(){
   if (this._noteCreate3.elementEvaluationVo == null) {
     this._noteCreate3=new Note('','',0,'',null);
 
-    Swal({
+    Swal.fire({
       type: 'error',
       title: 'Erreur',
       text: "Veuillez mentionner la référence de l'élément d'évaluation ",
@@ -290,7 +290,7 @@ public updateElement(){
       this._noteAnnuelCreate.notesElementVo.push(this._noteTmp);
       this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-      Swal({
+      Swal.fire({
         type: 'error',
         title: 'Erreur',
         text: "Cette élément est déja evalué ",
@@ -298,7 +298,7 @@ public updateElement(){
     }
   else
     {
-      Swal({
+      Swal.fire({
         title: 'Modification',
         text: "Vous êtes sûr de la modification",
         type: 'warning',
@@ -316,7 +316,7 @@ public updateElement(){
           this._noteAnnuelCreate.notesElementVo.push(this._noteTmp);
       this._noteCreate3=new Note('','',0,'',this._elementVoCreate);
 
-          Swal({
+          Swal.fire({
             title: 'Modification Référence personnel',
             text: 'Modification réussite',
             type: 'success',
@@ -344,14 +344,14 @@ public updateElement(){
     this.findByReference(selectedElement);
 
     if (this._noteCreate.referencePersonnel === '' || this._noteCreate.referenceEvaluateur === '') {
-      Swal({
+      Swal.fire({
         type: 'error',
         title: 'Erreur',
         text: "Manque d'infos:Référence evaluateur ou personnel ",
       });
     } else if (this._noteCreate.elementEvaluationVo == null) {
 
-      Swal({
+      Swal.fire({
         type: 'error',
         title: 'Erreur',
         text: "Veuillez mentionner la référence de l'élément d'évaluation ",
@@ -364,7 +364,7 @@ public updateElement(){
 
           this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
 
-          Swal({
+          Swal.fire({
             type: 'error',
             title: 'Erreur',
             text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
@@ -376,7 +376,7 @@ public updateElement(){
           this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
 
           this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
-          Swal({
+          Swal.fire({
             position: 'center',
             type: 'success',
             title: 'Note enregistrée',
@@ -409,7 +409,7 @@ public updateElement(){
 
             this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, this._noteCreate.observation, this._noteCreate.elementEvaluationVo);
 
-            Swal({
+            Swal.fire({
               type: 'error',
               title: 'Erreur',
               text: 'La note donnée est supérieure au barem Max : Barem Max pour  '+this._noteCreate.elementEvaluationVo.reference+' : '+this._noteCreate.elementEvaluationVo.baremMax,
@@ -420,7 +420,7 @@ public updateElement(){
             this._noteAnnuelCreate.notesElementVo.push(noteElementClone);
 
             this._noteCreate = new Note(this._noteCreate.referencePersonnel, this._noteCreate.referenceEvaluateur, 0, '', this._elementVoCreate);
-            Swal({
+            Swal.fire({
               position: 'center',
               type: 'success',
               title: 'Note enregistrée',
@@ -431,7 +431,7 @@ public updateElement(){
 
         }
         else {
-          Swal({
+          Swal.fire({
             type: 'error',
             title: 'Erreur',
             text: "Élément déja evalué ",
@@ -582,35 +582,35 @@ this._noteCreate2=noteElement;
 
 
     if(this._noteAnnuelCreate.referenceEvaluateur===''){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque d'infos:Référence evaluateur",
         type: 'error',
       });
     }
     else if(this._noteAnnuelCreate.referencePersonnel===''){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque d'infos:Référence personnel ",
         type: 'error',
       });
     }
     else if(this._noteAnnuelCreate.dateDevaluation==='AAAA-MM-JJ'){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque d'infos:Date d'évaluation",
         type: 'error',
       });
     }
     else if(this._noteAnnuelCreate.notesElementVo.length==0){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Veuillez d'abord saisir les notes pour chaque élément",
         type: 'error',
       });
     }
     else if(this._noteAnnuelCreate.notesElementVo.length!=this.listelements.length){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque de notes:le personnel: "+ this._noteAnnuelCreate.referencePersonnel +" n'as pas été évaluer dans touts les élémenrs",
         type: 'error',
@@ -631,7 +631,7 @@ this._noteCreate2=noteElement;
         }
       }
       if (this._validate == 0) {
-        Swal({
+        Swal.fire({
           title: 'Erreur!',
           text: "Erreur au niveau des Notes/Éléments : Existance d'une note qui ne convient pas à ce personnel ",
           type: 'error',
@@ -642,7 +642,7 @@ else {
       this.http.post(this._url3, this._noteAnnuelCreate).subscribe(
         (res) => {
           if (res == 3) {
-            Swal({
+            Swal.fire({
               title: 'Ajout de la Note annuel',
               text: 'Note annuel enregistrée',
               type: 'success',
@@ -658,13 +658,13 @@ else {
             this.findAllNotesAnnuel();
 
           } else if (res == -5) {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: 'Le personnel: ' + this._noteAnnuelCreate.referencePersonnel + ' a déjà été noté cette année',
               type: 'error',
             });
           } else {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: "Manque de notes : le personnel:  " + this._noteAnnuelCreate.referencePersonnel + "  n'as pas été évalué dans touts les éléments",
               type: 'error',
@@ -686,7 +686,7 @@ else {
 
   //Suppression de la note annuel et de ses notes /Element
   public deleteNoteAnnuel(noteAnnuelSupp:NoteAnnuel) {
-    Swal({
+    Swal.fire({
       title: 'Etes vous sûrs de la suppression',
       text: "Cette note sera supprimer de façon définitive",
       type: 'warning',
@@ -704,7 +704,7 @@ else {
               }
 
 
-              Swal({
+              Swal.fire({
                 title: 'Suppression Mention',
                 text: 'Suppression réussite',
                 type: 'success',
@@ -714,7 +714,7 @@ else {
 
 
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Suppression échouée:Erreur Inconnue',
                 type: 'error',
@@ -745,7 +745,7 @@ else {
 
   //Suppression de la  note /Element dans la table des notes /Elements avant la création dans la BD
   public deleteNote(noteSupp:Note) {
-    Swal({
+    Swal.fire({
       title: 'Etes vous sûrs de la suppression',
       text: "Cette note sera supprimer de façon définitive",
       type: 'warning',
@@ -759,7 +759,7 @@ else {
         if (index !== -1) {
           this._noteAnnuelCreate.notesElementVo.splice(index, 1);
         }
-        Swal({
+        Swal.fire({
           type: 'success',
           title: 'Suppression',
           text: 'Note Supprimée',

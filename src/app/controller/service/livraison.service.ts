@@ -6,6 +6,7 @@ import {getReact} from "./evolutions/Util/SwalReact";
 import swal from "sweetalert2";
 import {CommandeSourceWithProduit} from "../model/commande-source-with-produit.model";
 import {forEach} from "@angular/router/src/utils/collection";
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -41,11 +42,11 @@ export class LivraisonService {
     console.log(this.livraisonItemCreate.qte);
     console.log(this.livraisonItemCreate.refenceProduit);
     if (this._livraisonItemCreate.codeMagasin == "" || this._livraisonItemCreate.refenceProduit == "" || this._livraisonItemCreate.qte == "" || this._livraisonItemCreate.strategy == "") {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       let livraisonItemClone = new LivraisonItem(this._livraisonItemCreate.refenceProduit, this._livraisonItemCreate.qte, this._livraisonItemCreate.codeMagasin, this._livraisonItemCreate.referenceReception, this._livraisonItemCreate.strategy, this.livraisonItemCreate.referenceCommandeExpression);
       if (this._livraisonCreate.livraisonItemVos.some(({refenceProduit}) => refenceProduit == livraisonItemClone.refenceProduit)) {
-        swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+        Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
       } else {
         this._livraisonCreate.livraisonItemVos.push(livraisonItemClone);
       }
@@ -55,11 +56,11 @@ export class LivraisonService {
 
   public addLivraisonItemDeatil() {
     if (this._livraisonDeatailItemCreate.refenceProduit == "" || this._livraisonDeatailItemCreate.qte == "" || this._livraisonDeatailItemCreate.codeMagasin == "" || this._livraisonDeatailItemCreate.referenceReception == "") {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       let livraisonItemClone = new LivraisonItem(this._livraisonDeatailItemCreate.refenceProduit, this._livraisonDeatailItemCreate.qte, this._livraisonDeatailItemCreate.codeMagasin, this._livraisonDeatailItemCreate.referenceReception, this._livraisonDeatailItemCreate.strategy, this.livraisonDeatailItemCreate.referenceCommandeExpression);
      if (this._livraisonDetailCreate.livraisonItemVos.some(({refenceProduit})=> refenceProduit == livraisonItemClone.refenceProduit)) {
-       swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+       Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
      }else {
        this._livraisonDetailCreate.livraisonItemVos.push(livraisonItemClone);
      }
@@ -71,7 +72,7 @@ export class LivraisonService {
 
   public saveLivraison() {
     if (this._livraisonCreate.reference == "" || this._livraisonCreate.date == "" || this._livraisonCreate.referenceCommande == "" || this._livraisonCreate.referenceEntite == "") {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       this._http.post<number>(this._url, this._livraisonCreate).subscribe(
         data => {
@@ -79,20 +80,20 @@ export class LivraisonService {
 
           this._livraisonCreate = new Livraison("", "", "", "");
           if (data == -1) {
-            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+            Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
           }
           if (data == -2) {
-            swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+            Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
           }
           if (data == 1) {
-            swal(this.SWAL.SUCCESS_CREATE);
+            Swal.fire(this.SWAL.SUCCESS_CREATE);
           }
 
           console.log("Ajoute avec success");
         },
         error => {
           console.log("error");
-          swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+          Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
         }
       );
     }
@@ -101,20 +102,20 @@ export class LivraisonService {
 
   public saveLivraisonDetail() {
     if (this._livraisonDetailCreate.reference == "" || this._livraisonDetailCreate.date == "" || this._livraisonDetailCreate.referenceCommande == "" || this._livraisonDetailCreate.referenceEntite == "") {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
 
 
       this._http.post<number>(this._url + "detaille/", this._livraisonDetailCreate).subscribe(
         data => {
           if (data == -1) {
-            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+            Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
           }
           if (data == -2) {
-            swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+            Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
           }
           if (data == 1) {
-            swal(this.SWAL.SUCCESS_CREATE);
+            Swal.fire(this.SWAL.SUCCESS_CREATE);
           }
 
           this.livraisonDetailCreate = new Livraison("", "", "", "");

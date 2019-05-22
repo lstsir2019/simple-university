@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Offre} from '../model/offre.model';
 import {OffreDetail} from '../model/offre-detail.model';
 import {AppelOffreDetail} from '../model/appel-offre-detail.model';
+import {Fournisseur} from '../model/commandes/fournisseur.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,15 @@ import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 export class OffreService {
 
   private _url = 'http://localhost:8091/appelOffre-api/offres/';
-  private urlOffreDetail = 'http://localhost:8090/appelOffre-api/offreDetails';
+  private urlOffreDetail = 'http://localhost:8091/appelOffre-api/offreDetails';
+  private _url1: string = 'http://localhost:8090/faculte-commande/fournisseurs/finAll';
 
 
   public offreCreate: Offre = new Offre();
   public offreDetailCreate: OffreDetail = new OffreDetail('', 0, 0, 0);
   public offreDetailsSearch: Array<OffreDetail> = new Array<OffreDetail>();
   public offresSearch: Array<Offre> = new Array<Offre>();
+  public _fournisseurs: Array<Fournisseur>;
 
   constructor(private http: HttpClient) {
     this.offreCreate.montantTtc = 0;
@@ -66,6 +69,18 @@ export class OffreService {
       });
   }
 
+  allFournisseur() {
+    this.http.get<Array<Fournisseur>>(this._url1).subscribe(
+      data => {
+        console.log('ok');
+        this._fournisseurs = data;
+
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
   removeOffre(a: Offre) {
     this.http.delete<number>(this._url + '/reference/' + a.reference).subscribe(
       data => {
@@ -80,7 +95,6 @@ export class OffreService {
         console.log(error);
       });
   }
-
 
 
 }
