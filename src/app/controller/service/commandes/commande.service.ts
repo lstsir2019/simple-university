@@ -450,8 +450,8 @@ export class CommandeService {
 
   }
 
-  public offreToCommande(offre:Offre,offreDetailsVo:Array<OffreDetail>){
-    for(var item of offreDetailsVo){
+  public offreToCommande(offre:Offre){
+    for(var item of offre.offreDetailsVo){
       this.commandeCreate.total += item.prixUnitaire*item.quantite;
       let commandeItemClone = new CommandeItem(item.refProduit, item.quantite,item.prixUnitaire, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
       this.commandeCreate.commandeItemVos.push(commandeItemClone);
