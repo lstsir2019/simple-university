@@ -38,4 +38,10 @@ export class BudgetFaculteComponent implements OnInit {
   public detail(bf:BudgetFaculteVo){
     this.budgetService.detaillBudgetFaculte(bf);
   }
+
+  public deleteBudgetFaculte(bf:BudgetFaculteVo){
+    this.budgetService.deleteBudgetFaculte(bf);
+  }
+
+
 }
