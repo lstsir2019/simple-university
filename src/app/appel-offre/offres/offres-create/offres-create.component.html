@@ -19,9 +19,16 @@
         </div>
         <div class="input-group mx-sm-3">
           <div class="input-group-prepend">
-            <span class="input-group-text">Fournisseur</span>
+            <span class="input-group-text">fournisseur</span>
           </div>
-          <input class="form-control" type="text" [(ngModel)]="offre.refrenceFournisseur"/>
+
+            <select class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                    [(ngModel)]="offre.refrenceFournisseur">
+              <option disabled>----SELECT----</option>
+              <option *ngFor="let f of fournisseurs" value="{{f.reference}}">{{f.reference}}</option>
+            </select>
+
+
         </div>
         <div class="input-group mx-sm-3 mt-1">
           <div class="input-group-prepend">

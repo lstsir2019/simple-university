@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <img class="col-md-2" src="assets/img/fstgWide.png">
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav ml-auto ">
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="appleoffre">AppleOffre</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="budget">Budget</a></li>
       <!--Drop down Commande -->
@@ -52,7 +52,22 @@
       </li>
       <!--Evaluation Personnel Finish-->
 
-     <!-- <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>-->
+      <!-- <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="etudiant-admin">Etudiants</a></li>-->
+
+      <!--Drop down Mandat -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdow" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Mandat</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdow">
+          <a class="dropdown-item" routerLink="personnelCreate">Personnel</a>
+          <a class="dropdown-item" routerLink="projetSousProjetCreate">Projet/SousProjet</a>
+          <a class="dropdown-item" routerLink="entiteAdministratifCreate">Entité administratif</a>
+          <a class="dropdown-item" routerLink="responsabiliteCreate">Responsabilité</a>
+          <a class="dropdown-item" routerLink="mandatCreate">Mandat</a>
+        </div>
+      </li>
+      <!--Mandat Finish-->
     </ul>
   </div>
 </nav>

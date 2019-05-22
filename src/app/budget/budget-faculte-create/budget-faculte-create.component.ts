@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BudgetService} from "../../controller/service/budget.service";
 import {getReact} from '../../controller/service/evolutions/Util/SwalReact';
 import swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-faculte-create',
@@ -21,10 +22,10 @@ export class BudgetFaculteCreateComponent implements OnInit {
   }
   public saveBudgetFaculte(){
     if(this.budgetFaculteCreate.annee==null || this.budgetFaculteCreate.detaillesBudgetVo.creditOuvertReel==null || this.budgetFaculteCreate.detaillesBudgetVo.creditOuvertEstimatif==null || this.budgetFaculteCreate.detaillesBudgetVo.engageNonPaye==null || this.budgetFaculteCreate.detaillesBudgetVo.engagePaye==null){
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     }else{
       this.budgetService.saveBudgetFaculte();
-      swal(this.SWAL.SUCCESS_CREATE);
+      Swal.fire(this.SWAL.SUCCESS_CREATE);
 
     }
 

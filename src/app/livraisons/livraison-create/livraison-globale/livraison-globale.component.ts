@@ -8,6 +8,7 @@ import {StockGlobal} from "../../../controller/model/stock-global.Model";
 import {getReact} from "../../../controller/service/evolutions/Util/SwalReact";
 import swal from "sweetalert2";
 import  * as $ from 'jquery';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-livraison-globale',
@@ -70,7 +71,7 @@ export class LivraisonGlobaleComponent implements OnInit {
   public addLivraisonItem() {
 
     if(parseFloat(this.livraisonService.livraisonItemCreate.qte)>parseFloat(this.cmdExp.qteNonLivre) || parseFloat(this.livraisonService.livraisonItemCreate.qte)>this.stotockGlobal.qte){
-      swal({ title: 'Erreur !',
+      Swal.fire({ title: 'Erreur !',
         text: "Il faut regler la qunatite",
         type: 'error',
         confirmButtonText: 'ok'})

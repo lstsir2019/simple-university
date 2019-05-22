@@ -36,7 +36,7 @@ export class CommandeService {
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
   private _paiementCreate: Paiement = new Paiement(0,0,'','');
-  private _fournisseurs: Array<Fournisseur>;
+  public fournisseurs: Array<Fournisseur>;
   public produits: Array<Produit>;
   private _categories: Array<CategoriProduit>;
   public commandeItems: Array<CommandeItem>;
@@ -75,15 +75,15 @@ export class CommandeService {
   public saveCommande() {
     this.http.post<number>(this._url, this.commandeCreate).subscribe({
       next: data => {
-        if (data == -2) {
-          Swal({
+        if (data <0) {
+          Swal.fire({
             title: 'cannot save !',
-            text: 'Référence déja utilisé',
+            text: 'Référence déja utilisé ou bien vide',
             type: 'error',
           });
         }
         if (data == 1) {
-          Swal({
+          Swal.fire({
             title: 'info !',
             text: 'Commande ajouter avec success',
             type: 'success',
@@ -94,7 +94,7 @@ export class CommandeService {
         this.commandeCreate = new Commande('', 0, '', '', '', '');
         this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
-        console.log('erreur');
+        console.log(error);
       }
     });
   }
@@ -117,21 +117,21 @@ export class CommandeService {
     this.http.post<number>(this._url4 + '/referenceCommande/' + this.commandeSelected.reference + '/montant/' + this.paiementCreate.montant, this.paiementCreate).subscribe({
       next: data => {
         if (data == -2) {
-          Swal({
+          Swal.fire({
             title: 'cannot payer !',
             text: 'mantant superieur aux rest',
             type: 'error',
           });
         }
         if (data == -3) {
-          Swal({
+          Swal.fire({
             title: 'cannot payer !',
             text: 'commande deja payer',
             type: 'error',
           });
         }
         if (data == 1) {
-          Swal({
+          Swal.fire({
             title: 'info !',
             text: 'payermantant ',
             type: 'success',
@@ -165,14 +165,14 @@ export class CommandeService {
     this.http.get<Array<CommandeItem>>(this._url + '/reference/' + reference + '/commande-items').subscribe(
       data => {
         if (data == null) {
-          Swal(this.SWAL.SEARCH_NOT_FOUND);
+          Swal.fire(this.SWAL.SEARCH_NOT_FOUND);
           this.commandeItemsReception = new Array<CommandeItem>();
         } else {
           this.commandeItemsReception = data;
         }
       }, error => {
         this.commandeItemsReception = new Array<CommandeItem>();
-        Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+        Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
         console.log('error whith loading commandes items' + error);
       }
     );
@@ -216,11 +216,11 @@ export class CommandeService {
   public affecter() {
     this.http.post<number>('http://localhost:8090/faculte-commande/commandes/commandeSource', this.commandeSourceCreate).subscribe(
       data => {
-        if (data==-1) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
-        if (data==-2) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
-        if (data==-3) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
-        if (data==-4) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
-        if (data==-5) {Swal(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-1) {Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-2) {Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-3) {Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-4) {Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR)}
+        if (data==-5) {Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR)}
         console.log(data);
 
         this.findCommandeItemsByCommandeReference();
@@ -247,7 +247,7 @@ export class CommandeService {
       this.http.delete('http://localhost:8090/faculte-commande/commandes/reference/' + this.commandeSelected.reference + '', {}).subscribe(
         data => {
           if (data == 1) {
-            Swal({
+            Swal.fire({
               title: 'info !',
               text: 'commande suprrimée',
               type: 'success',
@@ -283,21 +283,21 @@ export class CommandeService {
     this.http.post<number>('http://localhost:8090/faculte-commande/fournisseurs/', this.fournisseurCreate).subscribe({
       next: data => {
         if (data == -1) {
-          Swal({
+          Swal.fire({
             title: 'cannot save !',
             text: 'Référence déja utilisé',
             type: 'error',
           });
         }
         if (data == -2) {
-          Swal({
+          Swal.fire({
             title: 'cannot save !',
             text: 'Référence ne peut pas etre vide',
             type: 'error',
           });
         }
         if (data == 1) {
-          Swal({
+          Swal.fire({
             title: 'info !',
             text: 'fournisseur ajouter avec success',
             type: 'success',
@@ -334,7 +334,7 @@ export class CommandeService {
       data => {
         console.log(data);
         if (data == 1) {
-          Swal({
+          Swal.fire({
             title: 'info !',
             text: 'fournisseur modifier avec success',
             type: 'success',
@@ -413,7 +413,7 @@ export class CommandeService {
       this.http.delete('http://localhost:8090/faculte-commande/items/deletItem/id/' + this.commandeItemSelected.id, {}).subscribe(
         data => {
           if (data == 1) {
-            Swal({
+            Swal.fire({
               title: 'info !',
               text: 'item suprrimée',
               type: 'success',
@@ -435,14 +435,14 @@ export class CommandeService {
      this.http.put('http://localhost:8090/faculte-commande/items/update/id/'+this.commandeItemSelected.id+'/qte/'+this.commandeItemSelected.qte+'/prix/' + this.commandeItemSelected.prix,{}).subscribe(
        data=>{
          if (data == 1) {
-           Swal({
+           Swal.fire({
              title: 'info !',
              text: 'item modifie',
              type: 'success',
            });
            this.findAll();
            this.findCommandeItemByReference(this.commandeSelected);
-         }else Swal(this.SWAL.ERROR_UNKNOWN_ERROR);
+         }else Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
        },error1 => {
          console.log(error1);
        }
@@ -450,13 +450,25 @@ export class CommandeService {
 
   }
 
-  public offreToCommande(offre:Offre){
-    for(var item of offre.offreDetailsVo){
+  public offreToCommande(offre:Offre,offreDetailsVo:Array<OffreDetail>){
+    for(var item of offreDetailsVo){
       this.commandeCreate.total += item.prixUnitaire*item.quantite;
       let commandeItemClone = new CommandeItem(item.refProduit, item.quantite,item.prixUnitaire, this.commandeItemCreate.id, this.commandeItemCreate.qteAffecte);
       this.commandeCreate.commandeItemVos.push(commandeItemClone);
       this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
     }
+
+  }
+
+  public getFournisseurs(){
+
+      this.http.get<Array<Fournisseur>>(this._url1).subscribe(
+        data => {
+          this.fournisseurs = data;
+        }, error => {
+          console.log('error whith loading fournisseurs');
+        }
+      );
 
   }
 
@@ -527,23 +539,7 @@ export class CommandeService {
     this._url1 = value;
   }
 
-  get fournisseurs(): Array<Fournisseur> {
-    if (this._fournisseurs != null) {
-      this.http.get<Array<Fournisseur>>(this._url1).subscribe(
-        data => {
-          this._fournisseurs = data;
-        }, error => {
-          console.log('error whith loading fournisseurs');
-        }
-      );
-    }
-    return this._fournisseurs;
-  }
 
-
-  set fournisseurs(value: Array<Fournisseur>) {
-    this._fournisseurs = value;
-  }
 
 
   get categories(): Array<CategoriProduit> {

@@ -24,7 +24,7 @@ export class ElementService {
 
   public  saveElement() {
     if(this._elementCreate.reference==='' || this._elementCreate.libelle===''){
-      Swal({
+      Swal.fire({
         title: 'Erreur!',
         text: "Manque d'infos:Référence ou libellé",
         type: 'error',
@@ -34,7 +34,7 @@ export class ElementService {
       this.http.post(this._url, this._elementCreate).subscribe(
         (res) => {
           if (res == 1) {
-            Swal({
+            Swal.fire({
               title: 'Création élément',
               text: 'Création réussite',
               type: 'success',
@@ -43,13 +43,13 @@ export class ElementService {
             this._listelements.push(elementclone);
             this._elementCreate = new Element('', '', 0, 0);
           } else if (res == -1) {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: 'Élément déjà créer',
               type: 'error',
             });
           } else {
-            Swal({
+            Swal.fire({
               title: 'Erreur!',
               text: 'Le barem de 20 est dépassé',
               type: 'error',
@@ -62,7 +62,7 @@ export class ElementService {
   }
 
   public deleteElement(elementSupp:Element) {
-    Swal({
+    Swal.fire({
       title: 'Suppression',
       text: "Vous voulez vraiment supprimer cet élément",
       type: 'warning',
@@ -81,7 +81,7 @@ export class ElementService {
               if (index !== -1) {
                 this._listelements.splice(index, 1);
               }
-              Swal({
+              Swal.fire({
                 title: 'Suppression élément',
                 text: 'Suppression réussite',
                 type: 'success',
@@ -91,7 +91,7 @@ export class ElementService {
 
 
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Suppression échouée:Erreur Inconnue',
                 type: 'error',
@@ -112,7 +112,7 @@ export class ElementService {
 
   public editReference(elementEdit:Element,nvelement:Element){
 
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -131,7 +131,7 @@ export class ElementService {
               this.findAll();
               this._elementCreate1 = new Element('','',0,0);
               this.findByReference(nvelement);
-              Swal({
+              Swal.fire({
                 title: 'Modification élément',
                 text: 'Modification réussite',
                 type: 'success',
@@ -139,14 +139,14 @@ export class ElementService {
 
             }
             else if(res==-1 || res==-2) {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: "Manque d'informations: Référence ou libellé",
                 type: 'error',
               });
             }
             else if(res==-3) {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Élément deja existant',
                 type: 'error',
@@ -154,7 +154,7 @@ export class ElementService {
             }
 
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',
@@ -176,7 +176,7 @@ export class ElementService {
 
 
   public editBarem(elementEdit:Element,nvelement:Element){
-    Swal({
+    Swal.fire({
       title: 'Modification',
       text: "Vous êtes sûr de la modification",
       type: 'warning',
@@ -196,7 +196,7 @@ export class ElementService {
               this._elementCreate1 = new Element('','',0,0);
               this.findByReference(elementEdit);
 
-              Swal({
+              Swal.fire({
                 title: 'Modification élément',
                 text: 'Modification réussite',
                 type: 'success',
@@ -204,14 +204,14 @@ export class ElementService {
 
             }
             else if (res==-1) {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Le barem de 20 est dépassé',
                 type: 'error',
               });
             }
             else {
-              Swal({
+              Swal.fire({
                 title: 'Erreur!',
                 text: 'Modification échouée:Erreur Inconnue',
                 type: 'error',

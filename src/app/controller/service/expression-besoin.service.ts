@@ -52,14 +52,14 @@ export class ExpressionBesoinService {
       this.http.post<number>(this.url,this.expressionBesoinCreate).subscribe(
         date=>{
           if (date == -1){
-            Swal({
+            Swal.fire({
               title: 'cannot save !',
               text: 'Référence déja utilisé',
               type: 'error',
             });
           }
           if (date == 1) {
-            Swal({
+            Swal.fire({
               title: 'done !',
               text: 'Expression Besoin crée',
               type: 'success',
@@ -106,7 +106,7 @@ export class ExpressionBesoinService {
       this.http.put('http://localhost:8099/faculte-besoin/item/accorder',this.expressionBesoinItemUpdate).subscribe(
         data=>{
           if (data == -1) {
-            Swal({
+            Swal.fire({
               title: 'failed !',
               text: 'qte demandé non acceptable(Qté demandé doit tjr être superieure à qte accordé)',
               type: 'error',
@@ -114,7 +114,7 @@ export class ExpressionBesoinService {
           }
 
           if (data == -2) {
-            Swal({
+            Swal.fire({
               title: 'failed !',
               text: 'qte accordé non acceptable(Qté accordé doit tjr être superieure à qte commandé)',
               type: 'error',
@@ -122,7 +122,7 @@ export class ExpressionBesoinService {
           }
 
           if (data == 1) {
-            Swal({
+            Swal.fire({
               title: 'done !!',
               text: 'modification éffectué .. !',
               type: 'success',
@@ -145,7 +145,7 @@ export class ExpressionBesoinService {
       this.http.delete("http://localhost:8099/faculte-besoin/item/delete/"+this.expressionBesoinItemSelect.id+"",{}).subscribe(
         data=>{
           if (data == -2) {
-            Swal({
+            Swal.fire({
               title: 'failed !',
               text: 'déja commander',
               type: 'error',
@@ -153,7 +153,7 @@ export class ExpressionBesoinService {
           }
 
           if (data == 1) {
-            Swal({
+            Swal.fire({
               title: 'done !!',
               text: 'suppression réussite',
               type: 'success',

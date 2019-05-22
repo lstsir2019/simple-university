@@ -8,6 +8,7 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {getReact} from "./evolutions/Util/SwalReact";
 import swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -100,16 +101,16 @@ export class ProduitService {
   public modyfieProduit() {
 
     if (this._produitModified.libelle=="" ||this._produitModified.typeProduitVo.code==""||this._produitModified.categorieProduitVo.libelle=="" ) {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     }
     this._http.put<number>(this._url5 + "/update/", this.produitModified).subscribe(
       data => {
 
         if (data==-1){
-          swal(this.SWAL.SEARCH_NOT_FOUND);
+          Swal.fire(this.SWAL.SEARCH_NOT_FOUND);
 
         } else{
-          swal(this.SWAL.SUCCESS_EDIT);
+          Swal.fire(this.SWAL.SUCCESS_EDIT);
         }
         console.log(this.produitModified);
         this.produitsFindAll();
@@ -124,16 +125,16 @@ export class ProduitService {
   public saveProduit() {
     console.log(this._produitCreate);
     if (this._produitCreate.reference=="" || this._produitCreate.libelle=="" || this._produitCreate.typeProduitVo.code=="" || this._produitCreate.categorieProduitVo.libelle=="") {
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     }else {
       this._http.post<number>(this._url5, this._produitCreate).subscribe(
         data => {
 
           if (data == -1) {
-            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+            Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
           } else {
             this._produitCreate = new Produit("", "");
-            swal(this.SWAL.SUCCESS_CREATE);
+            Swal.fire(this.SWAL.SUCCESS_CREATE);
             this.produitsFindAll();
             console.log("Ajoute avec success");
           }
@@ -193,14 +194,14 @@ export class ProduitService {
 
   public saveCategorie() {
     if (this._categorieCreate.libelle=="" || this._categorieCreate.referenceCompteBuditaire==""){
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       this._http.post<number>(this._url, this._categorieCreate).subscribe(
         data => {
           if (data==-1){
-            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS)
+            Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS)
           } else {
-            swal(this.SWAL.SUCCESS_CREATE);
+            Swal.fire(this.SWAL.SUCCESS_CREATE);
           }
 
           this._categorieCreate = new CategoriProduit("", "");
@@ -217,16 +218,16 @@ export class ProduitService {
 
   public saveType() {
     if (this._typeCreate.libelle=="" || this._typeCreate.code=="" ){
-      swal(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
 
 
       this._http.post<number>(this._url2, this._typeCreate).subscribe(
         data => {
           if (data==-1){
-            swal(this.SWAL.ERROR_REF_ALREADY_EXISTS);
+            Swal.fire(this.SWAL.ERROR_REF_ALREADY_EXISTS);
           } else{
-            swal(this.SWAL.SUCCESS_CREATE);
+            Swal.fire(this.SWAL.SUCCESS_CREATE);
           }
           this._typeCreate = new TypeProduit("", "");
           console.log("Ajoute avec success");

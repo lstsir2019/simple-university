@@ -3,6 +3,8 @@ import {OffreService} from '../../../controller/service/offre.service';
 import {Offre} from '../../../controller/model/offre.model';
 import {AppelOffreListeComponent} from '../../appel-offres/appel-offre-liste/appel-offre-liste.component';
 import {AppelOffreService} from '../../../controller/service/appel-offre.service';
+import {CommandeService} from '../../../controller/service/commandes/commande.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-offres-list',
@@ -14,7 +16,7 @@ export class OffresListComponent implements OnInit {
   appelOffreReference: string = '';
   offreSelected: Offre = new Offre();
 
-  constructor(private offreService: OffreService, public appelOffreService: AppelOffreService) {
+  constructor(private commandeService: CommandeService, private router: Router, private offreService: OffreService, public appelOffreService: AppelOffreService) {
 
   }
 
@@ -46,8 +48,22 @@ export class OffresListComponent implements OnInit {
     this.offreService.removeOffre(a);
   }
 
-  chekBestOffre(a : Offre) {
+  get bestOffre() {
+    return this.appelOffreService.offreSelected;
+  }
+
+  chekBestOffre(a: Offre) {
     this.appelOffreService.chekBestOffre(a);
+    this.appelOffreService.findOffreSelectedByRefernceAppelOffre(a.reference);
+
+
+  }
+
+  changeOffreToCommande(a) {
+    this.offreService.offreDetailByOffreReference(a.reference);
+    this.commandeService.offreToCommande(a,this.offreService.offreDetailsSearch);
+    this.router.navigate(['/commandeCreate']);
+
 
   }
 }

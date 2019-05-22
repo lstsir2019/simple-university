@@ -11,6 +11,7 @@ export class CommandeCreateComponent implements OnInit {
   constructor(private commandeService: CommandeService) { }
 
   ngOnInit() {
+    this.commandeService.getFournisseurs();
   }
 
   public get commande() {

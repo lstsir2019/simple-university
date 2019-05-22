@@ -44,6 +44,7 @@
           <th>Commande</th>
           <th>Date Reception</th>
           <th>Action</th>
+
         </tr>
         </thead>
         <tbody>
@@ -55,6 +56,7 @@
             <button (click)="findReceptionItemsByReceptionReference(r)" data-toggle="modal" data-target="#exampleModal"
                     class="btn-info btn-sm fa fa-plus"></button>
             <button (click)="deleteReception(r)" class="btn-danger btn-sm fa fa-trash-o"></button>
+            <button (click)="imprimer(r)" class="btn-info btn-sm fa fa-print"></button>
           </td>
         </tr>
         </tbody>

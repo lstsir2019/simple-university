@@ -11,13 +11,14 @@ import {AppRoutingModule} from '../../app-routing.module';
 export class AppelOffreService {
 
   private _url = 'http://localhost:8091/AppelOffre/AppelOffres/';
+  private _offreSelected: Offre = new Offre();
   private _appelOffreCreate: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
   private _appelOffreDetailCreate: AppelOffreDetail = new AppelOffreDetail('', 0, 0, 0);
   private _appelOffres: Array<AppelOffre>;
   private _appelOffreSelected: AppelOffre;
   public allAppelOffres: Array<AppelOffre> = new Array<AppelOffre>();
   public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<AppelOffreDetail>();
-  private _appelOffreSearch : AppelOffre = new AppelOffre("",0,0,0,0);
+  private _appelOffreSearch: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
 
   constructor(private http: HttpClient) {
   }
@@ -39,6 +40,7 @@ export class AppelOffreService {
         console.log('ok');
         this.appelOffreCreate = new AppelOffre('', 0, 0, 0, 0);
         this.appelOffreDetailCreate = new AppelOffreDetail('', 0, 0, 0);
+        this.findAll();
       }, error => {
         console.log(error);
       });
@@ -68,7 +70,6 @@ export class AppelOffreService {
       );
     }
   }
-
 
 
   get appelOffres(): Array<AppelOffre> {
@@ -108,8 +109,9 @@ export class AppelOffreService {
 
     }
   }
+
   public findAppelOffreByCriteria() {
-    this.http.post<Array<AppelOffre>>(this._url + 'criteria',this.appelOffreSearch).subscribe(
+    this.http.post<Array<AppelOffre>>(this._url + 'criteria', this.appelOffreSearch).subscribe(
       data => {
         this._appelOffres = data;
       }, error => {
@@ -117,6 +119,7 @@ export class AppelOffreService {
       }
     );
   }
+
   public findAppelOffreByRefernce(ref: string) {
     this.http.get<Array<AppelOffreDetail>>(this._url + 'appelOffre/reference/' + ref).subscribe(
       data => {
@@ -140,8 +143,8 @@ export class AppelOffreService {
 
   removeAppelOffre(a: AppelOffre) {
     let number = this._appelOffres.indexOf(a);
-    this._appelOffres.splice(number,1);
-    this.http.delete(this.url + 'reference/' + a.reference, ).subscribe(
+    this._appelOffres.splice(number, 1);
+    this.http.delete(this.url + 'reference/' + a.reference,).subscribe(
       data => {
         console.log('ok');
       }, error => {
@@ -152,6 +155,17 @@ export class AppelOffreService {
   }
 
 
+  public findOffreSelectedByRefernceAppelOffre(ref: string) {
+    this.http.get<Offre>(this._url + '/refrence/' + ref + '/selected').subscribe(
+      data => {
+        this._offreSelected = data;
+        console.log(data);
+      }, error => {
+        console.log('erroooor while loading AppelOffre details....');
+      }
+    );
+  }
+
   get appelOffreSearch(): AppelOffre {
     return this._appelOffreSearch;
   }
@@ -160,4 +174,12 @@ export class AppelOffreService {
     this._appelOffreSearch = value;
   }
 
+
+  get offreSelected(): Offre {
+    return this._offreSelected;
+  }
+
+  set offreSelected(value: Offre) {
+    this._offreSelected = value;
+  }
 }

@@ -99,7 +99,7 @@ export class EvolutionPersonnelListComponent implements OnInit {
     doc.text("Date d'evolution : " + data.dateEvolution, 10, 180);
 
 
-    Swal({
+    Swal.fire({
       title: 'Le type du fichier',
       input: 'select',
       inputOptions: {
@@ -112,7 +112,7 @@ export class EvolutionPersonnelListComponent implements OnInit {
       inputValidator: function (value) {
         return new Promise(function (resolve) {
           if (value === 'DOCX') {
-            Swal({
+            Swal.fire({
               title: 'Telechargement en cours ...!',
               timer: 1000,
               onBeforeOpen: () => {
@@ -124,11 +124,11 @@ export class EvolutionPersonnelListComponent implements OnInit {
             });
 
           } else if (value === 'TXT') {
-            Swal({
+            Swal.fire({
               title: 'Telechargement en cours ...!',
               timer: 1000,
               onBeforeOpen: () => {
-                Swal.showLoading()
+                Swal.showLoading();
               }
             }).then(() => {
               resolve();
@@ -136,11 +136,11 @@ export class EvolutionPersonnelListComponent implements OnInit {
             });
 
           } else {
-            Swal({
+            Swal.fire({
               title: 'Telechargement en cours ...!',
               timer: 1000,
               onBeforeOpen: () => {
-                Swal.showLoading()
+               Swal.showLoading()
               }
             }).then((result) => {
               resolve();
