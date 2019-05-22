@@ -73,16 +73,17 @@ export class EntiteAdministratifService {
   }
 
   get listEntiteAdministratifs(): Array<EntiteAdministratif> {
-    if (this._listEntiteAdministratifs == null) {
-      this.http.get<Array<EntiteAdministratif>>(this.url).subscribe(
-        data => {
-          this._listEntiteAdministratifs = data;
-        }, error => {
-          console.log('error---->');
-        }
-      );
-    }
     return this._listEntiteAdministratifs;
+  }
+
+  findEntiteAdmin(){
+    this.http.get<Array<EntiteAdministratif>>(this.url).subscribe(
+      data => {
+        this._listEntiteAdministratifs = data;
+      }, error => {
+        console.log('error---->');
+      }
+    );
   }
 
   set listEntiteAdministratifs(value: EntiteAdministratif[]) {

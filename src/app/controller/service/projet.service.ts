@@ -96,17 +96,18 @@ export class ProjetService {
   }
 
   get projets(): Array<Projet> {
-    if (this._projets == null) {
-      this.http.get<Array<Projet>>( this.url2).subscribe(
-        data => {
-          this._projets = data;
-        }, errorrr => {
-          console.log('error**');
-        }
-      );
-    }
     return this._projets;
   }
+  findProjet(){
+    this.http.get<Array<Projet>>( this.url2).subscribe(
+      data => {
+        this._projets = data;
+      }, errorrr => {
+        console.log('error**');
+      }
+    );
+  }
+
 
   set projets(value: Array<Projet>) {
     this._projets = value;

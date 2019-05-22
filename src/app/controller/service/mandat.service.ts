@@ -10,11 +10,11 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class MandatService {
-  public url = 'http://localhost:9999/mandat/mandat/';
+  public url = 'http://localhost:9999/mandat/mandats/';
   public url1 = 'http://localhost:9999/personnel/personnels/personnelAll/';
   public url2 = 'http://localhost:9999/responsabilite/responsabilites/responsabiliteAll/';
   public url3 = 'http://localhost:9999/entiteAdministratif/entiteAdministratifs/entiteAdministratifAll/';
-  public url4 = 'http://localhost:9999/mandat/mandat/mandatAll/';
+  public url4 = 'http://localhost:9999/mandat/mandats/mandatAll/';
 
   public mandatCreate: Mandat = new Mandat('', '');
   private _mandat: Mandat = new Mandat('', '');
@@ -83,7 +83,7 @@ export class MandatService {
   }
 
   findMandats() {
-    this.http.get<Array<Mandat>>(this.url).subscribe(
+    this.http.get<Array<Mandat>>(this.url4).subscribe(
       data => {
         this._listMandats = data;
       }, error => {
