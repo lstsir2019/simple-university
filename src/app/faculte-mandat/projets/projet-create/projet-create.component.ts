@@ -13,6 +13,7 @@ export class ProjetCreateComponent implements OnInit {
   constructor(private projetService: ProjetService) { }
 
   ngOnInit() {
+    this.projetService.findProjet();
   }
 
   public get projet() {
