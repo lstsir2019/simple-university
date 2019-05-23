@@ -61,7 +61,7 @@ export class OffresListComponent implements OnInit {
 
   changeOffreToCommande(a) {
     this.offreService.offreDetailByOffreReference(a.reference);
-    this.commandeService.offreToCommande(a);
+    this.commandeService.offreToCommande(a,this.offreService.offreDetailsSearch);
     this.router.navigate(['/commandeCreate']);
 
 
