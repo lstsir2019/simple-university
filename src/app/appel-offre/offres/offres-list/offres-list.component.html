@@ -24,7 +24,7 @@
           <input  [checked]="a.reference==bestOffre.reference"  (click)="chekBestOffre(a)" name="check"
                  type="radio" class="btn-outline-success">
 
-          <button  [disabled]="a.reference!=bestOffre.reference" (click)="changeOffreToCommande(a)"
+          <button  [hidden]="a.reference!=bestOffre.reference" (click)="changeOffreToCommande(a)"
                   class="btn btn-sm btn-outline-success"
                    data-dismiss="modal"><i class="fa fa-send">commande</i></button>
 

@@ -101,7 +101,7 @@ import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/respons
 import {CreateResponsabiliteComponent} from './faculte-mandat/responsabilites/create-responsabilite/create-responsabilite.component';
 import {ListResponsabiliteComponent} from './faculte-mandat/responsabilites/list-responsabilite/list-responsabilite.component';
 import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
-import {ListEntiteAdministartifComponent} from './controller/model/list-entite-administartif.component';
+import {ListEntiteAdministartifComponent} from './faculte-mandat/entite-administratifs/list-entite-administartif/list-entite-administartif.component';
 import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
 import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
 import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';

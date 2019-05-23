@@ -49,9 +49,15 @@ export class AppelOffreListeComponent implements OnInit {
 
 
   }
+  printAppelOffre(a:AppelOffre) {
+    this.appelOffreService.printAppelOffre(a.reference);
+
+
+  }
+
 
   changeOffreToCommande(a) {
-   //this.commandeService.offreToCommande(a.offreSelectedVo);
+   this.commandeService.offreToCommande(a.offreSelectedVo);
     this.router.navigate(["/commandeCreate"]);
   }
 }

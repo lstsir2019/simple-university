@@ -17,8 +17,7 @@ export class CreateEntiteAdministratifComponent implements OnInit {
     this.entiteAdministratifService.findAll();
     this.entiteAdministratifService.findallSousProjets();
     this.entiteAdministratifService.findallTypeEntite();
-
-
+    this.entiteAdministratifService.findEntiteAdmin();
   }
 
   public get entiteAdministratif(){

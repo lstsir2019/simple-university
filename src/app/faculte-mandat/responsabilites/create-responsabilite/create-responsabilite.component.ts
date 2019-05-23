@@ -12,6 +12,7 @@ export class CreateResponsabiliteComponent implements OnInit {
 
   ngOnInit() {
     this.responsabiliteService.findAll();
+    this.responsabiliteService.findResponsabilite();
   }
 
   public get responsabilite(){

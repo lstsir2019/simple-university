@@ -59,7 +59,10 @@ export class ResponsabiliteService {
   }
 
   get listResponsabilites(): Array<Responsabilite> {
-    if (this._listResponsabilites == null) {
+    return this._listResponsabilites;
+  }
+
+  findResponsabilite(){
       this.http.get<Array<Responsabilite>>(this.url).subscribe(
         data => {
           this._listResponsabilites = data;
@@ -68,8 +71,7 @@ export class ResponsabiliteService {
         }
       );
     }
-    return this._listResponsabilites;
-  }
+
 
 
   public deleteResponsabilte(responsabilite: Responsabilite) {

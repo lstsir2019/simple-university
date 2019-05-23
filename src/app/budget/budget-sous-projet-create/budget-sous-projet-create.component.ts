@@ -17,6 +17,7 @@ export class BudgetSousProjetCreateComponent implements OnInit {
   private SWAL = getReact('BudgetSousProjet', true);
 
   ngOnInit() {
+    this.budgetService.findSousProjetByProjet();
   }
 
   public mode: number = 0;
@@ -43,6 +44,11 @@ export class BudgetSousProjetCreateComponent implements OnInit {
     } else if (this.mode == 1) {
       this.mode = 0;
     }
+  }
+
+  public get allSousProjet(){
+
+    return this.budgetService.sousProjetsByProjet;
   }
 
 }

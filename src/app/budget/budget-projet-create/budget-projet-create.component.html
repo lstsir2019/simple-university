@@ -5,7 +5,10 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="refp">Référence Projet</label>
       </div>
-      <input type="text" class="form-control" id="refp" [(ngModel)]="budgetProjetCreate.referenceProjet">
+      <select  class="form-control" [(ngModel)]="budgetProjetCreate.referenceProjet"  id="refp" >
+        <option>---------SELECT---------</option>
+        <option *ngFor="let bp of allProjet" [value]="bp">{{bp.libelleP}}</option>
+      </select>
     </div>
 
     <div class="input-group input-group mb-3">
