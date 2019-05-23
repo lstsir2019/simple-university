@@ -71,6 +71,15 @@ export class AppelOffreService {
     }
   }
 
+  public printAppelOffre(reference:string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get(this._url+"pdf/reference/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
 
   get appelOffres(): Array<AppelOffre> {
     return this._appelOffres;
