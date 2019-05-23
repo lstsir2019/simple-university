@@ -18,14 +18,14 @@ export class BudgetProjetComponent implements OnInit {
   budgetFaculeteSelected:BudgetFaculteVo;
 
   ngOnInit() {
-    this.budgetService.findByAnneeMinAndMax();
+    this.budgetService.findAllBudgetFaculte();
   }
 
   public get budgetFaculte(){
     return this.budgetService.budgetFacultePrincipal;
   }
-  public get budgetFaculteList(){
-    return this.budgetService.budgetFaculteList;
+  public get budgetFaculteAll(){
+    return this.budgetService.allBudgetFaculte;
   }
 
 

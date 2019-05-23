@@ -57,7 +57,7 @@ export class AppelOffreListeComponent implements OnInit {
 
 
   changeOffreToCommande(a) {
-   //this.commandeService.offreToCommande(a.offreSelectedVo);
+   this.commandeService.offreToCommande(a.offreSelectedVo);
     this.router.navigate(["/commandeCreate"]);
   }
 }

@@ -36,7 +36,8 @@
           </div>
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button   class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalFaculte"><i class="fa fa-plus">Nouveau Budget</i></button>
+              <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModalFaculte"><i
+                class="fa fa-plus">Nouveau Budget</i></button>
             </div>
           </div>
         </div>
@@ -68,10 +69,11 @@
               <td>{{bf.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{bf.detaillesBudgetVo.creditOuvertReel}}</td>
               <td>
-                <button  class="btn btn-outline-danger fa fa-trash-o"
-                        type="button"></button>
+                <button class="btn btn-outline-danger fa fa-trash-o" type="button"
+                        (click)="deleteBudgetFaculte(bf)"></button>
 
-                <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bf)" data-toggle="modal" data-target="#detailFaculte"></button>
+                <button class="btn btn-outline-primary fa fa-info ml-2" (click)="detail(bf)" data-toggle="modal"
+                        data-target="#detailFaculte"></button>
               </td>
             </tr>
             </tbody>
@@ -96,7 +98,7 @@
       <!-- Modal body -->
       <div class="modal-body">
 
-      <app-budget-faculte-create></app-budget-faculte-create>
+        <app-budget-faculte-create></app-budget-faculte-create>
 
       </div>
 

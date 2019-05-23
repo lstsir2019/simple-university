@@ -15,7 +15,7 @@
               </div>
               <select  class="form-control" [(ngModel)]="budgetFaculeteSelected" (change)="findBudgetProjet()">
                 <option>---------SELECT---------</option>
-                <option *ngFor="let bf of budgetFaculteList" [ngValue]="bf">{{bf.annee}}</option>
+                <option *ngFor="let bf of budgetFaculteAll" [ngValue]="bf">{{bf.annee}}</option>
               </select>
             </div>
           </div>

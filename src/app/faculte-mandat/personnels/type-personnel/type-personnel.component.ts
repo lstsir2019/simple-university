@@ -14,6 +14,7 @@ export class TypePersonnelComponent implements OnInit {
 
   ngOnInit() {
     this.personnelService.findAll();
+    this.personnelService.findPersonels();
   }
   public get personnels(){
     return this.personnelService.listPersonnels;
