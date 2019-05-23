@@ -13,23 +13,9 @@
         </div>
 
         <div class="col">
-          <label>Libelle</label>
-
-          <input class="form-control" type="text" [(ngModel)]="fournisseur.libelle" required="">
-
-        </div>
-
-        <div class="col">
-          <label>Raison socilal</label>
-
-          <input class="form-control" type="text" [(ngModel)]="fournisseur.raisonSocial" required="">
-
-        </div>
-
-        <div class="col">
           <label>Mobile</label>
 
-          <input class="form-control" type="text" [(ngModel)]="fournisseur.mobile" required="">
+          <input class="form-control" type="text" [(ngModel)]="fournisseur.numero" required="">
 
         </div>
 
@@ -74,12 +60,11 @@
         <div class="card spacer">
           <div class="card-header text-black  ">ancient information</div>
           <table class="table table-hover  ">
-            <thead class="thead"><th>Reference</th><th>Libelle</th><th>Mobile</th><th>Email</th></thead>
+            <thead class="thead"><th>Reference</th><th>Mobile</th><th>Email</th></thead>
             <tbody class="tbody">
             <tr>
               <td>{{fournisseurtrouver.reference}}</td>
-              <td>{{fournisseurtrouver.libelle}}</td>
-              <td>{{fournisseurtrouver.mobile}}</td>
+              <td>{{fournisseurtrouver.numero}}</td>
               <td>{{fournisseurtrouver.email}}</td>
             </tr>
             </tbody>
@@ -97,17 +82,9 @@
             <tr>
               <div class="input-group mb-2 col">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" >libelle</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.libelle">
-              </div>
-            </tr>
-            <tr>
-              <div class="input-group mb-2 col">
-                <div class="input-group-prepend">
                   <span class="input-group-text" >Mobile</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.mobile">
+                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.numero">
               </div>
             </tr>
             <tr>
@@ -115,7 +92,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" >Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="fournisseurSerched.email">
+                <input type="email" class="form-control" [(ngModel)]="fournisseurSerched.email">
               </div>
             </tr>
             <tr>
