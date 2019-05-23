@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ReceptionService} from "../../controller/service/reception.service";
-import {MagasinService} from "../../controller/service/magasin.service";
-import {CommandeService} from "../../controller/service/commandes/commande.service";
+import {ReceptionService} from '../../controller/service/reception.service';
+import {MagasinService} from '../../controller/service/magasin.service';
+import {CommandeService} from '../../controller/service/commandes/commande.service';
 
 @Component({
   selector: 'app-reception-create',
@@ -14,25 +14,30 @@ export class ReceptionCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.magasinService.findAll();
   }
 
-  public saveReception(){
+  public saveReception() {
     this.receptionservice.saveReception();
   }
-  public addReceptionItem(){
+
+  public addReceptionItem() {
     this.receptionservice.addReceptionItem();
   }
-  public get reception(){
+
+  public get reception() {
     return this.receptionservice.receptionCreate;
   }
-  public get receptionItem(){
+
+  public get receptionItem() {
     return this.receptionservice.receptionItemCreate;
   }
-  public get receptionItems(){
+
+  public get receptionItems() {
     return this.receptionservice.receptionCreate.receptionItems;
   }
-  public get magasins(){
+
+  public get magasins() {
     return this.magasinService.magasins;
   }
 

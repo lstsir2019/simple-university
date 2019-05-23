@@ -20,7 +20,8 @@ export class BudgetService {
   }
 
   //---------------------- Les urls----------------------------------
-  public url_mandat = 'http://localhost:8090/mandat/mandat/';
+  public url_mandat = 'http://localhost:9999/';
+
 
   public _host = 'http://localhost:8099/budget-api/';
 
@@ -212,7 +213,7 @@ export class BudgetService {
   }
 
   public findAllProjet() {
-    this.http.get<Array<Projet>>(this.url_mandat + '').subscribe(
+    this.http.get<Array<Projet>>(this.url_mandat + 'projet/projets/projetAll/').subscribe(
       data => {
         if (data != null) {
           this.AllProjet = data;
