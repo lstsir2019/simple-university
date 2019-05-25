@@ -40,7 +40,7 @@ export class BudgetSousProjetComponent implements OnInit {
 
   public findBudgetSousProjet() {
     this.budgetService.findBudgetSousProjet(this.budgetPtogetSelected);
-
+    this.budgetService.findSousProjetByProjet();
 
   }
 
