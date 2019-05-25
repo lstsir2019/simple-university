@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 import {BudgetService} from '../../controller/service/budget.service';
 import * as jsPDF from 'jspdf';
-import {BudgetProjetVo} from "../../controller/model/budget/budget-projet.model";
+import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
 
 @Component({
   selector: 'app-budget-sous-projet',
@@ -18,33 +18,33 @@ export class BudgetSousProjetComponent implements OnInit {
   ngOnInit() {
 
   }
-  budgetPtogetSelected:BudgetProjetVo;
 
-  public get budgetProjet(){
+  budgetPtogetSelected: BudgetProjetVo;
+
+  public get budgetProjet() {
     return this.budgetService.budgetProjetPrincipal;
   }
 
- public get budgetSousProjet(){
+  public get budgetSousProjet() {
     return this.budgetService.budgetProjetPrincipal.budgetSousProjetVos;
-   this.budgetService.sousProjetsByProjet;
- }
+  }
 
 
-
- public detail(bsp: BudgetSousProjetVo){
+  public detail(bsp: BudgetSousProjetVo) {
     this.budgetService.detaillBudgetSousProjet(bsp);
- }
+  }
 
- public remove(bsp: BudgetSousProjetVo){
+  public remove(bsp: BudgetSousProjetVo) {
     this.budgetService.removeBudgetSousProjet(bsp);
- }
-  public findBudgetSousProjet(){
+  }
+
+  public findBudgetSousProjet() {
     this.budgetService.findBudgetSousProjet(this.budgetPtogetSelected);
 
 
   }
 
-  public get budgetProjetList(){
+  public get budgetProjetList() {
     return this.budgetService.budgetFacultePrincipal.budgetProjetVos;
   }
 

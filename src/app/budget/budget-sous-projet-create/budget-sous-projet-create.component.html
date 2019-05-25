@@ -5,9 +5,9 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="reference">Référence</label>
       </div>
-      <select  class="form-control" [(ngModel)]="budgetProjetCreate.referenceProjet" id="reference" >
+      <select  class="form-control" [(ngModel)]="budgetSousProjetCreate.referenceSousProjet" id="reference" >
         <option>---------SELECT---------</option>
-        <option *ngFor="let bsp of allSousProjet" [value]="bsp">{{bsp.referenceSousProjet}}</option>
+        <option *ngFor="let sp of allSousProjet" [value]="sp.referenceSousProjet">{{bsp.referenceSousProjet}}</option>
       </select>
 
     </div>
