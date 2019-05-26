@@ -37,7 +37,7 @@
               <div class="input-group-text">Produit</div>
             </div>
             <select id="referenceProduit" [(ngModel)]="receptionItem.referenceProduit" class="form-control">
-              <option *ngFor="let c of commandeItems" value="{{c.referenceProduit}}">{{c.referenceProduit}}</option>
+              <option *ngFor="let c of commandeItems" value="{{c.referenceProduit}}">{{c.referenceProduit}} / {{c.qte-c.qteReception}}</option>
             </select>
           </div>
         </div>
@@ -47,7 +47,7 @@
               <div class="input-group-text">Magasin</div>
             </div>
             <select id="referenceMagasin" [(ngModel)]="receptionItem.referenceMagasin" class="form-control">
-              <option *ngFor="let m of magasins">{{m.reference}}</option>
+              <option *ngFor="let m of magasins" value="{{m.reference}}">{{m.reference}}</option>
             </select>
           </div>
         </div>

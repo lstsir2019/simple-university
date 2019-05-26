@@ -228,7 +228,11 @@ export class BudgetService {
 
   public findSousProjetByProjet() {
     let p = this.AllProjet.find(a => a.libelleP == this.budgetProjetPrincipal.referenceProjet);
-    this.sousProjetsByProjet = p.sousProjetsVo;
+    if(p==null){
+      this.sousProjetsByProjet = new Array<SousProjet>();
+    }else{
+      this.sousProjetsByProjet = p.sousProjetsVo;
+    }
   }
 
 
@@ -372,34 +376,53 @@ export class BudgetService {
   public calculedetailleBudgetFaculte(bf: BudgetFaculteVo, BudgetProjetVos: Array<BudgetProjetVo>) {
     let reliquatEstimatif = 0;
     let reliquatReel = 0;
+    let engageNonPaye = 0;
+    let engagePaye = 0;
     BudgetProjetVos.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
+      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bf.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bf.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
+    bf.detaillesBudgetVo.engagePaye = engagePaye.toString();
+    bf.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
+
   }
 
   public calculedetailleBudgetProjet(bp: BudgetProjetVo, budgetSousProjetVos: Array<BudgetSousProjetVo>) {
     let reliquatEstimatif = 0;
     let reliquatReel = 0;
+    let engageNonPaye = 0;
+    let engagePaye = 0;
     budgetSousProjetVos.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
+      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
+    bp.detaillesBudgetVo.engagePaye = engagePaye.toString();
+    bp.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
   }
 
   public calculedetailleBudgetSousProjet(bsp: BudgetSousProjetVo, budgetCompteBudgitaireVo: Array<BudgetCompteBudgitaireVo>) {
     let reliquatEstimatif = 0;
     let reliquatReel = 0;
+    let engageNonPaye = 0;
+    let engagePaye = 0;
     budgetCompteBudgitaireVo.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
+      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bsp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bsp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
+    bsp.detaillesBudgetVo.engagePaye = engagePaye.toString();
+    bsp.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
   }
 
 

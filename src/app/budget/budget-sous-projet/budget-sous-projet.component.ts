@@ -19,6 +19,10 @@ export class BudgetSousProjetComponent implements OnInit {
 
   }
 
+  public get budgetFaculteVo(){
+    return this.budgetService.budgetFacultePrincipal;
+  }
+
   budgetPtogetSelected: BudgetProjetVo;
 
   public get budgetProjet() {

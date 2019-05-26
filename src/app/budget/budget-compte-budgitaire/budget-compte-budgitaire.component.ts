@@ -20,6 +20,13 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
 
   budgetSousProjetSelected:BudgetSousProjetVo;
 
+  public get budgetFaculteVo(){
+    return this.budgetService.budgetFacultePrincipal;
+  }
+  public get budgetProjetVo(){
+    return this.budgetService.budgetProjetPrincipal;
+  }
+
   public get budgetSousProjet(){
     return this.budgetService.budgetSousProjetPrincipal;
   }
