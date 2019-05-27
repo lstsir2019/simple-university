@@ -12,37 +12,39 @@ import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.mode
 export class BudgetProjetComponent implements OnInit {
 
 
-
   constructor(private budgetService: BudgetService) {
   }
-  budgetFaculeteSelected:BudgetFaculteVo;
+
+  budgetFaculeteSelected: BudgetFaculteVo;
 
   ngOnInit() {
     this.budgetService.findAllBudgetFaculte();
   }
 
-  public get budgetFaculte(){
+  public get budgetFaculte() {
     return this.budgetService.budgetFacultePrincipal;
   }
-  public get budgetFaculteAll(){
+
+  public get budgetFaculteAll() {
     return this.budgetService.allBudgetFaculte;
   }
 
 
-  public get budgetProjetList(){
+  public get budgetProjetList() {
     return this.budgetService.budgetFacultePrincipal.budgetProjetVos;
   }
 
 
-
-  public detail(bp:BudgetProjetVo){
+  public detail(bp: BudgetProjetVo) {
     this.budgetService.detaillBudgetProjet(bp);
   }
-  public remove(bp:BudgetProjetVo){
+
+  public remove(bp: BudgetProjetVo) {
     this.budgetService.removeBudgetProjet(bp);
   }
-  public findBudgetProjet(){
-      console.log("haaaaaaaaaaaaaaaaaaaaaaaaaaaaa  "+this.budgetFaculeteSelected);
+
+  public findBudgetProjet() {
+    console.log('haaaaaaaaaaaaaaaaaaaaaaaaaaaaa  ' + this.budgetFaculeteSelected);
     this.budgetService.findBudgetProjet(this.budgetFaculeteSelected);
 
   }
