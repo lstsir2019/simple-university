@@ -65,6 +65,8 @@ export class ProjetCreateComponent implements OnInit {
   public deleteSousProjet(sp){
     this.projetService.deleteSousProjet(sp);
   }
-
+  public printProjet(libelleP:string){
+    return this.projetService.printProjet(libelleP);
+  }
 
 }

@@ -35,4 +35,17 @@ export class TypePersonnelComponent implements OnInit {
 public  get personnelSelected() {
     return this.personnelService.pSelected;
   }
+  public get listTypePersonnels(){
+    return this.personnelService.listTypePersonnels;
+  }
+  public get personnel(){
+    return this.personnelService.personnelCreate;
+  }
+  public get listPersonnels(){
+    return this.personnelService.listPersonnels;
+  }
+
+  public printPersonnel(cin:string){
+    return this.personnelService.printPersonnel(cin);
+  }
 }

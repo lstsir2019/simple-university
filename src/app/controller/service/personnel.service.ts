@@ -183,6 +183,16 @@ export class PersonnelService {
     );
   }
 
+  public printPersonnel(cin :string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:9999/personnel/personnels/personnel/"+cin +"/pdf",httpOptions).subscribe((resultBlob: Blob) => {
+      console.log("http://localhost:9999/personnel/personnels/personnel/"+cin +"/pdf");
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
 
 }
 
