@@ -26,6 +26,7 @@ export class TypePersonnelComponent implements OnInit {
 
   public findByCin(personnel: Personnel){
     this.personnelService.findByCin(personnel);
+
   }
 
   public saveUpdatePersonnel() {
