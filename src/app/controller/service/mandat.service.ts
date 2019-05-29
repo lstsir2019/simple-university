@@ -17,7 +17,7 @@ export class MandatService {
   public url4 = 'http://localhost:9999/mandat/mandats/mandatAll/';
 
   public mandatCreate: Mandat = new Mandat('', '');
-  private _mandat: Mandat = new Mandat('', '');
+  public _mandat: Mandat = new Mandat('', '');
   public responsabiliteCreate: Responsabilite = new Responsabilite('');
   public entiteAdministratifCreate: EntiteAdministratif = new EntiteAdministratif('');
   public personnelCreate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -26,8 +26,11 @@ export class MandatService {
   public _listPersonnels: Array<Personnel>;
   public _listResponsabilites: Array<Responsabilite>;
   public _listEntites: Array<EntiteAdministratif>;
-  private _listMandats = Array<Mandat>();
-  private _mandatSelected: Mandat;
+  public _listMandats = Array<Mandat>();
+  public listM = Array<Mandat>();
+  public _mandatSelected: Mandat;
+  public mandatSearch : Mandat = new Mandat('','');
+
 
   constructor(private http: HttpClient) {
   }
@@ -66,7 +69,7 @@ export class MandatService {
 
     this.http.get<Array<Mandat>>(this.url4).subscribe(
       data => {
-        this._listMandats = data;
+        this.listM = data;
       },
       error1 => {
         console.log('error list mandat');
@@ -75,17 +78,17 @@ export class MandatService {
   }
 
   set listMandats(value: Mandat[]) {
-    this._listMandats = value;
+    this.listM = value;
   }
 
   get listMandats(): Array<Mandat> {
-    return this._listMandats;
+    return this.listM;
   }
 
   findMandats() {
     this.http.get<Array<Mandat>>(this.url4).subscribe(
       data => {
-        this._listMandats = data;
+        this.listM = data;
       }, error => {
         console.log('error list mandat');
       });
@@ -147,7 +150,7 @@ export class MandatService {
   }
 
 
-  public chercherMandatByPersonnelCin() {
+ /* public chercherMandatByPersonnelCin() {
 
     if (this.mandat != null) {
       console.log('http://localhost:9999/mandat/mandat/chercher/personnel/' + this._mandat.personnelVo.cin + '/entite/' + this._mandat.entiteAdministratifVo.referenceEntiteAdministratif + '/responsabilite/' + this._mandat.responsabiliteVo.referenceResponsabilite);
@@ -161,6 +164,24 @@ export class MandatService {
         }
       );
     }
+  }*/
+
+  public rechercheMandat(){
+
+    this.http.post<Array<Mandat>>("http://localhost:9999/mandat/mandats/chercherMandat",this.mandatSearch).subscribe(
+      data=>{
+        if (data ==null){
+          Swal.fire('Information','Mandat Introuvable','error');
+        }else{
+        this.listM = data;
+        console.log( " ha daaaata  "+data);
+        console.log(this.mandatSearch)
+          Swal.fire('Information','Mandats trouvé','success');
+        }
+      },error1 => {
+        console.log(error1);
+      }
+    );
   }
 
   get mandatSelected(): Mandat {

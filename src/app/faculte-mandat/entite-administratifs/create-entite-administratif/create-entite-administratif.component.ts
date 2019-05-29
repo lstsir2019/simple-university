@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EntiteAdministratifService} from '../../../controller/service/entite-administratif.service';
 import {ProjetService} from '../../../controller/service/projet.service';
-import {EntiteAdministratif} from '../../../controller/model/entite-administratif.model';
+
 
 
 @Component({
@@ -17,7 +17,7 @@ export class CreateEntiteAdministratifComponent implements OnInit {
     this.entiteAdministratifService.findAll();
     this.entiteAdministratifService.findallSousProjets();
     this.entiteAdministratifService.findallTypeEntite();
-    this.entiteAdministratifService.findEntiteAdmin();
+    this.entiteAdministratifService.findallEntite();
   }
 
   public get entiteAdministratif(){
@@ -49,8 +49,16 @@ export class CreateEntiteAdministratifComponent implements OnInit {
     this.entiteAdministratifService.deleteEntite(e);
   }
 
-  public findEntite(){
-    return this.entiteAdministratifService.findEntite();
+  public get listEntites(){
+    return this.entiteAdministratifService._listEntiteAdministratifs;
   }
+
+  public rechercheEntite(){
+    return this.entiteAdministratifService.rechercheEntite();
+  }
+  public get entiteRecherche(){
+    return this.entiteAdministratifService.entiteSearch;
+  }
+
 }
 

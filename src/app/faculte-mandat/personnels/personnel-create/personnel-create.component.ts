@@ -44,12 +44,11 @@ export class PersonnelCreateComponent implements OnInit {
   public get echelles(){
     return this.echelleService.echelles;
   }
- /* public get echlonsByEchelle(){
+  public get echlonsByEchelle(){
     return this.echelonService.listeEchelonsByEchelle;
   }
   public findEchelonByEchelle(){
     this.echelonService.getEchelonByEchelle(this.personnel.referenceEchelle);
   }
-*/
 
 }
