@@ -335,6 +335,11 @@ export class BudgetService {
       this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
       console.log(this.budgetProjetRemoved);
       console.log(this.budgetFacultePrincipal.budgetProjetVos);
+      Swal.fire(
+        'Supprimmé!',
+        'Vos données ont été supprimés.',
+        'success'
+      );
     }
   }
 
@@ -349,8 +354,11 @@ export class BudgetService {
       this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos.splice(indexSP, 1);
       this.calculedetailleBudgetProjet(this.budgetFacultePrincipal.budgetProjetVos[index], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos);
 
-      console.log(this.budgetProjetRemoved);
-      console.log(this.budgetFacultePrincipal.budgetProjetVos);
+      Swal.fire(
+        'Supprimmé!',
+        'Vos données ont été supprimés.',
+        'success'
+      );
     }
   }
 
@@ -365,8 +373,11 @@ export class BudgetService {
       let indexCB = this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos.indexOf(bcb);
       this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos.splice(indexCB, 1);
       this.calculedetailleBudgetSousProjet(this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP], this.budgetFacultePrincipal.budgetProjetVos[index].budgetSousProjetVos[indexSP].budgetCompteBudgitaireVos);
-      console.log(this.budgetProjetRemoved);
-      console.log(this.budgetFacultePrincipal.budgetProjetVos);
+      Swal.fire(
+        'Supprimmé!',
+        'Vos données ont été supprimés.',
+        'success'
+      );
     }
 
   }

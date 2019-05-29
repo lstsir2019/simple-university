@@ -12,7 +12,6 @@ import {CommandesComponent} from './commandes/commandes.component';
 import {ProduitsComponent} from './produits/produits.component';
 import {LivraisonsComponent} from './livraisons/livraisons.component';
 import {EvolutionsComponent} from './evolutions/evolutions.component';
-import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
 import {CommandeCreateComponent} from './commandes/commande-create/commande-create.component';
 import {CommandeListComponent} from './commandes/commande-list/commande-list.component';
 import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
@@ -34,7 +33,6 @@ import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-admini
 import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';
 
 const routes: Routes = [
-  {path: 'etudiant-admin', component: EtudiantAdminComponent},
   {path: 'exepressionbesoins', component: ExpressionBesoinsComponent},
   {path: 'reception', component: ReceptionComponent},
   {path: 'magasin', component: MagasinComponent},
