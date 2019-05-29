@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ReceptionService} from '../../controller/service/reception.service';
 import {MagasinService} from '../../controller/service/magasin.service';
 import {CommandeService} from '../../controller/service/commandes/commande.service';
+import {CommandeItem} from '../../controller/model/commandes/commande-item.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reception-create',
@@ -17,12 +19,31 @@ export class ReceptionCreateComponent implements OnInit {
     this.magasinService.findAll();
   }
 
+  ;
+
   public saveReception() {
     this.receptionservice.saveReception();
   }
 
   public addReceptionItem() {
-    this.receptionservice.addReceptionItem();
+    if (this.commandeItems != null) {
+      let commandeItem = this.commandeItems.find(a => a.referenceProduit == this.receptionItem.referenceProduit);
+      if (commandeItem != null) {
+        if (parseFloat(String(commandeItem.qte)) - parseFloat(String(commandeItem.qteReception)) < parseFloat(String(this.receptionItem.qte))) {
+          Swal.fire({
+            title: 'Erreur !',
+            text: 'Il faut regler la qunatite',
+            type: 'error',
+            confirmButtonText: 'ok'
+          });
+        } else {
+          commandeItem.qteReception = parseFloat(String(commandeItem.qteReception)) + parseFloat(String(this.receptionItem.qte));
+          this.receptionservice.addReceptionItem();
+        }
+      }
+    }
+
+
   }
 
   public get reception() {
@@ -42,7 +63,14 @@ export class ReceptionCreateComponent implements OnInit {
   }
 
   public deleteReceptionItems(item) {
-    this.receptionservice.deleteReceptionItems(item);
+    if (this.commandeItems != null) {
+      let commandeItem = this.commandeItems.find(a => a.referenceProduit == item.referenceProduit);
+      if (commandeItem != null) {
+        commandeItem.qteReception = parseFloat(String(commandeItem.qteReception)) - parseFloat(String(item.qte));
+        this.receptionservice.deleteReceptionItems(item);
+        
+      }
+    }
   }
 
   public get commandeItems() {

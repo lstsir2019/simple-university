@@ -1,35 +1,49 @@
-
-<div class="card spacer">
-  <div class="card-header text-black">Recherche</div>
+<div class="card spacer border border-primary">
+  <div class="card-header text-black text-center "> La Recherche</div>
   <div class="card-body">
     <div class="form-row">
 
-      <div class="input-group mb-2 col">
-        <div class="input-group-prepend">
-          <span class="input-group-text" >Personnel-CIN</span>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Personnel-CIN</span>
+          </div>
+          <select class="form-control form-control-sm" [(ngModel)]="mandatRecherche.personnelVo.cin">
+            <option value="">=====Select=====</option>
+            <option  *ngFor="let p of listPersonnels"> {{p.cin}}</option>
+          </select>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="mandat.personnelVo.cin" >
       </div>
-      <div class="input-group mb-2 col">
-        <div class="input-group-prepend">
-          <span class="input-group-text" >Entite Administratif</span>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Entite Administratif</span>
+          </div>
+          <select class="form-control form-control-sm" [(ngModel)]="mandatRecherche.entiteAdministratifVo.referenceEntiteAdministratif">
+            <option value="">=====Select=====</option>
+            <option *ngFor="let e of listEntites "> {{e.referenceEntiteAdministratif}}</option>
+          </select>
         </div>
-        <input type="text" class="form-control"  [(ngModel)]="mandat.entiteAdministratifVo.referenceEntiteAdministratif" >
       </div>
-      <div class="input-group mb-2 col">
-        <div class="input-group-prepend">
-          <span class="input-group-text" >Responsabilité</span>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Responsabilité</span>
+          </div>
+          <select class="form-control form-control-sm"
+                  [(ngModel)]="mandatRecherche.responsabiliteVo.referenceResponsabilite">
+            <option value="">=====Select=====</option>
+            <option *ngFor="let r of listResponsabilites"> {{r.referenceResponsabilite}}</option>
+          </select>
         </div>
-        <input type="text" class="form-control"  [(ngModel)]="mandat.responsabiliteVo.referenceResponsabilite" >
       </div>
 
-      <div class=" col">
-        <button class="btn btn-block btn-outline-info" (click)="chercherMandatByPersonnelCin">Recherche</button>
+      <div class="col">
+        <button class="btn btn-block btn-outline-info" (click)="rechercheMandat()">Recherche</button>
       </div>
     </div>
 
   </div>
-
 
 
 </div>
@@ -37,9 +51,9 @@
 <div class="row">
   <div class=" col-sm-12">
 
-    <div class="card">
-      <div class="card-header"> Liste des personnels</div>
-      <table class="table table-hover table-sm ">
+    <div class="card text-center border border-primary">
+      <div class="card-header border border-primary"> Liste des personnels</div>
+      <table class="table table-hover table-sm   ">
         <thead>
         <tr>
           <th scope="col">Date debut mandat</th>
@@ -47,7 +61,7 @@
           <th scope="col">Personnel</th>
           <th scope="col">Responsabilite</th>
           <th scope="col">Entite Administratif</th>
-
+          <th></th>
         </tr>
         </thead>
 
@@ -60,9 +74,12 @@
           <td>{{m.responsabiliteVo.referenceResponsabilite}}</td>
           <td>{{m.entiteAdministratifVo.referenceEntiteAdministratif}}</td>
           <td>
-            <button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal"
-                    data-whatever="@mdo"></button>
-            <button (click)="deleteMandat(m)" class=" fa fa-trash btn btn-danger "></button>
+
+            <button class=" fa fa-edit cc btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@mdo" ></button>
+            <button (click)="deleteMandat(m)" class=" fa fa-trash btn btn-sm btn-danger "></button>
+            <button class="fa fa-download cc btn btn-sm btn-primary" aria-hidden="true"
+                    data-whatever="@mdo" (click)="printMandat()"></button>
           </td>
 
         </tbody>

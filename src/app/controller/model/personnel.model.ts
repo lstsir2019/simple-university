@@ -3,7 +3,7 @@ import {TypePersonnel} from './type-personnel.model';
 
 export class Personnel {
 
-  public typePersonnelVo: TypePersonnel = new TypePersonnel('00');
+  public typePersonnelVo: TypePersonnel = new TypePersonnel('');
 
   constructor(
     public nom:string,

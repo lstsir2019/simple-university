@@ -1,16 +1,7 @@
 <br>
 <div class="container ">
-
-
   <div class="row">
-    <!--<div class="col-sm-3">
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" >Libelle Projet :</span>
-        <input type="text" class="form-control"  [(ngModel)]="projet.libelleP">
-      </div>
-    </div>
-    </div>-->
+
     <div class="col-md-4">
       <div class="input-group input-group mb-3">
         <div class="input-group-prepend">
@@ -18,7 +9,7 @@
         </div>
         <input [(ngModel)]="projet.libelleP" aria-describedby="inputGroup-sizing-sm" class="form-control" type="text">
         <div class="input-group-append">
-          <button (click)="findSousProjet()" class="btn btn-outline-primary fa fa-search"></button>
+
         </div>
       </div>
     </div>
@@ -38,13 +29,16 @@
       </div>
     </div>
 
+
     <div class="col-sm-5">
-      <div> Les sous projets :</div>
-      <table class="table table-sm table-hover">
+      <div class=" card card-header  text-center border border-primary"> Les sous projets </div>
+      <table class="table table-sm table-hover ">
         <thead>
         <tr>
-          <th scope="col">Libelle</th>
+          <th scope="col">Reference sous projet</th>
+          <th></th>
         </tr>
+
         </thead>
         <tbody>
         <tr *ngFor="let p of sousProjets">
@@ -71,12 +65,29 @@
   <div class="row">
     <div class=" col-sm-6">
 
-      <div class="card text-center ">
-        <div class="card-header"> Liste des Projets</div>
+      <div class="card text-center  border border-primary ">
+
+        <div class="card-header text-black">La Recherche</div>
+        <div class="card-body ">
+          <div class="form-row">
+            <div class="input-group mb-2 col">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Libelle projet</span>
+              </div>
+              <input type="text"  [(ngModel)]="projetRecherche.libelleP">
+              <div class="col">
+                <button class="btn btn-block btn-outline-info" (click)="rechercheProjet()">Recherche</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-header border border-primary"> Liste des Projets</div>
         <table class="table table-sm table-hover">
           <thead>
           <tr>
-            <th scope="col">LibelleP</th>
+            <th >Libelle projet</th>
           </tr>
           </thead>
           <tbody>
@@ -100,11 +111,11 @@
 
 
     <div class="col-sm-6" *ngIf="projetSelected != null">
-      <div class="card-header"> Liste des sous Projet de projet selectionné {{projetSelected.libelleP}}</div>
+      <div class="card-header"> Liste des sous projets de projet selectionné {{projetSelected.libelleP}}</div>
       <table class="table table-sm table-hover">
         <thead>
         <tr>
-          <th scope="col">Libelle sous projet</th>
+          <th scope="col">Reference sous projet</th>
 
         </tr>
         </thead>
@@ -126,7 +137,7 @@
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      id="exampleModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" >
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
         <form class="DivDuForm2">

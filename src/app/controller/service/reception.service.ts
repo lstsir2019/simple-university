@@ -88,13 +88,17 @@ export class ReceptionService {
 
       });
       let index: number = this._receptions.indexOf(reception);
-
+      this._receptions.splice(index,1);
+      Swal.fire(
+        'Supprimmé!',
+        'Vos données ont été supprimés.',
+        'success'
+      );
     }
   }
 
   public imprimer(reference: string) {
     const httpOptions = {
-
       responseType: 'blob' as 'json'
     };
     return this.http.get(this.url + '/pdf/reference/' + reference, httpOptions).subscribe((resultBlob: Blob) => {

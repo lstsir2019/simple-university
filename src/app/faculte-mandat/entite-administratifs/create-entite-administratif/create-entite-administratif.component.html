@@ -1,58 +1,101 @@
-<div  class="container">
+<div class="container">
   <br>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm">
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" >Entite Administratif :</span>
+          <span class="input-group-text">Entite Administratif </span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="entiteAdministratif.referenceEntiteAdministratif" >
-       <!-- <div class="input-group-append">
-          <button (click)="findEntite()" class="btn btn-outline-primary fa fa-search"></button>
-        </div>-->
-      </div>
-      <div class="col-sm-12">
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" >Type Entité adminsitratif</span>
-          </div>
-          <!-- <input class="form-control" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" />-->
-          <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.typeEntiteAdministratifVo.libelle" >
-            <option  *ngFor="let t of listTypeEntite" > {{t.libelle}}</option>
-          </select>
-        </div>
+        <input type="text" class="form-control" [(ngModel)]="entiteAdministratif.referenceEntiteAdministratif">
 
       </div>
-      <div class="col-sm-12">
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" >Sous Projet</span>
-          </div>
-         <!-- <input class="form-control" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" />-->
-           <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" >
-             <option  *ngFor="let e of listSousProjet" > {{e.referenceSousProjet}}</option>
-           </select>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Type Entite Administratif </span>
         </div>
-
+        <!--<input class="form-control" type="text" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet"/>-->
+         <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.typeEntiteAdministratifVo.libelle" >
+           <option  *ngFor="let t of listTypeEntite" > {{t.libelle}}</option>
+         </select>
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Sous projet </span>
+        </div>
+       <!-- <input class="form-control" type="text" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet"/>-->
+        <select   class="form-control form-control-sm" [(ngModel)]="entiteAdministratif.sousProjetVo.referenceSousProjet" >
+          <option  *ngFor="let e of listSousProjet" > {{e.referenceSousProjet}}</option>
+        </select>
       </div>
 
       <div id="ajouter" class="container">
         <div class="row" style="justify-content: center">
-          <input type="button" class="btn btn-outline-primary" value="Ajouter" (click)="addEntiteAdministratif()"  (click)="saveEntiteAdministratif()">
+          <input type="button" class="btn btn-outline-primary" value="Ajouter" (click)="addEntiteAdministratif()"
+                 (click)="saveEntiteAdministratif()">
         </div>
 
       </div>
 
     </div>
-    <div class="col-sm-6" >
-      <div class="card">
-        <div class="card-header"> les entites administratifs</div>
-        <table class="table table-hover">
+
+    <div class="col-sm-8">
+      <div class="card spacer border border-primary">
+        <div class="card-header text-black text-center "> La Recherche</div>
+        <div class="card-body">
+          <div class="form-row">
+
+            <div class="col-sm-4">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Entite Administratif</span>
+                </div>
+                <select class="form-control form-control-sm" [(ngModel)]="entiteRecherche.referenceEntiteAdministratif">
+                  <option value="">=====Select=====</option>
+                  <option  value="{{e.referenceEntiteAdministratif}}" *ngFor="let e of listEntites"> {{e.referenceEntiteAdministratif}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Type Entite Admin</span>
+                </div>
+                <select   class="form-control form-control-sm" [(ngModel)]="entiteRecherche.typeEntiteAdministratifVo.libelle" >
+                  <option value="">=====Select=====</option>
+                  <option  value="{{t.libelle}}" *ngFor="let t of listTypeEntite" > {{t.libelle}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Sous projet</span>
+                </div>
+                <select   class="form-control form-control-sm" [(ngModel)]="entiteRecherche.sousProjetVo.referenceSousProjet" >
+                  <option value="">=====Select=====</option>
+                  <option  value="{{e.referenceSousProjet}}" *ngFor="let e of listSousProjet" > {{e.referenceSousProjet}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md">
+              <button class="btn btn-block btn-outline-info" (click)="rechercheEntite()">Recherche</button>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="card text-center border border-primary ">
+        <div class="card-header border border-primary"> les entites administratifs</div>
+        <table class="table table-hover table-sm  ">
           <thead>
           <tr>
-            <th scope="col" >Entite Admin</th>
-            <th scope="col" >Sous Projet</th>
-            <th scope="col" >Type Entite Admin</th>
+            <th scope="col">Entite Admin</th>
+            <th scope="col">Sous Projet</th>
+            <th scope="col">Type Entite Admin</th>
             <th></th>
           </tr>
           </thead>
@@ -62,8 +105,13 @@
             <td>{{e.sousProjetVo.referenceSousProjet}}</td>
             <td>{{e.typeEntiteAdministratifVo.libelle}}</td>
 
-            <td><button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
-              <button  (click)="deleteEntite(e)" class=" fa fa-trash btn btn-danger "></button></td>
+            <td>
+              <button class=" fa fa-edit cc btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                      data-whatever="@mdo"></button>
+              <button (click)="deleteEntite(e)" class=" fa fa-trash btn btn-sm btn-danger "></button>
+              <button class="fa fa-download cc btn btn-sm btn-primary" aria-hidden="true"
+                      data-whatever="@mdo" (click)="printEntite()"></button>
+            </td>
 
           </tr>
           </tbody>
@@ -74,7 +122,8 @@
   </div>
 </div>
 
-<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -89,9 +138,9 @@
             <div class="col-sm-10">
               <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" >Entite Administratif :</span>
+                  <span class="input-group-text">Entite Administratif :</span>
                 </div>
-                <input class="form-control" type="text"   />
+                <input class="form-control" type="text"/>
               </div>
             </div>
           </div>
@@ -107,7 +156,8 @@
 
 <!-- info -->
 <!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -121,7 +171,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" >supprimer</button>
+        <button type="button" class="btn btn-danger">supprimer</button>
       </div>
     </div>
   </div>

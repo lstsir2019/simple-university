@@ -52,12 +52,6 @@ export class BudgetProjetComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
       this.budgetService.removeBudgetProjet(bp);
-
-        Swal.fire(
-          'Supprimmé!',
-          'Vos données ont été supprimés.',
-          'success'
-        );
       }
     });
 
