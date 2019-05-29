@@ -31,7 +31,6 @@ export class BudgetSousProjetCreateComponent implements OnInit {
       Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     } else {
       this.budgetService.ajouterNewBudgetSousProjet();
-      Swal.fire(this.SWAL.SUCCESS_CREATE);
     }
 
 

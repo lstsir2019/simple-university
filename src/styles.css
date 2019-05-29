@@ -17,7 +17,9 @@
   width: 100px;
   font-size: 20pt;
 }
-
+body {
+  padding-right: 0 !important;
+}
 .tbodyx {
   display:block;
   height:200px;
