@@ -228,9 +228,9 @@ export class BudgetService {
 
   public findSousProjetByProjet() {
     let p = this.AllProjet.find(a => a.libelleP == this.budgetProjetPrincipal.referenceProjet);
-    if(p==null){
+    if (p == null) {
       this.sousProjetsByProjet = new Array<SousProjet>();
-    }else{
+    } else {
       this.sousProjetsByProjet = p.sousProjetsVo;
     }
   }
@@ -305,22 +305,58 @@ export class BudgetService {
 
   //---------------------------  Budget Detailles --------------------------
   public detail: DetaillesBudgetVo = new DetaillesBudgetVo();
+  public detailClone: DetaillesBudgetVo = new DetaillesBudgetVo();
 
   public detaillBudgetFaculte(bf: BudgetFaculteVo) {
     this.detail = bf.detaillesBudgetVo;
+    this.budgetInstance = bf;
+    this.clone(bf.detaillesBudgetVo, this.detailClone);
   }
 
   public detaillBudgetProjet(bp: BudgetProjetVo) {
     this.detail = bp.detaillesBudgetVo;
+    this.budgetInstance = bp;
+    this.clone(bp.detaillesBudgetVo, this.detailClone);
   }
 
   public detaillBudgetSousProjet(bsp: BudgetSousProjetVo) {
     this.detail = bsp.detaillesBudgetVo;
+    this.budgetInstance = bsp;
+    this.clone(bsp.detaillesBudgetVo, this.detailClone);
   }
+
+  f;
 
   public detaillBudgetCompteBudgitaire(bcb: BudgetCompteBudgitaireVo) {
     this.detail = bcb.detaillesBudgetVo;
+    this.budgetInstance = bcb;
+    this.clone(bcb.detaillesBudgetVo, this.detailClone);
   }
+
+  public clone(detail: DetaillesBudgetVo, detailClone: DetaillesBudgetVo) {
+    detailClone.id = detail.id;
+    detailClone.engageNonPaye = detail.engageNonPaye;
+    detailClone.engagePaye = detail.engagePaye;
+    detailClone.creditOuvertEstimatif = detail.creditOuvertEstimatif;
+    detailClone.creditOuvertReel = detail.creditOuvertReel;
+    detailClone.reliquatEstimatif = detail.reliquatEstimatif;
+    detailClone.reliquatReel = detail.reliquatReel;
+    detailClone.reliquatNonPayeEstimatif = detail.reliquatNonPayeEstimatif;
+    detailClone.reliquatNonPayReel = detail.reliquatNonPayReel;
+    detailClone.reliquatPayeEstimatif = detail.reliquatPayeEstimatif;
+    detailClone.reliquatPayereel = detail.reliquatPayereel;
+  }
+
+  budgetInstance: any;
+
+  public update() {
+    if (this.budgetInstance instanceof BudgetProjetVo) {
+      console.log('haaaaaaa=======' + this.budgetInstance);
+      this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
+    }
+    this.clone(this.detailClone, this.detail);
+  }
+
 
   //----------------------Remove Budget -----------------------------------
 
@@ -381,8 +417,8 @@ export class BudgetService {
     BudgetProjetVos.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
-      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
-      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
+      engageNonPaye += parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye += parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bf.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bf.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
@@ -399,8 +435,8 @@ export class BudgetService {
     budgetSousProjetVos.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
-      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
-      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
+      engageNonPaye += parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye += parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
@@ -416,8 +452,8 @@ export class BudgetService {
     budgetCompteBudgitaireVo.forEach(bsp => {
       reliquatEstimatif += parseFloat(bsp.detaillesBudgetVo.creditOuvertEstimatif);
       reliquatReel += parseFloat(bsp.detaillesBudgetVo.creditOuvertReel);
-      engageNonPaye +=  parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
-      engagePaye+= parseFloat(bsp.detaillesBudgetVo.engagePaye);
+      engageNonPaye += parseFloat(bsp.detaillesBudgetVo.engageNonPaye);
+      engagePaye += parseFloat(bsp.detaillesBudgetVo.engagePaye);
     });
     bsp.detaillesBudgetVo.reliquatReel = reliquatReel.toString();
     bsp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();

@@ -36,6 +36,7 @@ export class BudgetSousProjetComponent implements OnInit {
 
 
   public detail(bsp: BudgetSousProjetVo) {
+
     this.budgetService.detaillBudgetSousProjet(bsp);
   }
 
