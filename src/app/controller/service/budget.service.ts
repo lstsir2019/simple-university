@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Projet} from '../model/projet.model';
 import {SousProjet} from '../model/sous-projet.model';
+import Any = jasmine.Any;
 
 @Injectable({
   providedIn: 'root'
@@ -445,7 +446,7 @@ export class BudgetService {
     bf.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
     bf.detaillesBudgetVo.engagePaye = engagePaye.toString();
     bf.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
-
+    this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal,this.budgetFacultePrincipal.budgetProjetVos);
   }
 
   public calculedetailleBudgetProjet(bp: BudgetProjetVo, budgetSousProjetVos: Array<BudgetSousProjetVo>) {
@@ -480,6 +481,7 @@ export class BudgetService {
     bsp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
     bsp.detaillesBudgetVo.engagePaye = engagePaye.toString();
     bsp.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
+    this.calculedetailleBudgetProjet(this.budgetProjetPrincipal,this.budgetProjetPrincipal.budgetSousProjetVos);
   }
 
 
@@ -710,6 +712,12 @@ export class BudgetService {
 
   //update budget sous projet
 
-
+  budget:any;
+  hi(){
+    if (this.budget instanceof BudgetFaculteVo) {
+     this.calculedetailleBudgetFaculte(this.budget,this.budget.budgetProjetVos);
+    }
+    this.budget instanceof BudgetProjetVo
+  }
 }
 
