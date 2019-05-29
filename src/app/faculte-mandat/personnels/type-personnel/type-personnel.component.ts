@@ -26,6 +26,7 @@ export class TypePersonnelComponent implements OnInit {
 
   public findByCin(personnel: Personnel){
     this.personnelService.findByCin(personnel);
+
   }
 
   public saveUpdatePersonnel() {
@@ -35,4 +36,28 @@ export class TypePersonnelComponent implements OnInit {
 public  get personnelSelected() {
     return this.personnelService.pSelected;
   }
+  public get listTypePersonnels(){
+    return this.personnelService.listTypePersonnels;
+  }
+  public get personnel(){
+    return this.personnelService.personnelCreate;
+  }
+  public get listPersonnels(){
+    return this.personnelService._listPersonnels;
+  }
+
+
+  public printPersonnel(cin:string){
+    return this.personnelService.printPersonnel(cin);
+  }
+
+  public recherchePersonnel(){
+    return this.personnelService.recherchePersonnel();
+  }
+
+  public get personnelRecherche(){
+    return this.personnelService.personnelSearch;
+  }
+
+
 }

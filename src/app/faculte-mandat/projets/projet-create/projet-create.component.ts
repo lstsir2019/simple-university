@@ -28,9 +28,7 @@ export class ProjetCreateComponent implements OnInit {
  public addSousProjet() {
     this.projetService.addSousProjet();
  }
-  public findSousProjet(){
-     this.projetService.findSousProjet();
-  }
+
 
  public saveProjet(){
     this.projetService.saveProjet();
@@ -45,7 +43,6 @@ export class ProjetCreateComponent implements OnInit {
 }
 
 
-
   public get Projets(){
     return this.projetService.projets;
   }
@@ -53,6 +50,21 @@ export class ProjetCreateComponent implements OnInit {
     this.projetService.findSousProjetByLibelleProjet(projet);
   }
 
+  public deleteSousProjet(sp){
+    this.projetService.deleteSousProjet(sp);
+  }
+  public printProjet(libelleP:string){
+    return this.projetService.printProjet(libelleP);
+  }
+
+
+  public rechercheProjet(){
+    return this.projetService.rechercheProjet();
+  }
+
+  public get projetRecherche(){
+    return this.projetService.projetSearch;
+  }
 
   public get projetSelected(){
     return this.projetService.projetSelected;
@@ -62,9 +74,7 @@ export class ProjetCreateComponent implements OnInit {
     this.projetService.deleteProjet(p);
   }
 
-  public deleteSousProjet(sp){
-    this.projetService.deleteSousProjet(sp);
-  }
+
 
 
 }
