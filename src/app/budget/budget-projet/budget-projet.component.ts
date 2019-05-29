@@ -3,6 +3,7 @@ import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model'
 import {BudgetService} from '../../controller/service/budget.service';
 import * as jsPDF from 'jspdf';
 import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.model';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-budget-projet',
@@ -40,7 +41,26 @@ export class BudgetProjetComponent implements OnInit {
   }
 
   public remove(bp: BudgetProjetVo) {
-    this.budgetService.removeBudgetProjet(bp);
+    Swal.fire({
+      title: 'Etes-vous sure?',
+      text: 'Vous ne pouvez pas revenir en arrière!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+      this.budgetService.removeBudgetProjet(bp);
+
+        Swal.fire(
+          'Supprimmé!',
+          'Vos données ont été supprimés.',
+          'success'
+        );
+      }
+    });
+
   }
 
   public findBudgetProjet() {
