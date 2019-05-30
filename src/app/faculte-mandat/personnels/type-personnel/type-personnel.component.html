@@ -1,9 +1,39 @@
+<div class="card spacer border border-primary ">
+  <div class="card-header text-black ">Recherche</div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="input-group mb-2 col">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >type Personnel</span>
+        </div>
+        <select class="form-control form-control " [(ngModel)]="personnelRecherche.typePersonnelVo.libelle">
+          <option value="">=====Select=====</option>
+          <option  value="{{tp.libelle}}" *ngFor="let tp of listTypePersonnels"  >  {{tp.libelle}} </option>
+        </select>
+      </div>
+      <div class="input-group mb-2 col">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Personnel-CIN</span>
+        </div>
+        <select   class="form-control form-control" [(ngModel)]="personnelRecherche.cin" >
+          <option value="">=====Select=====</option>
+          <option  value="{{p.cin}}" *ngFor="let p of listPersonnels" > {{p.cin}} : {{p.nom}}-{{p.prenom}}</option>
+        </select>
+      </div>
+
+      <div class=" col">
+        <button class="btn btn-block btn-outline-info" (click)="recherchePersonnel()">Recherche</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class=" col-sm-12">
+    <div class="card text-center border border-primary">
+      <div class="card-header border border-primary "> Liste des personnels</div>
 
-    <div class="card">
-      <div class="card-header"> Liste des personnels</div>
-      <table class="table table-hover table-sm ">
+      <table class="table table-sm table-hover ">
         <thead>
         <tr>
           <th scope="col">Nom</th>
@@ -24,7 +54,7 @@
            <th scope="col">Code d'echelle:</th>
            <th scope="col">Code d'echelle:</th>
            <th scope="col">Code d'echelon</th>-->
-
+          <th></th>
         </tr>
         </thead>
 
@@ -48,20 +78,31 @@
           <td>{{p.codeEchelle}}</td>
           <td>{{p.codeEchelon}}</td> -->
           <td>
-            <button class="btn btn-outline-info fa fa-plus" data-toggle="modal" data-target="#exampleModal1"
+            <button class="btn btn-sm btn-outline-info fa fa-plus" data-toggle="modal" data-target="#exampleModal1"
                     data-whatever="@mdo" (click)="findByCin(p)"></button>
-            <button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal"
+            <button class=" fa fa-edit cc btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
                     data-whatever="@mdo" (click)="findByCin(p)"></button>
-            <button (click)="deletePersonnel(p)" class=" fa fa-trash btn btn-danger "></button>
+            <button (click)="deletePersonnel(p)" class=" fa fa-trash btn btn-sm btn-danger "></button>
+            <button class="fa fa-download cc btn btn-sm btn-primary" aria-hidden="true"
+                    data-whatever="@mdo" (click)="printPersonnel(p.cin)"></button>
 
           </td>
 
         </tbody>
 
       </table>
+
+        <div class="text-center">
+          <button id="download" (click)="print()" class="btn btn-outline">
+            <span style="color: dodgerblue" class="fa fa-download"> </span>
+            <span  class="text-secondary" > Exporter sous format PDF tous les personnels </span>
+          </button>
+        </div>
+
     </div>
   </div>
 </div>
+
 
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -114,9 +155,9 @@
 </div>
 
 
-<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="exampleModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-body">
         <form class="DivDuForm2">
@@ -144,7 +185,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Date de Naissance: </span>
                 </div>
-                <input class="form-control" type="date" value="{{personnelSelected.dateNaissance}}"/>
+                <input class="form-control" type="text" value="{{personnelSelected.dateNaissance}}"/>
               </div>
             </div>
             <div class="col-sm-6">
@@ -208,7 +249,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Date d'exercice d'echelle:</span>
                 </div>
-                <input class="form-control" type="date" value="{{personnelSelected.dateExerciceEchelle}}"/>
+                <input class="form-control" type="text" value="{{personnelSelected.dateExerciceEchelle}}"/>
               </div>
             </div>
             <div class="col-sm-6">
@@ -228,7 +269,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Date d'activation:</span>
                 </div>
-                <input class="form-control" type="date" value="{{personnelSelected.dateActivation}}"/>
+                <input class="form-control" type="text" value="{{personnelSelected.dateActivation}}"/>
               </div>
             </div>
             <div class="col-sm-6">
@@ -236,7 +277,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Date d'acces a la fonction publique</span>
                 </div>
-                <input class="form-control" type="date" value="{{personnelSelected.dateAccesFonctionPublique}}"/>
+                <input class="form-control" type="text" value="{{personnelSelected.dateAccesFonctionPublique}}"/>
               </div>
             </div>
           </div>
@@ -246,13 +287,12 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Type personnel</span>
 
-<!--        <input class="form-control" type="text" value="{{personnelSelected.typePersonnelVo.libelle}}"/>-->
-                 <!--<select   class="form-control form-control-sm"  >
-                   <option *ngFor="let tp of listTypePersonnels" >{{tp.libelle}} </option>
-                 </select>-->
-                <select class="form-control form-control-sm " >
+                  <select class="form-control form-control-sm " [(ngModel)]="personnel.typePersonnelVo.libelle">
+                    <option  *ngFor="let tp of listTypePersonnels"  >  {{tp.libelle}} </option>
+                  </select>
+                <!--<select class="form-control form-control-sm " >
                   <option > {{personnelSelected.typePersonnelVo.libelle}} </option>
-                </select>
+                </select>-->
               </div>
 
             </div>
@@ -262,7 +302,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Date debut de type Personnel</span>
                 </div>
-                <input class="form-control" type="date" value="{{personnelSelected.dateDebutTypePersonnel}}"/>
+                <input class="form-control" type="text" value="{{personnelSelected.dateDebutTypePersonnel}}"/>
               </div>
             </div>
           </div>
@@ -292,6 +332,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class=" btn btn-primary " (click)="saveUpdatePersonnel()">Update</button>
       </div>
+
     </div>
   </div>
 </div>

@@ -32,9 +32,14 @@ export class MandatListComponent implements OnInit {
     this.mandatService.deleteMandat(m);
   }
 
-  public get chercherMandatByPersonnelCin(){
-    return this.mandatService.chercherMandatByPersonnelCin();
+
+  public rechercheMandat(){
+    return this.mandatService.rechercheMandat();
   }
+  public get mandatRecherche(){
+    return this.mandatService.mandatSearch;
+  }
+
 
   public get listPersonnels(){
     return this.mandatService._listPersonnels;

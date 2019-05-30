@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Reception} from '../model/reception.model';
 import {ReceptionItem} from '../model/reception-item.model';
 import {HttpClient} from '@angular/common/http';
+import Swal from 'sweetalert2';
+import {getReact} from './evolutions/Util/SwalReact';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,7 @@ import {HttpClient} from '@angular/common/http';
 export class ReceptionService {
 
 
+  private SWAL = getReact('Reception', true);
   public url: string = 'http://localhost:8041/reception-api/receptions/';
   public urlReceptionItem: string = 'http://localhost:8041/reception-api/receptionitems/';
   public receptionCreate: Reception = new Reception('', '', '');
@@ -22,7 +25,10 @@ export class ReceptionService {
   public receptionSearch: Reception = new Reception('', '', '');
 
   public addReceptionItem() {
-    if (this.receptionItemCreate.qte > 0) {
+    if (this.receptionItemCreate.qte <= 0 ||  this.receptionItemCreate.referenceProduit == "" || this.receptionItemCreate.referenceMagasin == "") {
+      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
+
+    } else {
       let receptionItemClone: ReceptionItem = new ReceptionItem(this.receptionItemCreate.reference, this.receptionItemCreate.referenceCategorie, this.receptionItemCreate.referenceProduit, this.receptionItemCreate.referenceMagasin, this.receptionItemCreate.qte);
       this.receptionCreate.receptionItems.push(receptionItemClone);
     }
@@ -32,8 +38,22 @@ export class ReceptionService {
     this.http.post<number>(this.url, this.receptionCreate).subscribe(
       data => {
         if (data > 0) {
+          Swal.fire(this.SWAL.SUCCESS_CREATE);
           this.receptionCreate = new Reception('', '', '');
         } else {
+          if (data == -2) {
+            Swal.fire({
+              title: 'cannot save !',
+              text: 'Référence déja utilisé ou bien vide',
+              type: 'error',
+            });
+          } else if (data == -4) {
+            Swal.fire({
+              title: 'error !',
+              text: 'Merci de verifier la date',
+              type: 'error',
+            });
+          }
           console.log(data);
         }
       },
@@ -68,13 +88,17 @@ export class ReceptionService {
 
       });
       let index: number = this._receptions.indexOf(reception);
-
+      this._receptions.splice(index,1);
+      Swal.fire(
+        'Supprimmé!',
+        'Vos données ont été supprimés.',
+        'success'
+      );
     }
   }
 
   public imprimer(reference: string) {
     const httpOptions = {
-
       responseType: 'blob' as 'json'
     };
     return this.http.get(this.url + '/pdf/reference/' + reference, httpOptions).subscribe((resultBlob: Blob) => {

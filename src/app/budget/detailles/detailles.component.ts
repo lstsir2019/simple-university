@@ -20,7 +20,11 @@ export class DetaillesComponent implements OnInit {
   }
 
   public get detail(){
-    return this.budgetService.detail;
+    return this.budgetService.detailClone;
+  }
+
+  public save(){
+    this.budgetService.update();
   }
 
 }

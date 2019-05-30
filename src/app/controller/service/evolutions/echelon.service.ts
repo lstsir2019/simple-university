@@ -25,7 +25,7 @@ export class EchelonService {
   private ERROR_INVALID_REF = this.SWAL_REACT.ERROR_INVALID_REF;
   private ERROR_NOT_ENOUGH_DATA = this.SWAL_REACT.ERROR_NOT_ENOUGH_DATA;
   private ERROR_UNKNOWN_ERROR = this.SWAL_REACT.ERROR_UNKNOWN_ERROR;
-
+  public listeEchelonsByEchelle= new Array<Echelon>();
 
   constructor(private http: HttpClient) {
     this.getEchelonsFromDatabase();
@@ -147,5 +147,18 @@ export class EchelonService {
         });
       }
     }
+  }
+
+
+
+
+  public getEchelonByEchelle(reference :string){
+    this.http.get<Array<Echelon>>(this.url+"EchelleReference/"+reference).subscribe(
+      data=>{
+        this.listeEchelonsByEchelle=data;
+      },error1 => {
+        console.log("hadchi makhdamch")
+      }
+    )
   }
 }

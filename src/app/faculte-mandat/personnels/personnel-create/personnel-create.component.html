@@ -2,7 +2,7 @@
 <div class="container">
   <br>
   <div>
-    <div class="card text-center">
+    <div class="card text-center border border-primary">
       <div class="card-header">CHOISIR TYPE DE PERSONNEL</div>
       <div class="card-body  ">
         <div class="col-sm-7 ">
@@ -21,7 +21,7 @@
     </div>
     <br>
     <div>
-      <div class="card text-center" *ngIf="personnel.typePersonnelVo.libelle != '00' " >
+      <div class="card text-center border border-primary" *ngIf="personnel.typePersonnelVo.libelle != '' " >
         <div class="card-header">INFORMATIONS</div>
         <div class="card-body  ">
         <div class="row">
@@ -198,7 +198,7 @@
 
         <div id="ajouter" class="container">
           <div class="row" style="justify-content: center">
-            <input type="button" class="btn btn-outline-primary" value="Ajoutez personnel" (click)="savePersonnel()">
+            <button class="btn btn-outline-primary" (click)="savePersonnel()" > Ajoutez personnel</button>
           </div>
         </div>
 

@@ -25,8 +25,6 @@ export class BudgetFaculteCreateComponent implements OnInit {
       Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
     }else{
       this.budgetService.saveBudgetFaculte();
-      Swal.fire(this.SWAL.SUCCESS_CREATE);
-
     }
 
   }

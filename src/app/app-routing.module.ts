@@ -12,7 +12,6 @@ import {CommandesComponent} from './commandes/commandes.component';
 import {ProduitsComponent} from './produits/produits.component';
 import {LivraisonsComponent} from './livraisons/livraisons.component';
 import {EvolutionsComponent} from './evolutions/evolutions.component';
-import {EtudiantAdminComponent} from './etudiant-admin/etudiant-admin.component';
 import {CommandeCreateComponent} from './commandes/commande-create/commande-create.component';
 import {CommandeListComponent} from './commandes/commande-list/commande-list.component';
 import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
@@ -28,29 +27,13 @@ import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
 import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
 import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
 import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
-import {PersonnelCreateComponent} from './faculte-mandat/personnels/personnel-create/personnel-create.component';
-import {ProjetCreateComponent} from './faculte-mandat/projets/projet-create/projet-create.component';
-import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
-import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';
 
 const routes: Routes = [
-  {path: 'etudiant-admin', component: EtudiantAdminComponent},
   {path: 'exepressionbesoins', component: ExpressionBesoinsComponent},
   {path: 'reception', component: ReceptionComponent},
   {path: 'magasin', component: MagasinComponent},
   {path: 'budget', component: BudgetComponent},
   {path: 'appleoffre', component: AppelOffreComponent},
-  /*{ path: 'evaluation', component: EvaluationPersonnelComponent,
-    children: [
-      // { path: '', redirectTo: 'elements', pathMatch: 'full' },
-      {path: 'elements', component: ElementsComponent, },
-
-      {path: 'mentions', component: MentionsComponent},
-      {path: 'notes', component: NotesComponent},
-
-
-    ]
-  },*/
 
   {path: 'elements', component: ElementsComponent,},
 
@@ -78,7 +61,7 @@ const routes: Routes = [
   {path: 'personnelCreate', component: PersonnelsComponent},
   {path: 'projetSousProjetCreate', component: ProjetsComponent},
   {path: 'entiteAdministratifCreate', component: EntiteAdministratifsComponent},
-  {path: 'responsabiliteCreate', component: ResponsabilitesComponent },
+  {path: 'responsabiliteCreate', component: ResponsabilitesComponent},
   {path: 'mandatCreate', component: MandatsComponent},
 
 ];

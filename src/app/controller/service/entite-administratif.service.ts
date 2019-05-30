@@ -6,6 +6,7 @@ import {EntiteAdministratif} from '../model/entite-administratif.model';
 import {SousProjet} from '../model/sous-projet.model';
 import Swal from 'sweetalert2';
 import {TypeEntiteAdministratif} from '../model/type-entite-administratif.model';
+import {Personnel} from '../model/personnel.model';
 
 
 @Injectable({
@@ -21,10 +22,14 @@ export class EntiteAdministratifService {
   private _createEntiteAdministratif: EntiteAdministratif = new EntiteAdministratif('');
   public sousProjetCreate: SousProjet = new SousProjet(0, '');
  public typeEntiteCreate : TypeEntiteAdministratif = new TypeEntiteAdministratif('');
-  private _listEntiteAdministratifs = Array<EntiteAdministratif>();
+  public _listEntiteAdministratifs : Array<EntiteAdministratif>;
   public _sousProjetss: Array<SousProjet>;
   public _typeEntiteAdmin : Array<TypeEntiteAdministratif>;
   private _entiteSelected: EntiteAdministratif;
+  public entiteSearch : EntiteAdministratif = new  EntiteAdministratif('');
+  public listEntiteAdmin = Array<EntiteAdministratif>();
+
+
 
   constructor(private http: HttpClient) {
   }
@@ -45,7 +50,6 @@ export class EntiteAdministratifService {
           Swal.fire('Informations', 'Entite administratif ajouter avec success', 'success');
           this._createEntiteAdministratif = new EntiteAdministratif('');
           this.sousProjetCreate = new SousProjet(0, '');
-          this.typeEntiteCreate = new TypeEntiteAdministratif('');
           this.findAll();
         }
         else if (data == -1) {
@@ -64,7 +68,7 @@ export class EntiteAdministratifService {
 
     this.http.get<Array<EntiteAdministratif>>(this.url5).subscribe(
       data => {
-        this._listEntiteAdministratifs = data;
+        this.listEntiteAdmin = data;
       },
       error1 => {
         console.log('error while loading elements...');
@@ -73,13 +77,13 @@ export class EntiteAdministratifService {
   }
 
   get listEntiteAdministratifs(): Array<EntiteAdministratif> {
-    return this._listEntiteAdministratifs;
+    return this.listEntiteAdmin;
   }
 
   findEntiteAdmin(){
     this.http.get<Array<EntiteAdministratif>>(this.url).subscribe(
       data => {
-        this._listEntiteAdministratifs = data;
+        this.listEntiteAdmin = data;
       }, error => {
         console.log('error---->');
       }
@@ -87,7 +91,7 @@ export class EntiteAdministratifService {
   }
 
   set listEntiteAdministratifs(value: EntiteAdministratif[]) {
-    this._listEntiteAdministratifs = value;
+    this.listEntiteAdmin = value;
   }
 
   public findallSousProjets() {
@@ -114,6 +118,19 @@ export class EntiteAdministratifService {
 
   }
 
+
+  public findallEntite() {
+
+    this.http.get<Array<EntiteAdministratif>>(this.url5).subscribe(
+      data => {
+        this._listEntiteAdministratifs = data;
+      }, error => {
+        console.log('error list Entite Administratif');
+      }
+    );
+
+  }
+
   public deleteEntite(entite: EntiteAdministratif) {
     this.entiteSelected = entite;
     if (this.entiteSelected != null) {
@@ -129,19 +146,26 @@ export class EntiteAdministratifService {
 
   }
 
-  public findEntite() {
 
-    if (this.createEntiteAdministratif != null) {
-      this.http.get<Array<EntiteAdministratif>>('http://localhost:8090/mandat/mandat/entiteAdministratif/' + this._createEntiteAdministratif.referenceEntiteAdministratif ).subscribe(
-        data => {
-          console.log('http://localhost:8090/mandat/mandat/entiteAdministratif/' + this._createEntiteAdministratif.referenceEntiteAdministratif)
-          console.log(data)
-         // this._createEntiteAdministratif.sousProjetVo = data;
-        }, error => {
-          console.log(error);
+
+
+  public rechercheEntite(){
+
+    this.http.post<Array<EntiteAdministratif>>("http://localhost:9999/entiteAdministratif/entiteAdministratifs/chercherEntite",this.entiteSearch).subscribe(
+      data=>{
+        if (data ==null){
+          Swal.fire('Information','Entite administratif Introuvable','error');
+        }else{
+          this.listEntiteAdmin = data;
+          console.log( " ha daaaata  "+data);
+          console.log(this.entiteSearch)
+          Swal.fire('Information','Entités administratifs trouvé','success');
         }
-      );
-    }
+
+      },error1 => {
+        console.log(error1);
+      }
+    );
   }
 
   get entiteSelected(): EntiteAdministratif {

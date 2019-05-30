@@ -1,5 +1,4 @@
 <div  class="container">
-  <br>
   <div class="row">
     <div class="col-sm-5">
       <div class="input-group input-group-sm mb-3">
@@ -17,12 +16,13 @@
 
     </div>
   <div class="col-sm-6" >
-    <div class="card">
-      <div class="card-header"> les responsabilites</div>
-    <table class="table table-hover">
+    <div class="card text-center">
+      <div class="card-header border border-primary"> Les résponsabilités</div>
+    <table class="table table-hover table-sm border border-primary">
       <thead>
       <tr>
-        <th scope="col" >Poste</th>
+        <th scope="col" >Résponsabilité</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -30,7 +30,6 @@
         <td>{{r.referenceResponsabilite}}</td>
         <td><button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
           <button (click)="deleteResponsabilite(r)"    class=" fa fa-trash btn btn-danger "></button></td>
-
       </tr>
       </tbody>
     </table>

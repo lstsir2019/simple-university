@@ -30,9 +30,9 @@ export class CommandeService {
   private _url3: string = 'http://localhost:8090/faculte-commande/paiementes/reference/';
   private _url4: string = 'http://localhost:8090/faculte-commande/paiementes';
 
-  private _commandeCreate: Commande = new Commande('', 0, '', '', '', '');
+  private _commandeCreate: Commande = new Commande('', 0, '', '', '', '','');
   private _commandeItemCreate: CommandeItem = new CommandeItem('', 0, 0,0,0);
-  private _commande: Commande = new Commande('', 0, '', '', '', '');
+  private _commande: Commande = new Commande('', 0, '', '', '', '','');
   private _commandes: Array<Commande>;
   private _commandeSelected: Commande;
   private _paiementCreate: Paiement = new Paiement(0,0,'','');
@@ -44,7 +44,7 @@ export class CommandeService {
   public expressionBesoinItemSelect: ExpressionBesoinItem;
   public commandeSourceCreate: CommandeSource = new CommandeSource(0, '',0,'','','','');
   public commandeItemSelected: CommandeItem=new CommandeItem('',0,0,0,0);
-  public commandecherch: Commande = new Commande('', 0, '', '', '', '');
+  public commandecherch: Commande = new Commande('', 0, '', '', '', '','');
   private _fournisseurCreate: Fournisseur = new Fournisseur('', '', '');
   public fournisseurtrover: Fournisseur;
   public commandeItemsReception: Array<CommandeItem>;
@@ -91,7 +91,7 @@ export class CommandeService {
           this.findAll();
         }
         console.log('ok');
-        this.commandeCreate = new Commande('', 0, '', '', '', '');
+        this.commandeCreate = new Commande('', 0, '', '', '', '','');
         this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
       }, error: error => {
         console.log(error);
@@ -459,6 +459,9 @@ export class CommandeService {
       this.commandeCreate.commandeItemVos.push(commandeItemClone);
       this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
     }
+    this.commandeCreate.fournisseurVo.reference=offre.refrenceFournisseur;
+    console.log(offre.refrenceFournisseur);
+    this.commandeCreate.referenceOffre=offre.reference;
 
   }
 
@@ -522,7 +525,7 @@ export class CommandeService {
 
   get commandeSelected(): Commande {
     if (this._commandeSelected == null) {
-      this._commandeSelected = new Commande('', 0, '', '', '', '');
+      this._commandeSelected = new Commande('', 0, '', '', '', '','');
     }
     return this._commandeSelected;
   }

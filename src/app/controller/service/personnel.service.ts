@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,17 +17,18 @@ export class PersonnelService {
   public url3 = 'http://localhost:9999/personnel/personnels/deletePersonnel/';
   public url4 = 'http://localhost:9999/personnel/personnels/cin/';
   public url5 = 'http://localhost:9999/typePersonnel/typePersonnels/typePersonnelAll/';
-  public url6 = 'http://localhost:9999/personnel/personnels/updatePersonnel/';
+  public url6 = 'http://localhost:9999/personnel/personnels/updatePersonnel';
 
   public personnelCreate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   public personnelToUpdate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   public typePersonnelCreate: TypePersonnel = new TypePersonnel('');
-
-
   private _personnelSelected: Personnel;
   public pSelected: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   public listPers: Array<Personnel>;
   public listTypePersonnels: Array<TypePersonnel>;
+  public personnelSearch : Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  public listPersonnel : Array<Personnel>;
+  public _listPersonnels: Array<Personnel>;
 
   constructor(private http: HttpClient) {
   }
@@ -68,7 +70,7 @@ export class PersonnelService {
 
     this.http.get<Array<Personnel>>(this.url2).subscribe(
       data => {
-        this.listPers = data;
+        this._listPersonnels = data;
       },
       error => {
         console.log('error find all personnel');
@@ -76,18 +78,19 @@ export class PersonnelService {
     );
   }
 
+
   set listPersonnels(value: Personnel[]) {
-    this.listPers = value;
+    this.listPersonnel = value;
   }
 
   get listPersonnels(): Array<Personnel> {
-    return this.listPers;
+    return this.listPersonnel;
   }
 
   findPersonels() {
     this.http.get<Array<Personnel>>(this.url2).subscribe(
       data => {
-        this.listPers = data;
+        this.listPersonnel = data;
         console.log('find list personnel');
 
       }, error => {
@@ -113,13 +116,7 @@ export class PersonnelService {
   }
 
 
-  get personnelSelected(): Personnel {
-    return this._personnelSelected;
-  }
 
-  set personnelSelected(value: Personnel) {
-    this._personnelSelected = value;
-  }
 
 
   public findByCin(personnel: Personnel) {
@@ -152,30 +149,14 @@ export class PersonnelService {
 
 
   public upDatePersonnel() {
-    this.http.put<Personnel>(this.url6, this.personnelSelected).subscribe(
+    this.http.put<number>(this.url6, this.personnelSelected).subscribe(
       data => {
-        this.personnelSelected = data;
-
-        this.personnelToUpdate.nom = data.nom;
-        this.personnelToUpdate.prenom = data.prenom;
-        this.personnelToUpdate.cin = data.cin;
-        this.personnelToUpdate.dateActivation = data.dateActivation;
-        this.personnelToUpdate.dateDebutTypePersonnel = data.dateDebutTypePersonnel;
-        this.personnelToUpdate.dateAccesFonctionPublique = data.dateAccesFonctionPublique;
-        this.personnelToUpdate.dateExerciceEchelle = data.dateExerciceEchelle;
-        this.personnelToUpdate.dateNaissance = data.dateNaissance;
-        this.personnelToUpdate.grade = data.grade;
-        this.personnelToUpdate.referenceEchelon = data.referenceEchelon;
-        this.personnelToUpdate.referenceEchelon = data.referenceEchelon;
-        this.personnelToUpdate.referenceEchelle = data.referenceEchelle;
-        this.personnelToUpdate.lieuNaissance = data.lieuNaissance;
-        this.personnelToUpdate.etatSocial = data.etatSocial;
-        this.personnelToUpdate.nombreEnfants = data.nombreEnfants;
-        this.personnelToUpdate.lieuAffectation = data.lieuAffectation;
-        this.personnelToUpdate.numeroLocation = data.numeroLocation;
-        this.personnelToUpdate.typePersonnelVo.libelle = data.typePersonnelVo.libelle;
-
-
+        if(data == 1){
+          Swal.fire('Informations', ' update Personnel avec success', 'success');
+          console.log( " ha data dyali "+ data);
+        }else{
+          Swal.fire('Informations', ' no update', 'error');
+        }
       }, error => {
         console.log('Error' + error);
         //Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
@@ -183,6 +164,47 @@ export class PersonnelService {
     );
   }
 
+  public printPersonnel(cin :string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:9999/personnel/personnels/personnel/"+cin +"/pdf",httpOptions).subscribe((resultBlob: Blob) => {
+      console.log("http://localhost:9999/personnel/personnels/personnel/"+cin +"/pdf");
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
+
+
+  public recherchePersonnel(){
+
+    this.http.post<Array<Personnel>>("http://localhost:9999/personnel/personnels/chercherPersonnel",this.personnelSearch).subscribe(
+      data=>{
+        if (data ==null){
+          Swal.fire('Information','Personnel Introuvable','error');
+        }else{
+          this.listPersonnel = data;
+          console.log( " ha daaaata  "+data);
+          console.log(this.personnelSearch)
+          Swal.fire('Information','Personnels trouvé','success');
+        }
+
+      },error1 => {
+        console.log(error1);
+      }
+    );
+  }
+
+
+
+  get personnelSelected(): Personnel {
+    return this._personnelSelected;
+  }
+
+  set personnelSelected(value: Personnel) {
+    this._personnelSelected = value;
+  }
 
 }
 

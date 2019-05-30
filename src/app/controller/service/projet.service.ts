@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Projet} from '../model/projet.model';
 import {SousProjet} from '../model/sous-projet.model';
 import {HttpClient} from '@angular/common/http';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,31 +16,37 @@ export class ProjetService {
   private url4 = 'http://localhost:9999/projet/projets/deleteProjet/';
   private url5 = 'http://localhost:9999/sousProjet/sousProjets/deleteSousProjetById/';
   private _projetCreate: Projet = new Projet('');
-  private _sousProjetCreate: SousProjet = new SousProjet(0,'');
+  private _sousProjetCreate: SousProjet = new SousProjet(0, '');
   private _projets: Array<Projet>;
   private _sousProjets: Array<SousProjet>;
   private _projetSelected: Projet;
   private _sousProjetSelected: SousProjet;
-   private _projet: Projet = new Projet('');
-  constructor( private http: HttpClient) { }
+  private _projet: Projet = new Projet('');
+  public  projetSearch : Projet = new Projet('');
+  public listProjet : Array<Projet>;
 
+  constructor(private http: HttpClient) {
+  }
 
 
   public addSousProjet() {
-    const sousProjetClone = new SousProjet(this.sousProjetCreate.id,this.sousProjetCreate.referenceSousProjet);
+    const sousProjetClone = new SousProjet(this.sousProjetCreate.id, this.sousProjetCreate.referenceSousProjet);
     this.projetCreate.sousProjetsVo.push(sousProjetClone);
   }
+
   public saveProjet() {
-    this.http.post<number>(this.url , this.projetCreate).subscribe(
+    this.http.post<number>(this.url, this.projetCreate).subscribe(
       data => {
         if (data == -1) {
-          Swal.fire('Error','Projet existe déja','error');
-        console.log('ok');
-      }else if(data == 1) {
-          Swal.fire('Informations','Projet et sous projet ajouter avec success','success');
+          Swal.fire('Error', 'Projet existe déja', 'error');
+          console.log('ok');
+        } else if (data == 1) {
+          Swal.fire('Informations', 'Projet et sous projet ajouter avec success', 'success');
           this.projetCreate = new Projet('');
-          this.sousProjetCreate = new SousProjet(0,'');
+          this.sousProjetCreate = new SousProjet(0, '');
           this.findAll();
+        } else if (data == -2) {
+          Swal.fire('Error', 'Erro ', 'error');
         }
 
 
@@ -47,7 +54,7 @@ export class ProjetService {
         console.log('error');
       }
     );
-      }
+  }
 
   public findAll() {
     this.http.get<Array<Projet>>(this.url2).subscribe(
@@ -60,48 +67,30 @@ export class ProjetService {
     );
   }
 
-  public findSousProjet() {
-
-    if (this.projetCreate != null) {
-      console.log(this.url3+ this._projetCreate.libelleP + "/sous-projet");
-      this.http.get<Array<SousProjet>>(this.url3+ this._projetCreate.libelleP + "/sous-projet").subscribe(
-        data => {
-          if (data == null) {
-            Swal.fire('Error','Projet introuvable ' ,'error');
-          console.log(data);
-
-          }else{
-            this._projetCreate.sousProjetsVo = data;
-          }
-        }, error => {
-          console.log(error);
-        }
-      );
-    }
-  }
 
   public findSousProjetByLibelleProjet(projet: Projet) {
     this._projetSelected = projet;
     if (this.projetSelected != null) {
 
-    this.http.get<Array<SousProjet>>(this.url3  + this.projetSelected.libelleP + "/sous-projet").subscribe(
-      data => {
-        this._projetSelected.sousProjetsVo = data;
-        console.log('ok');
-      }, error => {
-        console.log('error sous projets');
-      }
-    );
+      this.http.get<Array<SousProjet>>(this.url3 + this.projetSelected.libelleP + '/sous-projet').subscribe(
+        data => {
+          this._projetSelected.sousProjetsVo = data;
+          console.log('ok');
+        }, error => {
+          console.log('error sous projets');
+        }
+      );
     }
   }
 
   get projets(): Array<Projet> {
-    return this._projets;
+    return this.listProjet;
   }
-  findProjet(){
-    this.http.get<Array<Projet>>( this.url2).subscribe(
+
+  findProjet() {
+    this.http.get<Array<Projet>>(this.url2).subscribe(
       data => {
-        this._projets = data;
+        this.listProjet = data;
       }, errorrr => {
         console.log('error**');
       }
@@ -117,10 +106,10 @@ export class ProjetService {
   public deleteProjet(projet: Projet) {
     this.projetSelected = projet;
     if (this.projetSelected != null) {
-      console.log(this.url4 + this.projetSelected.libelleP );
-      this.http.delete<Projet>(this.url4 + this.projetSelected.libelleP ).subscribe(error => {
+      console.log(this.url4 + this.projetSelected.libelleP);
+      this.http.delete<Projet>(this.url4 + this.projetSelected.libelleP).subscribe(error => {
 
-          Swal.fire('Informations','Projet et sous projet supprimer avec success','success');
+        Swal.fire('Informations', 'Projet et sous projet supprimer avec success', 'success');
         console.log('Deleted projet  with libelleP = ' + this.projetSelected.libelleP + '' + error);
         this.findAll();
         this.projetSelected.sousProjetsVo = [];
@@ -138,9 +127,9 @@ export class ProjetService {
       console.log(this.url5 + this.sousProjetSelected.id);
       this.http.delete<SousProjet>(this.url5 + this.sousProjetSelected.id).subscribe(error => {
 
-        Swal.fire('Informations','Sous projet supprimer avec success','success');
+        Swal.fire('Informations', 'Sous projet supprimer avec success', 'success');
         console.log('Deleted sous projet  with id sous projet = ' + this.sousProjetSelected.id + '' + error);
-        
+
 
       });
       const index: number = this._sousProjets.indexOf(sousProjet);
@@ -148,6 +137,41 @@ export class ProjetService {
     }
 
   }
+
+  public printProjet(libelleP: string) {
+    const httpOptions = {
+
+      responseType: 'blob' as 'json'
+    };
+    return this.http.get('http://localhost:9999/projet/projets/projet/' + libelleP + '/pdf', httpOptions).subscribe((resultBlob: Blob) => {
+      console.log('http://localhost:9999/personnel/personnels/personnel/' + libelleP + '/pdf');
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);
+    });
+  }
+
+
+  public rechercheProjet() {
+
+    this.http.post<Array<Projet>>('http://localhost:9999/projet/projets/chercherProjet', this.projetSearch).subscribe(
+      data => {
+        if (data == null) {
+          Swal.fire('Information', 'Projet Introuvable', 'error');
+          this.projetSelected.sousProjetsVo = [];
+        } else {
+          this.listProjet = data;
+          this.projetSelected.sousProjetsVo = [];
+          console.log(' ha daaaata  ' + data);
+          console.log(this.projetSearch);
+          Swal.fire('Information', 'Projets trouvé', 'success');
+        }
+
+      }, error1 => {
+        console.log(error1);
+      }
+    );
+  }
+
 
   get projet(): Projet {
     return this._projet;
@@ -157,13 +181,13 @@ export class ProjetService {
     this._projet = value;
   }
 
-/*  get url(): string {
-    return this._url;
-  }
+  /*  get url(): string {
+      return this._url;
+    }
 
-  set url(value: string) {
-    this._url = value;
-  }*/
+    set url(value: string) {
+      this._url = value;
+    }*/
 
   get projetCreate(): Projet {
     return this._projetCreate;
