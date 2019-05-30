@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppelOffreService} from '../../../controller/service/appel-offre.service';
 import {AppelOffre} from '../../../controller/model/appel-offre.model';
 import {OffreService} from '../../../controller/service/offre.service';
@@ -13,20 +13,23 @@ import {CommandeService} from '../../../controller/service/commandes/commande.se
 })
 export class AppelOffreListeComponent implements OnInit {
 
-  constructor(private commandeService:CommandeService,private router:Router,private appelOffreService: AppelOffreService,private offreService:OffreService) { }
+  constructor(private commandeService: CommandeService, private router: Router, private appelOffreService: AppelOffreService, private offreService: OffreService) {
+  }
 
   ngOnInit() {
     this.appelOffreService.findAll();
     this.appelOffreService.findAppelOffreDetailByObjectifAppelOffre(this.appelOffreSelected);
   }
 
-  public findAppelOffreDetailByObjectifAppelOffre(appelOffre: AppelOffre ) {
+  public findAppelOffreDetailByObjectifAppelOffre(appelOffre: AppelOffre) {
     this.appelOffreService.findAppelOffreDetailByObjectifAppelOffre(appelOffre);
 
   }
-  public get appelOffreSearch(){
+
+  public get appelOffreSearch() {
     return this.appelOffreService.appelOffreSearch;
   }
+
   public get appelOffres() {
     return this.appelOffreService.appelOffres;
   }
@@ -40,8 +43,9 @@ export class AppelOffreListeComponent implements OnInit {
   }
 
   findOffreDetailByAppelOffre(a) {
-  this.offreService.findByAppelOffreRefernce(a.reference);
-  this.appelOffreService.findOffreSelectedByRefernceAppelOffre(a.reference);
+    this.offreService.findByAppelOffreRefernce(a.reference);
+    this.offreService.findOffreSelectedByRefernceAppelOffre(a.reference);
+
   }
 
   removeAppelOffre(a) {
@@ -49,7 +53,8 @@ export class AppelOffreListeComponent implements OnInit {
 
 
   }
-  printAppelOffre(a:AppelOffre) {
+
+  printAppelOffre(a: AppelOffre) {
     this.appelOffreService.printAppelOffre(a.reference);
 
 

@@ -5,11 +5,14 @@ import {Offre} from '../model/offre.model';
 import {OffreDetail} from '../model/offre-detail.model';
 import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 import {Fournisseur} from '../model/commandes/fournisseur.model';
+import {compileBaseDefFromMetadata} from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OffreService {
+
+  private _urlAppelOffre = 'http://localhost:8091/AppelOffre/AppelOffres/';
 
   private _url = 'http://localhost:8091/appelOffre-api/offres/';
   private urlOffreDetail = 'http://localhost:8091/appelOffre-api/offreDetails';
@@ -17,6 +20,7 @@ export class OffreService {
 
 
   public offreCreate: Offre = new Offre();
+  private _offreSelected: Offre = new Offre();
   public offreDetailCreate: OffreDetail = new OffreDetail('', 0, 0, 0);
   public offreDetailsSearch: Array<OffreDetail> = new Array<OffreDetail>();
   public offresSearch: Array<Offre> = new Array<Offre>();
@@ -96,5 +100,30 @@ export class OffreService {
       });
   }
 
+  public findOffreSelectedByRefernceAppelOffre(ref: string) {
+    this.http.get<Offre>(this._urlAppelOffre + '/refrence/' + ref + '/selected').subscribe(
+      data => {
+        this._offreSelected = data;
+        console.log(data);
+      }, error => {
+        console.log('erroooor while loading AppelOffre details....');
+      }
+    );
+  }
+  chekBestOffre(a: Offre) {
+    this.http.put<number>(this._urlAppelOffre + '/offre/reference/' + a.reference, a).subscribe(
+      data => {
+        console.log('ok');
+      }, error => {
+        console.log('error' + error);
+      }
+    );
+  }
+  get offreSelected(): Offre {
+    return this._offreSelected;
+  }
 
+  set offreSelected(value: Offre) {
+    this._offreSelected = value;
+  }
 }

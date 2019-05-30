@@ -16,6 +16,7 @@ export class OffresListComponent implements OnInit {
   appelOffreReference: string = '';
   offreSelected: Offre = new Offre();
 
+
   constructor(private commandeService: CommandeService, private router: Router, private offreService: OffreService, public appelOffreService: AppelOffreService) {
 
   }
@@ -30,6 +31,8 @@ export class OffresListComponent implements OnInit {
   public get offres() {
     return this.offreService.offresSearch;
   }
+
+  mode = -1;
 
   public get offreDetails() {
     return this.offreService.offreDetailsSearch;
@@ -49,21 +52,29 @@ export class OffresListComponent implements OnInit {
   }
 
   get bestOffre() {
-    return this.appelOffreService.offreSelected;
+    return this.offreService.offreSelected;
   }
 
   chekBestOffre(a: Offre) {
-    this.appelOffreService.chekBestOffre(a);
-    this.appelOffreService.findOffreSelectedByRefernceAppelOffre(a.reference);
-
+    this.offreService.chekBestOffre(a);
+    this.offreService.findOffreSelectedByRefernceAppelOffre(a.reference);
 
   }
 
   changeOffreToCommande(a) {
     this.offreService.offreDetailByOffreReference(a.reference);
-    this.commandeService.offreToCommande(a,this.offreService.offreDetailsSearch);
+    this.commandeService.offreToCommande(a, this.offreService.offreDetailsSearch);
     this.router.navigate(['/commandeCreate']);
 
 
+  }
+
+  gogog() {
+    let offre = this.offreService.offresSearch.find(o => o.reference == this.offreService.offreSelected.reference);
+    if (offre != null) {
+      this.mode = this.offreService.offresSearch.indexOf(offre);
+    } else {
+      this.mode = -1;
+    }
   }
 }
