@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Projet} from '../model/projet.model';
 import {SousProjet} from '../model/sous-projet.model';
-import Any = jasmine.Any;
 
 @Injectable({
   providedIn: 'root'
@@ -372,7 +371,6 @@ export class BudgetService {
     this.clone(bsp.detaillesBudgetVo, this.detailClone);
   }
 
-  f;
 
   public detaillBudgetCompteBudgitaire(bcb: BudgetCompteBudgitaireVo) {
     this.detail = bcb.detaillesBudgetVo;
@@ -397,11 +395,14 @@ export class BudgetService {
   budgetInstance: any;
 
   public update() {
-    if (this.budgetInstance instanceof BudgetProjetVo) {
-      console.log('haaaaaaa=======' + this.budgetInstance);
-      this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
-    }
     this.clone(this.detailClone, this.detail);
+    if (this.budgetInstance instanceof BudgetProjetVo) {
+      this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
+    } else if (this.budgetInstance instanceof BudgetSousProjetVo) {
+      this.calculedetailleBudgetProjet(this.budgetProjetPrincipal, this.budgetProjetPrincipal.budgetSousProjetVos);
+    } else if (this.budgetInstance instanceof BudgetCompteBudgitaireVo){
+      this.calculedetailleBudgetSousProjet(this.budgetSousProjetPrincipal, this.budgetSousProjetPrincipal.budgetCompteBudgitaireVos);
+    }
   }
 
 
@@ -482,7 +483,6 @@ export class BudgetService {
     bf.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
     bf.detaillesBudgetVo.engagePaye = engagePaye.toString();
     bf.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
-    this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal,this.budgetFacultePrincipal.budgetProjetVos);
   }
 
   public calculedetailleBudgetProjet(bp: BudgetProjetVo, budgetSousProjetVos: Array<BudgetSousProjetVo>) {
@@ -500,6 +500,8 @@ export class BudgetService {
     bp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
     bp.detaillesBudgetVo.engagePaye = engagePaye.toString();
     bp.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
+    this.calculedetailleBudgetFaculte(this.budgetFacultePrincipal, this.budgetFacultePrincipal.budgetProjetVos);
+
   }
 
   public calculedetailleBudgetSousProjet(bsp: BudgetSousProjetVo, budgetCompteBudgitaireVo: Array<BudgetCompteBudgitaireVo>) {
@@ -517,7 +519,8 @@ export class BudgetService {
     bsp.detaillesBudgetVo.reliquatEstimatif = reliquatEstimatif.toString();
     bsp.detaillesBudgetVo.engagePaye = engagePaye.toString();
     bsp.detaillesBudgetVo.engageNonPaye = engageNonPaye.toString();
-    this.calculedetailleBudgetProjet(this.budgetProjetPrincipal,this.budgetProjetPrincipal.budgetSousProjetVos);
+    this.calculedetailleBudgetProjet(this.budgetProjetPrincipal, this.budgetProjetPrincipal.budgetSousProjetVos);
+
   }
 
 
@@ -748,12 +751,13 @@ export class BudgetService {
 
   //update budget sous projet
 
-  budget:any;
-  hi(){
+  budget: any;
+
+  hi() {
     if (this.budget instanceof BudgetFaculteVo) {
-     this.calculedetailleBudgetFaculte(this.budget,this.budget.budgetProjetVos);
+      this.calculedetailleBudgetFaculte(this.budget, this.budget.budgetProjetVos);
     }
-    this.budget instanceof BudgetProjetVo
+    this.budget instanceof BudgetProjetVo;
   }
 }
 
