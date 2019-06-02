@@ -1,86 +1,91 @@
 <mat-dialog-content class="mat-card">
-  <div class="card-header text-center">
-    Création
-  </div>
-  <div class="card-body">
-
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="refea">Réf C-B</label>
-      </div>
-      <input type="text" placeholder="Pick one" id="refea" aria-label="Number" class="form-control" matInput
-             [formControl]="myControl" [matAutocomplete]="auto">
-
-      <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
+  <div class="card">
+    <div class="card-header text-center">
+      Création
     </div>
-    <div *ngIf="mode==1" class="mb-3">
-      <div class="card text-center">
+    <div class="card-body">
+
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="refea">Réf C-B</label>
+        </div>
+        <input type="text" placeholder="Pick one" id="refea" aria-label="Number" class="form-control" matInput
+               [formControl]="myControl" [matAutocomplete]="auto">
+
+        <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
+      </div>
+      <div *ngIf="mode==1" class="mb-3">
+        <div class="card text-center">
 
 
-        <div class="card-body">
-          <div class="card-title">Nouveau Compte Budgitaire</div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="code">Code</label>
+          <div class="card-body">
+            <div class="card-title">Nouveau Compte Budgitaire</div>
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="code">Code</label>
+              </div>
+              <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" class="form-control"
+                     aria-label="Sizing example input" min="0" step="any" required id="code"
+                     aria-describedby="inputGroup-sizing-sm">
             </div>
-            <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="code"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group  ">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="libelle">Libellé</label>
+            <div class="input-group input-group  ">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="libelle">Libellé</label>
+              </div>
+              <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle"
+                     class="form-control"
+                     aria-label="Sizing example input" min="0" step="any" required id="libelle"
+                     aria-describedby="inputGroup-sizing-sm">
             </div>
-            <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle"
-                   class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="libelle"
-                   aria-describedby="inputGroup-sizing-sm">
           </div>
         </div>
       </div>
-    </div>
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>
+        </div>
+        <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertEstimatif"
+               class="form-control"
+               aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
+               aria-describedby="inputGroup-sizing-sm">
       </div>
-      <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertEstimatif"
-             class="form-control"
-             aria-label="Sizing example input" min="0" step="any" required id="creditouverestimatif"
-             aria-describedby="inputGroup-sizing-sm">
-    </div>
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="creditouverreel">Crédit ouvert réel</label>
+        </div>
+        <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertReel"
+               class="form-control"
+               aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
+               aria-describedby="inputGroup-sizing-sm">
       </div>
-      <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.creditOuvertReel"
-             class="form-control"
-             aria-label="Sizing example input" min="0" step="any" required id="creditouverreel"
-             aria-describedby="inputGroup-sizing-sm">
-    </div>
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="engagepaye">Engagé payé</label>
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="engagepaye">Engagé payé</label>
+        </div>
+        <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engagePaye" class="form-control"
+               aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
+               aria-describedby="inputGroup-sizing-sm">
       </div>
-      <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engagePaye" class="form-control"
-             aria-label="Sizing example input" min="0" step="any" required id="engagepaye"
-             aria-describedby="inputGroup-sizing-sm">
-    </div>
-    <div class="input-group input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="engagenonpaye">Engagé non payé</label>
+        </div>
+        <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engageNonPaye"
+               class="form-control"
+               aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
+               aria-describedby="inputGroup-sizing-sm">
       </div>
-      <input type="number" [(ngModel)]="budgetCompteBudgitaireCreate.detaillesBudgetVo.engageNonPaye"
-             class="form-control"
-             aria-label="Sizing example input" min="0" step="any" required id="engagenonpaye"
-             aria-describedby="inputGroup-sizing-sm">
-    </div>
 
 
-    <div class="row">
-      <button mat-button [mat-dialog-close]="true" class="btn btn-outline-secondary btn-block"
-              (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
+      <div class="row">
+        <button mat-button [mat-dialog-close]="true" class="btn btn-outline-secondary btn-block"
+                (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
+      </div>
     </div>
+
   </div>
+
+
 </mat-dialog-content>
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option autoActiveFirstOption *ngFor="let option of filteredOptions | async" [value]="option.code">
