@@ -1,4 +1,4 @@
-<div class="card">
+<mat-dialog-content class="mat-card">
   <div class="card-header text-center">
     Création
   </div>
@@ -8,7 +8,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="refea">Réf C-B</label>
       </div>
-      <input type="text" placeholder="Pick one" id="refea" aria-label="Number"  class="form-control" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <input type="text" placeholder="Pick one" id="refea" aria-label="Number" class="form-control" matInput
+             [formControl]="myControl" [matAutocomplete]="auto">
 
       <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>
@@ -75,12 +76,12 @@
     </div>
 
 
-
     <div class="row">
-      <button class="btn btn-outline-secondary btn-block" (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
+      <button mat-button [mat-dialog-close]="true" class="btn btn-outline-secondary btn-block"
+              (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
     </div>
   </div>
-</div>
+</mat-dialog-content>
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option autoActiveFirstOption *ngFor="let option of filteredOptions | async" [value]="option.code">
     {{option.code}} : {{option.libelle}}
