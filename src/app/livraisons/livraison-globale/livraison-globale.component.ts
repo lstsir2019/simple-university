@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {LivraisonService} from "../../../controller/service/livraison.service";
-import {ProduitService} from "../../../controller/service/produit.service";
-import {StockGlobalService} from "../../../controller/service/stock-global.service";
-import {LivraisonItem} from "../../../controller/model/livraison-item.model";
-import {CommandeSourceWithProduit} from "../../../controller/model/commande-source-with-produit.model";
-import {StockGlobal} from "../../../controller/model/stock-global.Model";
-import {getReact} from "../../../controller/service/evolutions/Util/SwalReact";
+import {LivraisonService} from "../../controller/service/livraison.service";
+import {ProduitService} from "../../controller/service/produit.service";
+import {StockGlobalService} from "../../controller/service/stock-global.service";
+import {LivraisonItem} from "../../controller/model/livraison-item.model";
+import {CommandeSourceWithProduit} from "../../controller/model/commande-source-with-produit.model";
+import {StockGlobal} from "../../controller/model/stock-global.Model";
+import {getReact} from "../../controller/service/evolutions/Util/SwalReact";
 import swal from "sweetalert2";
 import  * as $ from 'jquery';
 import Swal from 'sweetalert2';

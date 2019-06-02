@@ -6,39 +6,13 @@
 
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="refea">Réf C-B</label>
+        <label class="input-group-text" for="refea">Code C-B</label>
       </div>
-      <input type="text" placeholder="Pick one" id="refea" aria-label="Number" class="form-control" matInput
+      <input type="text" placeholder="Code" id="refea" aria-label="Number" class="form-control" matInput
              [formControl]="myControl" [matAutocomplete]="auto">
 
-      <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>
-    <div *ngIf="mode==1" class="mb-3">
-      <div class="card text-center">
 
-
-        <div class="card-body">
-          <div class="card-title">Nouveau Compte Budgitaire</div>
-          <div class="input-group input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="code">Code</label>
-            </div>
-            <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="code"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group  ">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="libelle">Libellé</label>
-            </div>
-            <input type="text" [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.libelle"
-                   class="form-control"
-                   aria-label="Sizing example input" min="0" step="any" required id="libelle"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="input-group input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="creditouverestimatif">Crédit ouvert éstimatif</label>

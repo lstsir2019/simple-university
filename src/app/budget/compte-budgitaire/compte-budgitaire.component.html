@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        Compte-Bugitaire
+      </div>
+      <div>
+        <div class="card-body d-lg-flex justify-content-center">
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="anneeMin">Code</label>
+              </div>
+              <input  aria-describedby="inputGroup-sizing-sm"
+                     aria-label="Sizing example input"
+                     class="form-control" id="anneeMin" min="0" required step="any"
+                     type="number">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="anneeMax">Libelle</label>
+              </div>
+              <input  aria-describedby="inputGroup-sizing-sm"
+                     aria-label="Sizing example input"
+                     class="form-control" id="anneeMax" min="0" required step="any"
+                     type="text">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="input-group input-group mb-3">
+              <button class="btn btn-outline-success btn-block" ><i class="fa fa-plus">Nouveau </i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="card-title">List Des Compte</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-sm text-center">
+            <thead>
+            <tr>
+              <th scope="1">Code</th>
+              <th scope="1">Libelle</th>
+              <th scope="1">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="compteList.length<=0">
+              <td colspan="4" class="font-italic text-center">No item Found</td>
+            </tr>
+            <tr *ngFor="let c of compteList">
+              <td>{{c.code}}</td>
+              <td>{{c.libelle}}</td>
+        
+              <td>
+                <button class="btn btn-outline-danger fa fa-trash-o" type="button"
+                        (click)="deleteCompte(c)"></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

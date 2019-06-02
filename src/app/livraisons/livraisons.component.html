@@ -4,13 +4,15 @@
 
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-create-tab" data-toggle="tab" href="#nav-create" role="tab" aria-controls="nav-create" aria-selected="true">CREATION</a>
-      <a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">RECHERCHE</a>
+      <a class="nav-item nav-link active" id="nav-Detail-tab" data-toggle="tab" href="#nav-Detail" role="tab" aria-controls="nav-Detail" aria-selected="true">Livraison-Detail</a>
+      <a class="nav-item nav-link " id="nav-Global-tab" data-toggle="tab" href="#nav-Global" role="tab" aria-controls="nav-Global" aria-selected="true">Livraison-Global</a>
+      <a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">Exploration</a>
     </div>
   </nav>
 
   <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab"><app-livraison-create></app-livraison-create></div>
+    <div class="tab-pane fade show active" id="nav-Detail" role="tabpanel" aria-labelledby="nav-Detail-tab"><app-livraison-detaille></app-livraison-detaille></div>
+    <div class="tab-pane fade " id="nav-Global" role="tabpanel" aria-labelledby="nav-Global-tab"><app-livraison-globale></app-livraison-globale></div>
     <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab"><app-livraison-list></app-livraison-list></div>
 
   </div>
