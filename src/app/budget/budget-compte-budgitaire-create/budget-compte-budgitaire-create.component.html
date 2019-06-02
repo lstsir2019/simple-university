@@ -8,12 +8,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="refea">Réf C-B</label>
       </div>
-      <select [(ngModel)]="budgetCompteBudgitaireCreate.compteBudgitaireVo.code" id="refea" class="select form-control"
-              required>
-        <option>----------SELECT-----------</option>
-        <option *ngFor="let compte of compteBudgitaireList" value="{{compte.code}}">{{compte.code}}/{{compte.libelle}}
-        </option>
-      </select>
+      <input type="text" placeholder="Pick one" id="refea" aria-label="Number"  class="form-control" matInput [formControl]="myControl" [matAutocomplete]="auto">
+
       <button class="btn btn-outline-primary" (click)="changeMode()">+</button>
     </div>
     <div *ngIf="mode==1" class="mb-3">
@@ -81,10 +77,12 @@
 
 
     <div class="row">
-      <button class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#myModalCompte"
-              (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
-
-
+      <button class="btn btn-outline-secondary btn-block" (click)="ajouterNewBudgetCompteBudegtaireProjet()"><i class="fa fa-plus">Ajouter</i></button>
     </div>
   </div>
 </div>
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option autoActiveFirstOption *ngFor="let option of filteredOptions | async" [value]="option.code">
+    {{option.code}} : {{option.libelle}}
+  </mat-option>
+</mat-autocomplete>
