@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div>
+    <div class="card">
+      <div class="card-header text-center">
+        Budget Faculte
+      </div>
+      <div class="card-body d-lg-flex justify-content-center">
+        <div class="col-md-6">
+          <div class="input-group input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" >Budget-Projet</label>
+            </div>
+            <select  class="form-control" [(ngModel)]="budgetProjet" (change)="findDetailles();findBudgetSousProjet()">
+              <option>---------SELECT---------</option>
+              <option *ngFor="let bp of budgetProjetList" [ngValue]="bp">{{bp.referenceProjet}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group input-group mb-3">
+            <button (click)="findDetailles()"
+                    class="btn btn-outline-primary btn-block"><i class="fa fa-search">Search</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="card-title">List</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-sm text-center">
+            <thead>
+            <tr>
+              <th scope="1">Code</th>
+              <th scope="1">Liblle</th>
+              <th scope="1">COE</th>
+              <th scope="1">COR</th>
+              <th scope="1">EngagePaye</th>
+              <th scope="1">EngageNonPaye</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bcb of budgetCompteBudgitaires">
+              <td>{{bcb.compteBudgitaireVo.code}}</td>
+              <td>{{bcb.compteBudgitaireVo.libelle}}</td>
+              <td>{{bcb.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+              <td>{{bcb.detaillesBudgetVo.creditOuvertReel}}</td>
+              <td>{{bcb.detaillesBudgetVo.engagePaye}}</td>
+              <td>{{bcb.detaillesBudgetVo.engageNonPaye}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

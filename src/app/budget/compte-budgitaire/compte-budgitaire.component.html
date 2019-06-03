@@ -12,7 +12,7 @@
                 <label class="input-group-text" for="anneeMin">Code</label>
               </div>
               <input  aria-describedby="inputGroup-sizing-sm"
-                     aria-label="Sizing example input"
+                     aria-label="Sizing example input" [(ngModel)]="compteBugitaire.code"
                      class="form-control" id="anneeMin" min="0" required step="any"
                      type="number">
             </div>
@@ -23,7 +23,7 @@
                 <label class="input-group-text" for="anneeMax">Libelle</label>
               </div>
               <input  aria-describedby="inputGroup-sizing-sm"
-                     aria-label="Sizing example input"
+                     aria-label="Sizing example input"  [(ngModel)]="compteBugitaire.libelle"
                      class="form-control" id="anneeMax" min="0" required step="any"
                      type="text">
             </div>
@@ -31,7 +31,7 @@
 
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button class="btn btn-outline-success btn-block" ><i class="fa fa-plus">Nouveau </i></button>
+              <button class="btn btn-outline-success btn-block" (click)="save()"><i class="fa fa-plus">Nouveau </i></button>
             </div>
           </div>
         </div>

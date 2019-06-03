@@ -14,12 +14,13 @@ import {BudgetCompteBudgitaireCreateComponent} from '../budget-compte-budgitaire
 export class BudgetCompteBudgitaireComponent implements OnInit {
 
 
-  constructor(private budgetService: BudgetService,public dialog: MatDialog) {
+  constructor(private budgetService: BudgetService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
 
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(BudgetCompteBudgitaireCreateComponent);
 
@@ -44,10 +45,7 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
 
 
   public findBudgetCompteBudgitaire() {
-
-    console.log('haaaaaaaaaaaaaaaaa sous projet ' + this.budgetSousProjetSelected);
     this.budgetService.findBudgetCompteBudgitaire(this.budgetSousProjetSelected);
-
   }
 
   public get budgetSousProjetList() {
@@ -74,12 +72,6 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.budgetService.removeBudgetCompteBudgitaire(bcb);
-
-        Swal.fire(
-          'Supprimmé!',
-          'Vos données ont été supprimés.',
-          'success'
-        );
       }
     });
 

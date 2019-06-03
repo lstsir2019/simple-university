@@ -106,6 +106,11 @@ import {FaculteMandatComponent} from './faculte-mandat/faculte-mandat.component'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule, MatDialogModule, MatInputModule} from '@angular/material';
 import { CompteBudgitaireComponent } from './budget/compte-budgitaire/compte-budgitaire.component';
+import { BudgetFaculteExplorationComponent } from './budget/Exploration/budget-faculte-exploration/budget-faculte-exploration.component';
+import { BudgetProjetExplorationComponent } from './budget/Exploration/budget-projet-exploration/budget-projet-exploration.component';
+import { BudgetSousProjetExplorationComponent } from './budget/Exploration/budget-sous-projet-exploration/budget-sous-projet-exploration.component';
+import { BudgetExplorationComponent } from './budget/Exploration/budget-exploration/budget-exploration.component';
+import { ExplorationComponent } from './budget/Exploration/exploration/exploration.component';
 
 @NgModule({
   declarations: [
@@ -207,6 +212,11 @@ import { CompteBudgitaireComponent } from './budget/compte-budgitaire/compte-bud
     MandatListComponent,
     FaculteMandatComponent,
     CompteBudgitaireComponent,
+    BudgetFaculteExplorationComponent,
+    BudgetProjetExplorationComponent,
+    BudgetSousProjetExplorationComponent,
+    BudgetExplorationComponent,
+    ExplorationComponent,
 
   ],
   imports: [
@@ -224,11 +234,11 @@ import { CompteBudgitaireComponent } from './budget/compte-budgitaire/compte-bud
     MatDialogModule
 ],
 
-
   entryComponents: [
-    BudgetCompteBudgitaireCreateComponent
+    BudgetCompteBudgitaireCreateComponent,
+    BudgetExplorationComponent
 ],
-  providers: [DatePipe],
+  providers: [DatePipe,BudgetExplorationComponent],
   bootstrap: [AppComponent],
 
 })

@@ -7,7 +7,6 @@ import {BudgetComponent} from './budget/budget.component';
 import {MentionsComponent} from './evaluation-personnel/mentions/mentions.component';
 import {NotesComponent} from './evaluation-personnel/notes/notes.component';
 import {ElementsComponent} from './evaluation-personnel/elements/elements.component';
-import {EvaluationPersonnelComponent} from './evaluation-personnel/evaluation-personnel.component';
 import {CommandesComponent} from './commandes/commandes.component';
 import {ProduitsComponent} from './produits/produits.component';
 import {LivraisonsComponent} from './livraisons/livraisons.component';
@@ -17,18 +16,16 @@ import {CommandeListComponent} from './commandes/commande-list/commande-list.com
 import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-besoin-create/expression-besoin-create.component';
 import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
 import {PaiementComponent} from './commandes/paiement/paiement.component';
-import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
-import {AppelOffresComponent} from './appel-offre/appel-offres/appel-offres.component';
 import {AppelOffreComponent} from './appel-offre/appel-offre.component';
 import {PersonnelsComponent} from './faculte-mandat/personnels/personnels.component';
 import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
 import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
 import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
 import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
-import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.component';
 import {CompteBudgitaireComponent} from './budget/compte-budgitaire/compte-budgitaire.component';
+import {ExplorationComponent} from './budget/Exploration/exploration/exploration.component';
 
 const routes: Routes = [
   {path: 'exepressionbesoins', component: ExpressionBesoinsComponent},
@@ -36,7 +33,7 @@ const routes: Routes = [
   {path: 'magasin', component: MagasinComponent},
 
   {path: 'budget', component: BudgetComponent},
-  {path: 'budgetFaculte', component: BudgetFaculteComponent},
+  {path: 'budgetFaculte', component: ExplorationComponent},
   {path: 'compteBudgitaire', component: CompteBudgitaireComponent},
 
 

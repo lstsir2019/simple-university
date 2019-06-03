@@ -1,0 +1,37 @@
+<div>
+  <div class="card">
+    <div class="card-header text-center">
+      <h4 class="card-title">List</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm text-center">
+          <thead>
+          <tr>
+            <th scope="1">Code</th>
+            <th scope="1">Liblle</th>
+            <th scope="1">COE</th>
+            <th scope="1">COR</th>
+            <th scope="1">EngagePaye</th>
+            <th>EngageNonPaye</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!--<tr *ngIf="budgetFaculteList.length<=0">
+            <td colspan="4" class="font-italic text-center">No item Found</td>
+          </tr>-->
+          <tr *ngFor="let bcb of budgetCompteBudgitaires">
+            <td>{{bcb.compteBudgitaireVo.code}}</td>
+            <td>{{bcb.compteBudgitaireVo.libelle}}</td>
+            <td>{{bcb.detaillesBudgetVo.creditOuvertEstimatif}}</td>
+            <td>{{bcb.detaillesBudgetVo.creditOuvertReel}}</td>
+            <td>{{bcb.detaillesBudgetVo.engagePaye}}</td>
+            <td>{{bcb.detaillesBudgetVo.engageNonPaye}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

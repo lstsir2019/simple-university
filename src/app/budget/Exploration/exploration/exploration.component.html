@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="budgetfacultes-tab" data-toggle="tab" href="#budgetfacultes"
+             role="tab" aria-controls="budgetprojet"
+             aria-selected="true">Budget Faculte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " id="budgetfaculte-tab" data-toggle="tab" href="#budgetfaculte"
+             role="tab" aria-controls="budgetprojet"
+             aria-selected="true">Budget Faculte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="budgetprojet-tab" data-toggle="tab" href="#budgetprojet" role="tab"
+             aria-controls="budgetSousProjet"
+             aria-selected="false">Budget Projet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="budgetsousprojet-tab" data-toggle="tab" href="#budgetsousprojet"
+             role="tab" aria-controls="budgetCompteBudgitaire"
+             aria-selected="false">Budget Sous Projet</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade mt-md-2 show active" id="budgetfacultes" role="tabpanel"
+             aria-labelledby="budgetprojet-tab">
+          <app-budget-faculte></app-budget-faculte>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetfaculte" role="tabpanel" aria-labelledby="budgetSousProjet-tab">
+          <app-budget-faculte-exploration></app-budget-faculte-exploration>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetprojet" role="tabpanel"
+             aria-labelledby="budgetCompteBudgitaire-tab">
+          <app-budget-projet-exploration></app-budget-projet-exploration>
+        </div>
+        <div class="tab-pane fade mt-md-2" id="budgetsousprojet" role="tabpanel" aria-labelledby="confirmation-tab">
+          <app-budget-sous-projet-exploration></app-budget-sous-projet-exploration>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
