@@ -42,7 +42,6 @@ import {CategorieTypeCreateComponent} from './produits/categorie-type-create/cat
 import {TypeCreateComponent} from './produits/type-create/type-create.component';
 import {ProduitsComponent} from './produits/produits.component';
 import {LivraisonsComponent} from './livraisons/livraisons.component';
-import {LivraisonCreateComponent} from './livraisons/livraison-create/livraison-create.component';
 import {LivraisonListComponent} from './livraisons/livraison-list/livraison-list.component';
 import {EvolutionsPersonnelComponent} from './evolutions/evolutions-personnel/evolutions-personnel.component';
 import {EvolutionPersonnelCreateComponent} from './evolutions/evolutions-personnel/evolution-personnel-create/evolution-personnel-create.component';
@@ -67,8 +66,8 @@ import {DetaillesComponent} from './budget/detailles/detailles.component';
 import {DatePipe} from '@angular/common';
 import {PaiementComponent} from './commandes/paiement/paiement.component';
 import {PaiemmentModalComponent} from './commandes/paiemment-modal/paiemment-modal.component';
-import {LivraisonDetailleComponent} from './livraisons/livraison-create/livraison-detaille/livraison-detaille.component';
-import {LivraisonGlobaleComponent} from './livraisons/livraison-create/livraison-globale/livraison-globale.component';
+import {LivraisonDetailleComponent} from './livraisons/livraison-detaille/livraison-detaille.component';
+import {LivraisonGlobaleComponent} from './livraisons/livraison-globale/livraison-globale.component';
 import {MagasinCreateCreateComponent} from './magasin/magasin-create/magasin-create-create/magasin-create-create.component';
 import {MagasinCreateListeComponent} from './magasin/magasin-create/magasin-create-liste/magasin-create-liste.component';
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
@@ -106,6 +105,7 @@ import {MandatListComponent} from './faculte-mandat/mandats/mandat-list/mandat-l
 import {FaculteMandatComponent} from './faculte-mandat/faculte-mandat.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule, MatDialogModule, MatInputModule} from '@angular/material';
+import { CompteBudgitaireComponent } from './budget/compte-budgitaire/compte-budgitaire.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +144,7 @@ import {MatAutocompleteModule, MatDialogModule, MatInputModule} from '@angular/m
     TypeCreateComponent,
     ProduitsComponent,
     LivraisonsComponent,
-    LivraisonCreateComponent,
+
     LivraisonListComponent,
     //Evolution components
     EvolutionsPersonnelComponent,
@@ -206,6 +206,7 @@ import {MatAutocompleteModule, MatDialogModule, MatInputModule} from '@angular/m
     MandatCreateComponent,
     MandatListComponent,
     FaculteMandatComponent,
+    CompteBudgitaireComponent,
 
   ],
   imports: [

@@ -27,12 +27,20 @@ import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
 import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
 import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
 import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
+import {BudgetFaculteComponent} from './budget/budget-faculte/budget-faculte.component';
+import {CompteBudgitaireComponent} from './budget/compte-budgitaire/compte-budgitaire.component';
 
 const routes: Routes = [
   {path: 'exepressionbesoins', component: ExpressionBesoinsComponent},
   {path: 'reception', component: ReceptionComponent},
   {path: 'magasin', component: MagasinComponent},
+
   {path: 'budget', component: BudgetComponent},
+  {path: 'budgetFaculte', component: BudgetFaculteComponent},
+  {path: 'compteBudgitaire', component: CompteBudgitaireComponent},
+
+
+
   {path: 'appleoffre', component: AppelOffreComponent},
 
   {path: 'elements', component: ElementsComponent,},
