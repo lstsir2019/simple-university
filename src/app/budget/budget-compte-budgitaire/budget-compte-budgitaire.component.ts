@@ -3,6 +3,8 @@ import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-com
 import {BudgetService} from '../../controller/service/budget.service';
 import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
 import Swal from 'sweetalert2';
+import {MatDialog} from '@angular/material';
+import {BudgetCompteBudgitaireCreateComponent} from '../budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
 
 @Component({
   selector: 'app-budget-compte-budgitaire',
@@ -12,11 +14,19 @@ import Swal from 'sweetalert2';
 export class BudgetCompteBudgitaireComponent implements OnInit {
 
 
-  constructor(private budgetService: BudgetService) {
+  constructor(private budgetService: BudgetService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
 
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(BudgetCompteBudgitaireCreateComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   budgetSousProjetSelected: BudgetSousProjetVo;
@@ -35,10 +45,7 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
 
 
   public findBudgetCompteBudgitaire() {
-
-    console.log('haaaaaaaaaaaaaaaaa sous projet ' + this.budgetSousProjetSelected);
     this.budgetService.findBudgetCompteBudgitaire(this.budgetSousProjetSelected);
-
   }
 
   public get budgetSousProjetList() {
@@ -65,12 +72,6 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.budgetService.removeBudgetCompteBudgitaire(bcb);
-
-        Swal.fire(
-          'Supprimmé!',
-          'Vos données ont été supprimés.',
-          'success'
-        );
       }
     });
 

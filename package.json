@@ -1,5 +1,5 @@
 {
-  "name": "com-faculte-evolution",
+  "name": "simple-faculte",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -19,6 +19,9 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@angular/cdk": "~7.3.7",
+    "@angular/material": "~7.3.7",
+    "hammerjs": "^2.0.8",
     "@types/jquery": "^3.3.29",
     "angular-popper": "^2.0.0",
     "bootstrap": "^4.3.1",
