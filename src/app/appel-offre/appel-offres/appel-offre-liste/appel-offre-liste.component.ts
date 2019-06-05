@@ -25,6 +25,9 @@ export class AppelOffreListeComponent implements OnInit {
     this.appelOffreService.findAppelOffreDetailByObjectifAppelOffre(appelOffre);
 
   }
+  public get allAppelOffre (){
+    return this.appelOffreService.allAppelOffres;
+  }
 
   public get appelOffreSearch() {
     return this.appelOffreService.appelOffreSearch;
@@ -43,8 +46,7 @@ export class AppelOffreListeComponent implements OnInit {
   }
 
   findOffreDetailByAppelOffre(a) {
-    this.offreService.findByAppelOffreRefernce(a.reference);
-    this.offreService.findOffreSelectedByRefernceAppelOffre(a.reference);
+
 
   }
 

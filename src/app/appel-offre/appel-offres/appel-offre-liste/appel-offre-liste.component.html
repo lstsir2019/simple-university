@@ -22,10 +22,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text">AppelOffre</span>
           </div>
-          <select class="form-control" type="text" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-                  [(ngModel)]="appelOffreSearch.reference">
+          <select class="form-control btn-block" type="text" [(ngModel)]="appelOffreSearch.reference">
             <option disabled>----SELECT----</option>
-       <!--     <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>-->
+           <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>-->
           </select>
         </div>
         <div class="input-group mx-sm-3 mb-2">
@@ -69,8 +68,6 @@
             <td>
               <button (click)="findAppelOffreDetailByObjectifAppelOffre(a)" data-toggle="modal" data-target="#exampleModal"
                       class="btn btn-sm btn-outline-dark"><i class="fa fa-plus">Detail</i></button>
-              <button (click)="findOffreDetailByAppelOffre(a)" data-toggle="modal" data-target="#offreModal"
-                      class="btn btn-sm btn-outline-info"><i class="fa fa-search">Offres</i></button>
               <button (click)="removeAppelOffre(a)"
                       class="btn btn-sm btn-outline-danger"><i class="fa fa-remove">supprimer</i></button>
               <button (click)="printAppelOffre(a)"
@@ -117,28 +114,6 @@
               </tbody>
             </table>
             </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade bd-example-modal-xl" id="offreModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="offreModalLabel">Offre de l'appel d'offre {{appelOffreSelected.reference}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="" *ngIf="appelOffreSelected != null">
-        <div class="card spacer">
-          <app-offres-list></app-offres-list>
         </div>
       </div>
       <div class="modal-footer">

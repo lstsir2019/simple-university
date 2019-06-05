@@ -15,6 +15,7 @@ export class OffresListComponent implements OnInit {
 
   appelOffreReference: string = '';
   offreSelected: Offre = new Offre();
+  public reference: string;
 
 
   constructor(private commandeService: CommandeService, private router: Router, private offreService: OffreService, public appelOffreService: AppelOffreService) {
@@ -39,12 +40,16 @@ export class OffresListComponent implements OnInit {
   }
 
   offreDetailByOffreReference(a: Offre) {
-    if (null != a) this.offreSelected = a;
-    this.offreService.offreDetailByOffreReference(a.reference);
+      this.offreSelected = a;
+      this.offreService.offreDetailByOffreReference(a.reference);
   }
 
   public get allAppelOffre() {
     return this.appelOffreService.allAppelOffres;
+  }
+
+  public get appelOffreSearch() {
+    return this.appelOffreService.appelOffreSearch;
   }
 
   removeOffre(a: Offre) {
@@ -69,10 +74,13 @@ export class OffresListComponent implements OnInit {
 
   }
 
-  gogog() {
-    let offre = this.offreService.offresSearch.find(o => o.reference == this.offreService.offreSelected.reference);
-    if (offre != null) {
-      this.mode = this.offreService.offresSearch.indexOf(offre);
+  findOffresByAppelOffreReference() {
+    this.offreService.findByAppelOffreRefernce(this.reference);
+    this.offreService.findOffreSelectedByRefernceAppelOffre(this.reference);
+    let number=this.offres.findIndex(o => o.reference == this.bestOffre.reference);
+    console.log(number);
+    if (number != null) {
+      this.mode = number;
     } else {
       this.mode = -1;
     }

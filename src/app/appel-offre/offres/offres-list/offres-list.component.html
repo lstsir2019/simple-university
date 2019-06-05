@@ -1,4 +1,21 @@
-<button (click)="gogog()"></button>
+<div class="card-body">
+  <div class="d-flex justify-content-center">
+    <div class="input-group mt-1 col-md-4">
+      <div class="input-group-prepend ">
+        <span class="input-group-text">AppelOffre</span>
+      </div>
+      <select class="form-control" style="align-self: auto" type="text" [(ngModel)]="appelOffreSearch.reference">
+        <option disabled>----SELECT----</option>
+        <option *ngFor="let ap of allAppelOffre" value="{{ap.reference}}">{{ap.reference}}</option>-->
+      </select>
+      <div class="input-group-append">
+        <button (click)="findOffresByAppelOffreReference()" class="btn btn-outline-primary"><i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <div class="card-body">
   <div class="table-responsive">
     <table class="table table-hover table-sm">
@@ -16,18 +33,16 @@
         <td>{{a.tva}}</td>
         <td>{{a.montantTtc}}</td>
         <td>
-          <button (click)="offreDetailByOffreReference(a)"
-                  data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-dark fa fa-plus"
-                  data-dismiss="modal"></button>
+          <button (click)="offreDetailByOffreReference(a)" data-toggle="modal" data-target="#exampleModal"
+                  class="btn btn-sm btn-outline-dark"><i class="fa fa-plus">Detail</i></button>
           <button (click)="removeOffre(a)"
                   class="btn btn-sm btn-outline-danger fa fa-trash"></button>
 
-          <input  [checked]="a.reference==bestOffre.reference"   (click)="chekBestOffre(a);mode=i;" name="check"
-                 type="radio" class="btn-outline-success">
+          <input [checked]="a.reference==bestOffre.reference" (click)="chekBestOffre(a);mode=i;" name="check"
+                 type="radio" >
 
-          <button  *ngIf="mode==i" (click)="changeOffreToCommande(a)"
-                  class="btn btn-sm btn-outline-success"
-                   data-dismiss="modal"><i class="fa fa-send">commande</i></button>
+          <button *ngIf="mode==i" (click)="changeOffreToCommande(a)"
+                  class="btn btn-sm btn-outline-success"><i class="fa fa-send">commande</i></button>
 
 
         </td>
@@ -36,7 +51,6 @@
     </table>
   </div>
 </div>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -48,23 +62,27 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <table class="table table-hover table-sm">
-          <thead>
-          <th>reference produit</th>
-          <th>prix unitaire</th>
-          <th>quatite</th>
-          <th>total</th>
-          </thead>
-          <tbody>
-          <tr *ngFor="let ad of offreDetails">
-            <td>{{ad.refProduit}}</td>
-            <td>{{ad.prixUnitaire}}</td>
-            <td>{{ad.quantite}}</td>
-            <td>{{ad.total}}</td>
-          </tr>
-          </tbody>
-        </table>
+      <div class="" *ngIf="offreSelected != null">
+        <div class="card spacer">
+          <div class="table-responsive">
+            <table class="table table-hover table-sm">
+              <thead>
+              <th>reference produit</th>
+              <th>prix unitaire</th>
+              <th>quatite</th>
+              <th>total</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let ad of offreDetails">
+                <td>{{ad.refProduit}}</td>
+                <td>{{ad.prixUnitaire}}</td>
+                <td>{{ad.quantite}}</td>
+                <td>{{ad.total}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -73,3 +91,6 @@
     </div>
   </div>
 </div>
+
+
+
