@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetService} from '../../controller/service/budget.service';
-import {getReact} from '../../controller/service/evolutions/Util/SwalReact';
+import {BudgetService} from '../../../controller/service/budget.service';
+import {getReact} from '../../../controller/service/evolutions/Util/SwalReact';
 import swal from 'sweetalert2';
 import Swal from 'sweetalert2';
 

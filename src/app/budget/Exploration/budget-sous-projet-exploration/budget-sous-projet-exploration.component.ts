@@ -12,7 +12,7 @@ import {BudgetSousProjetVo} from '../../../controller/model/budget/budget-sous-p
 export class BudgetSousProjetExplorationComponent implements OnInit {
 
   budgetCompteBudgitaires: Array<BudgetCompteBudgitaireVo> = new Array<BudgetCompteBudgitaireVo>();
-  budgetSousProjet: BudgetSousProjetVo;
+  budgetSousProjet: BudgetSousProjetVo=new BudgetSousProjetVo();
 
   constructor(private budgetService: BudgetService) {
   }
