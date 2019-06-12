@@ -8,7 +8,7 @@ import {ExpressionBesoinCreateComponent} from './expression-besoins/expression-b
 import {ExpressionBesoinListComponent} from './expression-besoins/expression-besoin-list/expression-besoin-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {HeaderComponent} from './header/header.component';
+import {HeaderComponent} from './layouts/header/header.component';
 import {ReceptionComponent} from './reception/reception.component';
 import {ReceptionCreateComponent} from './reception/reception-create/reception-create.component';
 import {ReceptionListComponent} from './reception/reception-list/reception-list.component';
@@ -74,7 +74,7 @@ import {CommandeAffectationComponent} from './commandes/commande-affectation/com
 import {MagasinUpdateComponent} from './magasin/magasin-update/magasin-update.component';
 import {StockGlobalListComponent} from './magasin/stock-global-list/stock-global-list.component';
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
-import {FooterComponent} from './footer/footer.component';
+import {FooterComponent} from './layouts/footer/footer.component';
 import {AppelOffreComponent} from './appel-offre/appel-offre.component';
 import {OffresListComponent} from './appel-offre/offres/offres-list/offres-list.component';
 import {OffresCreateComponent} from './appel-offre/offres/offres-create/offres-create.component';
