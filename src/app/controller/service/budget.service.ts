@@ -771,6 +771,36 @@ export class BudgetService {
     return this.http.get<Array<BudgetCompteBudgitaireVo>>(this._url_bcb + '/detailles/budgetprojet/' + id);
   }
 
+  public printFaculte(annee): any {
+    const httpOptions = {
+      responseType: 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url_bf + '/pdf/faculte/annee/' + annee, httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);
+    });
+  }
+
+  public printProjet(id): any {
+    const httpOptions = {
+      responseType: 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url_bp + '/pdf/projet/id/' + id, httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);
+    });
+  }
+
+  public printSousProjet(referenceProjet,referenceSousProjet,annee): any {
+    const httpOptions = {
+      responseType: 'blob' as 'json' //This also worked
+    };
+    return this.http.get(this._url_bsp + '/pdf/sous-projet/referenceProjet/'+referenceProjet+'/referenceSousProjet/'+referenceSousProjet+'/annee/'+annee, httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);
+    });
+  }
+
 
   /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);
    let detaills=new DetaillesBudgetVo(bf.detaillesBudgetVo.antecedent,bf.detaillesBudgetVo.creditOuvertEstimatif,bf.detaillesBudgetVo.creditOuvertReel);
