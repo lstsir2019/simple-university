@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
-import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
-import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
-import {BudgetService} from '../../controller/service/budget.service';
+import {BudgetSousProjetVo} from '../../../controller/model/budget/budget-sous-projet.model';
+import {BudgetProjetVo} from '../../../controller/model/budget/budget-projet.model';
+import {BudgetCompteBudgitaireVo} from '../../../controller/model/budget/budget-compte-budgitaire.model';
+import {BudgetService} from '../../../controller/service/budget.service';
 
 @Component({
   selector: 'app-detailles',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetCompteBudgitaireVo} from '../../controller/model/budget/budget-compte-budgitaire.model';
-import {BudgetService} from '../../controller/service/budget.service';
-import {BudgetSousProjetVo} from '../../controller/model/budget/budget-sous-projet.model';
+import {BudgetCompteBudgitaireVo} from '../../../controller/model/budget/budget-compte-budgitaire.model';
+import {BudgetService} from '../../../controller/service/budget.service';
+import {BudgetSousProjetVo} from '../../../controller/model/budget/budget-sous-projet.model';
 import Swal from 'sweetalert2';
 import {MatDialog} from '@angular/material';
 import {BudgetCompteBudgitaireCreateComponent} from '../budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';

@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <div class="d-lg-flex justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="input-group input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text">Budget-Sous-Projet</label>
@@ -20,8 +20,9 @@
         </div>
         <div class="col-md-3">
           <div class="input-group input-group mb-3">
-            <button (click)="findDetailles()" class="btn btn-outline-success btn-block"><i class="fa fa-plus">Nouveau</i>
-            </button>
+            <button (click)="findDetailles()"
+                    class="btn btn-outline-success btn-block"><i class="fa fa-print"> imprimerie</i></button>
+
           </div>
         </div>
         </div>
@@ -31,10 +32,8 @@
             <tr>
               <th scope="1">COR</th>
               <th scope="1">COE</th>
-              <th scope="1">EngagePaye</th>
-              <th scope="1">EngageNonPaye</th>
-              <th scope="1">reliquatReel</th>
-              <th scope="1">reliquatEstimatif</th>
+              <th scope="1">EP</th>
+              <th scope="1">ENP</th>
             </tr>
             </thead>
             <tbody>
@@ -43,8 +42,6 @@
               <td>{{budgetSousProjet.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{budgetSousProjet.detaillesBudgetVo.engagePaye}}</td>
               <td>{{budgetSousProjet.detaillesBudgetVo.engageNonPaye}}</td>
-              <td>{{budgetSousProjet.detaillesBudgetVo.reliquatReel}}</td>
-              <td>{{budgetSousProjet.detaillesBudgetVo.reliquatEstimatif}}</td>
             </tr>
             </tbody>
           </table>
@@ -53,7 +50,6 @@
       </div>
     </div>
   </div>
-
   <div>
     <div class="card">
       <div class="card-header text-center">
