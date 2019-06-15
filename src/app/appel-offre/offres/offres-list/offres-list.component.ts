@@ -75,9 +75,12 @@ export class OffresListComponent implements OnInit {
   }
 
   findOffresByAppelOffreReference() {
-    this.offreService.findByAppelOffreRefernce(this.reference);
     this.offreService.findOffreSelectedByRefernceAppelOffre(this.reference);
-    let number=this.offres.findIndex(o => o.reference == this.bestOffre.reference);
+    this.offreService.findByAppelOffreRefernce(this.reference);
+    let number=-1;
+    if(this.bestOffre!=null && this.bestOffre.reference!=null){
+      number=this.offres.findIndex(o => o.reference == this.bestOffre.reference);
+    }
     console.log(number);
     if (number != null) {
       this.mode = number;
