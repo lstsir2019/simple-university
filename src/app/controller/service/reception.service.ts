@@ -4,6 +4,7 @@ import {ReceptionItem} from '../model/reception-item.model';
 import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {getReact} from './evolutions/Util/SwalReact';
+import {CommandeItem} from '../model/commandes/commande-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ReceptionService {
   public urlReceptionItem: string = 'http://localhost:8041/reception-api/receptionitems/';
   public receptionCreate: Reception = new Reception('', '', '');
   public receptionItemCreate: ReceptionItem = new ReceptionItem('', '', '', '', 0);
+  public commandeItemsReception: Array<CommandeItem>;
 
   constructor(private http: HttpClient) {
   }
@@ -25,13 +27,10 @@ export class ReceptionService {
   public receptionSearch: Reception = new Reception('', '', '');
 
   public addReceptionItem() {
-    if (this.receptionItemCreate.qte <= 0 ||  this.receptionItemCreate.referenceProduit == "" || this.receptionItemCreate.referenceMagasin == "") {
-      Swal.fire(this.SWAL.ERROR_NOT_ENOUGH_DATA);
 
-    } else {
       let receptionItemClone: ReceptionItem = new ReceptionItem(this.receptionItemCreate.reference, this.receptionItemCreate.referenceCategorie, this.receptionItemCreate.referenceProduit, this.receptionItemCreate.referenceMagasin, this.receptionItemCreate.qte);
       this.receptionCreate.receptionItems.push(receptionItemClone);
-    }
+
   }
 
   public saveReception() {
@@ -95,6 +94,25 @@ export class ReceptionService {
         'success'
       );
     }
+
+  }
+  private _urlCommande: string = 'http://localhost:8090/faculte-commande/commandes/';
+
+  public findCommandeItemsReceptionByReference(reference: string) {
+    this.http.get<Array<CommandeItem>>(this._urlCommande + '/reference/' + reference + '/commande-items').subscribe(
+      data => {
+        if (data == null) {
+          Swal.fire(this.SWAL.SEARCH_NOT_FOUND);
+          this.commandeItemsReception = new Array<CommandeItem>();
+        } else {
+          this.commandeItemsReception = data;
+        }
+      }, error => {
+        this.commandeItemsReception = new Array<CommandeItem>();
+        Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
+        console.log('error whith loading commandes items' + error);
+      }
+    );
   }
 
   public imprimer(reference: string) {

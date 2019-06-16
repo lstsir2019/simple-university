@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetService} from '../../controller/service/budget.service';
-import * as jsPDF from 'jspdf';
-import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.model';
+import {BudgetService} from '../../../controller/service/budget.service';
+import {BudgetFaculteVo} from '../../../controller/model/budget/budget-faculte.model';
 
 @Component({
   selector: 'app-budget-faculte',

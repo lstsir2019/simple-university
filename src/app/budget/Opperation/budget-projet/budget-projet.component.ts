@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BudgetProjetVo} from '../../controller/model/budget/budget-projet.model';
-import {BudgetService} from '../../controller/service/budget.service';
-import * as jsPDF from 'jspdf';
-import {BudgetFaculteVo} from '../../controller/model/budget/budget-faculte.model';
+import {BudgetProjetVo} from '../../../controller/model/budget/budget-projet.model';
+import {BudgetService} from '../../../controller/service/budget.service';
+import {BudgetFaculteVo} from '../../../controller/model/budget/budget-faculte.model';
 import Swal from "sweetalert2";
 
 @Component({

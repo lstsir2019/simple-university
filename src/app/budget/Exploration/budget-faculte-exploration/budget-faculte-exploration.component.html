@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <div class="d-lg-flex justify-content-center">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="input-group input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text">Année</label>
@@ -19,8 +19,8 @@
           </div>
           <div class="col-md-3">
             <div class="input-group input-group mb-3">
-              <button (click)="print()"
-                      class="btn btn-outline-primary btn-block"><i class="fa fa-print"> Print</i></button>
+              <button (click)="findDetailles()"
+                      class="btn btn-outline-success btn-block"><i class="fa fa-print"> imprimerie</i></button>
             </div>
           </div>
         </div>
@@ -30,10 +30,8 @@
             <tr>
               <th scope="1">COR</th>
               <th scope="1">COE</th>
-              <th scope="1">EngagePaye</th>
-              <th scope="1">EngageNonPaye</th>
-              <th scope="1">reliquatReel</th>
-              <th scope="1">reliquatEstimatif</th>
+              <th scope="1">EP</th>
+              <th scope="1">ENP</th>
             </tr>
             </thead>
             <tbody>
@@ -42,8 +40,6 @@
               <td>{{budgetFaculte.detaillesBudgetVo.creditOuvertEstimatif}}</td>
               <td>{{budgetFaculte.detaillesBudgetVo.engagePaye}}</td>
               <td>{{budgetFaculte.detaillesBudgetVo.engageNonPaye}}</td>
-              <td>{{budgetFaculte.detaillesBudgetVo.reliquatReel}}</td>
-              <td>{{budgetFaculte.detaillesBudgetVo.reliquatEstimatif}}</td>
             </tr>
             </tbody>
           </table>

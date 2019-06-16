@@ -19,14 +19,13 @@ export class ReceptionCreateComponent implements OnInit {
     this.magasinService.findAll();
   }
 
-  ;
 
   public saveReception() {
     this.receptionservice.saveReception();
   }
 
   public addReceptionItem() {
-    if (this.commandeItems != null) {
+    if (this.commandeItems != null && this.commandeItems.length > 0 && this.reception.referenceCommande.length > 0) {
       let commandeItem = this.commandeItems.find(a => a.referenceProduit == this.receptionItem.referenceProduit);
       if (commandeItem != null) {
         if (parseFloat(String(commandeItem.qte)) - parseFloat(String(commandeItem.qteReception)) < parseFloat(String(this.receptionItem.qte))) {
@@ -36,14 +35,26 @@ export class ReceptionCreateComponent implements OnInit {
             type: 'error',
             confirmButtonText: 'ok'
           });
+        } else if (this.receptionItem.qte <= 0 || this.receptionItem.referenceProduit == '' || this.receptionItem.referenceMagasin == '') {
+          Swal.fire({
+            title: 'Erreur !',
+            text: 'Insuffisance de données',
+            type: 'error',
+            confirmButtonText: 'ok'
+          });
         } else {
           commandeItem.qteReception = parseFloat(String(commandeItem.qteReception)) + parseFloat(String(this.receptionItem.qte));
           this.receptionservice.addReceptionItem();
         }
       }
+    }else{
+      Swal.fire( {
+        title: 'Erreur !',
+        text: 'Il faut regler la Référence du commande',
+        type: 'error',
+        confirmButtonText: 'ok'
+      })
     }
-
-
   }
 
   public get reception() {
@@ -68,7 +79,7 @@ export class ReceptionCreateComponent implements OnInit {
       if (commandeItem != null) {
         commandeItem.qteReception = parseFloat(String(commandeItem.qteReception)) - parseFloat(String(item.qte));
         this.receptionservice.deleteReceptionItems(item);
-        
+
       }
     }
   }
