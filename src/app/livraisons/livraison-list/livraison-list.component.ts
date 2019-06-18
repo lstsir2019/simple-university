@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LivraisonService} from "../../controller/service/livraison.service";
 import {Livraison} from "../../controller/model/livraison.model";
 import {Stock} from "../../controller/model/stock.model";
+import {CommandeService} from '../../controller/service/commandes/commande.service';
 
 @Component({
   selector: 'app-livraison-list',
@@ -10,7 +11,7 @@ import {Stock} from "../../controller/model/stock.model";
 })
 export class LivraisonListComponent implements OnInit {
 
-  constructor(private livraisonService: LivraisonService) { }
+  constructor(private livraisonService: LivraisonService,private commandeService:CommandeService) { }
 
   ngOnInit() {
    this.livraisonService.findAll();
@@ -39,5 +40,9 @@ export class LivraisonListComponent implements OnInit {
   }
   public print(livraison:Livraison){
     this.livraisonService.print(livraison.reference);
+  }
+
+  public get commandes(){
+    return this.commandeService.commandes;
   }
 }

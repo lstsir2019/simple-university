@@ -64,5 +64,8 @@ export class BudgetProjetComponent implements OnInit {
   public detailFaculte(bf:BudgetFaculteVo){
     this.budgetService.detaillBudgetFaculte(bf);
   }
+  public initialiseFaculte(){
+    this.budgetFaculeteSelected=new BudgetFaculteVo(null,null);
+  }
 
 }

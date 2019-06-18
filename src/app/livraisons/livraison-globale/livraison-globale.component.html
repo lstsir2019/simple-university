@@ -28,7 +28,11 @@
             <div class="input-group-prepend">
               <div class="input-group-text">ref-cmd</div>
             </div>
-            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >
+            <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraison.referenceCommande" >
+              <option selected>Choose...</option>
+              <option *ngFor="let c of commandes"  value="{{c.reference}}">{{c.reference}}</option>
+
+            </select>
           </div>
         </div>
         <div class="form-group  col-sm-2">
@@ -41,8 +45,8 @@
             <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
               <option  value="dep-info">dep-info</option>
-              <option  value="physique">physique</option>
-              <option  value="info">info</option>
+              <option  value="physique">dep-physique</option>
+              <option  value="dep-bio">dep-bio</option>
             </select>
           </div>
 
@@ -75,7 +79,7 @@
                   <div class="input-group-text">CMD-EXP</div>
                 </div>
               <select class="form-control" [(ngModel)]="cmdExp" (change)="getCommandeExpression()" >
-                <option>Cmd-expr/produit/Qte</option>
+                <option >Cmd-expr/produit/Qte</option>
                 <option *ngFor="let c of commandesExpressionsGmobal" [ngValue]="c" >{{c.referenceCommandeExpression}}/{{c.referenceProduit}}/{{c.qteNonLivre}}</option>
               </select>
               </div>

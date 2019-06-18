@@ -76,6 +76,9 @@ export class BudgetCompteBudgitaireComponent implements OnInit {
     });
 
   }
+  public initialiseSousProjet(){
+    this.budgetSousProjetSelected=new BudgetSousProjetVo(null,'');
+  }
 
 
 }

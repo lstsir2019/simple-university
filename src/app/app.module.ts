@@ -236,9 +236,16 @@ import { ExplorationComponent } from './budget/Exploration/exploration/explorati
 
   entryComponents: [
     BudgetCompteBudgitaireCreateComponent,
-    BudgetExplorationComponent
+    BudgetExplorationComponent,
+    BudgetCompteBudgitaireComponent,
+    BudgetFaculteComponent,
+    BudgetProjetComponent,
+    BudgetSousProjetComponent
 ],
-  providers: [DatePipe,BudgetExplorationComponent],
+  providers: [DatePipe,BudgetExplorationComponent,
+    BudgetCompteBudgitaireComponent,
+    BudgetProjetComponent,
+    BudgetSousProjetComponent],
   bootstrap: [AppComponent],
 
 })

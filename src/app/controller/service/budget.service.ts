@@ -7,9 +7,12 @@ import {BudgetCompteBudgitaireVo} from '../model/budget/budget-compte-budgitaire
 import {CompteBudgitaireVo} from '../model/budget/compte-budgitaire.model';
 import {DetaillesBudgetVo} from '../model/budget/detailles-budget.model';
 import Swal from 'sweetalert2';
-import {forEach} from '@angular/router/src/utils/collection';
 import {Projet} from '../model/projet.model';
 import {SousProjet} from '../model/sous-projet.model';
+import {BudgetCompteBudgitaireComponent} from '../../budget/Opperation/budget-compte-budgitaire/budget-compte-budgitaire.component';
+import {BudgetFaculteComponent} from '../../budget/Opperation/budget-faculte/budget-faculte.component';
+import {BudgetProjetComponent} from '../../budget/Opperation/budget-projet/budget-projet.component';
+import {BudgetSousProjetComponent} from '../../budget/Opperation/budget-sous-projet/budget-sous-projet.component';
 
 @Injectable({
   providedIn: 'root'
@@ -800,110 +803,6 @@ export class BudgetService {
       window.open(downloadURL);
     });
   }
-
-
-  /* let bfClone=new BudgetFaculteVo(bf.id,bf.annee);
-   let detaills=new DetaillesBudgetVo(bf.detaillesBudgetVo.antecedent,bf.detaillesBudgetVo.creditOuvertEstimatif,bf.detaillesBudgetVo.creditOuvertReel);
-   detaills.engageNonPaye=bf.detaillesBudgetVo.engageNonPaye;
-   detaills.engagePaye=bf.detaillesBudgetVo.engagePaye;
-   detaills.reliquatEstimatif=bf.detaillesBudgetVo.reliquatEstimatif;
-   detaills.reliquatReel=bf.detaillesBudgetVo.reliquatReel;
-   detaills.reliquatPayeEstimatif=bf.detaillesBudgetVo.reliquatPayeEstimatif;
-   detaills.reliquatPayereel=bf.detaillesBudgetVo.reliquatPayereel;
-   detaills.reliquatNonPayeEstimatif=bf.detaillesBudgetVo.reliquatNonPayeEstimatif;
-   detaills.reliquatNonPayReel=bf.detaillesBudgetVo.reliquatNonPayReel;
-   detaills.id=bf.detaillesBudgetVo.id;
-   bfClone.detaillesBudgetVo=detaills;*/
-
-
-  //permet d'ajouter le budget entite administratif
-
-  //permet d'ajouter le budget compte budgitaire
-
-  //permet de sauvegarder l'objet tout entier
-
-
-  /* DELETE: delete the budgetFaculte from the server */
-
-
-  /* DELETE: delete the budget sous projet from the server */
-  /*public deleteBudgetSousProjet(bsp:BudgetSousProjetVo) {
-    if (bsp.id == 0) {
-    const index: number ;//= this.budgetFacultePrincipal.budgetProjetVos..indexOf(bsp);
-      if (index !== -1) {
-      //  this._budgetFaculteCreate.budgetSousProjetVo.splice(index, 1);
-      }
-    } else {
-      Swal({
-        title: 'Etes-vous sure?',
-        text: 'Vous ne pouvez pas revenir en arrière!',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimer!'
-      }).then((result) => {
-        if (result.value) {
-          this.http.delete(this._url_bsp + 'referenceSousProjet/' + bsp.referenceSousProjet + '/annee/' + bsp.budgetFaculteVo.annee).subscribe(
-            data => {
-              Swal(
-                'Supprimmé!',
-                'Vos données ont été supprimés.',
-                'success'
-              );
-              if (this._budgetSousProjetCreate.referenceSousProjet == undefined || null) {
-                console.log('bonsoir');
-                this.findAllByAnnee();
-              } else if (this._budgetEntiteAdministratifCreate.referenceEntiteAdministratif == undefined || null) {
-                this.findAllByAnneeAndBudgetSousProjet();
-              } else {
-                this.findAllByAnneeAndBudgetSousProjetAndBudgetEntitiAdmin();
-              }
-            }, error => {
-              console.log(error);
-            }
-          );
-        }
-      });
-    }
-  }
-*/
-  /* DELETE: delete the budget sous entite administratif from the server */
-
-  /* DELETE: delete the budget budget compte cudgitaire from the server */
-
-  //find By creteria annee
-
-  // find by annee et RefSousProjet
-
-  //find by Annee et refSousProjet et refEntitéAdministratif
-
-  //searchAllByCriteriaAnneMinAndAnneMax
-
-  //find all info by annee min and annee max
-
-
-  //permet de rafraichair les champs en se basant sur l'objet supprimmé
-
-  //update budget Faculte
-  /*public updateBudgetFaculte(){
-    let _bfFind:BudgetFaculteVo=this._budgetFacultes.find(bf=>bf.annee==this._budgetFaculteCreate.annee);
-    let budgetFaculteClone:BudgetFaculteVo=new BudgetFaculteVo();
-    let reelConsomme=parseFloat(_bfFind.detaillesBudgetVo.creditOuvertReel)-parseFloat(_bfFind.detaillesBudgetVo.reliquatReel);
-    let estimatifConsomme=parseFloat(_bfFind.detaillesBudgetVo.reliquatEstimatif)-parseFloat(_bfFind.detaillesBudgetVo.reliquatEstimatif);
-    if (parseFloat(this._budgetFaculteCreate.detaillesBudgetVo.creditOuvertReel)<reelConsomme|| parseFloat(this._budgetFaculteCreate.detaillesBudgetVo.creditOuvertEstimatif)<estimatifConsomme){
-      Swal({
-        type: 'error',
-        title: 'Error',
-        text: 'Le reliquat Estimatif/Reel n\'est pas suffisant \n pour les sous projet!'
-      });
-    }
-  }*/
-
-  //update budget sous projet
-
-  //update budget sous projet
-
   budget: any;
 
   hi() {

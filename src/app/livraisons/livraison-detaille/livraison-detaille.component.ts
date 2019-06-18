@@ -11,6 +11,8 @@ import {CommandeSourceWithProduit} from "../../controller/model/commande-source-
 import swal from "sweetalert2";
 import  * as $ from 'jquery';
 import Swal from 'sweetalert2';
+import {EntiteAdministratifService} from '../../controller/service/entite-administratif.service';
+import {CommandeService} from '../../controller/service/commandes/commande.service';
 @Component({
   selector: 'app-livraison-detaille',
   templateUrl: './livraison-detaille.component.html',
@@ -24,10 +26,11 @@ export class LivraisonDetailleComponent implements OnInit {
   stockDeataol: Stock;
   public stockR: Stock = new Stock("", "", 0, 0, 0, new Magasin(""));
 
-  constructor(private livraisonService: LivraisonService, private produitService: ProduitService, private stockGlobalService: StockGlobalService, private stockService: StockDetailleServiceService) {
+  constructor(private livraisonService: LivraisonService, private produitService: ProduitService, private stockGlobalService: StockGlobalService, private stockService: StockDetailleServiceService,private entite:EntiteAdministratifService,private commandeService:CommandeService) {
   }
 
   ngOnInit() {
+
     $(document).ready(function () {
       $("#defaultInline11 ,#defaultInline22").change(function () {
         $(this).attr("checked" , "checked");
@@ -36,6 +39,7 @@ export class LivraisonDetailleComponent implements OnInit {
         });
       });
     });
+
   }
 
   public getCommandeExpression() {
@@ -89,7 +93,8 @@ export class LivraisonDetailleComponent implements OnInit {
     } else {
       this.livraisonService.addLivraisonItemDeatil();
       this.stockService.stocksDetaille=[];
-      this.livraisonService.commandesExpressions=[];
+      this.cmdExp=new CommandeSourceWithProduit("","","");
+     // this.livraisonService.commandesExpressions=[];
     }
 
   }
@@ -104,6 +109,9 @@ export class LivraisonDetailleComponent implements OnInit {
 
   public get livraisonItems() {
     return this.livraisonService.livraisonDetailCreate.livraisonItemVos;
+  }
+  public get entiteAdministrativ(){
+    return this.entite.listEntiteAdmin;
   }
 
   public saveLivraisonDetail() {
@@ -128,4 +136,7 @@ export class LivraisonDetailleComponent implements OnInit {
     this.stockR = new Stock(stock.referenceReception, stock.referenceProduit, stock.qte, stock.qteDeffectueuse, stock.seuilAlert, stock.magasinVo);
   }
 
+  public get commandes(){
+    return this.commandeService.commandes;
+  }
 }
