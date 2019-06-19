@@ -5,6 +5,9 @@ import {AppelOffreListeComponent} from '../../appel-offres/appel-offre-liste/app
 import {AppelOffreService} from '../../../controller/service/appel-offre.service';
 import {CommandeService} from '../../../controller/service/commandes/commande.service';
 import {Router} from '@angular/router';
+import {BudgetCompteBudgitaireCreateComponent} from '../../../budget/Opperation/budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
+import {MatDialog} from '@angular/material';
+import {DetailsOffresComponent} from '../details-offres/details-offres.component';
 
 @Component({
   selector: 'app-offres-list',
@@ -17,8 +20,15 @@ export class OffresListComponent implements OnInit {
   offreSelected: Offre = new Offre();
   public reference: string;
 
+  openDialog() {
+    const dialogRef = this.dialog.open(DetailsOffresComponent);
 
-  constructor(private commandeService: CommandeService, private router: Router, private offreService: OffreService, public appelOffreService: AppelOffreService) {
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  constructor(private detailsOffresComponent: DetailsOffresComponent, private dialog: MatDialog, private commandeService: CommandeService, private router: Router, private offreService: OffreService, public appelOffreService: AppelOffreService) {
 
   }
 
@@ -35,13 +45,12 @@ export class OffresListComponent implements OnInit {
 
   mode = -1;
 
-  public get offreDetails() {
-    return this.offreService.offreDetailsSearch;
-  }
-
   offreDetailByOffreReference(a: Offre) {
-      this.offreSelected = a;
-      this.offreService.offreDetailByOffreReference(a.reference);
+    this.offreSelected = a;
+    this.offreService.offreDetailByOffreReference(a.reference);
+    this.detailsOffresComponent.offreSelected=a;
+    console.log(this.detailsOffresComponent.offreSelected);
+    this.openDialog();
   }
 
   public get allAppelOffre() {
@@ -77,9 +86,9 @@ export class OffresListComponent implements OnInit {
   findOffresByAppelOffreReference() {
     this.offreService.findOffreSelectedByRefernceAppelOffre(this.reference);
     this.offreService.findByAppelOffreRefernce(this.reference);
-    let number=-1;
-    if(this.bestOffre!=null && this.bestOffre.reference!=null){
-      number=this.offres.findIndex(o => o.reference == this.bestOffre.reference);
+    let number = -1;
+    if (this.bestOffre != null && this.bestOffre.reference != null) {
+      number = this.offres.findIndex(o => o.reference == this.bestOffre.reference);
     }
     console.log(number);
     if (number != null) {

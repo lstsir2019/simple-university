@@ -1,0 +1,30 @@
+<div class="card ">
+  <div class="card-title">
+    <h5 class="modal-title" id="exampleModalLabel">Detail d'offre {{offreSelected.reference}}</h5>
+  </div>
+  <div class="col-md-12">
+    <div class="" *ngIf="offreSelected != null">
+      <div class="card spacer">
+        <div class="table-responsive border">
+          <table class="table table-hover table-bordered table-sm">
+            <thead>
+            <th>reference produit</th>
+            <th>prix unitaire</th>
+            <th>quatite</th>
+            <th>total</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ad of offreDetails">
+              <td>{{ad.refProduit}}</td>
+              <td>{{ad.prixUnitaire}}</td>
+              <td>{{ad.quantite}}</td>
+              <td>{{ad.total}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

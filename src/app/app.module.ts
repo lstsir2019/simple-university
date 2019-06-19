@@ -111,6 +111,7 @@ import { BudgetProjetExplorationComponent } from './budget/Exploration/budget-pr
 import { BudgetSousProjetExplorationComponent } from './budget/Exploration/budget-sous-projet-exploration/budget-sous-projet-exploration.component';
 import { BudgetExplorationComponent } from './budget/Exploration/budget-exploration/budget-exploration.component';
 import { ExplorationComponent } from './budget/Exploration/exploration/exploration.component';
+import { DetailsOffresComponent } from './appel-offre/offres/details-offres/details-offres.component';
 
 @NgModule({
   declarations: [
@@ -217,6 +218,7 @@ import { ExplorationComponent } from './budget/Exploration/exploration/explorati
     BudgetSousProjetExplorationComponent,
     BudgetExplorationComponent,
     ExplorationComponent,
+    DetailsOffresComponent,
 
   ],
   imports: [
@@ -236,9 +238,14 @@ import { ExplorationComponent } from './budget/Exploration/exploration/explorati
 
   entryComponents: [
     BudgetCompteBudgitaireCreateComponent,
-    BudgetExplorationComponent
+    BudgetExplorationComponent,
+    DetailsOffresComponent
 ],
-  providers: [DatePipe,BudgetExplorationComponent],
+  providers: [
+    DatePipe,
+    BudgetExplorationComponent,
+    DetailsOffresComponent
+  ],
   bootstrap: [AppComponent],
 
 })
