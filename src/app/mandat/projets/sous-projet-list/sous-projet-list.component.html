@@ -1,0 +1,162 @@
+<br>
+
+<div class="row">
+  <div class=" col-sm-6">
+
+    <div class="card text-center  border border-primary ">
+
+      <div class="card-header text-black"><b>RECHERCHE</b></div>
+      <div class="card-body ">
+        <div class="form-row">
+          <div class="input-group mb-2 col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Libelle projet</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="projetRecherche.libelleP">
+            <div class="col">
+              <button class="btn btn-block btn-outline-info" (click)="rechercheProjet()">Recherche</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-header border border-primary"><b>LISTE DES PROJETS</b></div>
+      <table class="table table-sm table-hover">
+        <thead>
+        <tr>
+          <th>Libelle projet</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of Projets">
+          <td>{{p.libelleP}}</td>
+          <td>
+
+            <button class="btn btn-sm btn-outline-info fa fa-plus"
+                    (click)="findSousProjetByLibelleProjet(p)"></button>
+            <button class=" fa fa-edit cc btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@mdo" (click)="setProjetSelect(p)"></button>
+            <button (click)="deleteProjet(p)" class=" fa fa-trash btn btn-sm btn-danger "></button>
+            <button class="fa fa-download cc btn btn-sm btn-primary" aria-hidden="true"
+                    data-whatever="@mdo" (click)="printProjet(p.libelleP)"></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-sm-6" *ngIf="projetSelected != null">
+    <div class="card-header border border-primary "><b> Liste des sous projets de projet selectionné : </b>
+      {{projetSelected.libelleP}}
+    </div>
+    <table class="table table-sm table-hover border border-primary">
+      <thead>
+      <tr>
+        <th scope="col">Reference des sous projets</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sp of projetSelected.sousProjetsVo">
+        <td>{{sp.referenceSousProjet}}</td>
+        <td>
+          <button class="btn btn-outline-danger fa fa-times" (click)="deleteSousProjet(sp)"></button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="exampleModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="DivDuForm2">
+          <div class="row">
+            <div class="col-sm-8" style="text-align: center">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Projet </span>
+                </div>
+                <input class="form-control" type="text" [(ngModel)]="projetSelected.libelleP"
+                       [ngModelOptions]="{standalone: true}"/>
+              </div>
+            </div>
+
+          </div>
+          <!--    <h5 class="text-center">Les sous projets</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dynamic_field">
+                <thead>
+                <tr>
+                  <th scope="col">Reference sous projet</th>
+                  <th></th>
+                </tr>
+
+                </thead>
+                <tbody *ngFor="let p of  projetSelected.sousProjetsVo ">
+                <tr>
+                  <td><input type="text"  class="form-control name_list"  value="{{p.referenceSousProjet}}" /></td>
+
+                 <td>
+                  <span class="table-remove text-center"><button type="button"
+                                                     class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                  </td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>-->
+
+
+          <div class=" card card-header  text-center border border-primary"> Les sous projets </div>
+          <table class="table table-sm table-hover " id="dynamic_field" >
+            <thead>
+            <tr>
+              <th scope="col">Reference sous projet</th>
+              <th></th>
+            </tr>
+
+            </thead>
+            <tbody  >
+            <tr *ngFor="let sp of projetSelected.sousProjetsVo let p of sousProjetPush"   >
+              <td >
+                <input type="text" class="form-control name_list"  [(ngModel)]="sp.referenceSousProjet" [ngModelOptions]="{standalone: true}">
+              </td>
+              <td>
+              <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="deleteSousProjet(sp)">Remove</button></span>
+              </td>
+
+            </tr >
+
+            <!--<tr>
+              &lt;!&ndash;<td ><input  type="text" name="name[]"  class="form-control name_list" [(ngModel)]="sp.referenceSousProjet" /></td>&ndash;&gt;
+
+            </tr>-->
+            <tr><td class="text-center"> <button class="btn btn-sm btn-primary my-0 "  type="button" (click)="Add()" >ADD</button> </td>
+            <td></td>
+            </tr>
+
+
+
+
+            </tbody>
+          </table>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn btn-primary " (click)="saveUpdateProjet()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+

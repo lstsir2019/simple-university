@@ -1,0 +1,71 @@
+<br>
+<div  class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Personnel</span>
+        </div>
+        <!--   <input class="form-control" type="text" [(ngModel)]="personnel.typePersonnelVo.libelle" />-->
+         <select   class="form-control form-control-sm" [(ngModel)]="mandat.personnelVo.cin" >
+           <option value="">=====Select=====</option>
+             <option  value="{{p.cin}}" *ngFor="let p of listPersonnels" > {{p.cin}} : {{p.nom}}-{{p.prenom}}</option>
+           </select>
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Responsabilité</span>
+        </div>
+         <select   class="form-control form-control-sm"  [(ngModel)]="mandat.responsabiliteVo.referenceResponsabilite">
+           <option value="">=====Select=====</option>
+        <option  value="{{r.referenceResponsabilite}}" *ngFor="let r of listResponsabilites" > {{r.referenceResponsabilite}}</option>
+      </select>
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Entité Administrative</span>
+        </div>
+        <select   class="form-control form-control-sm" [(ngModel)]="mandat.entiteAdministratifVo.referenceEntiteAdministratif" >
+          <option value="">=====Select=====</option>
+        <option  *ngFor="let e of listEntites " > {{e.referenceEntiteAdministratif}}</option>
+      </select>
+      </div>
+
+    </div>
+
+
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Date début mandat</span>
+        </div>
+        <input class="form-control" type="date" [(ngModel)]="mandat.dateDebutMandat" />
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Date fin mandat</span>
+        </div>
+        <input class="form-control" type="date" [(ngModel)]="mandat.dateFinMandat" />
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div id="ajouter" class="container">
+  <div class="row" style="justify-content: center">
+    <input type="button" class="btn btn-outline-primary" value="Ajouter" (click)="saveMandat()">
+  </div>
+</div>

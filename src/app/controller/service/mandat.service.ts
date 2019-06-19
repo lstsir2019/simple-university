@@ -15,13 +15,15 @@ export class MandatService {
   public url2 = 'http://localhost:9999/responsabilite/responsabilites/responsabiliteAll/';
   public url3 = 'http://localhost:9999/entiteAdministratif/entiteAdministratifs/entiteAdministratifAll/';
   public url4 = 'http://localhost:9999/mandat/mandats/mandatAll/';
+  public url5 = 'http://localhost:9999/mandat/mandats/deleteMandat/';
+  public url6 = 'http://localhost:9999/mandat/mandats/updateMandat';
 
-  public mandatCreate: Mandat = new Mandat('', '');
-  public _mandat: Mandat = new Mandat('', '');
-  public responsabiliteCreate: Responsabilite = new Responsabilite('');
-  public entiteAdministratifCreate: EntiteAdministratif = new EntiteAdministratif('');
-  public personnelCreate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-  public _personnelCreate1: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  public mandatCreate: Mandat = new Mandat(0, '','');
+  public _mandat: Mandat = new Mandat(0, '','');
+  public responsabiliteCreate: Responsabilite = new Responsabilite(0,'');
+  public entiteAdministratifCreate: EntiteAdministratif = new  EntiteAdministratif(0,'');
+  public personnelCreate: Personnel =new Personnel(0,'','','','','','','','','','','','','','','','');
+  public _personnelCreate1: Personnel = new Personnel(0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','');
 
   public _listPersonnels: Array<Personnel>;
   public _listResponsabilites: Array<Responsabilite>;
@@ -29,14 +31,14 @@ export class MandatService {
   public _listMandats = Array<Mandat>();
   public listM = Array<Mandat>();
   public _mandatSelected: Mandat;
-  public mandatSearch : Mandat = new Mandat('','');
-
+  public mandatSearch : Mandat =new Mandat(0, '','');
+  public mandatToUpdate : Mandat = new Mandat(0,'','');
 
   constructor(private http: HttpClient) {
   }
 
   public addMandat() {
-    const mandatClone = new Mandat(this.mandatCreate.dateDebutMandat, this.mandatCreate.dateFinMandat);
+    const mandatClone = new Mandat(this.mandatCreate.id,this.mandatCreate.dateDebutMandat, this.mandatCreate.dateFinMandat);
     this._listMandats.push(mandatClone);
   }
 
@@ -45,9 +47,9 @@ export class MandatService {
       data => {
         if (data == 1) {
           Swal.fire('Informations', 'Mandat ajouter avec success', 'success');
-          this.personnelCreate = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-          this.responsabiliteCreate = new Responsabilite('');
-          this.entiteAdministratifCreate = new EntiteAdministratif('');
+          this.personnelCreate = new Personnel(0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','');
+          this.responsabiliteCreate = new Responsabilite(0,'');
+          this.entiteAdministratifCreate = new  EntiteAdministratif(0,'');
 
           console.log('mandat ajouter avec success');
           this.findAll();
@@ -137,9 +139,9 @@ export class MandatService {
   public deleteMandat(mandat: Mandat) {
     this.mandatSelected = mandat;
     if (this.mandatSelected != null) {
-      console.log('http://localhost:8090/mandat/mandat/deleteMandat/' + this.mandatSelected.personnelVo.cin);
-      this.http.delete<Mandat>('http://localhost:8090/mandat/mandat/deleteMandat/' + this.mandatSelected.personnelVo.cin).subscribe(error => {
-
+      console.log(this.url5 + this.mandatSelected.personnelVo.cin);
+      this.http.delete<Mandat>(this.url5  + this.mandatSelected.personnelVo.cin).subscribe(error => {
+        Swal.fire('Information','Mandat supprimer avec succes','success');
         console.log('Deleted Mandat  with personnel cin = ' + this.mandatSelected.personnelVo.cin + '' + error);
         this.findAll();
       });
@@ -183,6 +185,67 @@ export class MandatService {
       }
     );
   }
+
+
+  public printMandat(cin :string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:9999/mandat/mandats/mandatPersonnel/"+cin +"/pdf",httpOptions).subscribe((resultBlob: Blob) => {
+      console.log("http://localhost:9999/mandat/mandats/mandatPersonnel/"+cin +"/pdf");
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
+
+
+
+  public setMandatSelect(mandat: Mandat) {
+    let mandatClone:Mandat = new Mandat(
+      mandat.id,
+      mandat.dateDebutMandat,
+      mandat.dateFinMandat,
+    );
+    this.mandatToUpdate = mandatClone;
+    this.mandatSelected.personnelVo.cin = mandat.personnelVo.cin;
+    this.mandatSelected.responsabiliteVo=mandat.responsabiliteVo;
+    this.mandatSelected.entiteAdministratifVo = mandat.entiteAdministratifVo;
+    this.mandatSelected = mandat;
+
+  }
+
+
+
+  public upDateMandat() {
+
+    this.http.put(this.url6, this.mandatToUpdate).subscribe(
+
+      data => {
+        console.log("debut data  " + data);
+        if(data == 1 ){
+          Swal.fire('Informations', ' Modification mandat  avec success', 'success');
+          this.findAll();
+        }else{
+          Swal.fire('Error', ' Probleme update', 'error');
+        }
+      }, error => {
+        console.log('Error' + error);
+        //Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
+      }
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   get mandatSelected(): Mandat {
     return this._mandatSelected;

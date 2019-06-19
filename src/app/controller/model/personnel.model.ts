@@ -6,6 +6,7 @@ export class Personnel {
   public typePersonnelVo: TypePersonnel = new TypePersonnel('');
 
   constructor(
+    public id :number,
     public nom:string,
     public prenom :string,
     public dateNaissance :string,

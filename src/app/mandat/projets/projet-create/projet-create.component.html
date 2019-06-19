@@ -1,0 +1,82 @@
+<br>
+<div class="container ">
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="input-group input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Libelle projet :</label>
+        </div>
+        <input [(ngModel)]="projet.libelleP" aria-describedby="inputGroup-sizing-sm" class="form-control" type="text">
+        <div class="input-group-append">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Libelle sous projet :</span>
+          <input type="text" class="form-control" [(ngModel)]="sousProjet.referenceSousProjet">
+        </div>
+      </div>
+      <div class="container">
+        <div class="row" style="justify-content: center">
+          <input type="button" class="btn btn-sm btn-outline-primary" value="Ajoutez sousProjet"
+                 (click)="addSousProjet()">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-5">
+      <div class=" card card-header  text-center border border-primary"> Les sous projets </div>
+      <table class="table table-sm table-hover ">
+        <thead>
+        <tr>
+          <th scope="col">Reference sous projet</th>
+          <th></th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of sousProjets">
+          <td>{{p.referenceSousProjet}}</td>
+          <td>
+            <button class="btn btn-outline-danger fa fa-times" (click)="eleminer(p)"></button>
+          </td>
+          <!--<td><button class=" fa fa-edit cc btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+          <button (click)="deleteProjet(p)" class=" fa fa-trash btn btn-danger "></button></td>-->
+        </tr>
+        <div id="ajouter" class="container">
+          <div class="row" style="justify-content: center">
+            <button (click)="saveProjet()" class="btn btn-outline-primary"> SAVE ALL</button>
+          </div>
+        </div>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

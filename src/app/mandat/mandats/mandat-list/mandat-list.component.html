@@ -1,0 +1,169 @@
+<div class="card spacer border border-primary">
+  <div class="card-header text-black text-center "><b>RECHERCHE</b></div>
+  <div class="card-body">
+    <div class="form-row">
+
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Personnel-CIN</span>
+          </div>
+          <!--<select class="form-control form-control-sm" [(ngModel)]="mandatRecherche.personnelVo.cin">
+            <option value="">=====Select=====</option>
+            <option  *ngFor="let p of listPersonnels"> {{p.cin}}</option>
+          </select>-->
+          <input type="text" class="form-control" [(ngModel)]="mandatRecherche.personnelVo.cin" >
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Entité Administrative</span>
+          </div>
+          <select class="form-control form-control-sm" [(ngModel)]="mandatRecherche.entiteAdministratifVo.referenceEntiteAdministratif">
+            <option value="">=====Select=====</option>
+            <option *ngFor="let e of listEntites "> {{e.referenceEntiteAdministratif}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Responsabilité</span>
+          </div>
+          <select class="form-control form-control-sm"
+                  [(ngModel)]="mandatRecherche.responsabiliteVo.referenceResponsabilite">
+            <option value="">=====Select=====</option>
+            <option *ngFor="let r of listResponsabilites"> {{r.referenceResponsabilite}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col">
+        <button class="btn btn-block btn-outline-info" (click)="rechercheMandat()">Recherche</button>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<br>
+<div class="row">
+  <div class=" col-sm-12">
+
+    <div class="card text-center border border-primary">
+      <div class="card-header border border-primary"> <b>LISTE DES MANDATS</b></div>
+      <table class="table table-hover table-sm   ">
+        <thead>
+        <tr>
+          <th scope="col">Date début mandat</th>
+          <th scope="col">Date fin mandat</th>
+          <th scope="col">Personnel</th>
+          <th scope="col">Responsabilité</th>
+          <th scope="col">Entité Administrative</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let m of mandats ">
+
+          <td>{{m.dateDebutMandat}}</td>
+          <td>{{m.dateFinMandat}}</td>
+          <td>{{m.personnelVo.cin}} : {{m.personnelVo.nom}}-{{m.personnelVo.prenom}}</td>
+          <td>{{m.responsabiliteVo.referenceResponsabilite}}</td>
+          <td>{{m.entiteAdministratifVo.referenceEntiteAdministratif}}</td>
+          <td>
+
+            <button class=" fa fa-edit cc btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@mdo" (click)="setMandatSelect(m)"  ></button>
+            <button (click)="deleteMandat(m)" class=" fa fa-trash btn btn-sm btn-danger "></button>
+            <button class="fa fa-download cc btn btn-sm btn-primary" aria-hidden="true"
+                    data-whatever="@mdo" (click)="printMandat(m.personnelVo.cin)"></button>
+          </td>
+
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form class="DivDuForm2">
+
+
+            <div class="col-sm-12">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Date début mandat : </span>
+                </div>
+                <input class="form-control" type="date" [(ngModel)]="mandatToUpdate.dateDebutMandat" [ngModelOptions]="{standalone: true}"/>
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Date fin mandat : </span>
+                </div>
+                <input class="form-control" type="date" [(ngModel)]="mandatToUpdate.dateFinMandat" [ngModelOptions]="{standalone: true}"/>
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Personnel</span>
+                </div>
+                <!--   <input class="form-control" type="text" [(ngModel)]="personnel.typePersonnelVo.libelle" />-->
+                <select   class="form-control form-control-sm" [(ngModel)]="mandatToUpdate.personnelVo.cin"  [ngModelOptions]="{standalone: true}">
+                  <option value="">=====Select=====</option>
+                  <option  value="{{p.cin}}" *ngFor="let p of listPersonnels" > {{p.cin}} : {{p.nom}}-{{p.prenom}}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="col-sm-12">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Responsabilité</span>
+                </div>
+                <select   class="form-control form-control-sm"  [(ngModel)]="mandatToUpdate.responsabiliteVo.referenceResponsabilite" [ngModelOptions]="{standalone: true}">
+                  <option value="">=====Select=====</option>
+                  <option  *ngFor="let r of listResponsabilites" > {{r.referenceResponsabilite}}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="col-sm-12">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" >Entité Administrative</span>
+                </div>
+                <select   class="form-control form-control-sm" [(ngModel)]="mandatToUpdate.entiteAdministratifVo.referenceEntiteAdministratif" [ngModelOptions]="{standalone: true}" >
+                  <option value="">=====Select=====</option>
+                  <option  *ngFor="let e of listEntites " > {{e.referenceEntiteAdministratif}}</option>
+                </select>
+              </div>
+
+            </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn btn-primary " (click)="saveUpdateMandat()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

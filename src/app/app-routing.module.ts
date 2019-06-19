@@ -19,11 +19,11 @@ import {PaiementComponent} from './commandes/paiement/paiement.component';
 import {CommandeAffectationComponent} from './commandes/commande-affectation/commande-affectation.component';
 import {FournisseurComponent} from './commandes/fournisseur/fournisseur.component';
 import {AppelOffreComponent} from './appel-offre/appel-offre.component';
-import {PersonnelsComponent} from './faculte-mandat/personnels/personnels.component';
-import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
-import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
-import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
-import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
+import {PersonnelsComponent} from './mandat/personnels/personnels.component';
+import {ProjetsComponent} from './mandat/projets/projets.component';
+import {EntiteAdministratifsComponent} from './mandat/entite-administratifs/entite-administratifs.component';
+import {ResponsabilitesComponent} from './mandat/responsabilites/responsabilites.component';
+import {MandatsComponent} from './mandat/mandats/mandats.component';
 import {CompteBudgitaireComponent} from './budget/compte-budgitaire/compte-budgitaire.component';
 import {ExplorationComponent} from './budget/Exploration/exploration/exploration.component';
 

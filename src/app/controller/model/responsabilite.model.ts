@@ -1,3 +1,3 @@
 export class Responsabilite {
-  constructor(public referenceResponsabilite: string ){}
+  constructor(public id : number,public referenceResponsabilite: string ){}
 }

@@ -3,6 +3,7 @@ import {Personnel} from '../model/personnel.model';
 import {TypePersonnel} from '../model/type-personnel.model';
 import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
+import {ExpressionBesoinItem} from '../model/expression-besoin-item.model';
 
 
 
@@ -19,14 +20,15 @@ export class PersonnelService {
   public url5 = 'http://localhost:9999/typePersonnel/typePersonnels/typePersonnelAll/';
   public url6 = 'http://localhost:9999/personnel/personnels/updatePersonnel';
 
-  public personnelCreate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-  public personnelToUpdate: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  public personnelCreate: Personnel = new Personnel(0,'','','','','','','','','','','','','','','','');
+  public personnelToUpdate: Personnel= new Personnel(0,'','','','','','','','','','','','','','','','');
+
   public typePersonnelCreate: TypePersonnel = new TypePersonnel('');
   private _personnelSelected: Personnel;
-  public pSelected: Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  public pSelected: Personnel = new Personnel(0,'','','','','','','','','','','','','','','','');
   public listPers: Array<Personnel>;
   public listTypePersonnels: Array<TypePersonnel>;
-  public personnelSearch : Personnel = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  public personnelSearch : Personnel = new Personnel(0,'','','','','','','','','','','','','','','','');
   public listPersonnel : Array<Personnel>;
   public _listPersonnels: Array<Personnel>;
 
@@ -34,7 +36,7 @@ export class PersonnelService {
   }
 
   public addPersonnel() {
-    const personnelClone = new Personnel(this.personnelCreate.nom, this.personnelCreate.prenom,
+    const personnelClone = new Personnel(this.personnelCreate.id,this.personnelCreate.nom, this.personnelCreate.prenom,
       this.personnelCreate.dateNaissance, this.personnelCreate.etatSocial, this.personnelCreate.cin, this.personnelCreate.numeroLocation,
       this.personnelCreate.lieuNaissance, this.personnelCreate.nombreEnfants, this.personnelCreate.lieuAffectation, this.personnelCreate.dateExerciceEchelle,
       this.personnelCreate.grade, this.personnelCreate.dateActivation, this.personnelCreate.dateAccesFonctionPublique, this.personnelCreate.dateDebutTypePersonnel,
@@ -48,7 +50,7 @@ export class PersonnelService {
         if (data == 1) {
           Swal.fire('Informations', 'Personnel ajouter avec success', 'success');
           console.log('personnel ajouter avec success');
-          this.personnelCreate = new Personnel('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+          this.personnelCreate = new Personnel(0,'','','','','','','','','','','','','','','','');
           this.typePersonnelCreate = new TypePersonnel('');
           this.findAll();
         }
@@ -70,12 +72,37 @@ export class PersonnelService {
 
     this.http.get<Array<Personnel>>(this.url2).subscribe(
       data => {
-        this._listPersonnels = data;
+        this.listPersonnel = data;
       },
       error => {
         console.log('error find all personnel');
       }
     );
+  }
+  public setPersonnelSelect(personnel: Personnel) {
+    let personnelClone:Personnel = new Personnel(
+      personnel.id,
+      personnel.nom,
+      personnel.prenom,
+      personnel.dateNaissance,
+      personnel.etatSocial,
+      personnel.cin,
+      personnel.numeroLocation,
+      personnel.lieuNaissance,
+      personnel.nombreEnfants,
+      personnel.lieuAffectation,
+      personnel.dateExerciceEchelle,
+      personnel.grade,
+      personnel.dateActivation,
+      personnel.dateAccesFonctionPublique,
+      personnel.dateDebutTypePersonnel,
+      personnel.referenceEchelle,
+      personnel.referenceEchelon,
+
+    );
+    this.personnelToUpdate = personnelClone;
+    this.personnelSelected.typePersonnelVo.libelle=personnel.typePersonnelVo.libelle;
+    this.personnelSelected = personnel;
   }
 
 
@@ -149,11 +176,15 @@ export class PersonnelService {
 
 
   public upDatePersonnel() {
-    this.http.put<number>(this.url6, this.personnelSelected).subscribe(
+
+    console.log(" type personnel ========>" +this.personnelToUpdate.typePersonnelVo.libelle);
+    this.http.put(this.url6, this.personnelToUpdate).subscribe(
       data => {
+        console.log("debut data  " +data);
         if(data == 1){
           Swal.fire('Informations', ' update Personnel avec success', 'success');
           console.log( " ha data dyali "+ data);
+          this.findPersonels();
         }else{
           Swal.fire('Informations', ' no update', 'error');
         }

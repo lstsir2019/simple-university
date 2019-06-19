@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Responsabilite} from '../model/responsabilite.model';
 import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
+import {EntiteAdministratif} from '../model/entite-administratif.model';
 
 
 
@@ -13,14 +14,16 @@ export class ResponsabiliteService {
   private url = 'http://localhost:9999/responsabilite/responsabilites/';
   private url2 = 'http://localhost:9999/responsabilite/responsabilites/responsabiliteAll/';
   private url3 = 'http://localhost:9999/responsabilite/responsabilites/deleteResponsabilite/';
-   public createResponsabilite: Responsabilite = new Responsabilite('');
+  private url4 = 'http://localhost:9999/responsabilite/responsabilites/updateResponsabilite';
+   public createResponsabilite: Responsabilite = new Responsabilite(0,'');
    private _listResponsabilites = Array<Responsabilite>();
   private _responsabiliteSelected: Responsabilite;
+  public responsabiliteToUpdate : Responsabilite = new Responsabilite(0,'');
 
   constructor(private http: HttpClient) { }
 
   public addResponsabilite() {
-    const responsabiliteClone = new Responsabilite(this.createResponsabilite.referenceResponsabilite);
+    const responsabiliteClone = new Responsabilite(this.createResponsabilite.id,this.createResponsabilite.referenceResponsabilite);
     this._listResponsabilites.push(responsabiliteClone);
   }
   public saveResponsabilite() {
@@ -30,7 +33,7 @@ export class ResponsabiliteService {
 
             Swal.fire('Informations','Responsabilite ajouter avec success','success');
         console.log('responsabilite creer');
-        this.createResponsabilite = new Responsabilite('');
+        this.createResponsabilite = new Responsabilite(0,'');
         this.findAll();
 
       }  else if(data == -1) {
@@ -91,6 +94,51 @@ export class ResponsabiliteService {
     }
 
   }
+
+
+
+
+  public upDateResponsabilite() {
+
+    this.http.put(this.url4, this.responsabiliteToUpdate).subscribe(
+
+      data => {
+        console.log("debut data  " + data);
+
+        if(data == 1 ){
+          Swal.fire('Informations', ' Modification reponsabilite  avec success', 'success');
+          this.findAll();
+        }else{
+          Swal.fire('Error', ' Probleme update', 'error');
+        }
+      }, error => {
+        console.log('Error' + error);
+        //Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
+      }
+    );
+  }
+
+
+
+
+
+  public setResponSelect(responsabilite: Responsabilite) {
+    let responsabiliteClone:Responsabilite = new Responsabilite(
+      responsabilite.id,
+      responsabilite.referenceResponsabilite,
+    );
+    this.responsabiliteToUpdate = responsabiliteClone;
+    this.responsabiliteSelected = responsabilite;
+
+  }
+
+
+
+
+
+
+
+
 
 
   get responsabiliteSelected(): Responsabilite {

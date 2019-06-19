@@ -87,22 +87,22 @@ import {BudgetProjetCreateComponent} from './budget/Opperation/budget-projet-cre
 import {BudgetSousProjetCreateComponent} from './budget/Opperation/budget-sous-projet-create/budget-sous-projet-create.component';
 import {BudgetCompteBudgitaireCreateComponent} from './budget/Opperation/budget-compte-budgitaire-create/budget-compte-budgitaire-create.component';
 import {BudgetDetailComponent} from './budget/Opperation/budget-detail/budget-detail.component';
-import {ProjetsComponent} from './faculte-mandat/projets/projets.component';
-import {ProjetCreateComponent} from './faculte-mandat/projets/projet-create/projet-create.component';
-import {SousProjetListComponent} from './faculte-mandat/projets/sous-projet-list/sous-projet-list.component';
-import {PersonnelsComponent} from './faculte-mandat/personnels/personnels.component';
-import {PersonnelCreateComponent} from './faculte-mandat/personnels/personnel-create/personnel-create.component';
-import {TypePersonnelComponent} from './faculte-mandat/personnels/type-personnel/type-personnel.component';
-import {ResponsabilitesComponent} from './faculte-mandat/responsabilites/responsabilites.component';
-import {CreateResponsabiliteComponent} from './faculte-mandat/responsabilites/create-responsabilite/create-responsabilite.component';
-import {ListResponsabiliteComponent} from './faculte-mandat/responsabilites/list-responsabilite/list-responsabilite.component';
-import {EntiteAdministratifsComponent} from './faculte-mandat/entite-administratifs/entite-administratifs.component';
-import {ListEntiteAdministartifComponent} from './faculte-mandat/entite-administratifs/list-entite-administartif/list-entite-administartif.component';
-import {CreateEntiteAdministratifComponent} from './faculte-mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
-import {MandatsComponent} from './faculte-mandat/mandats/mandats.component';
-import {MandatCreateComponent} from './faculte-mandat/mandats/mandat-create/mandat-create.component';
-import {MandatListComponent} from './faculte-mandat/mandats/mandat-list/mandat-list.component';
-import {FaculteMandatComponent} from './faculte-mandat/faculte-mandat.component';
+import {ProjetsComponent} from './mandat/projets/projets.component';
+import {ProjetCreateComponent} from './mandat/projets/projet-create/projet-create.component';
+import {SousProjetListComponent} from './mandat/projets/sous-projet-list/sous-projet-list.component';
+import {PersonnelsComponent} from './mandat/personnels/personnels.component';
+import {PersonnelCreateComponent} from './mandat/personnels/personnel-create/personnel-create.component';
+import {TypePersonnelComponent} from './mandat/personnels/type-personnel/type-personnel.component';
+import {ResponsabilitesComponent} from './mandat/responsabilites/responsabilites.component';
+import {CreateResponsabiliteComponent} from './mandat/responsabilites/create-responsabilite/create-responsabilite.component';
+import {ListResponsabiliteComponent} from './mandat/responsabilites/list-responsabilite/list-responsabilite.component';
+import {EntiteAdministratifsComponent} from './mandat/entite-administratifs/entite-administratifs.component';
+import {ListEntiteAdministartifComponent} from './mandat/entite-administratifs/list-entite-administartif/list-entite-administartif.component';
+import {CreateEntiteAdministratifComponent} from './mandat/entite-administratifs/create-entite-administratif/create-entite-administratif.component';
+import {MandatsComponent} from './mandat/mandats/mandats.component';
+import {MandatCreateComponent} from './mandat/mandats/mandat-create/mandat-create.component';
+import {MandatListComponent} from './mandat/mandats/mandat-list/mandat-list.component';
+import {MandatComponent} from './mandat/mandat.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule, MatDialogModule, MatInputModule} from '@angular/material';
 import { CompteBudgitaireComponent } from './budget/compte-budgitaire/compte-budgitaire.component';
@@ -211,7 +211,7 @@ import { DetailsOffresComponent } from './appel-offre/offres/details-offres/deta
     MandatsComponent,
     MandatCreateComponent,
     MandatListComponent,
-    FaculteMandatComponent,
+    MandatComponent,
     CompteBudgitaireComponent,
     BudgetFaculteExplorationComponent,
     BudgetProjetExplorationComponent,
@@ -249,12 +249,10 @@ import { DetailsOffresComponent } from './appel-offre/offres/details-offres/deta
   providers: [DatePipe,BudgetExplorationComponent,
     BudgetCompteBudgitaireComponent,
     BudgetProjetComponent,
-    BudgetSousProjetComponent],
-  providers: [
-    DatePipe,
-    BudgetExplorationComponent,
+    BudgetSousProjetComponent,
     DetailsOffresComponent
   ],
+
   bootstrap: [AppComponent],
 
 })

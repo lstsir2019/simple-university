@@ -18,24 +18,28 @@ export class EntiteAdministratifService {
   public url3 = 'http://localhost:9999/typeEntiteAdministratif/typeEntiteAdministratifs/typeEntiteAdministratifAll/';
   public url4 = 'http://localhost:9999/entiteAdministratif/entiteAdministratifs/deleteEntiteAdministratif/';
   public url5 = 'http://localhost:9999/entiteAdministratif/entiteAdministratifs/entiteAdministratifAll/';
+  public url7 = 'http://localhost:9999/entiteAdministratif/entiteAdministratifs/updateEntiteAdmin';
+  public url6 = 'http://localhost:9999/personnel/personnels/personnelAll/';
 
-  private _createEntiteAdministratif: EntiteAdministratif = new EntiteAdministratif('');
+  private _createEntiteAdministratif: EntiteAdministratif = new  EntiteAdministratif(0,'');
   public sousProjetCreate: SousProjet = new SousProjet(0, '');
+  public personelCreate: Personnel =  new Personnel(0,'','','','','','','','','','','','','','','','');
  public typeEntiteCreate : TypeEntiteAdministratif = new TypeEntiteAdministratif('');
   public _listEntiteAdministratifs : Array<EntiteAdministratif>;
   public _sousProjetss: Array<SousProjet>;
   public _typeEntiteAdmin : Array<TypeEntiteAdministratif>;
+  public _listPersonnel : Array<Personnel>;
   private _entiteSelected: EntiteAdministratif;
-  public entiteSearch : EntiteAdministratif = new  EntiteAdministratif('');
+  public entiteSearch : EntiteAdministratif = new  EntiteAdministratif(0,'');
   public listEntiteAdmin = Array<EntiteAdministratif>();
-
+  public  entiteAdministratifToUpdate : EntiteAdministratif = new  EntiteAdministratif(0,'');
 
 
   constructor(private http: HttpClient) {
   }
 
   public addEntiteAdministratif() {
-    const entiteAdministratifClone = new EntiteAdministratif(
+    const entiteAdministratifClone = new EntiteAdministratif(this._createEntiteAdministratif.id,
       this._createEntiteAdministratif.referenceEntiteAdministratif);
     this._listEntiteAdministratifs.push(entiteAdministratifClone);
   }
@@ -48,15 +52,19 @@ export class EntiteAdministratifService {
         if (data == 1) {
           console.log('entite creer avec success');
           Swal.fire('Informations', 'Entite administratif ajouter avec success', 'success');
-          this._createEntiteAdministratif = new EntiteAdministratif('');
+          this._createEntiteAdministratif = new  EntiteAdministratif(0,'');
           this.sousProjetCreate = new SousProjet(0, '');
+          this.personelCreate =  new Personnel(0,'','','','','','','','','','','','','','','','');
+          console.log('if data ==1  ha data =====>' + data);
           this.findAll();
         }
         else if (data == -1) {
           Swal.fire('Informations', 'Entite administratif existe déja ', 'error');
+          console.log('if data == -1  ha data =====>' + data);
           this.findAll();
         }
         else if (data == -2) {
+          console.log('if data == -2  ha data =====>' + data);
           Swal.fire('Erreur', 'Sous projet existe déja ', 'error');
         }
       }, error => {
@@ -130,13 +138,24 @@ export class EntiteAdministratifService {
     );
 
   }
+  public findallPersonnel() {
+
+    this.http.get<Array<Personnel>>(this.url6).subscribe(
+      data => {
+        this._listPersonnel = data;
+      }, error => {
+        console.log('error listPersonnel');
+      }
+    );
+
+  }
 
   public deleteEntite(entite: EntiteAdministratif) {
     this.entiteSelected = entite;
     if (this.entiteSelected != null) {
       console.log(this.url4 + this.entiteSelected.referenceEntiteAdministratif);
       this.http.delete<EntiteAdministratif>(this.url4 + this.entiteSelected.referenceEntiteAdministratif).subscribe(error => {
-
+        Swal.fire('Information','Entités administratifs supprimer avec succes','success');
         console.log('Deleted Entite administratif  with poste = ' + this.entiteSelected.referenceEntiteAdministratif + '' + error);
         this.findAll();
       });
@@ -167,6 +186,73 @@ export class EntiteAdministratifService {
       }
     );
   }
+
+
+  public setEntiteSelect(entiteAdmin: EntiteAdministratif) {
+    let entiteClone:EntiteAdministratif = new EntiteAdministratif(
+      entiteAdmin.id,
+      entiteAdmin.referenceEntiteAdministratif,
+    );
+    this.entiteAdministratifToUpdate = entiteClone;
+    this.entiteSelected.typeEntiteAdministratifVo.libelle = entiteAdmin.typeEntiteAdministratifVo.libelle;
+    this.entiteSelected.sousProjetVo=entiteAdmin.sousProjetVo;
+    this.entiteSelected.chefVo = entiteAdmin.chefVo;
+    this.entiteSelected = entiteAdmin;
+
+  }
+
+
+  public upDateEntite() {
+
+    this.http.put(this.url7, this.entiteAdministratifToUpdate).subscribe(
+
+      data => {
+        console.log("debut data  " + data);
+
+        if(data == 1 ){
+          Swal.fire('Informations', ' Modification entité adminstrative  avec success', 'success');
+          this.findAll();
+        }else{
+          Swal.fire('Error', ' Probleme update', 'error');
+        }
+      }, error => {
+        console.log('Error' + error);
+        //Swal.fire(this.SWAL.ERROR_UNKNOWN_ERROR);
+      }
+    );
+  }
+
+
+  public printEntite(referenceEntiteAdministratif :string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:9999/entiteAdministratif/entiteAdministratifs/entite/"+referenceEntiteAdministratif +"/pdf",httpOptions).subscribe((resultBlob: Blob) => {
+      console.log("http://localhost:9999/entiteAdministratif/entiteAdministratifs/entite/"+referenceEntiteAdministratif +"/pdf");
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   get entiteSelected(): EntiteAdministratif {
     return this._entiteSelected;
