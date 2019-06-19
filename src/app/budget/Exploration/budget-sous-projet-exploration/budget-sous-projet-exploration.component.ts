@@ -31,6 +31,9 @@ export class BudgetSousProjetExplorationComponent implements OnInit {
       }
     );
   }
+  public printSousProjet(){
+    this.budgetService.printSousProjet(this.budgetSousProjet.budgetProjetVo.referenceProjet, this.budgetSousProjet.referenceSousProjet, this.budgetService.budgetFaculteExpo.annee);
+  }
 
 
 }

@@ -239,8 +239,17 @@ import { DetailsOffresComponent } from './appel-offre/offres/details-offres/deta
   entryComponents: [
     BudgetCompteBudgitaireCreateComponent,
     BudgetExplorationComponent,
-    DetailsOffresComponent
+    DetailsOffresComponent,
+    BudgetExplorationComponent,
+    BudgetCompteBudgitaireComponent,
+    BudgetFaculteComponent,
+    BudgetProjetComponent,
+    BudgetSousProjetComponent
 ],
+  providers: [DatePipe,BudgetExplorationComponent,
+    BudgetCompteBudgitaireComponent,
+    BudgetProjetComponent,
+    BudgetSousProjetComponent],
   providers: [
     DatePipe,
     BudgetExplorationComponent,

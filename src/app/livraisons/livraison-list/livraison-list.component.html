@@ -41,9 +41,8 @@
 
             <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraisonQuery.referenceCommande" >
               <option selected>Choose...</option>
-              <option  value="com-01">com-01</option>
-              <option  value="com-02">com-02</option>
-              <option  value="com-03">com-03</option>
+              <option *ngFor="let c of commandes"  value="{{c.reference}}">{{c.reference}}</option>
+
             </select>
           </div>
         </div>

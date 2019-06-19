@@ -35,7 +35,12 @@
               <!--<option  value="com-02">com-02</option>-->
               <!--<option  value="com-03">com-03</option>-->
             <!--</select>-->
-            <input type="text" [(ngModel)]="livraison.referenceCommande" class="form-control" >
+
+            <select class="custom-select" id="inputGroupSelect05" [(ngModel)]="livraison.referenceCommande" >
+              <option selected>Choose...</option>
+              <option *ngFor="let c of commandes"  value="{{c.reference}}">{{c.reference}}</option>
+
+            </select>
           </div>
         </div>
 
@@ -48,9 +53,8 @@
 
             <select class="custom-select"   [(ngModel)]="livraison.referenceEntite">
               <option selected>Choose...</option>
-              <option  value="dep-info">dep-info</option>
-              <option  value="physique">physique</option>
-              <option  value="info">info</option>
+              <option  *ngFor="let e of entiteAdministrativ" value="{{e.referenceEntiteAdministratif}}">{{e.referenceEntiteAdministratif}}</option>
+
             </select>
           </div>
         </div>

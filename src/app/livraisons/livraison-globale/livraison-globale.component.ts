@@ -9,6 +9,9 @@ import {getReact} from "../../controller/service/evolutions/Util/SwalReact";
 import swal from "sweetalert2";
 import  * as $ from 'jquery';
 import Swal from 'sweetalert2';
+import {CommandeService} from '../../controller/service/commandes/commande.service';
+import {StockDetailleServiceService} from '../../controller/service/stock-detaille-service.service';
+import {EntiteAdministratifService} from '../../controller/service/entite-administratif.service';
 
 @Component({
   selector: 'app-livraison-globale',
@@ -21,7 +24,7 @@ export class LivraisonGlobaleComponent implements OnInit {
   referenceProduit:string="";
   cmdExp:CommandeSourceWithProduit;
   stotockGlobal:StockGlobal;
-  constructor(private livraisonService: LivraisonService,private produitService:ProduitService,private stockGlobalService:StockGlobalService) { }
+  constructor(private livraisonService: LivraisonService,private produitService:ProduitService,private stockGlobalService:StockGlobalService,private commandeService:CommandeService,private entite:EntiteAdministratifService) { }
 
   ngOnInit() {
    // this.produitService.produitsFindAll();
@@ -32,6 +35,7 @@ export class LivraisonGlobaleComponent implements OnInit {
            $(":checked").prop("checked" , false).removeAttr("checked");
          });
       });
+
     });
   }
   public findStockGlobal(){
@@ -77,9 +81,9 @@ export class LivraisonGlobaleComponent implements OnInit {
         confirmButtonText: 'ok'})
     }else {
       this.livraisonService.addLivraisonItem();
-      this.livraisonService.commandesExpressionsGlobals=[];
+      //this.livraisonService.commandesExpressionsGlobals=[];
       this.stockGlobalService.stockGlobalsLiverson=[];
-
+      this.cmdExp=new CommandeSourceWithProduit("","","");
 
     }
   }
@@ -108,5 +112,12 @@ export class LivraisonGlobaleComponent implements OnInit {
     console.log('Selected value is: ', value);
     this.livraisonService.commandeExpression=value;
     console.log("haaahowaa  ==> "+this.commandeExpressiont.referenceCommandeExpression);
+  }
+
+  public get commandes(){
+    return this.commandeService.commandes;
+  }
+  public get entiteAdministrativ(){
+    return this.entite.listEntiteAdmin;
   }
 }

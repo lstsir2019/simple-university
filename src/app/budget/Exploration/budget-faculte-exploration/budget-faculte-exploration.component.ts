@@ -44,4 +44,8 @@ export class BudgetFaculteExplorationComponent implements OnInit {
     console.log(this.budgetFaculte.annee);
     this.findDetaillesByAnnne(this.budgetFaculte.annee);
   }
+
+  print(){
+    this.budgetService.printFaculte(this.budgetFaculte.annee);
+  }
 }

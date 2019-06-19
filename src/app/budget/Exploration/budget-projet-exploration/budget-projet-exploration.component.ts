@@ -29,6 +29,9 @@ export class BudgetProjetExplorationComponent implements OnInit {
       }
     );
   }
+  printProjet(){
+    this.budgetService.printProjet(this.budgetProjet.id);
+  }
 
   public get budgetProjetList() {
     return this.budgetService.budgetFaculteExpo.budgetProjetVos;
