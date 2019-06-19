@@ -85,12 +85,14 @@ export class ProduitService {
     return this.types;
   }
 
+  public findallProdcuts(){
+    return this._http.get<Array<Produit>>(this._url5);
+  }
+
   public produitsFindAll() {
     this._http.get<Array<Produit>>(this._url5).subscribe(
       data => {
-
         this._produits = data;
-
       }, error1 => {
         console.log(error1);
       }

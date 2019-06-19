@@ -50,9 +50,17 @@ export class OffresCreateComponent implements OnInit {
     this.offreService.saveOffre();
   }
 
+  recalcule(){
+    this.offre.montantTtc = this.offre.montantHt * (1 + this.offre.tva / 100);
+  }
+
   removeoffreDetailsVo(item: OffreDetail) {
     let index: number = this.offre.offreDetailsVo.indexOf(item);
-    this.offre.offreDetailsVo.splice(index, 1);
+    if(index!=null){
+      this.offre.montantHt -=item.total;
+      this.offre.montantTtc = this.offre.montantHt * (1 + this.offre.tva / 100);
+      this.offre.offreDetailsVo.splice(index, 1);
+    }
   }
 
   public get fournisseurs() {

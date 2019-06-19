@@ -63,19 +63,19 @@
               <span class="input-group-text">Montant HT</span>
             </div>
             <input class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-                   [(ngModel)]="offre.montantHt" disabled/>
+                   step="0.01"    [(ngModel)]="offre.montantHt" disabled/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">TVA</span>
             </div>
-            <input class="form-control" type="number" [(ngModel)]="offre.tva"/>
+            <input class="form-control" type="number" (keydown)="recalcule()" (keypress)="recalcule()" (keyup)="recalcule()" [(ngModel)]="offre.tva"/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Montant TTC</span>
             </div>
-            <input class="form-control" type="number" [(ngModel)]="offre.montantTtc" disabled/>
+            <input class="form-control" type="number"  step="0.01" [(ngModel)]="offre.montantTtc" disabled/>
           </div>
         </div>
       </div>
