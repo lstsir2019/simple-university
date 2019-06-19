@@ -182,6 +182,17 @@ export class ExpressionBesoinService {
     );
   }
 
+  // public nbrNonaccorde:number;
+  // public getNbrNonAccorde(){
+  //   this.http.get<number>('http://localhost:8099/faculte-besoin/item/besoinnonaccorder').subscribe(
+  //     data=>{
+  //       this.nbrNonaccorde = data;
+  //     },error1 => {
+  //       console.log("error while getting nbr...");
+  //     }
+  //   );
+  // }
+
 
 
 
@@ -244,6 +255,15 @@ export class ExpressionBesoinService {
     );
   }
 
+  public printCommande(reference:string){
+    const httpOptions = {
+
+      responseType  : 'blob' as 'json'
+    };
+    return this.http.get("http://localhost:8099/faculte-besoin/expressionbesoins/pdf/reference/"+reference,httpOptions).subscribe((resultBlob: Blob) => {
+      var downloadURL = URL.createObjectURL(resultBlob);
+      window.open(downloadURL);});
+  }
 
 
 

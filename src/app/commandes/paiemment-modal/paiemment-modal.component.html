@@ -21,6 +21,22 @@
     <td> montant </td>
     <td><input type="number" min="0" class="form-control"   [(ngModel)]="paiement.montant"></td>
   </tr>
+  <tr>
+    <td>
+
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="defaultInline22" name="inlineDefaultRadiosExample" (click)="selectType('cash')" checked>
+        <label class="custom-control-label" for="defaultInline22">cash</label>
+      </div>
+    </td>
+    <td>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="defaultInline11" name="inlineDefaultRadiosExample" (click)="selectType('cheque')">
+        <label class="custom-control-label" for="defaultInline11">cheque</label>
+      </div>
+    </td>
+
+  </tr>
 
 
 </table>

@@ -15,7 +15,7 @@ import {text} from '@angular/core/src/render3';
 import {Offre} from '../../model/offre.model';
 import {AppelOffre} from '../../model/appel-offre.model';
 import {OffreDetail} from '../../model/offre-detail.model';
-import {OffresComponent} from '../../../appel-offre/offres/offres.component';
+// import {OffresComponent} from '../../../appel-offre/offres/offres.component';
 
 
 @Injectable({
@@ -113,8 +113,8 @@ export class CommandeService {
     }
   }
 
-  public payerCommande() {
-    this.http.post<number>(this._url4 + '/referenceCommande/' + this.commandeSelected.reference + '/montant/' + this.paiementCreate.montant, this.paiementCreate).subscribe({
+  public payerCommande(type:string) {
+    this.http.post<number>(this._url4 + '/referenceCommande/' + this.commandeSelected.reference + '/montant/' + this.paiementCreate.montant+'/type/'+type, this.paiementCreate).subscribe({
       next: data => {
         if (data == -2) {
           Swal.fire({
@@ -450,6 +450,7 @@ export class CommandeService {
 
   }
 
+
   public offreToCommande(offre:Offre,offreDetailsVos:Array<OffreDetail>){
     //ne touchez pas les parametre de cette methode //
     //offre contient reference et le total //
@@ -460,7 +461,6 @@ export class CommandeService {
       this.commandeItemCreate = new CommandeItem('', 0, 0,0,0);
     }
     this.commandeCreate.fournisseurVo.reference=offre.refrenceFournisseur;
-    console.log(offre.refrenceFournisseur);
     this.commandeCreate.referenceOffre=offre.reference;
 
   }

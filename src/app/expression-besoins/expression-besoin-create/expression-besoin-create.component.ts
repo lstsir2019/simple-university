@@ -39,13 +39,21 @@ public get expressionBesoin() {
     this.expressionBesoinService.addExpressionBesoinItem();
   }
 
+  public ref:string;
   public saveCommande(){
+    this.ref=this.expressionBesoin.reference;
     this.expressionBesoinService.saveExpressionBesoin();
   }
 
+  public printCommande(){
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>><<"+this.ref);
+    return this.expressionBesoinService.printCommande(this.ref);
+  }
   public getCategories(){
     this.expressionBesoinService.getCategories();
   }
+
+
 
 
   public eleminer(expressionBesoinItem:ExpressionBesoinItem){

@@ -44,4 +44,5 @@ export class ExpressionBesoinItemManipComponent implements OnInit {
     return this.expressionBesoinService.accorder();
   }
 
+
 }

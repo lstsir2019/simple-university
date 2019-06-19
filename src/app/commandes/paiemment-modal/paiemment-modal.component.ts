@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandeService} from '../../controller/service/commandes/commande.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-paiemment-modal',
@@ -11,6 +12,7 @@ export class PaiemmentModalComponent implements OnInit {
   constructor(private commandeService:CommandeService) { }
 
   ngOnInit() {
+
   }
 
 
@@ -21,11 +23,16 @@ export class PaiemmentModalComponent implements OnInit {
   public  get paiement(){
     return this.commandeService.paiementCreate;
   }
+  public typePaiement:string;
   public  payerCommande(){
-    return this.commandeService.payerCommande();
+    return this.commandeService.payerCommande(this.typePaiement);
 
   }
   public get commandeSelected() {
     return this.commandeService.commandeSelected;
+  }
+
+  public selectType(type:string){
+    this.typePaiement=type;
   }
 }
