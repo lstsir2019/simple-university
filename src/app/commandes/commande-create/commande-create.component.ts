@@ -36,10 +36,15 @@ export class CommandeCreateComponent implements OnInit {
     return this.commandeService.addCommandeItem();
   }
 
+  public ref:string;
   public saveCommande(){
+    this.ref=this.commande.reference;
     this.commandeService.saveCommande();
   }
 
+  public printCommande(){
+    return this.commandeService.printCommande(this.ref);
+  }
   public fournisseurs(){
     return this.commandeService.fournisseurs;
   }
