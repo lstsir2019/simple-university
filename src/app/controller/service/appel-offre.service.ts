@@ -2,21 +2,20 @@ import {Injectable} from '@angular/core';
 import {AppelOffre} from '../model/appel-offre.model';
 import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 import {HttpClient} from '@angular/common/http';
-import {Offre} from '../model/offre.model';
-import {AppRoutingModule} from '../../app-routing.module';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppelOffreService {
 
-  private _url = 'http://localhost:8091/AppelOffre/AppelOffres/';
+  private _url = 'http://localhost:4682/AppelOffre/AppelOffres/';
   private _appelOffreCreate: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
   private _appelOffreDetailCreate: AppelOffreDetail = new AppelOffreDetail('', 0, 0, 0);
   private _appelOffres: Array<AppelOffre>;
   private _appelOffreSelected: AppelOffre;
-  public allAppelOffres: Array<AppelOffre> = new Array<AppelOffre>();
-  public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<AppelOffreDetail>();
+  public allAppelOffres: Array<AppelOffre> = new Array<>();
+  public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<>();
   private _appelOffreSearch: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
 
   constructor(private http: HttpClient) {

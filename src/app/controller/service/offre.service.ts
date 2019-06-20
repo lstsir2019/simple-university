@@ -1,29 +1,26 @@
 import {Injectable} from '@angular/core';
-import {AppelOffre} from '../model/appel-offre.model';
 import {HttpClient} from '@angular/common/http';
 import {Offre} from '../model/offre.model';
 import {OffreDetail} from '../model/offre-detail.model';
-import {AppelOffreDetail} from '../model/appel-offre-detail.model';
 import {Fournisseur} from '../model/commandes/fournisseur.model';
-import {compileBaseDefFromMetadata} from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OffreService {
 
-  private _urlAppelOffre = 'http://localhost:8091/AppelOffre/AppelOffres/';
+  private _urlAppelOffre = 'http://localhost:4682/AppelOffre/AppelOffres/';
 
-  private _url = 'http://localhost:8091/appelOffre-api/offres/';
-  private urlOffreDetail = 'http://localhost:8091/appelOffre-api/offreDetails';
+  private _url = 'http://localhost:4682/appelOffre-api/offres/';
+  private urlOffreDetail = 'http://localhost:4682/appelOffre-api/offreDetails';
   private _url1: string = 'http://localhost:8090/faculte-commande/fournisseurs/finAll';
 
 
   public offreCreate: Offre = new Offre();
   private _offreSelected: Offre = new Offre();
   public offreDetailCreate: OffreDetail = new OffreDetail('', 0, 0, 0);
-  public offreDetailsSearch: Array<OffreDetail> = new Array<OffreDetail>();
-  public offresSearch: Array<Offre> = new Array<Offre>();
+  public offreDetailsSearch: Array<OffreDetail> = new Array<>();
+  public offresSearch: Array<Offre> = new Array<>();
   public _fournisseurs: Array<Fournisseur>;
 
   constructor(private http: HttpClient) {
