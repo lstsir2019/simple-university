@@ -19,8 +19,8 @@ export class OffreService {
   public offreCreate: Offre = new Offre();
   private _offreSelected: Offre = new Offre();
   public offreDetailCreate: OffreDetail = new OffreDetail('', 0, 0, 0);
-  public offreDetailsSearch: Array<OffreDetail> = new Array<>();
-  public offresSearch: Array<Offre> = new Array<>();
+  public offreDetailsSearch: Array<OffreDetail> = new Array<OffreDetail>();
+  public offresSearch: Array<Offre> = new Array<Offre>();
   public _fournisseurs: Array<Fournisseur>;
 
   constructor(private http: HttpClient) {

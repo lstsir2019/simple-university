@@ -14,8 +14,8 @@ export class AppelOffreService {
   private _appelOffreDetailCreate: AppelOffreDetail = new AppelOffreDetail('', 0, 0, 0);
   private _appelOffres: Array<AppelOffre>;
   private _appelOffreSelected: AppelOffre;
-  public allAppelOffres: Array<AppelOffre> = new Array<>();
-  public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<>();
+  public allAppelOffres: Array<AppelOffre> = new Array<AppelOffre>();
+  public appleOffreDetailsByReference: Array<AppelOffreDetail> = new Array<AppelOffreDetail>();
   private _appelOffreSearch: AppelOffre = new AppelOffre('', 0, 0, 0, 0);
 
   constructor(private http: HttpClient) {
